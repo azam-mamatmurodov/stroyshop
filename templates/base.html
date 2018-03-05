@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    {% block css %}{% endblock %}
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fancy.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/fontawesome/font-awesome.min.css' %}">
+    <script src="{% static 'js/scripts.js' %}"></script>
+</head>
+<body class="product">
+        {% block content %}{% endblock %}
+        {% block js %}{% endblock %}
+</body>
+</html>

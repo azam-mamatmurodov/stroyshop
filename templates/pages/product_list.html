@@ -1,0 +1,206 @@
+{% extends 'base.html' %}
+{% load static mptt_tags i18n humanize %}
+
+{% block content %}
+{{ header }}
+{% full_tree_for_model products.Category as cat_tree %}
+<div id="main">
+    <div id="left">
+        <section id="category">
+            <h2>{% trans 'Choose category' %}</h2>
+            <ul>
+                {% recursetree cat_tree %}
+                    <li class="{% if not node.is_leaf_node %}expanded{% endif %}">
+                        <a href="{% url 'products:product_list' slug=node.slug %}">
+                            {{ node.name }}
+                        </a>
+                        {% if not node.is_leaf_node %}
+                            <ul class="children">
+                                {{ children }}
+                            </ul>
+                        {% endif %}
+                    </li>
+                {% endrecursetree %}
+            </ul>
+        </section>
+        <section id="filter">
+            <h2>Filtrovat po</h2>
+            <div class="filter-row">
+                <h3></h3>
+                <form action="" method="get">
+                    {{ filter.form.as_p }}
+                    <input type="submit" />
+                </form>
+            </div>
+        </section>
+        <section id="recommend">
+            <h2>Recommended products</h2>
+            <div class="block-content">
+                <div class="product-row">
+                    <div class="image">
+                        <img src="{% static 'images/prod.png' %}">
+                    </div>
+                    <div class="title">
+                        Kraska fasadnaya fakturnaya yesho shtoto Hayat 10kg
+                    </div>
+                    <div class="price">
+                        <strong>99.900 sum </strong><span>/ im</span>
+                    </div>
+                    <div class="addtocart">
+                        <button>Add to cart</button>
+                    </div>
+                </div>
+                <div class="product-row">
+                    <div class="image">
+                        <img src="{% static 'images/prod.png' %}">
+                    </div>
+                    <div class="title">
+                        Kraska fasadnaya fakturnaya yesho shtoto Hayat 10kg
+                    </div>
+                    <div class="price">
+                        <strong>99.900 sum </strong><span>/ im</span>
+                    </div>
+                    <div class="addtocart">
+                        <button>Add to cart</button>
+                    </div>
+                </div>
+                <div class="product-row">
+                    <div class="image">
+                        <img src="{% static 'images/prod.png' %}">
+                    </div>
+                    <div class="title">
+                        Kraska fasadnaya fakturnaya yesho shtoto Hayat 10kg
+                    </div>
+                    <div class="price">
+                        <strong>99.900 sum </strong><span>/ im</span>
+                    </div>
+                    <div class="addtocart">
+                        <button>Add to cart</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div id="center">
+        <section id="breadcrumbs">
+            <a href="">Category</a>
+            <a href="" class="last">Vodoemulsii</a>
+        </section>
+        <section id="inner-slider">
+            <div class="owl-carousel">
+                <div class="row">
+                    <img src="{% static 'images/baner.JPG' %}">
+                    <span>Super prochniy kraska "Sico"</span>
+                    <button>Buy</button>
+                </div>
+                <div class="row">
+                    <img src="{% static 'images/baner.JPG' %}">
+                    <span>Super prochniy kraska "Sico"</span>
+                    <button>Buy</button>
+                </div>
+                <div class="row">
+                    <img src="{% static 'images/baner.JPG' %}">
+                    <span>Super prochniy kraska "Sico"</span>
+                    <button>Buy</button>
+                </div>
+            </div>
+        </section>
+        <section id="sort">
+            <div class="found">{% trans 'Found products' %}: <span>{{ object_list.count }}</span></div>
+            <div class="sorting">
+                <form>
+                    <label>{% trans 'Sorting' %}:</label>
+                    <select name="{{ filter.order_by_field }}" id="">
+                        <option value="a_z">
+                            {% trans 'A-z' %}
+                        </option>
+                        <option value="z_a">
+                            {% trans 'Z-a' %}
+                        </option>
+                        <option value="new_first">
+                            {% trans 'New products first' %}
+                        </option>
+                        <option value="old_first">
+                            {% trans 'Old products first' %}
+                        </option>
+                    </select>
+                </form>
+            </div>
+        </section>
+        <section id="products">
+            <div class="block-content">
+                {% for product in object_list %}
+                    <div class="product-row">
+                        <div class="image">
+                            <img src="{{ product.get_default_image.image.url }}">
+                        </div>
+                        <div class="title">
+                            <a href="{{ product.get_absolute_url }}">
+                                {{ product.name }}
+                            </a>
+                        </div>
+                        <div class="price">
+                            <strong>{{ product.get_price|floatformat|intcomma }} sum </strong>
+                        </div>
+                        <div class="addtocart">
+                            <button>{% trans 'Add to cart' %}</button>
+                        </div>
+                        <div class="variation">
+                            <div class="weight">
+                                <ul>
+                                    {% for variation in product.get_variations %}
+                                        <li><span>{{ variation.name }} {{ product.volume }}</span></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            {% if product.get_variations.0.color %}
+                                <div class="color">
+                                    <ul>
+                                        {% for variation in product.get_variations %}
+                                            <li><span class="red" style="background-color: {{ variation.color }}"></span></li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            {% if is_paginated %}
+                <div class="block-footer">
+                    <div id="pager">
+                        <ul>
+                            {% if page_obj.has_previous %}
+                                <li class="prev">
+                                    <a href="?page={{ page_obj.previous_page_number }}">
+                                        {% trans 'Back' %}
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% for page in paginator.page_range %}
+                                {% if page_obj.number == page %}
+                                    <li class="active">
+                                        <a href="?page={{ page }}">{{ page }}</a>
+                                    </li>
+                                {% else %}
+                                    <li class="">
+                                        <a href="?page={{ page }}">{{ page }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if page_obj.has_next %}
+                                <li class="next">
+                                    <a href="?page={{ page_obj.next_page_number }}">
+                                        {% trans 'Next' %}
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
+        </section>
+    </div>
+</div>
+{{ footer }}
+{% endblock %}

@@ -1,0 +1,398 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-03-03 18:50+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: main/models.py:9 main/models.py:22 main/models.py:36 products/models.py:16
+#: products/models.py:48
+msgid "Name"
+msgstr "Имя"
+
+#: main/models.py:10 main/models.py:23 main/models.py:37 products/models.py:17
+msgid "Slug"
+msgstr ""
+
+#: main/models.py:13 main/models.py:27
+msgid "Order"
+msgstr "Заказ"
+
+#: main/models.py:24 main/models.py:38 products/models.py:61
+msgid "Image"
+msgstr "Изображение"
+
+#: products/admin.py:32 products/models.py:77
+#: templates/pages/product_detail.html:73
+msgid "Color"
+msgstr "Цвет"
+
+#: products/models.py:31 products/models.py:107
+msgid "Category"
+msgstr "Категория"
+
+#: products/models.py:32
+msgid "Categories"
+msgstr "Категории"
+
+#: products/models.py:49
+msgid "Logo"
+msgstr "Логотип"
+
+#: products/models.py:53 products/models.py:108
+msgid "Brand"
+msgstr "Бренд"
+
+#: products/models.py:54
+msgid "Brands"
+msgstr "Бренды"
+
+#: products/models.py:62 products/models.py:94 products/models.py:148
+msgid "Product"
+msgstr "Продукт"
+
+#: products/models.py:78
+msgid "Colors"
+msgstr "Цвета"
+
+#: products/models.py:92
+msgid "Price"
+msgstr "Цена"
+
+#: products/models.py:93
+msgid "Quantity"
+msgstr "Количество"
+
+#: products/models.py:101
+msgid "Variation"
+msgstr "Вариация"
+
+#: products/models.py:102
+msgid "Variations"
+msgstr "Вариации"
+
+#: products/models.py:106
+msgid "Product name"
+msgstr "Название продукта"
+
+#: products/models.py:109 templates/pages/product_detail.html:104
+msgid "Description"
+msgstr "Описание"
+
+#: products/models.py:110 templates/pages/product_detail.html:98
+msgid "Characters"
+msgstr "Параметры"
+
+#: products/models.py:111
+msgid "Product Owner"
+msgstr "Владелец продукта"
+
+#: products/models.py:114
+msgid "Available in stock"
+msgstr "Есть в наличии"
+
+#: products/models.py:149
+msgid "Products"
+msgstr "Продукты"
+
+#: products/views.py:34
+msgid "Title a-z"
+msgstr "Заглавие a-z"
+
+#: products/views.py:35
+msgid "Title z-a"
+msgstr "Заглавие z-a"
+
+#: products/views.py:36 templates/pages/product_list.html:121
+msgid "New products first"
+msgstr "Новые продукты"
+
+#: products/views.py:37 templates/pages/product_list.html:124
+msgid "Old products first"
+msgstr "Старые продукты"
+
+#: project/settings.py:204
+msgid "KG"
+msgstr "КГ"
+
+#: project/settings.py:205
+msgid "Litr"
+msgstr "Литр"
+
+#: templates/pages/login.html:15 templates/parts/header.html:15
+msgid "Login"
+msgstr "Логин"
+
+#: templates/pages/login.html:27
+msgid "Phone number"
+msgstr "Номер телефона"
+
+#: templates/pages/login.html:35 templates/pages/register.html:43
+#: users/forms.py:18
+msgid "Password"
+msgstr "Пароль"
+
+#: templates/pages/login.html:45
+msgid "Log In"
+msgstr "Войти"
+
+#: templates/pages/login.html:53
+msgid "Forgot Password"
+msgstr "Забыли пароль"
+
+#: templates/pages/main.html:6 templates/pages/static.html:6
+msgid "Home"
+msgstr "Главная"
+
+#: templates/pages/main.html:14
+msgid "Working with us very easy"
+msgstr "Работать с нами легко"
+
+#: templates/pages/main.html:18
+msgid "Choose a product"
+msgstr "Выбрать продукт"
+
+#: templates/pages/main.html:21
+msgid "Payment method"
+msgstr "Способ оплаты"
+
+#: templates/pages/main.html:24
+msgid "And we'll deliver your order"
+msgstr "И мы доставим ваш заказ"
+
+#: templates/pages/main.html:30
+msgid "Quick access"
+msgstr "Быстрый доступ"
+
+#: templates/pages/main.html:43
+msgid "Top products of Stroyshop"
+msgstr "Лучшие продукты Stroyshop"
+
+#: templates/pages/product_detail.html:19
+msgid "Similar products"
+msgstr "Похожие продукты"
+
+#: templates/pages/product_detail.html:32
+#: templates/pages/product_detail.html:55
+msgid "sum"
+msgstr "Сум"
+
+#: templates/pages/product_detail.html:35 templates/pages/product_list.html:146
+msgid "Add to cart"
+msgstr "Добавить в карту"
+
+#: templates/pages/product_detail.html:58
+msgid "In stock"
+msgstr "В наличии"
+
+#: templates/pages/product_detail.html:59
+msgid "Available"
+msgstr "Доступно"
+
+#: templates/pages/product_detail.html:59
+msgid "Not available"
+msgstr "Не доступно"
+
+#: templates/pages/product_detail.html:62
+msgid "Packing"
+msgstr "Упаковка"
+
+#: templates/pages/product_detail.html:84
+msgid "Last updated"
+msgstr "Последнее обновление"
+
+#: templates/pages/product_detail.html:112
+msgid "Feedbacks"
+msgstr "Отзывы"
+
+#: templates/pages/product_detail.html:115 templates/pages/search.html:7
+msgid "Found"
+msgstr "Найдено"
+
+#: templates/pages/product_detail.html:115
+msgid "feedbacks"
+msgstr "Отзывы"
+
+#: templates/pages/product_detail.html:118
+#: templates/pages/product_list.html:112
+msgid "Sorting"
+msgstr "Сортировка"
+
+#: templates/pages/product_detail.html:120
+msgid "Last first"
+msgstr "Последние"
+
+#: templates/pages/product_detail.html:126
+msgid "Leave review"
+msgstr "Оставить отзыв"
+
+#: templates/pages/product_detail.html:132
+msgid "Your name"
+msgstr "Ваше имя"
+
+#: templates/pages/product_detail.html:141
+msgid "Where are you from"
+msgstr "Откуда вы"
+
+#: templates/pages/product_detail.html:150
+msgid "Title"
+msgstr "Название"
+
+#: templates/pages/product_detail.html:159
+msgid "Your message"
+msgstr "Ваше сообщение"
+
+#: templates/pages/product_list.html:10
+msgid "Choose category"
+msgstr "Выберите категорию"
+
+#: templates/pages/product_list.html:109
+msgid "Found products"
+msgstr "Найденные товары"
+
+#: templates/pages/product_list.html:115
+msgid "A-z"
+msgstr "A-z"
+
+#: templates/pages/product_list.html:118
+msgid "Z-a"
+msgstr "Z-a"
+
+#: templates/pages/product_list.html:176
+msgid "Back"
+msgstr "Назад"
+
+#: templates/pages/product_list.html:194
+msgid "Next"
+msgstr "Следущий"
+
+#: templates/pages/register.html:15 templates/parts/header.html:20
+msgid "Registration"
+msgstr "Регистрация"
+
+#: templates/pages/register.html:27
+msgid "Full name"
+msgstr "Полное имя"
+
+#: templates/pages/register.html:35
+msgid "Phone"
+msgstr "Телефон"
+
+#: templates/pages/register.html:51 users/forms.py:19
+msgid "Confirm password"
+msgstr "Подтвердите пароль"
+
+#: templates/parts/banner.html:10
+msgid "more"
+msgstr "больше"
+
+#: templates/parts/category_list.html:5 templates/parts/header.html:64
+msgid "Product categories"
+msgstr "Категория продукта"
+
+#: templates/parts/header.html:9
+msgid "Logout"
+msgstr "Выйти"
+
+#: templates/parts/header.html:34
+msgid "Search product"
+msgstr "Найти продукт"
+
+#: templates/parts/header.html:48
+msgid "Cart"
+msgstr "Корзина"
+
+#: templates/parts/header.html:56
+msgid "Checkout"
+msgstr "Оформление заказа"
+
+#: users/admin.py:17
+msgid "Personal info"
+msgstr "Личная информация"
+
+#: users/admin.py:18
+msgid "Permissions"
+msgstr "Права доступа"
+
+#: users/admin.py:20
+msgid "Important dates"
+msgstr "Важные дни"
+
+#: users/forms.py:17
+msgid "Fullname"
+msgstr "Полноеимя"
+
+#: users/forms.py:29
+msgid "Passwords not match"
+msgstr "Пароль не указан"
+
+#: users/models.py:44
+msgid "Phone number or Username"
+msgstr "Номер телефона или Имя пользователя"
+
+#: users/models.py:45
+msgid "First name"
+msgstr "Имя"
+
+#: users/models.py:46
+msgid "Last name"
+msgstr "Фамилия"
+
+#: users/models.py:47
+msgid "Date joined"
+msgstr "Дата вступления"
+
+#: users/models.py:48
+msgid "Active"
+msgstr "Активный"
+
+#: users/models.py:49
+msgid "Avatar"
+msgstr "Аватар"
+
+#: users/models.py:56
+msgid "User"
+msgstr "Пользователь"
+
+#: users/models.py:57
+msgid "Users"
+msgstr "Пользователи"
+
+#: users/models.py:64
+msgid "Client user"
+msgstr "Клиент пользователя"
+
+#: users/models.py:65
+msgid "Client address"
+msgstr "Адрес клиента"
+
+#: users/models.py:75
+msgid "Producer"
+msgstr "Производитель"
+
+#: users/models.py:76
+msgid "Supplier"
+msgstr "Поставшик"
+
+#: users/models.py:78
+msgid "Merchant user"
+msgstr "Продавец"
+
+#: users/models.py:79
+msgid "Merchant type"
+msgstr "Топ торговца"

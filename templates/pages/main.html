@@ -1,0 +1,440 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans 'Home' %}{% endblock %}
+
+{% block content %}
+    {{ header }}
+    {{ banner }}
+    {% include 'parts/partners.html' %}
+    <section id="iseasy">
+        <div class="block-title">
+            {% trans 'Working with us very easy' %}
+        </div>
+        <div class="block-content">
+            <div>
+                <span>{% trans 'Choose a product' %}</span>
+            </div>
+            <div>
+                <span>{% trans 'Payment method' %}</span>
+            </div>
+            <div>
+                <span>{% trans "And we'll deliver your order" %}</span>
+            </div>
+        </div>
+    </section>
+    <section id="quick">
+        <div class="block-title">
+            {% trans 'Quick access' %}
+        </div>
+        <div class="block-content">
+            <div>
+                <a href="">Vodo emulsii</a>
+            </div>
+            <div>
+                <a href="">Kraski</a>
+            </div>
+        </div>
+    </section>
+    <section id="toprod">
+        <div class="block-title">
+            {% trans 'Top products of Stroyshop' %}
+        </div>
+        <div class="block-content">
+            <div class="owl-carousel">
+                <div class="product-row">
+                    <div class="image">
+                        <img src="{% static 'images/prod.png' %}">
+                    </div>
+                    <div class="title">
+                        Kraska fasadnaya fakturnaya yesho shtoto Hayat 10kg
+                    </div>
+                    <div class="price">
+                        <strong>99.900 sum </strong><span>/ im</span>
+                    </div>
+                    <div class="addtocart">
+                        <button>Add to cart</button>
+                    </div>
+                    <div class="variation">
+                        <div class="weight">
+                            <ul>
+                                <li><span>9 kg</span></li>
+                                <li><span>11 kg</span></li>
+                                <li><span>13 kg</span></li>
+                                <li><span>15 kg</span></li>
+                            </ul>
+                        </div>
+                        <div class="color">
+                            <ul>
+                                <li><span class="red"></span></li>
+                                <li><span class="blue"></span></li>
+                                <li><span class="green"></span></li>
+                                <li><span class="black"></span></li>
+                                <li><span class="white"></span></li>
+                                <li><span class="pink"></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-row">
+                    <div class="image">
+                        <img src="{% static 'images/prod.png' %}">
+                    </div>
+                    <div class="title">
+                        Kraska fasadnaya fakturnaya yesho shtoto Hayat 10kg
+                    </div>
+                    <div class="price">
+                        <strong>99.900 sum </strong><span>/ im</span>
+                    </div>
+                    <div class="addtocart">
+                        <button>Add to cart</button>
+                    </div>
+                    <div class="variation">
+                        <div class="weight">
+                            <ul>
+                                <li><span>9 kg</span></li>
+                                <li><span>11 kg</span></li>
+                                <li><span>13 kg</span></li>
+                                <li><span>15 kg</span></li>
+                            </ul>
+                        </div>
+                        <div class="color">
+                            <ul>
+                                <li><span class="red"></span></li>
+                                <li><span class="blue"></span></li>
+                                <li><span class="green"></span></li>
+                                <li><span class="black"></span></li>
+                                <li><span class="white"></span></li>
+                                <li><span class="pink"></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-row">
+                    <div class="image">
+                        <img src="{% static 'images/prod.png' %}">
+                    </div>
+                    <div class="title">
+                        Kraska fasadnaya fakturnaya yesho shtoto Hayat 10kg
+                    </div>
+                    <div class="price">
+                        <strong>99.900 sum </strong><span>/ im</span>
+                    </div>
+                    <div class="addtocart">
+                        <button>Add to cart</button>
+                    </div>
+                    <div class="variation">
+                        <div class="weight">
+                            <ul>
+                                <li><span>9 kg</span></li>
+                                <li><span>11 kg</span></li>
+                                <li><span>13 kg</span></li>
+                                <li><span>15 kg</span></li>
+                            </ul>
+                        </div>
+                        <div class="color">
+                            <ul>
+                                <li><span class="red"></span></li>
+                                <li><span class="blue"></span></li>
+                                <li><span class="green"></span></li>
+                                <li><span class="black"></span></li>
+                                <li><span class="white"></span></li>
+                                <li><span class="pink"></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-row">
+                    <div class="image">
+                        <img src="{% static 'images/prod.png' %}">
+                    </div>
+                    <div class="title">
+                        Kraska fasadnaya fakturnaya yesho shtoto Hayat 10kg
+                    </div>
+                    <div class="price">
+                        <strong>99.900 sum </strong><span>/ im</span>
+                    </div>
+                    <div class="addtocart">
+                        <button>Add to cart</button>
+                    </div>
+                    <div class="variation">
+                        <div class="weight">
+                            <ul>
+                                <li><span>9 kg</span></li>
+                                <li><span>11 kg</span></li>
+                                <li><span>13 kg</span></li>
+                                <li><span>15 kg</span></li>
+                            </ul>
+                        </div>
+                        <div class="color">
+                            <ul>
+                                <li><span class="red"></span></li>
+                                <li><span class="blue"></span></li>
+                                <li><span class="green"></span></li>
+                                <li><span class="black"></span></li>
+                                <li><span class="white"></span></li>
+                                <li><span class="pink"></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-row">
+                    <div class="image">
+                        <img src="{% static 'images/prod.png' %}">
+                    </div>
+                    <div class="title">
+                        Kraska fasadnaya fakturnaya yesho shtoto Hayat 10kg
+                    </div>
+                    <div class="price">
+                        <strong>99.900 sum </strong><span>/ im</span>
+                    </div>
+                    <div class="addtocart">
+                        <button>Add to cart</button>
+                    </div>
+                    <div class="variation">
+                        <div class="weight">
+                            <ul>
+                                <li><span>9 kg</span></li>
+                                <li><span>11 kg</span></li>
+                                <li><span>13 kg</span></li>
+                                <li><span>15 kg</span></li>
+                            </ul>
+                        </div>
+                        <div class="color">
+                            <ul>
+                                <li><span class="red"></span></li>
+                                <li><span class="blue"></span></li>
+                                <li><span class="green"></span></li>
+                                <li><span class="black"></span></li>
+                                <li><span class="white"></span></li>
+                                <li><span class="pink"></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-row">
+                    <div class="image">
+                        <img src="{% static 'images/prod.png' %}">
+                    </div>
+                    <div class="title">
+                        Kraska fasadnaya fakturnaya yesho shtoto Hayat 10kg
+                    </div>
+                    <div class="price">
+                        <strong>99.900 sum </strong><span>/ im</span>
+                    </div>
+                    <div class="addtocart">
+                        <button>Add to cart</button>
+                    </div>
+                    <div class="variation">
+                        <div class="weight">
+                            <ul>
+                                <li><span>9 kg</span></li>
+                                <li><span>11 kg</span></li>
+                                <li><span>13 kg</span></li>
+                                <li><span>15 kg</span></li>
+                            </ul>
+                        </div>
+                        <div class="color">
+                            <ul>
+                                <li><span class="red"></span></li>
+                                <li><span class="blue"></span></li>
+                                <li><span class="green"></span></li>
+                                <li><span class="black"></span></li>
+                                <li><span class="white"></span></li>
+                                <li><span class="pink"></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-row">
+                    <div class="image">
+                        <img src="{% static 'images/prod.png' %}">
+                    </div>
+                    <div class="title">
+                        Kraska fasadnaya fakturnaya yesho shtoto Hayat 10kg
+                    </div>
+                    <div class="price">
+                        <strong>99.900 sum </strong><span>/ im</span>
+                    </div>
+                    <div class="addtocart">
+                        <button>Add to cart</button>
+                    </div>
+                    <div class="variation">
+                        <div class="weight">
+                            <ul>
+                                <li><span>9 kg</span></li>
+                                <li><span>11 kg</span></li>
+                                <li><span>13 kg</span></li>
+                                <li><span>15 kg</span></li>
+                            </ul>
+                        </div>
+                        <div class="color">
+                            <ul>
+                                <li><span class="red"></span></li>
+                                <li><span class="blue"></span></li>
+                                <li><span class="green"></span></li>
+                                <li><span class="black"></span></li>
+                                <li><span class="white"></span></li>
+                                <li><span class="pink"></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-row">
+                    <div class="image">
+                        <img src="{% static 'images/prod.png' %}">
+                    </div>
+                    <div class="title">
+                        Kraska fasadnaya fakturnaya yesho shtoto Hayat 10kg
+                    </div>
+                    <div class="price">
+                        <strong>99.900 sum </strong><span>/ im</span>
+                    </div>
+                    <div class="addtocart">
+                        <button>Add to cart</button>
+                    </div>
+                    <div class="variation">
+                        <div class="weight">
+                            <ul>
+                                <li><span>9 kg</span></li>
+                                <li><span>11 kg</span></li>
+                                <li><span>13 kg</span></li>
+                                <li><span>15 kg</span></li>
+                            </ul>
+                        </div>
+                        <div class="color">
+                            <ul>
+                                <li><span class="red"></span></li>
+                                <li><span class="blue"></span></li>
+                                <li><span class="green"></span></li>
+                                <li><span class="black"></span></li>
+                                <li><span class="white"></span></li>
+                                <li><span class="pink"></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-row">
+                    <div class="image">
+                        <img src="{% static 'images/prod.png' %}">
+                    </div>
+                    <div class="title">
+                        Kraska fasadnaya fakturnaya yesho shtoto Hayat 10kg
+                    </div>
+                    <div class="price">
+                        <strong>99.900 sum </strong><span>/ im</span>
+                    </div>
+                    <div class="addtocart">
+                        <button>Add to cart</button>
+                    </div>
+                    <div class="variation">
+                        <div class="weight">
+                            <ul>
+                                <li><span>9 kg</span></li>
+                                <li><span>11 kg</span></li>
+                                <li><span>13 kg</span></li>
+                                <li><span>15 kg</span></li>
+                            </ul>
+                        </div>
+                        <div class="color">
+                            <ul>
+                                <li><span class="red"></span></li>
+                                <li><span class="blue"></span></li>
+                                <li><span class="green"></span></li>
+                                <li><span class="black"></span></li>
+                                <li><span class="white"></span></li>
+                                <li><span class="pink"></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="block-footer">
+            <a href="">More products</a>
+        </div>
+    </section>
+    <section id="superprice">
+        <div class="owl-carousel">
+            <div class="row">
+                <div class="image">
+                    <img src="{% static 'images/superprice.jpg' %}">
+                </div>
+                <div class="title">
+                    Superprice!
+                </div>
+                <div class="subtitle">
+                    Tovari po ochenama nizkiy tsena vasya
+                </div>
+                <div class="description">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </div>
+                <div class="link">
+                    <a href="">More products</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="image">
+                    <img src="{% static 'images/superprice.jpg' %}">
+                </div>
+                <div class="title">
+                    Superprice!
+                </div>
+                <div class="subtitle">
+                    Tovari po ochenama nizkiy tsena vasya
+                </div>
+                <div class="description">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </div>
+                <div class="link">
+                    <a href="">More products</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="image">
+                    <img src="{% static 'images/superprice.jpg' %}">
+                </div>
+                <div class="title">
+                    Superprice!
+                </div>
+                <div class="subtitle">
+                    Tovari po ochenama nizkiy tsena vasya
+                </div>
+                <div class="description">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </div>
+                <div class="link">
+                    <a href="">More products</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="feedbacks">
+        <div class="owl-carousel">
+            <div class="row">
+                <div class="image"><img src="{% static 'images/face.jpg' %}"></div>
+                <div class="text">
+                    <div class="title">Steve Jobs</div>
+                    <div class="body">I learnt English, I speak in English, but I don't understood what I'm said!</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="image"><img src="{% static 'images/face.jpg' %}"></div>
+                <div class="text">
+                    <div class="title">Steve Jobs</div>
+                    <div class="body">I learnt English, I speak in English, but I don't understood what I'm said!</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="image"><img src="{% static 'images/face.jpg' %}"></div>
+                <div class="text">
+                    <div class="title">Steve Jobs</div>
+                    <div class="body">I learnt English, I speak in English, but I don't understood what I'm said!</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {{ footer }}
+{% endblock %}

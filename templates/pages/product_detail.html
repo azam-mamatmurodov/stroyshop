@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+{% load static i18n humanize %}
+
+{% block title %}
+    {{ product.title }}
+{% endblock %}
+
+{% block content %}
+    {{ header }}
+    <div id="main">
+        <section id="breadcrumbs">
+            <a href="">Main</a>
+            <a href="" class="last">Cart</a>
+        </section>
+        <section id="product-content">
+            <div class="product-info">
+                {% if similar_products %}
+                    <div class="likethis">
+                        <h2>{% trans 'Similar products' %}</h2>
+                        <div class="block-content">
+                            {% for similar_product in similar_products %}
+                                <div class="product-row">
+                                    <div class="image">
+                                        <img src="{{ similar_product.get_default_image.image.url }}">
+                                    </div>
+                                    <div class="title">
+                                        <a href="{{ similar_product.get_absolute_url }}">
+                                            {{ similar_product.name }}
+                                        </a>
+                                    </div>
+                                    <div class="price">
+                                        <strong>{{ similar_product.get_price|floatformat|intcomma }} {% trans 'sum' %} </strong>
+                                    </div>
+                                    <div class="addtocart">
+                                        <button>{% trans 'Add to cart' %}</button>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="images">
+                    <img id="img_01" style="width: 100%; height: 200px;" src="{{ product.get_default_image.image.url }}" data-zoom-image="{{ product.get_default_image.image.url }}" />
+                    <div id="gal1">
+                        {% for image_object in product.get_all_images %}
+                            <a href="#" data-image="{{ image_object.image.url }}" data-zoom-image="{{ image_object.image.url }}">
+                                <img style="height: 100px;" id="img_{{ forloop.counter }}" src="{{ image_object.image.url }}" />
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="category">{{ product.category }}</div>
+                <div class="title">{{ product.name }}</div>
+                <div class="price">
+                    <strong>{{ product.get_default_variation.price|floatformat|intcomma }} {% trans 'sum' %} </strong>
+                </div>
+                <div class="isavailable">
+                    <label>{% trans 'In stock' %}:</label>
+                    <span>{% if product.available_in_stock %}{% trans 'Available' %}{% else %}{% trans 'Not available' %}{% endif %}</span>
+                </div>
+                <div class="weight">
+                    <label>{% trans 'Packing' %}:</label>
+                    <ul>
+                        {% for variation in product.get_variations %}
+                            <li class="{% if forloop.counter0 == 0 %}active{% endif %}">
+                                <span>{{ variation.name }} {{ product.volume.title }}</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% if product.is_color_exist %}
+                    <div class="color">
+                        <label>{% trans 'Color' %}:</label><span>{{ product.get_default_variation.color }}</span>
+                        <ul>
+                            {% for variation in product.get_variations %}
+                                <li>
+                                    <span class="active" style="background-color: {{ variation.color.color }}"></span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                <div class="nalichiye">
+                    <span>{% trans 'Last updated' %}: {{ product.updated }}</span>
+                </div>
+                <div class="actions">
+                    <form>
+                        <div class="form-item">
+                            <input type="text" name="quantity">
+                            <div class="plus"></div>
+                            <div class="minus"></div>
+                        </div>
+                        <input type="submit" name="submit" value="&#xf07a; Add to cart">
+                    </form>
+                </div>
+            </div>
+            <div class="product-char">
+                <h2>{% trans 'Characters' %}</h2>
+                <div>
+                    {{ product.characters|safe }}
+                </div>
+            </div>
+            <div class="product-desc">
+                <h2>{% trans 'Description' %}</h2>
+                <div>
+                    {{ product.description|safe }}
+                </div>
+            </div>
+        </section>
+    </div>
+    <section id="feedbacks-block">
+        <div class="block-title">{% trans 'Feedbacks' %}</div>
+        <div class="block-header">
+            <div class="sort">
+                <div class="found">{% trans 'Found' %}: <span>{{ product.get_reviews.count }} {% trans 'feedbacks' %}</span></div>
+                <div class="sorting">
+                    <form action="">
+                        <label>{% trans 'Sorting' %}:</label>
+                        <select name="review_sorting">
+                            <option value="">{% trans 'Last first' %}</option>
+                        </select>
+                    </form>
+                </div>
+            </div>
+            <div class="addfeed">
+                <button>{% trans 'Leave review' %}</button>
+            </div>
+            <div class="feedback-form" {% if review_form.has_error %}style="display:block;"{% endif %}>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-item">
+                        <label>{% trans 'Your name' %}</label>
+                        {{ review_form.reviewer }}
+                        {% if review_form.reviewer.errors %}
+                            <div class="help-block">
+                                {{ review_form.reviewer.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="form-item">
+                        <label>{% trans 'Where are you from' %} ?</label>
+                        {{ review_form.reviewer_location }}
+                        {% if review_form.reviewer_location.errors %}
+                            <div class="help-block">
+                                {{ review_form.reviewer_location.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="form-item">
+                        <label>{% trans 'Title' %}</label>
+                        {{ review_form.subject }}
+                        {% if review_form.subject.errors %}
+                            <div class="help-block">
+                                {{ review_form.subject.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="form-item">
+                        <label>{% trans 'Your message' %}</label>
+                        {{ review_form.text }}
+                        {% if review_form.text.errors %}
+                            <div class="help-block">
+                                {{ review_form.text.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="form-actions">
+                        <input type="submit" name="Submit">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="block-content">
+            {% for product_review in product.get_reviews %}
+                <div class="row">
+                    <div class="name">{{ product_review.reviewer }}</div>
+                    <div class="land">from {{ product_review.reviewer_location }}</div>
+                    <div class="title">{{ product_review.subject }}</div>
+                    <div class="body">{{ product_review.text }}</div>
+                    <div class="date">{{ product_review.created_at }}</div>
+                </div>
+            {% endfor %}
+        </div>
+        {% if product.get_reviews.count > 5 %}
+            <div class="block-footer">
+                <a href="">More feedbacks</a>
+            </div>
+        {% endif %}
+    </section>
+    {{ footer }}
+{% endblock %}

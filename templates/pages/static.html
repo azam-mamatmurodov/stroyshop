@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans 'Home' %}{% endblock %}
+
+{% block content %}
+    {{ header }}
+    {{ banner }}
+    {% include 'parts/partners.html' %}
+
+    <section id="page" class="content">
+        <h3 class="title">{{ object.name }}</h3>
+        <div class="content">
+            {{ object.body|safe }}
+        </div>
+    </section>
+    {{ footer }}
+{% endblock %}

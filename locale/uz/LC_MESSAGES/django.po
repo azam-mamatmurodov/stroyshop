@@ -1,0 +1,412 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-03-03 18:50+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: main/models.py:9 main/models.py:22 main/models.py:36 products/models.py:16
+#: products/models.py:48
+msgid "Name"
+msgstr "Ism"
+
+#: main/models.py:10 main/models.py:23 main/models.py:37 products/models.py:17
+msgid "Slug"
+msgstr ""
+
+#: main/models.py:13 main/models.py:27
+msgid "Order"
+msgstr "Buyurtma"
+
+#: main/models.py:24 main/models.py:38 products/models.py:61
+msgid "Image"
+msgstr "Rasm"
+
+#: products/admin.py:32 products/models.py:77
+#: templates/pages/product_detail.html:73
+msgid "Color"
+msgstr "Rang"
+
+#: products/models.py:31 products/models.py:107
+msgid "Category"
+msgstr "Toifa"
+
+#: products/models.py:32
+msgid "Categories"
+msgstr "Toifalar"
+
+#: products/models.py:49
+msgid "Logo"
+msgstr "Emblema"
+
+#: products/models.py:53 products/models.py:108
+msgid "Brand"
+msgstr "Tovar"
+
+#: products/models.py:54
+msgid "Brands"
+msgstr "Tovarlar"
+
+#: products/models.py:62 products/models.py:94 products/models.py:148
+msgid "Product"
+msgstr "Mahsulot"
+
+#: products/models.py:78
+msgid "Colors"
+msgstr "Ranglar"
+
+#: products/models.py:92
+msgid "Price"
+msgstr "Narx"
+
+#: products/models.py:93
+msgid "Quantity"
+msgstr "Miqdor"
+
+#: products/models.py:101
+msgid "Variation"
+msgstr "O'zgarish"
+
+#: products/models.py:102
+msgid "Variations"
+msgstr "O'zgarishlar"
+
+#: products/models.py:106
+#, fuzzy
+#| msgid "First name"
+msgid "Product name"
+msgstr "Ism"
+
+#: products/models.py:109 templates/pages/product_detail.html:104
+msgid "Description"
+msgstr "Ta'rif"
+
+#: products/models.py:110 templates/pages/product_detail.html:98
+msgid "Characters"
+msgstr "Belgilar"
+
+#: products/models.py:111
+msgid "Product Owner"
+msgstr "Mahsulot sohibi"
+
+#: products/models.py:114
+msgid "Available in stock"
+msgstr "Omborda mavjud"
+
+#: products/models.py:149
+msgid "Products"
+msgstr "Mahsulotlar"
+
+#: products/views.py:34
+msgid "Title a-z"
+msgstr "a-z sarlavhasi"
+
+#: products/views.py:35
+msgid "Title z-a"
+msgstr "z-a sarlavhasi"
+
+#: products/views.py:36 templates/pages/product_list.html:121
+msgid "New products first"
+msgstr "Avval yangi mahsulotlar"
+
+#: products/views.py:37 templates/pages/product_list.html:124
+msgid "Old products first"
+msgstr "Avval eski mahsulotlar"
+
+#: project/settings.py:204
+msgid "KG"
+msgstr "Kg"
+
+#: project/settings.py:205
+msgid "Litr"
+msgstr "Litr"
+
+#: templates/pages/login.html:15 templates/parts/header.html:15
+msgid "Login"
+msgstr "Kirish"
+
+#: templates/pages/login.html:27
+msgid "Phone number"
+msgstr "Telefon raqami"
+
+#: templates/pages/login.html:35 templates/pages/register.html:43
+#: users/forms.py:18
+msgid "Password"
+msgstr "Parol"
+
+#: templates/pages/login.html:45
+msgid "Log In"
+msgstr "Kirish"
+
+#: templates/pages/login.html:53
+msgid "Forgot Password"
+msgstr "Parolni unutingizmi"
+
+#: templates/pages/main.html:6 templates/pages/static.html:6
+msgid "Home"
+msgstr "Bosh sahifa"
+
+#: templates/pages/main.html:14
+msgid "Working with us very easy"
+msgstr "Biz bilan ishlash juda oson"
+
+#: templates/pages/main.html:18
+msgid "Choose a product"
+msgstr "Mahsulotni tanlang"
+
+#: templates/pages/main.html:21
+msgid "Payment method"
+msgstr "To'lov uslubi"
+
+#: templates/pages/main.html:24
+msgid "And we'll deliver your order"
+msgstr "Va biz buyurtmangizni yetqizib beramiz"
+
+#: templates/pages/main.html:30
+msgid "Quick access"
+msgstr "Tez kirish"
+
+#: templates/pages/main.html:43
+msgid "Top products of Stroyshop"
+msgstr "Stroyshopning eng yaxshi mahsulotlari"
+
+#: templates/pages/product_detail.html:19
+msgid "Similar products"
+msgstr "Shu kabi mahsulotlar"
+
+#: templates/pages/product_detail.html:32
+#: templates/pages/product_detail.html:55
+msgid "sum"
+msgstr "so'm"
+
+#: templates/pages/product_detail.html:35 templates/pages/product_list.html:146
+msgid "Add to cart"
+msgstr "Savavatchaga qo'shish"
+
+#: templates/pages/product_detail.html:58
+msgid "In stock"
+msgstr "Sotuvda mavjud"
+
+#: templates/pages/product_detail.html:59
+msgid "Available"
+msgstr "mavjud"
+
+#: templates/pages/product_detail.html:59
+msgid "Not available"
+msgstr "Mavjud emas"
+
+#: templates/pages/product_detail.html:62
+msgid "Packing"
+msgstr "Qadoqlash"
+
+#: templates/pages/product_detail.html:84
+#, fuzzy
+#| msgid "Last name"
+msgid "Last updated"
+msgstr "Familiya"
+
+#: templates/pages/product_detail.html:112
+msgid "Feedbacks"
+msgstr "Fikrlar"
+
+#: templates/pages/product_detail.html:115 templates/pages/search.html:7
+msgid "Found"
+msgstr "Topildi"
+
+#: templates/pages/product_detail.html:115
+msgid "feedbacks"
+msgstr "fikrlar"
+
+#: templates/pages/product_detail.html:118
+#: templates/pages/product_list.html:112
+msgid "Sorting"
+msgstr "Tartiblash"
+
+#: templates/pages/product_detail.html:120
+msgid "Last first"
+msgstr "Oxirgi marta"
+
+#: templates/pages/product_detail.html:126
+msgid "Leave review"
+msgstr "Sharhni qoldirish"
+
+#: templates/pages/product_detail.html:132
+#, fuzzy
+#| msgid "First name"
+msgid "Your name"
+msgstr "Ism"
+
+#: templates/pages/product_detail.html:141
+msgid "Where are you from"
+msgstr "Qayerdansiz"
+
+#: templates/pages/product_detail.html:150
+msgid "Title"
+msgstr "Sarlavha"
+
+#: templates/pages/product_detail.html:159
+msgid "Your message"
+msgstr "Sizning xatingiz"
+
+#: templates/pages/product_list.html:10
+msgid "Choose category"
+msgstr "Kategoriya tanlang"
+
+#: templates/pages/product_list.html:109
+msgid "Found products"
+msgstr "Mahsulotlar topildi"
+
+#: templates/pages/product_list.html:115
+msgid "A-z"
+msgstr "A-z"
+
+#: templates/pages/product_list.html:118
+msgid "Z-a"
+msgstr "Z-a"
+
+#: templates/pages/product_list.html:176
+msgid "Back"
+msgstr "Ortga"
+
+#: templates/pages/product_list.html:194
+msgid "Next"
+msgstr "Keyingi"
+
+#: templates/pages/register.html:15 templates/parts/header.html:20
+msgid "Registration"
+msgstr "Ro'yxatdan o'tish"
+
+#: templates/pages/register.html:27
+#, fuzzy
+#| msgid "First name"
+msgid "Full name"
+msgstr "Ism"
+
+#: templates/pages/register.html:35
+msgid "Phone"
+msgstr "Telefon"
+
+#: templates/pages/register.html:51 users/forms.py:19
+msgid "Confirm password"
+msgstr "Parolni tasdiqlash"
+
+#: templates/parts/banner.html:10
+msgid "more"
+msgstr "ko'proq"
+
+#: templates/parts/category_list.html:5 templates/parts/header.html:64
+msgid "Product categories"
+msgstr "Mahsulot toifasi"
+
+#: templates/parts/header.html:9
+msgid "Logout"
+msgstr "Chiqish"
+
+#: templates/parts/header.html:34
+msgid "Search product"
+msgstr "Mahsulotni qidirish"
+
+#: templates/parts/header.html:48
+msgid "Cart"
+msgstr ""
+
+#: templates/parts/header.html:56
+msgid "Checkout"
+msgstr ""
+
+#: users/admin.py:17
+msgid "Personal info"
+msgstr "Shaxsiy ma'lumot"
+
+#: users/admin.py:18
+msgid "Permissions"
+msgstr "Ruxsatlar"
+
+#: users/admin.py:20
+msgid "Important dates"
+msgstr "Muhim sanalar"
+
+#: users/forms.py:17
+msgid "Fullname"
+msgstr "To'liq ismi sharif"
+
+#: users/forms.py:29
+msgid "Passwords not match"
+msgstr "Parollar mos emas"
+
+#: users/models.py:44
+msgid "Phone number or Username"
+msgstr "Telefon nomer yoki foydalanuvchi nomi"
+
+#: users/models.py:45
+msgid "First name"
+msgstr "Ism"
+
+#: users/models.py:46
+msgid "Last name"
+msgstr "Familiya"
+
+#: users/models.py:47
+msgid "Date joined"
+msgstr "Qo'shilgan sana"
+
+#: users/models.py:48
+msgid "Active"
+msgstr "Faol"
+
+#: users/models.py:49
+msgid "Avatar"
+msgstr ""
+
+#: users/models.py:56
+msgid "User"
+msgstr "Foydalanuvchi"
+
+#: users/models.py:57
+msgid "Users"
+msgstr "Foydalanuvchilar"
+
+#: users/models.py:64
+msgid "Client user"
+msgstr "Mijoz foydalanuvchi"
+
+#: users/models.py:65
+#, fuzzy
+#| msgid "Email address"
+msgid "Client address"
+msgstr "Email manzil"
+
+#: users/models.py:75
+msgid "Producer"
+msgstr "Ishlab chiqaruvchi"
+
+#: users/models.py:76
+msgid "Supplier"
+msgstr "yetkazib beruvchi"
+
+#: users/models.py:78
+msgid "Merchant user"
+msgstr "Savdo foydalanuvchisi"
+
+#: users/models.py:79
+msgid "Merchant type"
+msgstr "Savdo turi"
+
+#~ msgid "Email address"
+#~ msgstr "Email manzil"
+
+#~ msgid "Company"
+#~ msgstr "Kompaniyalar"

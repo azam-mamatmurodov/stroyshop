@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block content %}
+    {{ header }}
+    <div id="main">
+        <div id="center">
+            <section id="breadcrumbs">
+                <a href="">Main</a>
+                <a href="" class="last">Cart</a>
+            </section>
+            <section id="cart-content">
+                <div id="page-title">
+                    Korzina pokupok (4)
+                </div>
+                <div class="product-row">
+                    <form>
+                        <div class="product-info">
+                            <div class="image">
+                                <img src="{% static 'images/prod.png' %}">
+                            </div>
+                            <div class="title">
+                                Kraska fasadnaya fakturnaya yesho shtoto Hayat 10kg
+                            </div>
+                            <div class="price">
+                                <strong>99.900 sum </strong><span>/ im</span>
+                            </div>
+                            <div class="isavailable">
+                                Available
+                            </div>
+                            <div class="quantity">
+                                <label>Quantity</label>
+                                <input type="text" name="quantity">
+                                <div class="plus"></div>
+                                <div class="minus"></div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <input type="submit" name="save" value="Save">
+                            <input type="delete" name="delete" value="Delete">
+                        </div>
+                    </form>
+                </div>
+                <div class="product-row">
+                    <form>
+                        <div class="product-info">
+                            <div class="image">
+                                <img src="{% static 'images/prod.png' %}">
+                            </div>
+                            <div class="title">
+                                Kraska fasadnaya fakturnaya yesho shtoto Hayat 10kg
+                            </div>
+                            <div class="price">
+                                <strong>99.900 sum </strong><span>/ im</span>
+                            </div>
+                            <div class="isavailable">
+                                Available
+                            </div>
+                            <div class="quantity">
+                                <label>Quantity</label>
+                                <input type="text" name="quantity">
+                                <div class="plus"></div>
+                                <div class="minus"></div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <input type="submit" name="save" value="Save">
+                            <input type="delete" name="delete" value="Delete">
+                        </div>
+                    </form>
+                </div>
+                <div class="product-row">
+                    <form>
+                        <div class="product-info">
+                            <div class="image">
+                                <img src="{% static 'images/prod.png' %}">
+                            </div>
+                            <div class="title">
+                                Kraska fasadnaya fakturnaya yesho shtoto Hayat 10kg
+                            </div>
+                            <div class="price">
+                                <strong>99.900 sum </strong><span>/ im</span>
+                            </div>
+                            <div class="isavailable">
+                                Available
+                            </div>
+                            <div class="quantity">
+                                <label>Quantity</label>
+                                <input type="text" name="quantity">
+                                <div class="plus"></div>
+                                <div class="minus"></div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <input type="submit" name="save" value="Save">
+                            <input type="delete" name="delete" value="Delete">
+                        </div>
+                    </form>
+                </div>
+                <div class="product-row">
+                    <form>
+                        <div class="product-info">
+                            <div class="image">
+                                <img src="{% static 'images/prod.png' %}">
+                            </div>
+                            <div class="title">
+                                Kraska fasadnaya fakturnaya yesho shtoto Hayat 10kg
+                            </div>
+                            <div class="price">
+                                <strong>99.900 sum </strong><span>/ im</span>
+                            </div>
+                            <div class="isavailable">
+                                Available
+                            </div>
+                            <div class="quantity">
+                                <label>Quantity</label>
+                                <input type="text" name="quantity">
+                                <div class="plus"></div>
+                                <div class="minus"></div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <input type="submit" name="save" value="Save">
+                            <input type="delete" name="delete" value="Delete">
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+        <div id="right">
+            <section id="checkout">
+                <div class="order-info">
+                    <p>
+                        <span>Product quantity</span><span>5</span>
+                    </p>
+                    <p>
+                        <span>Product quantity</span><span>5</span>
+                    </p>
+                    <p>
+                        <span>Product quantity</span><span>5</span>
+                    </p>
+                    <p>
+                        <span>Product quantity</span><span>5</span>
+                    </p>
+                </div>
+                <div class="itog">
+                    <h5>Itogovaya stoimost</h5>
+                    <h2>36,000.00 sum</h2>
+                    <button>Go to checkout</button>
+                </div>
+            </section>
+        </div>
+    </div>
+    {{ footer }}
+{% endblock %}

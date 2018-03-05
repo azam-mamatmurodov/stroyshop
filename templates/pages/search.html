@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block content %}
+    {{ header }}
+    <div id="search_page">
+        {% trans 'Found' %}: {{ product_list.count }}
+        <div class="results">
+            {% for product in product_list %}
+                <div class="product-item">
+                    <a href="{{ product.get_absolute_url }}">
+                        {{ product }}
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {{ footer }}
+{% endblock %}
