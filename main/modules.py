@@ -10,7 +10,7 @@ def get_breadcrumb(page_name, request):
 
 
 def cart(request):
-    current_user_session_key = request.session._get_or_create_session_key()
+    current_user_session_key = request.COOKIES.get('client_id')
     cart_items = Cart.objects.filter(session_key=current_user_session_key, status=True, order__isnull=True)
     cart_total_price = 0
     for cart_item in cart_items:

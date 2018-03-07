@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.utils.translation import ugettext as _
 
+
+
 from parler.admin import TranslatableAdmin
 from mptt.admin import DraggableMPTTAdmin
 
@@ -35,7 +37,7 @@ class ColorAdmin(TranslatableAdmin):
 
 class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductImageAdmin, VariationAdmin]
-    list_display = ['name']
+    list_display = ['name', 'price', ]
 
 
 class ReviewAdmin(admin.ModelAdmin):
@@ -50,3 +52,4 @@ admin.site.register(Product, ProductAdmin)
 admin.site.register(Review, ReviewAdmin)
 admin.site.register(Color, ColorAdmin)
 admin.site.register(VolumeType, TranslatableAdmin)
+admin.site.register(Variation)

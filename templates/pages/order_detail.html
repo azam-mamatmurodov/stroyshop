@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+    {{ header }}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+				<div class="panel panel-login">
+					<div class="panel-heading">
+						<div class="row">
+							<div class="col-xs-6">
+								<h2 class="page_title">
+                                    {% trans 'Checkout' %}
+                                </h2>
+							</div>
+						</div>
+						<hr>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-12">
+                                {{ object }}
+                            </div>
+						</div>
+					</div>
+				</div>
+			</div>
+        </div>
+    </div>
+    {{ footer }}
+{% endblock %}

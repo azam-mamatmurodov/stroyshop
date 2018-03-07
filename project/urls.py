@@ -22,6 +22,7 @@ urlpatterns += solid_i18n_patterns(
     url(r'^admin/', admin.site.urls),
     url(r'', include('users.urls', namespace='users')),
     url(r'', include('products.urls', namespace='products')),
+    url(r'', include('orders.urls', namespace='orders')),
     url(r'', include('main.urls', namespace='main')),
     url(r'api/v1/', include(api_urlpatterns, namespace='api'),),
     url(r'api/v1/docs/', api_view)

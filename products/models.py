@@ -3,6 +3,9 @@ from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 from django.shortcuts import reverse
 
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+
 from mptt.models import MPTTModel, TreeForeignKey
 from parler.models import TranslatableModel, TranslatedFields
 from parler.managers import TranslationManager
@@ -109,10 +112,11 @@ class Product(models.Model):
     description = RichTextUploadingField(blank=True, null=True, verbose_name=_('Description'), )
     characters = RichTextUploadingField(blank=True, null=True, verbose_name=_('Characters'), )
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('Product Owner'), related_name='products', )
-    volume = models.ForeignKey(VolumeType,)
+    volume = models.ForeignKey(VolumeType, verbose_name=_('Is recommended'))
     updated = models.DateField(auto_now=True, auto_created=True, )
     available_in_stock = models.BooleanField(default=True, verbose_name=_('Available in stock'))
-    is_recommended = models.BooleanField(default=False)
+    is_recommended = models.BooleanField(default=False, verbose_name=_('Is recommended'))
+    price = models.DecimalField(decimal_places=2, max_digits=10, verbose_name=_('Price'), null=True, blank=True, )
 
     def __str__(self):
         return "{}".format(self.name)
@@ -127,10 +131,10 @@ class Product(models.Model):
         return self.images.all()
 
     def get_price(self):
-        try:
-            return self.get_default_variation().price
-        except AttributeError:
-            return 0
+        if not self.price:
+            self.price = self.get_default_variation().price
+            self.save()
+        return self.price
 
     def get_default_variation(self):
         return self.variations.first()
@@ -147,6 +151,16 @@ class Product(models.Model):
     class Meta:
         verbose_name = _('Product')
         verbose_name_plural = _('Products')
+
+
+def my_pre_save_handler(sender, instance, *args, **kwargs):
+    if not instance.product.price:
+        instance.product.price = instance.price
+        instance.product.save()
+        print(instance.price)
+
+
+pre_save.connect(my_pre_save_handler, sender=Variation)
 
 
 class Review(models.Model):

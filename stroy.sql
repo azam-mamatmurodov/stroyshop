@@ -468,6 +468,83 @@ ALTER SEQUENCE main_static_translation_id_seq OWNED BY main_static_translation.i
 
 
 --
+-- Name: orders_cart; Type: TABLE; Schema: public; Owner: stroyshop
+--
+
+CREATE TABLE orders_cart (
+    id integer NOT NULL,
+    session_key character varying(255) NOT NULL,
+    count integer NOT NULL,
+    status boolean NOT NULL,
+    total_price numeric(10,2) NOT NULL,
+    order_id integer,
+    variation_id integer NOT NULL
+);
+
+
+ALTER TABLE orders_cart OWNER TO stroyshop;
+
+--
+-- Name: orders_cart_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
+--
+
+CREATE SEQUENCE orders_cart_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE orders_cart_id_seq OWNER TO stroyshop;
+
+--
+-- Name: orders_cart_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
+--
+
+ALTER SEQUENCE orders_cart_id_seq OWNED BY orders_cart.id;
+
+
+--
+-- Name: orders_order; Type: TABLE; Schema: public; Owner: stroyshop
+--
+
+CREATE TABLE orders_order (
+    id integer NOT NULL,
+    client_name character varying(60) NOT NULL,
+    created timestamp with time zone NOT NULL,
+    customer_id integer,
+    phone character varying(12) NOT NULL,
+    shipping_address text NOT NULL,
+    state integer NOT NULL,
+    total_price numeric(10,2)
+);
+
+
+ALTER TABLE orders_order OWNER TO stroyshop;
+
+--
+-- Name: orders_order_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
+--
+
+CREATE SEQUENCE orders_order_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE orders_order_id_seq OWNER TO stroyshop;
+
+--
+-- Name: orders_order_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
+--
+
+ALTER SEQUENCE orders_order_id_seq OWNED BY orders_order.id;
+
+
+--
 -- Name: products_brands; Type: TABLE; Schema: public; Owner: stroyshop
 --
 
@@ -642,7 +719,8 @@ CREATE TABLE products_product (
     updated date NOT NULL,
     available_in_stock boolean NOT NULL,
     volume_id integer NOT NULL,
-    is_recommended boolean NOT NULL
+    is_recommended boolean NOT NULL,
+    price numeric(10,2)
 );
 
 
@@ -1131,6 +1209,20 @@ ALTER TABLE ONLY main_static_translation ALTER COLUMN id SET DEFAULT nextval('ma
 
 
 --
+-- Name: orders_cart id; Type: DEFAULT; Schema: public; Owner: stroyshop
+--
+
+ALTER TABLE ONLY orders_cart ALTER COLUMN id SET DEFAULT nextval('orders_cart_id_seq'::regclass);
+
+
+--
+-- Name: orders_order id; Type: DEFAULT; Schema: public; Owner: stroyshop
+--
+
+ALTER TABLE ONLY orders_order ALTER COLUMN id SET DEFAULT nextval('orders_order_id_seq'::regclass);
+
+
+--
 -- Name: products_brands id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
@@ -1349,6 +1441,12 @@ COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
 70	Can add volume type	31	add_volumetype
 71	Can change volume type	31	change_volumetype
 72	Can delete volume type	31	delete_volumetype
+73	Can add cart	33	add_cart
+74	Can change cart	33	change_cart
+75	Can delete cart	33	delete_cart
+76	Can add order	34	add_order
+77	Can change order	34	change_order
+78	Can delete order	34	delete_order
 \.
 
 
@@ -1356,7 +1454,7 @@ COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
 -- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-SELECT pg_catalog.setval('auth_permission_id_seq', 72, true);
+SELECT pg_catalog.setval('auth_permission_id_seq', 78, true);
 
 
 --
@@ -1487,6 +1585,86 @@ COPY django_admin_log (id, action_time, object_id, object_repr, action_flag, cha
 121	2018-03-02 04:14:01.613962+05	1	Kg	2	[{"changed": {"fields": ["name"]}}]	31	1
 122	2018-03-02 04:14:08.147667+05	1	Kg	2	[{"changed": {"fields": ["name"]}}]	31	1
 123	2018-03-02 05:13:44.027982+05	16	Test comment	2	[{"changed": {"fields": ["is_approved"]}}]	25	1
+124	2018-03-02 19:08:10.163445+05	13	Универсальная	2	[{"changed": {"fields": ["slug"]}}]	14	1
+125	2018-03-02 19:08:44.217557+05	21	Фасадная	2	[{"changed": {"fields": ["slug"]}}]	14	1
+126	2018-03-02 19:09:16.594164+05	17	Премиум	2	[{"changed": {"fields": ["slug"]}}]	14	1
+127	2018-03-02 19:09:39.789023+05	16	Внутренная	2	[{"changed": {"fields": ["slug"]}}]	14	1
+128	2018-03-03 01:51:21.47614+05	5	1234	3		6	1
+129	2018-03-03 02:05:33.477707+05	11	Maxamov	3		6	1
+130	2018-03-03 02:05:33.502329+05	10	Maxamov	3		6	1
+131	2018-03-03 02:05:33.513488+05	9	Maxam	3		6	1
+132	2018-03-03 02:05:33.524669+05	7	Maxam	3		6	1
+133	2018-03-03 02:05:33.538789+05	6	1234567	3		6	1
+134	2018-03-03 18:29:55.875016+05	10	HAYAT PREMIUM FASAD Краска для нар. работ силикон	2	[{"changed": {"fields": ["is_recommended"]}}]	23	1
+135	2018-03-03 18:30:04.740763+05	9	HAYAT EXTRA Пена монтажная (аплик/пист) 700/750)	2	[{"changed": {"fields": ["is_recommended"]}}]	23	1
+136	2018-03-06 00:48:54.040924+05	5	wmi81g6ptm5h76z78cv9lgope4gf3i16	3		33	1
+137	2018-03-06 00:48:54.147845+05	4	wmi81g6ptm5h76z78cv9lgope4gf3i16	3		33	1
+138	2018-03-06 00:48:54.161554+05	3	wmi81g6ptm5h76z78cv9lgope4gf3i16	3		33	1
+139	2018-03-06 00:48:54.172533+05	2	wmi81g6ptm5h76z78cv9lgope4gf3i16	3		33	1
+140	2018-03-06 09:49:49.063293+05	7	HAYAT ECO INTERIOR Краска для потолков	2	[{"changed": {"name": "Variation", "object": "4.5", "fields": ["color"]}}, {"changed": {"name": "Variation", "object": "15", "fields": ["color"]}}, {"changed": {"name": "Variation", "object": "25", "fields": ["color"]}}]	23	1
+141	2018-03-06 22:28:47.011384+05	10	HAYAT PREMIUM FASAD Краска для нар. работ силикон	2	[]	23	1
+142	2018-03-07 13:25:15.691061+05	3	Order object	3		34	1
+143	2018-03-07 13:25:15.720685+05	2	Order object	3		34	1
+144	2018-03-07 13:25:15.731491+05	1	Order object	3		34	1
+145	2018-03-07 17:06:42.846142+05	10	HAYAT PREMIUM FASAD Краска для нар. работ силикон	2	[]	23	1
+146	2018-03-07 17:07:00.391062+05	10	HAYAT PREMIUM FASAD Краска для нар. работ силикон	2	[{"added": {"name": "Variation", "object": "36"}}]	23	1
+147	2018-03-07 17:07:13.916164+05	10	HAYAT PREMIUM FASAD Краска для нар. работ силикон	2	[{"changed": {"fields": ["characters"]}}]	23	1
+148	2018-03-07 17:08:05.353234+05	9	HAYAT EXTRA Пена монтажная (аплик/пист) 700/750)	2	[]	23	1
+149	2018-03-07 17:08:08.642889+05	8	HAYAT ECO Эмаль Универсал (белая)	2	[]	23	1
+150	2018-03-07 17:08:11.0227+05	7	HAYAT ECO INTERIOR Краска для потолков	2	[]	23	1
+151	2018-03-07 17:08:13.734281+05	6	FASAD+	2	[]	23	1
+152	2018-03-07 17:08:16.578308+05	5	Eko (половая)	2	[]	23	1
+153	2018-03-07 17:08:20.30856+05	4	Econom 118 (белая)	2	[]	23	1
+154	2018-03-07 17:11:00.802904+05	11	asasasasasas	1	[{"added": {}}, {"added": {"name": "product image", "object": "ProductImage object"}}, {"added": {"name": "Variation", "object": "Test"}}]	23	1
+155	2018-03-07 17:17:41.575382+05	11	asasasasasas	2	[]	23	1
+156	2018-03-07 17:21:39.740449+05	11	asasasasasas	2	[{"changed": {"name": "Variation", "object": "Test", "fields": ["price"]}}]	23	1
+157	2018-03-07 17:22:25.304449+05	12	asaa121212	1	[{"added": {}}, {"added": {"name": "Variation", "object": "asasasas"}}]	23	1
+158	2018-03-07 17:23:18.093873+05	12	asaa121212	2	[]	23	1
+159	2018-03-07 17:24:30.295787+05	14	asasas	1	[{"added": {}}, {"added": {"name": "Variation", "object": "as121212"}}]	23	1
+160	2018-03-07 17:25:04.968968+05	15	asasas	1	[{"added": {}}, {"added": {"name": "Variation", "object": "assssssssss"}}]	23	1
+161	2018-03-07 17:32:08.608534+05	19	asaasasas	1	[{"added": {}}, {"added": {"name": "Variation", "object": "121212qawqw"}}]	23	1
+162	2018-03-07 17:33:24.976059+05	19	asaasasas	3		23	1
+163	2018-03-07 17:33:25.004815+05	15	asasas	3		23	1
+164	2018-03-07 17:33:25.015416+05	14	asasas	3		23	1
+165	2018-03-07 17:33:25.026502+05	12	asaa121212	3		23	1
+166	2018-03-07 17:33:25.037721+05	11	asasasasasas	3		23	1
+167	2018-03-07 17:34:40.65095+05	20	as112	1	[{"added": {}}, {"added": {"name": "Variation", "object": "Test 123"}}]	23	1
+168	2018-03-07 17:35:33.185527+05	20	as112	3		23	1
+169	2018-03-07 17:37:03.29771+05	22	Test 123	1	[{"added": {}}, {"added": {"name": "Variation", "object": "Test 123"}}]	23	1
+170	2018-03-07 17:37:29.373083+05	22	Test 123	2	[]	23	1
+171	2018-03-07 17:37:43.415345+05	22	Test 123	2	[{"changed": {"name": "Variation", "object": "Test 123", "fields": ["price"]}}]	23	1
+172	2018-03-07 17:37:51.69806+05	22	Test 123	3		23	1
+173	2018-03-07 17:38:21.347565+05	23	Test product	1	[{"added": {}}, {"added": {"name": "Variation", "object": "Test contact"}}]	23	1
+174	2018-03-07 17:38:40.986194+05	23	Test product	2	[{"added": {"name": "Variation", "object": "Test contact 2"}}, {"changed": {"name": "Variation", "object": "Test contact", "fields": ["price"]}}]	23	1
+175	2018-03-07 17:44:09.418117+05	23	Test product	3		23	1
+176	2018-03-07 17:44:36.621369+05	24	Test product	1	[{"added": {}}, {"added": {"name": "Variation", "object": "Test var"}}]	23	1
+177	2018-03-07 17:44:58.1312+05	24	Test product	2	[]	23	1
+178	2018-03-07 17:46:24.407927+05	24	Test product	2	[]	23	1
+179	2018-03-07 18:07:51.420632+05	24	Test product	2	[]	23	1
+180	2018-03-07 18:08:01.131125+05	24	Test product	3		23	1
+181	2018-03-07 18:08:24.956448+05	25	wwqsasas	1	[{"added": {}}, {"added": {"name": "Variation", "object": "Test name"}}]	23	1
+182	2018-03-07 18:09:09.295574+05	25	wwqsasas	3		23	1
+183	2018-03-07 18:50:23.351103+05	29	test	1	[{"added": {}}, {"added": {"name": "Variation", "object": "asasas"}}]	23	1
+184	2018-03-07 18:50:31.305589+05	29	test	2	[]	23	1
+185	2018-03-07 18:51:08.55972+05	29	test	2	[]	23	1
+186	2018-03-07 18:51:17.65461+05	29	test	3		23	1
+187	2018-03-07 18:51:45.403474+05	30	Presave	1	[{"added": {}}, {"added": {"name": "Variation", "object": "Presave"}}]	23	1
+188	2018-03-07 18:52:45.259905+05	30	Presave	3		23	1
+189	2018-03-07 18:57:25.700883+05	31	Presave	1	[{"added": {}}, {"added": {"name": "Variation", "object": "Tese"}}]	23	1
+190	2018-03-07 18:59:55.757411+05	31	Presave	2	[]	23	1
+191	2018-03-07 19:00:08.00257+05	31	Presave	2	[{"changed": {"name": "Variation", "object": "Tese", "fields": ["price"]}}]	23	1
+192	2018-03-07 19:00:15.472712+05	31	Presave	3		23	1
+193	2018-03-07 19:00:45.115121+05	32	Test pro	1	[{"added": {}}, {"added": {"name": "Variation", "object": "Test pro var 1"}}]	23	1
+194	2018-03-07 19:01:07.731686+05	32	Test pro	2	[{"added": {"name": "Variation", "object": "Test pro var 2"}}]	23	1
+195	2018-03-07 19:01:23.275781+05	32	Test pro	3		23	1
+196	2018-03-07 19:02:03.285696+05	33	Test pro	1	[{"added": {}}, {"added": {"name": "Variation", "object": "Test pro var 1"}}, {"added": {"name": "Variation", "object": "Test pro var 2"}}]	23	1
+197	2018-03-07 19:08:51.400756+05	33	Test pro	2	[{"changed": {"fields": ["price"]}}]	23	1
+198	2018-03-07 19:35:47.282182+05	35	rwasasasas	1	[{"added": {}}, {"added": {"name": "Variation", "object": "ttttttttttttt"}}]	23	1
+199	2018-03-07 19:35:54.975977+05	35	rwasasasas	3		23	1
+200	2018-03-07 19:35:55.006203+05	33	Test pro	3		23	1
+201	2018-03-07 19:36:20.903528+05	36	asasasasas	1	[{"added": {}}, {"added": {"name": "Variation", "object": "asaas"}}]	23	1
+202	2018-03-07 19:36:27.793788+05	36	asasasasas	3		23	1
+203	2018-03-07 19:37:49.513392+05	37	OOOO	1	[{"added": {}}, {"added": {"name": "Variation", "object": "Test name"}}, {"added": {"name": "Variation", "object": "Test name 2"}}]	23	1
 \.
 
 
@@ -1494,7 +1672,7 @@ COPY django_admin_log (id, action_time, object_id, object_repr, action_flag, cha
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-SELECT pg_catalog.setval('django_admin_log_id_seq', 123, true);
+SELECT pg_catalog.setval('django_admin_log_id_seq', 203, true);
 
 
 --
@@ -1534,6 +1712,8 @@ COPY django_content_type (id, app_label, model) FROM stdin;
 30	products	colortranslation
 31	products	volumetype
 32	products	volumetypetranslation
+33	orders	cart
+34	orders	order
 \.
 
 
@@ -1541,7 +1721,7 @@ COPY django_content_type (id, app_label, model) FROM stdin;
 -- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-SELECT pg_catalog.setval('django_content_type_id_seq', 32, true);
+SELECT pg_catalog.setval('django_content_type_id_seq', 34, true);
 
 
 --
@@ -1618,6 +1798,20 @@ COPY django_migrations (id, app, name, applied) FROM stdin;
 67	products	0035_auto_20180301_2332	2018-03-02 04:32:54.647829+05
 68	products	0036_auto_20180301_2339	2018-03-02 04:39:23.192744+05
 69	products	0037_auto_20180301_2339	2018-03-02 04:40:01.416594+05
+70	products	0038_auto_20180302_1907	2018-03-02 19:09:45.279595+05
+71	users	0013_auto_20180303_0156	2018-03-03 01:56:37.455328+05
+72	orders	0001_initial	2018-03-05 18:54:01.936428+05
+73	users	0014_auto_20180305_1853	2018-03-05 18:54:02.019885+05
+74	orders	0002_auto_20180305_1856	2018-03-05 18:56:24.400875+05
+75	orders	0003_auto_20180305_2302	2018-03-05 23:02:51.507234+05
+76	orders	0004_auto_20180305_2330	2018-03-05 23:30:25.922418+05
+77	orders	0005_auto_20180307_1253	2018-03-07 12:53:39.00464+05
+78	orders	0006_auto_20180307_1254	2018-03-07 12:54:38.105254+05
+79	orders	0007_auto_20180307_1256	2018-03-07 12:56:08.110165+05
+80	orders	0008_auto_20180307_1300	2018-03-07 13:00:17.668257+05
+81	products	0039_product_price	2018-03-07 17:01:34.412259+05
+82	orders	0009_auto_20180307_2057	2018-03-07 20:57:56.422378+05
+83	products	0040_auto_20180307_2057	2018-03-07 20:57:57.26965+05
 \.
 
 
@@ -1625,7 +1819,7 @@ COPY django_migrations (id, app, name, applied) FROM stdin;
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-SELECT pg_catalog.setval('django_migrations_id_seq', 69, true);
+SELECT pg_catalog.setval('django_migrations_id_seq', 83, true);
 
 
 --
@@ -1636,12 +1830,25 @@ COPY django_session (session_key, session_data, expire_date) FROM stdin;
 oxr7hxshvn5rov26rbllhnrbfmk7cev0	MTM4NjVlM2IwNDBjZmEzYWE1NzY0MzM2NDU1NzZlYjYwMGYxZDhlYzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkMjY5MGZlMGIwYTRlYWZmMTYyNDAxZjkzNjg3Y2IyMWMyZGM2OTNiIn0=	2018-02-28 01:25:35.034684+05
 a7k6adi6ac6uaroshpqlho0nsgfgsvbw	MjA5MDFjNjUxMmM3MDE5ZDVhOWUzYzM3YzE4OWE4Zjc5Mjg2MTYyMjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlOTE2NDYyYjZmMWEzN2JiMmE2YTMyNDFkODk0YzU4MDM2MDZlOTMzIn0=	2018-03-08 02:06:03.175184+05
 fii5m7pfwnufcjmwokikupas5atuph1n	MjA5MDFjNjUxMmM3MDE5ZDVhOWUzYzM3YzE4OWE4Zjc5Mjg2MTYyMjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlOTE2NDYyYjZmMWEzN2JiMmE2YTMyNDFkODk0YzU4MDM2MDZlOTMzIn0=	2018-03-08 23:49:57.589949+05
+pmyvcaswpzudfbhfluu7godte38nd0xm	Njc5ZTM2YTdhYTlhMjA2MWVmYmViOTk0YzQzOTcwY2Y1N2VjY2Y1MDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlOTE2NDYyYjZmMWEzN2JiMmE2YTMyNDFkODk0YzU4MDM2MDZlOTMzIiwicHJvZHVjdCI6MSwiY2FydCI6W3sidmFyaWF0aW9uX2lkIjozMSwicXVhbnRpdHkiOjMzLCJjbGllbnRfaWQiOjYxfV19	2018-03-17 04:30:55.245876+05
+rqfy0lmhb9qbjbldbv3dnwt4nbcf12gv	MjA5MDFjNjUxMmM3MDE5ZDVhOWUzYzM3YzE4OWE4Zjc5Mjg2MTYyMjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlOTE2NDYyYjZmMWEzN2JiMmE2YTMyNDFkODk0YzU4MDM2MDZlOTMzIn0=	2018-03-17 18:29:41.482416+05
+j6d0avxuyd1srfxn3sje2snh9bnptps5	MjA5MDFjNjUxMmM3MDE5ZDVhOWUzYzM3YzE4OWE4Zjc5Mjg2MTYyMjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlOTE2NDYyYjZmMWEzN2JiMmE2YTMyNDFkODk0YzU4MDM2MDZlOTMzIn0=	2018-03-19 18:54:58.878801+05
 4iu00yw2lrnim6pkigg6tjt0fsxmjf9k	MjA5MDFjNjUxMmM3MDE5ZDVhOWUzYzM3YzE4OWE4Zjc5Mjg2MTYyMjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlOTE2NDYyYjZmMWEzN2JiMmE2YTMyNDFkODk0YzU4MDM2MDZlOTMzIn0=	2018-03-10 15:11:26.529502+05
 8lcc9cggor490024cxu5583oznwbba4w	MjA5MDFjNjUxMmM3MDE5ZDVhOWUzYzM3YzE4OWE4Zjc5Mjg2MTYyMjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlOTE2NDYyYjZmMWEzN2JiMmE2YTMyNDFkODk0YzU4MDM2MDZlOTMzIn0=	2018-03-13 02:03:55.661669+05
+fn83rfywoosoigchyjasu3ptmye13qnc	ODY3Mjc2NmFkZGJhODQ0MmY4YTM1ZDAxN2Q0NmEwMTc4MTg1YTA1Yjp7fQ==	2018-03-19 23:09:16.816111+05
 85zfbwxcuisq5eiv3yyz4x5qfh5f5wht	MjA5MDFjNjUxMmM3MDE5ZDVhOWUzYzM3YzE4OWE4Zjc5Mjg2MTYyMjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlOTE2NDYyYjZmMWEzN2JiMmE2YTMyNDFkODk0YzU4MDM2MDZlOTMzIn0=	2018-03-13 14:02:21.272557+05
 7h90470ak4onkee7z2kfdz7zkwmktych	MjA5MDFjNjUxMmM3MDE5ZDVhOWUzYzM3YzE4OWE4Zjc5Mjg2MTYyMjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlOTE2NDYyYjZmMWEzN2JiMmE2YTMyNDFkODk0YzU4MDM2MDZlOTMzIn0=	2018-03-13 19:28:32.933524+05
+adafhbo47pytykclgjcxyl9nlod1e9qs	ODY3Mjc2NmFkZGJhODQ0MmY4YTM1ZDAxN2Q0NmEwMTc4MTg1YTA1Yjp7fQ==	2018-03-19 23:10:25.06447+05
 fxlv414wmgvpfp59xwwxthtd6fpc52pf	MjA5MDFjNjUxMmM3MDE5ZDVhOWUzYzM3YzE4OWE4Zjc5Mjg2MTYyMjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlOTE2NDYyYjZmMWEzN2JiMmE2YTMyNDFkODk0YzU4MDM2MDZlOTMzIn0=	2018-03-15 19:13:58.131918+05
 an50alff4av105k510p35l8fcpyqsonr	MjA5MDFjNjUxMmM3MDE5ZDVhOWUzYzM3YzE4OWE4Zjc5Mjg2MTYyMjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlOTE2NDYyYjZmMWEzN2JiMmE2YTMyNDFkODk0YzU4MDM2MDZlOTMzIn0=	2018-03-16 00:35:30.702356+05
+ulx52uwqqevs6mhe4is82ooa289hbr2r	ODY3Mjc2NmFkZGJhODQ0MmY4YTM1ZDAxN2Q0NmEwMTc4MTg1YTA1Yjp7fQ==	2018-03-19 23:11:26.118656+05
+0ojja4dem35vg2r05weed8gu873b6m27	ODY3Mjc2NmFkZGJhODQ0MmY4YTM1ZDAxN2Q0NmEwMTc4MTg1YTA1Yjp7fQ==	2018-03-19 23:12:19.56923+05
+4wwqpr8g1oxobjppl7879xnoy0gq2g04	ODY3Mjc2NmFkZGJhODQ0MmY4YTM1ZDAxN2Q0NmEwMTc4MTg1YTA1Yjp7fQ==	2018-03-19 23:14:16.235394+05
+db7y9nzd5h3rcne362m4qsrsdo9jnje1	ODY3Mjc2NmFkZGJhODQ0MmY4YTM1ZDAxN2Q0NmEwMTc4MTg1YTA1Yjp7fQ==	2018-03-19 23:15:35.933555+05
+vjvr8v9715ko8r39jubga2grbv01ptm6	ODY3Mjc2NmFkZGJhODQ0MmY4YTM1ZDAxN2Q0NmEwMTc4MTg1YTA1Yjp7fQ==	2018-03-19 23:16:37.320762+05
+b9dk23ju7292i9crwq4x2pk5aag9bjk8	ODY3Mjc2NmFkZGJhODQ0MmY4YTM1ZDAxN2Q0NmEwMTc4MTg1YTA1Yjp7fQ==	2018-03-19 23:16:52.420859+05
+z74wy0cnqh38bowdnst3l7hp8dvz322q	ODY3Mjc2NmFkZGJhODQ0MmY4YTM1ZDAxN2Q0NmEwMTc4MTg1YTA1Yjp7fQ==	2018-03-21 11:38:18.126871+05
+mhhl87v8svg4xnqune1mlvewy8mqfgi1	MjA5MDFjNjUxMmM3MDE5ZDVhOWUzYzM3YzE4OWE4Zjc5Mjg2MTYyMjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlOTE2NDYyYjZmMWEzN2JiMmE2YTMyNDFkODk0YzU4MDM2MDZlOTMzIn0=	2018-03-21 20:42:13.699247+05
 \.
 
 
@@ -1762,6 +1969,81 @@ SELECT pg_catalog.setval('main_static_translation_id_seq', 6, true);
 
 
 --
+-- Data for Name: orders_cart; Type: TABLE DATA; Schema: public; Owner: stroyshop
+--
+
+COPY orders_cart (id, session_key, count, status, total_price, order_id, variation_id) FROM stdin;
+43	wmi81g6ptm5h76z78cv9lgope4gf3i16	2	t	108000.00	\N	15
+44	wmi81g6ptm5h76z78cv9lgope4gf3i16	1	t	53000.00	\N	14
+45	wmi81g6ptm5h76z78cv9lgope4gf3i16	1	t	62000.00	\N	23
+47	54kuq044u3xit6di87r26nvoo9v46nzw	2	t	122000.00	\N	22
+46	54kuq044u3xit6di87r26nvoo9v46nzw	4	t	240000.00	\N	21
+48	54kuq044u3xit6di87r26nvoo9v46nzw	3	t	159000.00	\N	14
+49	54kuq044u3xit6di87r26nvoo9v46nzw	1	t	59000.00	\N	20
+50	lde182yzryppvjjly7ag0l8i2furqd3k	1	t	52000.00	\N	13
+51	4b4g5g9cblnjstx46fwdvn3p3n9l185d	1	t	51000.00	\N	12
+52	153bxuj5o8730vajlke0oxzy2h5eevjg	1	t	51000.00	\N	12
+53	8afmtnqid06uy3rtnamrbsszeamtvq7g	1	t	58000.00	\N	19
+54	9lvg0zqtkryt4kqrqwvb0o3zc0mld31p	1	t	52000.00	\N	13
+55	0x3n2rmtq82hrlt5ljg9p1ac20avs4av	1	t	50000.00	\N	11
+56	fmue6vj17jy6hkuu0lhfte2wo9hk6uqm	1	t	58000.00	\N	19
+57	u6betufekg0hesv0dl67dngody0851or	1	t	58000.00	\N	19
+58	2hr0c7xff0ej159pch211dy73q27d641	1	t	51000.00	\N	12
+59	an7k9bnhw4k5nkcfyarpw9r2eqkdp7i3	1	t	58000.00	\N	19
+60	zvtq0wp46ymmshjo8o2z5ntyq2t8382t	1	t	53000.00	\N	14
+61	s14851kqleu8k4rl8hjvslq5g71h7f0x	1	t	61000.00	\N	22
+62	leftifgbip137u10r96yfefnis1d4w01	1	t	58000.00	\N	19
+63	eu290lhgktl2kni80iegqfe4hcy8v15k	2	t	118000.00	\N	20
+64	dyhmfuynpd0imb2uacoeixvqxc3l4e6u	2	t	118000.00	\N	20
+65	egvv6jqa96k3q4hizgc7shi2ns9bgtji	1	t	60000.00	\N	21
+66	waxzre88qa3crmp66whnw7pjdh5zsugi	1	t	51000.00	\N	12
+67	f23s0d4240erol9fxvi1wnhkhskap1ow	1	t	52000.00	\N	13
+68	ffytts4enkgymeq6990acm3spzhv1ws3	1	t	58000.00	\N	19
+69	wiwra6srhdwegjtn5tmrxw16unnun9n2	1	t	58000.00	\N	19
+70	3i6o2xw32i8xnqydr9h1413c5myaurci	1	t	58000.00	\N	19
+71	9ot1eb95r5dys8apu6c0kya3yy70hj06	1	t	58000.00	\N	19
+72	5rzwfc6duufke5y4o98k9iw0j3i10eq9	1	t	52000.00	\N	13
+73	8l1g2fnlu7sz6x9yhnlrxxqnksm46oyk	1	t	51000.00	\N	12
+74	e30:1etSTm:X5HOOlkemC_aEiekPur_VnCWwD0	1	t	51000.00	\N	12
+42	wmi81g6ptm5h76z78cv9lgope4gf3i16	1	t	56000.00	\N	17
+40	wmi81g6ptm5h76z78cv9lgope4gf3i16	2	t	114000.00	\N	18
+41	wmi81g6ptm5h76z78cv9lgope4gf3i16	2	t	110000.00	\N	16
+82	28c52191-15b5-4142-a3be-ca90503d6969	1	t	59000.00	4	20
+83	28c52191-15b5-4142-a3be-ca90503d6969	1	t	56000.00	4	17
+81	28c52191-15b5-4142-a3be-ca90503d6969	2	t	116000.00	4	19
+85	53ede158-e583-424d-a5dc-dc85e2837bf1	1	t	61000.00	\N	22
+86	53ede158-e583-424d-a5dc-dc85e2837bf1	1	t	62000.00	\N	23
+87	28c52191-15b5-4142-a3be-ca90503d6969	1	t	52000.00	\N	13
+84	28c52191-15b5-4142-a3be-ca90503d6969	2	t	106000.00	5	14
+88	28c52191-15b5-4142-a3be-ca90503d6969	1	t	54000.00	\N	15
+\.
+
+
+--
+-- Name: orders_cart_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
+--
+
+SELECT pg_catalog.setval('orders_cart_id_seq', 88, true);
+
+
+--
+-- Data for Name: orders_order; Type: TABLE DATA; Schema: public; Owner: stroyshop
+--
+
+COPY orders_order (id, client_name, created, customer_id, phone, shipping_address, state, total_price) FROM stdin;
+4	Mamatmurodov	2018-03-07 13:25:51.365863+05	1	12345	Tashkent ccc	0	173000.00
+5	Mamatmurodov	2018-03-07 13:30:56.580621+05	\N	A'zam	Hello street	0	53000.00
+\.
+
+
+--
+-- Name: orders_order_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
+--
+
+SELECT pg_catalog.setval('orders_order_id_seq', 5, true);
+
+
+--
 -- Data for Name: products_brands; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
@@ -1790,21 +2072,21 @@ COPY products_category (id, "order", lft, rght, tree_id, mptt_level, parent_id) 
 7	0	1	2	7	0	\N
 8	0	1	2	8	0	\N
 9	0	1	2	9	0	\N
-16	0	7	8	4	2	13
-13	0	6	11	4	1	5
 14	0	12	13	4	1	5
 5	0	1	16	4	0	\N
 15	0	14	15	4	1	5
-17	0	9	10	4	2	13
 19	0	3	4	10	2	18
 20	0	5	6	10	2	18
 2	0	1	4	1	0	\N
-21	0	2	3	1	1	2
 3	0	1	4	2	0	\N
 22	0	2	3	2	1	3
 10	0	1	10	10	0	\N
 18	0	2	9	10	1	10
 23	0	7	8	10	2	18
+13	0	6	11	4	1	5
+21	0	2	3	1	1	2
+17	0	9	10	4	2	13
+16	0	7	8	4	2	13
 \.
 
 
@@ -1832,18 +2114,18 @@ COPY products_category_translation (id, language_code, name, master_id, slug) FR
 11	ru	Эмалевая краска и Лак	10	emalevaya-kraska-i-lak
 12	ru	Внутренная	11	vnutrennaya
 13	ru	Премиум	12	premium
-14	ru	Универсальная	13	universalnaya
 15	ru	Фасадная	14	fasadnaya
 16	ru	Цветная	15	cvetnaya
-17	ru	Внутренная	16	vnutrennaya
-18	ru	Премиум	17	premium
 19	en	Water-based paint	2	water-based-paint
 20	ru	Краска	18	kraska
 21	ru	Универсальная	19	universalnaya
 22	ru	Половая	20	polovaya
-23	ru	Фасадная	21	fasadnaya
 24	ru	Пена	22	pena
 25	ru	Краска-115	23	kraska-115
+14	ru	Универсальная	13	dekorativnaya-shkaturka-universalnaya
+23	ru	Фасадная	21	vodoimmulsionnaya-kraska-fasadnaya
+18	ru	Премиум	17	dekorativnaya-shkaturka-universalnaya-premium
+17	ru	Внутренная	16	dekorativnaya-shkaturka-universalnaya-vnutrennaya
 \.
 
 
@@ -1889,14 +2171,15 @@ SELECT pg_catalog.setval('products_color_translation_id_seq', 6, true);
 -- Data for Name: products_product; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY products_product (id, name, description, characters, brand_id, category_id, owner_id, updated, available_in_stock, volume_id, is_recommended) FROM stdin;
-5	Eko (половая)			20	20	3	2018-03-01	t	1	f
-10	HAYAT PREMIUM FASAD Краска для нар. работ силикон	<p>Предназначена для наржной окраски зданий и сооружений, по кирпичным и бетонным, деревянным и другим пористым покрытиям по загрунтованной поверхности металла</p>		21	23	4	2018-03-01	t	1	f
-8	HAYAT ECO Эмаль Универсал (белая)			21	19	4	2018-03-01	t	1	f
-9	HAYAT EXTRA Пена монтажная (аплик/пист) 700/750)			21	22	4	2018-03-01	t	1	f
-6	FASAD+			20	21	3	2018-03-01	t	1	f
-7	HAYAT ECO INTERIOR Краска для потолков	<p>Предназначена для отделочных работ внутри помещения (стен и потолков) и для нанесения по дереву, картону и другим пористым поверхностям.</p>		21	19	4	2018-03-01	t	1	f
-4	Econom 118 (белая)			20	19	3	2018-03-01	t	1	f
+COPY products_product (id, name, description, characters, brand_id, category_id, owner_id, updated, available_in_stock, volume_id, is_recommended, price) FROM stdin;
+10	HAYAT PREMIUM FASAD Краска для нар. работ силикон	<p>Предназначена для наржной окраски зданий и сооружений, по кирпичным и бетонным, деревянным и другим пористым покрытиям по загрунтованной поверхности металла</p>	<p>Test info</p>	21	23	4	2018-03-07	t	1	t	61000.00
+9	HAYAT EXTRA Пена монтажная (аплик/пист) 700/750)			21	22	4	2018-03-07	t	1	t	60000.00
+8	HAYAT ECO Эмаль Универсал (белая)			21	19	4	2018-03-07	t	1	f	58000.00
+7	HAYAT ECO INTERIOR Краска для потолков	<p>Предназначена для отделочных работ внутри помещения (стен и потолков) и для нанесения по дереву, картону и другим пористым поверхностям.</p>		21	19	4	2018-03-07	t	1	f	55000.00
+6	FASAD+			20	21	3	2018-03-07	t	1	f	52000.00
+5	Eko (половая)			20	20	3	2018-03-07	t	1	f	51000.00
+4	Econom 118 (белая)			20	19	3	2018-03-07	t	1	f	50000.00
+37	OOOO			20	21	13	2018-03-07	t	1	f	1000.00
 \.
 
 
@@ -1904,7 +2187,7 @@ COPY products_product (id, name, description, characters, brand_id, category_id,
 -- Name: products_product_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-SELECT pg_catalog.setval('products_product_id_seq', 10, true);
+SELECT pg_catalog.setval('products_product_id_seq', 37, true);
 
 
 --
@@ -1944,7 +2227,7 @@ COPY products_productimage (id, image, product_id) FROM stdin;
 -- Name: products_productimage_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-SELECT pg_catalog.setval('products_productimage_id_seq', 27, true);
+SELECT pg_catalog.setval('products_productimage_id_seq', 28, true);
 
 
 --
@@ -1975,14 +2258,17 @@ COPY products_variation (id, price, quantity, product_id, name, color_id) FROM s
 13	52000.00	1	6	20	\N
 14	53000.00	1	6	10	\N
 15	54000.00	1	6	4	\N
-16	55000.00	1	7	4.5	\N
-17	56000.00	1	7	15	\N
-18	57000.00	1	7	25	\N
 19	58000.00	1	8	22	\N
 20	59000.00	1	8	3	\N
 21	60000.00	1	9	750	\N
 22	61000.00	1	10	15	\N
 23	62000.00	1	10	25	\N
+16	55000.00	1	7	4.5	1
+17	56000.00	1	7	15	2
+18	57000.00	1	7	25	1
+24	63000.00	2	10	36	\N
+45	1000.00	2	37	Test name	\N
+46	2000.00	3	37	Test name 2	\N
 \.
 
 
@@ -1990,7 +2276,7 @@ COPY products_variation (id, price, quantity, product_id, name, color_id) FROM s
 -- Name: products_variation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-SELECT pg_catalog.setval('products_variation_id_seq', 23, true);
+SELECT pg_catalog.setval('products_variation_id_seq', 46, true);
 
 
 --
@@ -2064,9 +2350,14 @@ SELECT pg_catalog.setval('users_merchant_id_seq', 2, true);
 --
 
 COPY users_user (id, password, last_login, is_superuser, is_staff, phone, email, first_name, last_name, date_joined, is_active, avatar) FROM stdin;
-1	pbkdf2_sha256$36000$MddcO5HnWX0h$n0Qq4sdTvSNPKruWKfweTttJaHuNjTugrYLUi+S1nZ4=	2018-03-02 00:35:30.679272+05	t	t	998389478	azam.mamatmurodov@gmail.com	A'zam	Mamatmurodov	2018-02-14 01:24:32.11251+05	t	
+14	pbkdf2_sha256$36000$oYwb6del7oVe$e2SFCWUn7kwhy6z32Cj5FcB5oVWbuS977+FK+Kk1drg=	\N	f	f	99812312		Maxam		2018-03-03 18:11:20.079564+05	t	
+15	pbkdf2_sha256$36000$HOOZQHNqLuX4$qlyg6hArRImovqYBQCLrrQ9PzDxVFFQfG3VH2fZml8o=	\N	f	f	12312		asas		2018-03-07 05:54:41.298668+05	t	
+16	pbkdf2_sha256$36000$dTZAiIpWdoiW$XAsCma9iqN3t16g2CeQ807/KB14JpNjcUY0F7CSTwq0=	2018-03-07 05:57:50.127116+05	f	f	123		maxam		2018-03-07 05:57:06.657493+05	t	
 3	pbkdf2_sha256$36000$zZ1POOYiN9cm$MmRm0Ti8P7zmmHwIIh3oGTdQXuvv+8IXENglAuO19Vs=	\N	f	f	998991111111	Polard@example.com	Polard	Polard	2018-03-02 00:48:40.791109+05	t	
 4	pbkdf2_sha256$36000$cmVDwSWrOft2$dDTZO7VzHOkz2k4tFU1mhCmujVBWLiSPhXqFpS4mteE=	\N	f	f	991234567	Hayat@example.com	Hayat	Hayat	2018-03-02 00:49:27.367788+05	t	
+1	pbkdf2_sha256$36000$MddcO5HnWX0h$n0Qq4sdTvSNPKruWKfweTttJaHuNjTugrYLUi+S1nZ4=	2018-03-07 20:42:13.6874+05	t	t	998389478	azam.mamatmurodov@gmail.com	A'zam	Mamatmurodov	2018-02-14 01:24:32.11251+05	t	
+12	pbkdf2_sha256$36000$mi6hUfz6r2OZ$i3anJwfWPj92QI0Y3jh1gAfB3xwiGq1oV7SWqG93fTE=	\N	f	f	1234567		Mamatmurodov		2018-03-03 02:09:15.192667+05	t	
+13	pbkdf2_sha256$36000$OyPip0KnrHgB$8fLeZhVKAgAcogd/n9dAirWo2Gv2Q2gD8X5PKWxdbf4=	2018-03-03 02:09:49.258501+05	f	f	12345		Mamatmurodov		2018-03-03 02:09:40.723852+05	t	
 \.
 
 
@@ -2089,7 +2380,7 @@ SELECT pg_catalog.setval('users_user_groups_id_seq', 1, false);
 -- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-SELECT pg_catalog.setval('users_user_id_seq', 4, true);
+SELECT pg_catalog.setval('users_user_id_seq', 16, true);
 
 
 --
@@ -2268,6 +2559,22 @@ ALTER TABLE ONLY main_static_translation
 
 
 --
+-- Name: orders_cart orders_cart_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+--
+
+ALTER TABLE ONLY orders_cart
+    ADD CONSTRAINT orders_cart_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: orders_order orders_order_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+--
+
+ALTER TABLE ONLY orders_order
+    ADD CONSTRAINT orders_order_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: products_brands products_brands_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
@@ -2297,6 +2604,14 @@ ALTER TABLE ONLY products_category_translation
 
 ALTER TABLE ONLY products_category_translation
     ADD CONSTRAINT products_category_translation_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: products_category_translation products_category_translation_slug_d9e2774a_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+--
+
+ALTER TABLE ONLY products_category_translation
+    ADD CONSTRAINT products_category_translation_slug_d9e2774a_uniq UNIQUE (slug);
 
 
 --
@@ -2409,14 +2724,6 @@ ALTER TABLE ONLY users_merchant
 
 ALTER TABLE ONLY users_merchant
     ADD CONSTRAINT users_merchant_user_id_key UNIQUE (user_id);
-
-
---
--- Name: users_user users_user_email_key; Type: CONSTRAINT; Schema: public; Owner: stroyshop
---
-
-ALTER TABLE ONLY users_user
-    ADD CONSTRAINT users_user_email_key UNIQUE (email);
 
 
 --
@@ -2629,6 +2936,27 @@ CREATE INDEX main_static_translation_slug_7864d7f2_like ON main_static_translati
 
 
 --
+-- Name: orders_cart_order_id_8e8f80ce; Type: INDEX; Schema: public; Owner: stroyshop
+--
+
+CREATE INDEX orders_cart_order_id_8e8f80ce ON orders_cart USING btree (order_id);
+
+
+--
+-- Name: orders_cart_variation_id_09aeaf8e; Type: INDEX; Schema: public; Owner: stroyshop
+--
+
+CREATE INDEX orders_cart_variation_id_09aeaf8e ON orders_cart USING btree (variation_id);
+
+
+--
+-- Name: orders_order_customer_id_0b76f6a4; Type: INDEX; Schema: public; Owner: stroyshop
+--
+
+CREATE INDEX orders_order_customer_id_0b76f6a4 ON orders_order USING btree (customer_id);
+
+
+--
 -- Name: products_brands_category_id_90ebd3a5; Type: INDEX; Schema: public; Owner: stroyshop
 --
 
@@ -2682,13 +3010,6 @@ CREATE INDEX products_category_translation_language_code_ddf7527e_like ON produc
 --
 
 CREATE INDEX products_category_translation_master_id_f53287e3 ON products_category_translation USING btree (master_id);
-
-
---
--- Name: products_category_translation_slug_d9e2774a; Type: INDEX; Schema: public; Owner: stroyshop
---
-
-CREATE INDEX products_category_translation_slug_d9e2774a ON products_category_translation USING btree (slug);
 
 
 --
@@ -2804,13 +3125,6 @@ CREATE INDEX products_volumetype_translation_master_id_f5e4ae1f ON products_volu
 
 
 --
--- Name: users_user_email_243f6e77_like; Type: INDEX; Schema: public; Owner: stroyshop
---
-
-CREATE INDEX users_user_email_243f6e77_like ON users_user USING btree (email varchar_pattern_ops);
-
-
---
 -- Name: users_user_groups_group_id_9afc8d0e; Type: INDEX; Schema: public; Owner: stroyshop
 --
 
@@ -2907,6 +3221,30 @@ ALTER TABLE ONLY main_menu_translation
 
 ALTER TABLE ONLY main_static_translation
     ADD CONSTRAINT main_static_translation_master_id_6c9d2d70_fk_main_static_id FOREIGN KEY (master_id) REFERENCES main_static(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: orders_cart orders_cart_order_id_8e8f80ce_fk_orders_order_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+--
+
+ALTER TABLE ONLY orders_cart
+    ADD CONSTRAINT orders_cart_order_id_8e8f80ce_fk_orders_order_id FOREIGN KEY (order_id) REFERENCES orders_order(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: orders_cart orders_cart_variation_id_09aeaf8e_fk_products_variation_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+--
+
+ALTER TABLE ONLY orders_cart
+    ADD CONSTRAINT orders_cart_variation_id_09aeaf8e_fk_products_variation_id FOREIGN KEY (variation_id) REFERENCES products_variation(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: orders_order orders_order_customer_id_0b76f6a4_fk_users_user_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+--
+
+ALTER TABLE ONLY orders_order
+    ADD CONSTRAINT orders_order_customer_id_0b76f6a4_fk_users_user_id FOREIGN KEY (customer_id) REFERENCES users_user(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --

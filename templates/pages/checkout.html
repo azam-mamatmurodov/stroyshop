@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+    {{ header }}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+				<div class="panel panel-login">
+					<div class="panel-heading">
+						<div class="row">
+							<div class="col-xs-6">
+								<h2 class="page_title">
+                                    {% trans 'Checkout' %}
+                                </h2>
+							</div>
+						</div>
+						<hr>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-12">
+                                {% if not user.is_authenticated %}
+                                    <h4>{% trans 'Login OR continue without authorization' %}</h4>
+                                    <form id="login-form" action="{% url 'users:login' %}?next={{ request.path }}" method="post" role="form" style="display: block;">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="{% trans 'Phone number' %}" value="">
+                                        </div>
+                                        {% if login_form.username.errors %}
+                                            <div class="help-block">
+                                                {{ login_form.username.errors }}
+                                            </div>
+                                        {% endif %}
+                                        <div class="form-group">
+                                            <input type="password" name="passwd" id="password" tabindex="2" class="form-control" placeholder="{% trans 'Password' %}">
+                                        </div>
+                                        {% if login_form.passwd.errors %}
+                                            <div class="help-block">
+                                                {{ login_form.passwd.errors }}
+                                            </div>
+                                        {% endif %}
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-sm-6 col-sm-offset-3">
+                                                    <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="{% trans 'Log In' %}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="text-center">
+                                                        <a href="?next={{ request.path }}" tabindex="5" class="forgot-password">{% trans 'Forgot Password' %}?</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                {% endif %}
+                                <form id="checkout-form" action="" method="post" role="form" style="display: block;">
+                                    {% csrf_token %}
+                                    {{ form.as_p }}
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-sm-offset-3">
+                                                <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="{% trans 'Log In' %}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+        </div>
+    </div>
+    {{ footer }}
+{% endblock %}

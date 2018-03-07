@@ -2,7 +2,7 @@
 {% load static i18n humanize %}
 
 {% block title %}
-    {{ product.title }}
+    {{ product.name }}
 {% endblock %}
 
 {% block content %}
@@ -52,7 +52,12 @@
                 <div class="category">{{ product.category }}</div>
                 <div class="title">{{ product.name }}</div>
                 <div class="price">
-                    <strong>{{ product.get_default_variation.price|floatformat|intcomma }} {% trans 'sum' %} </strong>
+                    <strong>
+                        <span class="product_price">
+                            {{ product.get_default_variation.price|floatformat|intcomma }}
+                        </span>
+                        {% trans 'sum' %}
+                    </strong>
                 </div>
                 <div class="isavailable">
                     <label>{% trans 'In stock' %}:</label>
@@ -62,19 +67,20 @@
                     <label>{% trans 'Packing' %}:</label>
                     <ul>
                         {% for variation in product.get_variations %}
-                            <li class="{% if forloop.counter0 == 0 %}active{% endif %}">
-                                <span>{{ variation.name }} {{ product.volume.title }}</span>
+                            <li data-color_name="{{ variation.color.name }}" data-variation="{{ variation.id }}" data-max="{{ variation.quantity }}"  data-variation_id="{{ variation.id }}"  data-price="{{ variation.price|floatformat|intcomma }}" class="{% if forloop.counter0 == 0 %}active{% endif %} variation_item">
+                                <span>{{ variation.name }} {{ product.volume.name }}</span>
                             </li>
                         {% endfor %}
                     </ul>
                 </div>
-                {% if product.is_color_exist %}
+                {% if product.get_default_variation.color %}
                     <div class="color">
-                        <label>{% trans 'Color' %}:</label><span>{{ product.get_default_variation.color }}</span>
+                        <label>{% trans 'Color' %}:</label>
+                        <span class="color_name">{{ product.get_default_variation.color }}</span>
                         <ul>
                             {% for variation in product.get_variations %}
-                                <li>
-                                    <span class="active" style="background-color: {{ variation.color.color }}"></span>
+                                <li class="color_change" id="variation_{{ variation.id }}" style="{% if forloop.counter0 != 0 %}display: none;{% endif %}">
+                                    <span class="{% if forloop.counter0 == 0 %}active{% endif %}"style="background-color: {{ variation.color.color }}"></span>
                                 </li>
                             {% endfor %}
                         </ul>
@@ -84,13 +90,13 @@
                     <span>{% trans 'Last updated' %}: {{ product.updated }}</span>
                 </div>
                 <div class="actions">
-                    <form>
+                    <form class="product_cart_add_form">
                         <div class="form-item">
-                            <input type="text" name="quantity">
+                            <input type="text" value="1" name="quantity" data-variation="{{ product.get_default_variation.id }}">
                             <div class="plus"></div>
                             <div class="minus"></div>
                         </div>
-                        <input type="submit" name="submit" value="&#xf07a; Add to cart">
+                        <input type="submit" name="submit" value="&#xf07a; {% trans 'Add to cart' %}">
                     </form>
                 </div>
             </div>
@@ -174,7 +180,7 @@
             {% for product_review in product.get_reviews %}
                 <div class="row">
                     <div class="name">{{ product_review.reviewer }}</div>
-                    <div class="land">from {{ product_review.reviewer_location }}</div>
+                    <div class="land">{% trans 'from' %} {{ product_review.reviewer_location }}</div>
                     <div class="title">{{ product_review.subject }}</div>
                     <div class="body">{{ product_review.text }}</div>
                     <div class="date">{{ product_review.created_at }}</div>
@@ -183,7 +189,7 @@
         </div>
         {% if product.get_reviews.count > 5 %}
             <div class="block-footer">
-                <a href="">More feedbacks</a>
+                <a href="">{% trans 'More feedbacks' %}</a>
             </div>
         {% endif %}
     </section>

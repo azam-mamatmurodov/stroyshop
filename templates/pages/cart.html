@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load i18n static %}
+{% load i18n static humanize %}
 
 {% block content %}
     {{ header }}
@@ -11,145 +11,59 @@
             </section>
             <section id="cart-content">
                 <div id="page-title">
-                    Korzina pokupok (4)
+                    {% trans 'Cart items' %} ({{ cart_total_count }})
                 </div>
-                <div class="product-row">
-                    <form>
-                        <div class="product-info">
-                            <div class="image">
-                                <img src="{% static 'images/prod.png' %}">
+                {% for cart_item in cart_items %}
+                    <div class="product-row">
+                        <form>
+                            <div class="product-info">
+                                <div class="image">
+                                    <img src="{{ cart_item.variation.product.get_default_image.image.url }}" alt="">
+                                </div>
+                                <div class="title">
+                                    <a href="{{ cart_item.variation.product.get_absolute_url }}">
+                                        {{ cart_item.variation.product.name }} -
+                                        {{ cart_item.variation.name }}
+                                        {{ cart_item.variation.product.volume }}
+                                    </a>
+                                </div>
+                                <div class="price">
+                                    <strong><span class="price_total">{{ cart_item.total_price|floatformat|intcomma }}</span> {% trans 'sum' %} </strong>
+                                </div>
+                                <div class="isavailable">
+                                    {% if cart_item.variation.product.is_available %}
+                                        {% trans 'Available' %}
+                                    {% else %}
+                                        {% trans 'Not available' %}
+                                    {% endif %}
+                                </div>
+                                <div class="quantity">
+                                    <label>{% trans 'Quantity' %}</label>
+                                    <input class="change_price_cart_item" data-price="{{ cart_item.variation.price|floatformat|intcomma }}" type="text" name="quantity" value="{{ cart_item.count }}" min="1">
+                                    <div class="plus"></div>
+                                    <div class="minus"></div>
+                                </div>
                             </div>
-                            <div class="title">
-                                Kraska fasadnaya fakturnaya yesho shtoto Hayat 10kg
+                            <div class="form-actions">
+                                <input class="save_item" data-variation_id="{{ cart_item.variation.id }}" type="submit" name="save" value="{% trans 'Save' %}">
+                                <input class="delete_item" data-variation_id="{{ cart_item.variation.id }}" type="button" name="delete" value="{% trans 'Delete' %}">
                             </div>
-                            <div class="price">
-                                <strong>99.900 sum </strong><span>/ im</span>
-                            </div>
-                            <div class="isavailable">
-                                Available
-                            </div>
-                            <div class="quantity">
-                                <label>Quantity</label>
-                                <input type="text" name="quantity">
-                                <div class="plus"></div>
-                                <div class="minus"></div>
-                            </div>
-                        </div>
-                        <div class="form-actions">
-                            <input type="submit" name="save" value="Save">
-                            <input type="delete" name="delete" value="Delete">
-                        </div>
-                    </form>
-                </div>
-                <div class="product-row">
-                    <form>
-                        <div class="product-info">
-                            <div class="image">
-                                <img src="{% static 'images/prod.png' %}">
-                            </div>
-                            <div class="title">
-                                Kraska fasadnaya fakturnaya yesho shtoto Hayat 10kg
-                            </div>
-                            <div class="price">
-                                <strong>99.900 sum </strong><span>/ im</span>
-                            </div>
-                            <div class="isavailable">
-                                Available
-                            </div>
-                            <div class="quantity">
-                                <label>Quantity</label>
-                                <input type="text" name="quantity">
-                                <div class="plus"></div>
-                                <div class="minus"></div>
-                            </div>
-                        </div>
-                        <div class="form-actions">
-                            <input type="submit" name="save" value="Save">
-                            <input type="delete" name="delete" value="Delete">
-                        </div>
-                    </form>
-                </div>
-                <div class="product-row">
-                    <form>
-                        <div class="product-info">
-                            <div class="image">
-                                <img src="{% static 'images/prod.png' %}">
-                            </div>
-                            <div class="title">
-                                Kraska fasadnaya fakturnaya yesho shtoto Hayat 10kg
-                            </div>
-                            <div class="price">
-                                <strong>99.900 sum </strong><span>/ im</span>
-                            </div>
-                            <div class="isavailable">
-                                Available
-                            </div>
-                            <div class="quantity">
-                                <label>Quantity</label>
-                                <input type="text" name="quantity">
-                                <div class="plus"></div>
-                                <div class="minus"></div>
-                            </div>
-                        </div>
-                        <div class="form-actions">
-                            <input type="submit" name="save" value="Save">
-                            <input type="delete" name="delete" value="Delete">
-                        </div>
-                    </form>
-                </div>
-                <div class="product-row">
-                    <form>
-                        <div class="product-info">
-                            <div class="image">
-                                <img src="{% static 'images/prod.png' %}">
-                            </div>
-                            <div class="title">
-                                Kraska fasadnaya fakturnaya yesho shtoto Hayat 10kg
-                            </div>
-                            <div class="price">
-                                <strong>99.900 sum </strong><span>/ im</span>
-                            </div>
-                            <div class="isavailable">
-                                Available
-                            </div>
-                            <div class="quantity">
-                                <label>Quantity</label>
-                                <input type="text" name="quantity">
-                                <div class="plus"></div>
-                                <div class="minus"></div>
-                            </div>
-                        </div>
-                        <div class="form-actions">
-                            <input type="submit" name="save" value="Save">
-                            <input type="delete" name="delete" value="Delete">
-                        </div>
-                    </form>
-                </div>
+                        </form>
+                    </div>
+                {% endfor %}
             </section>
         </div>
-        <div id="right">
-            <section id="checkout">
-                <div class="order-info">
-                    <p>
-                        <span>Product quantity</span><span>5</span>
-                    </p>
-                    <p>
-                        <span>Product quantity</span><span>5</span>
-                    </p>
-                    <p>
-                        <span>Product quantity</span><span>5</span>
-                    </p>
-                    <p>
-                        <span>Product quantity</span><span>5</span>
-                    </p>
-                </div>
-                <div class="itog">
-                    <h5>Itogovaya stoimost</h5>
-                    <h2>36,000.00 sum</h2>
-                    <button>Go to checkout</button>
-                </div>
-            </section>
-        </div>
+        {% if cart_items.count %}
+            <div id="right">
+                <section id="checkout">
+                    <div class="itog">
+                        <h5>{% trans 'Total price' %}</h5>
+                        <h2>{{ cart_total_price|floatformat|intcomma }} {% trans 'sum' %}</h2>
+                        <a href="{% url 'orders:checkout' %}">{% trans 'Checkout' %}</a>
+                    </div>
+                </section>
+            </div>
+        {% endif %}
     </div>
     {{ footer }}
 {% endblock %}

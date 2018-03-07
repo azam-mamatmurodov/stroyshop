@@ -12,8 +12,8 @@ from products.forms import LeaveReviewForm
 
 class ProductFilter(django_filters.FilterSet):
     SORTING_RULES = {
-        'price_asc': 'variations__price',
-        'price_desc': '-variations__price',
+        'price_asc': 'price',
+        'price_desc': '-price',
         'a_z': 'name',
         'z_a': '-name',
         'new_first': '-pk',
@@ -21,9 +21,9 @@ class ProductFilter(django_filters.FilterSet):
     }
 
     order_by_field = 'order_by'
-    min = django_filters.NumberFilter(field_name='variations__price', lookup_expr='gte', )
-    max = django_filters.NumberFilter(field_name='variations__price', lookup_expr='lte', )
-    is_recommended = django_filters.NumberFilter()
+    min = django_filters.NumberFilter(field_name='price', lookup_expr='gte', )
+    max = django_filters.NumberFilter(field_name='price', lookup_expr='lte', )
+    is_recommended = django_filters.NumberFilter(field_name='is_recommended', label=_('Is recommended'))
 
     class Meta:
         model = Product
@@ -35,6 +35,8 @@ class ProductFilter(django_filters.FilterSet):
             ('z_a', _('Title z-a')),
             ('new_first', _('New products first')),
             ('old_first', _('Old products first')),
+            ('price_asc', _('Price increasing')),
+            ('price_desc', _('Price decreasing')),
         ),
     )
 
@@ -53,13 +55,23 @@ class ProductFilter(django_filters.FilterSet):
         if self.request.GET.get('brand', None):
             brand = self.request.GET.get('brand')
             _qs = _qs.filter(brand=brand)
+
+        if self.request.GET.get('min', None):
+            min = self.request.GET.get('min')
+            _qs = _qs.filter(price__gte=min)
+
+        if self.request.GET.get('max', None):
+            max = self.request.GET.get('max')
+            print(max)
+            _qs = _qs.filter(price__lte=max)
+
         return _qs
 
 
 class ProductListView(ListView):
     template_name = 'pages/product_list.html'
     model = Product
-    paginate_by = 60
+    paginate_by = 1
 
     def get_queryset(self):
         queryset = self.model.objects.all()
@@ -69,8 +81,7 @@ class ProductListView(ListView):
             except Category.DoesNotExist:
                 raise Http404
             queryset = queryset.filter(category__in=[cat_item.id for cat_item in category.get_family()])
-        if self.request.GET.get('order_by'):
-            queryset = queryset.order_by(ProductFilter.SORTING_RULES.get(self.request.GET.get('order_by'))).distinct()
+        queryset = ProductFilter(request=self.request, queryset=queryset).qs
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -78,6 +89,17 @@ class ProductListView(ListView):
         context.update(get_default(request=self.request))
         dj_filter = ProductFilter(request=self.request, queryset=self.queryset)
         context['filter'] = dj_filter
+        context['recommended_products'] = self.model.objects.filter(is_recommended=True)
+        context['filter_query'] = self.request.build_absolute_uri().replace(self.request.build_absolute_uri('/').strip("/"), '')
+
+        if self.kwargs.get('slug') != 'all':
+            try:
+                category = Category.objects.get(translations__slug=self.kwargs.get('slug'))
+            except Category.DoesNotExist:
+                raise Http404
+            context['title'] = category.name
+        else:
+            context['title'] = _('All')
         return context
 
 
@@ -105,15 +127,6 @@ class ProductDetail(DetailView, ProcessFormView):
         else:
             context['review_form'] = review
         return self.render_to_response(context=context)
-
-
-class CartView(TemplateView):
-    template_name = 'pages/cart.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context.update(get_default(request=self.request))
-        return context
 
 
 class SearchView(ListView):

@@ -11,6 +11,9 @@ class LoginView(generic.FormView):
     form_class = LoginForm
 
     def get_success_url(self):
+        if 'next' in self.request.GET:
+            next = self.request.GET['next']
+            return next
         return reverse('main:home')
 
     def get_context_data(self, **kwargs):
@@ -31,7 +34,7 @@ class LoginView(generic.FormView):
 
         if user:
             login(self.request, user=user)
-            return redirect(reverse('main:home'))
+            return redirect(to=self.get_success_url())
         else:
             form.add_error('username', 'invalid account credentials')
             return super().form_invalid(form=form)
@@ -49,7 +52,9 @@ class RegisterView(generic.FormView):
         return reverse('main:home')
 
     def form_valid(self, form):
-        form.save(commit=True)
+        user = form.save(commit=True)
+        if authenticate(self.request, phone=user.phone, password=form.cleaned_data.get('password')):
+            login(self.request, user=user)
         return super().form_valid(form=form)
 
     def get_context_data(self, **kwargs):

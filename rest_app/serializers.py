@@ -1,7 +1,10 @@
 from rest_framework import serializers
 
+from orders.models import Cart
 
-class CartSerializer(serializers.Serializer):
-    variation_id = serializers.IntegerField(required=True)
-    quantity = serializers.IntegerField(required=True)
-    client_id = serializers.IntegerField(required=True)
+
+class CartSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Cart
+        fields = '__all__'
