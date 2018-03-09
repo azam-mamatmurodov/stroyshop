@@ -2,6 +2,7 @@ from django.views.generic import TemplateView, DetailView
 
 from main.modules import get_default
 from main.models import Static
+from products.models import Product
 
 
 class HomeView(TemplateView):
@@ -10,6 +11,7 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update(get_default(request=self.request))
+        context['top_products'] = Product.objects.filter(is_top=True)
         return context
 
 

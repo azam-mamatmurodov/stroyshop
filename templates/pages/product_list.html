@@ -44,7 +44,9 @@
                             <img src="{{ recommended_product.get_default_image.image.url }}">
                         </div>
                         <div class="title">
-                            {{ product.name }}
+                            <a href="{{ recommended_product.get_absolute_url }}">
+                                {{ recommended_product.name }}
+                            </a>
                         </div>
                         <div class="price">
                             <strong>
