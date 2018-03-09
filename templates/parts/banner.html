@@ -1,0 +1,16 @@
+{% load i18n %}
+<section id="slider">
+    <div class="owl-carousel">
+        {% for banner in banner_items %}
+            <div class="row">
+                <img src="{{ banner.image.url }}">
+                <span>{{ banner.name }}</span>
+                <button>
+                    <a href="{% url 'main:home' %}">
+                        {% trans 'more' %}
+                    </a>
+                </button>
+            </div>
+        {% endfor %}
+    </div>
+</section>

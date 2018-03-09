@@ -1,0 +1,28 @@
+{% load static mptt_tags i18n %}
+{% full_tree_for_model products.Category as tree %}
+<ul>
+    <li class="expanded">
+        <a href="{% url 'products:product_list' slug='all' %}">{% trans 'Product categories' %}</a>
+        <ul>
+            {% recursetree tree %}
+                <li class="{% if not node.is_leaf_node %}expanded{% endif %}">
+                    <a href="{% url 'products:product_list' slug=node.slug %}">
+                        {{ node.name }}
+                    </a>
+                    {% if not node.is_leaf_node %}
+                        <ul class="children">
+                            {{ children }}
+                        </ul>
+                    {% endif %}
+                </li>
+            {% endrecursetree %}
+        </ul>
+    </li>
+    {% for menu_item in menu_items %}
+        <li>
+            <a href="{% url 'main:static' slug=menu_item.slug %}">
+                {{ menu_item.name }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>

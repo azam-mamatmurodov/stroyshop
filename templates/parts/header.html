@@ -1,0 +1,91 @@
+{% load static mptt_tags i18n humanize %}
+
+{% full_tree_for_model products.Category as tree %}
+<header id="header">
+    <div class="header-top">
+        <div id="user-block">
+            {% if request.user.is_authenticated %}
+                <p>
+                    <a href="{% url 'users:logout' %}" class="logout">
+                        {% trans 'Logout' %}
+                    </a>
+                </p>
+            {% else %}
+                <p>
+                    <a href="{% url 'users:login' %}" class="login">
+                        {% trans 'Login' %}
+                    </a>
+                </p>
+                <p>
+                    <a href="{% url 'users:register' %}" class="register">
+                        {% trans 'Registration' %}
+                    </a>
+                </p>
+            {% endif %}
+        </div>
+    </div>
+    <div class="logo">
+        <a href="/">
+            <img src="{% static 'images/logo.png' %}">
+        </a>
+    </div>
+    <div class="header-bottom">
+        <div id="search-block">
+            <form action="{% url 'products:search' %}">
+                <input type="text" name="search" {% if request.GET.search %}value="{{ request.GET.search }}"{% else %}placeholder="{% trans 'Search product' %}"{% endif %}>
+                <input type="submit" value="&#xf002;">
+            </form>
+        </div>
+        <div id="cart-info">
+            <div class="numbers-block">
+                <p>
+                    <span>+998 (97) 430-60-70</span>
+                    <span>+998 (97) 430-60-70</span>
+                </p>
+            </div>
+            <div class="cart-block">
+                <a href="{% url 'orders:cart' %}">
+                    <p>
+                        <span>{% trans 'Cart' %}</span>
+                        <span><em id="cart_price_total">{{ cart.cart_total_price|floatformat|intcomma }}</em> {% trans 'sum' %}</span>
+                    </p>
+                </a>
+            </div>
+            <div class="checkout-block">
+                <button>
+                    <a href="{% url 'orders:checkout' %}">
+                        {% trans 'Checkout' %}
+                    </a>
+                </button>
+            </div>
+        </div>
+        <div id="menu-block">
+            <ul>
+                <li class="expanded">
+                    <a href="{% url 'products:product_list' slug='all' %}">{% trans 'Product categories' %}</a>
+                    <ul>
+                        {% recursetree tree %}
+                            <li class="{% if not node.is_leaf_node %}expanded{% endif %}">
+                                <a href="{% url 'products:product_list' slug=node.slug %}">
+                                    {{ node.name }}
+                                </a>
+                                {% if not node.is_leaf_node %}
+                                    <ul class="children">
+                                        {{ children }}
+                                    </ul>
+                                {% endif %}
+                            </li>
+                        {% endrecursetree %}
+                    </ul>
+                </li>
+                {% for menu_item in menu_items %}
+                    <li>
+                        <a href="{% url 'main:static' slug=menu_item.slug %}">
+                            {{ menu_item.name }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</header>
