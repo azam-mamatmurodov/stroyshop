@@ -720,7 +720,8 @@ CREATE TABLE products_product (
     available_in_stock boolean NOT NULL,
     volume_id integer NOT NULL,
     is_recommended boolean NOT NULL,
-    price numeric(10,2)
+    price numeric(10,2),
+    is_top boolean NOT NULL
 );
 
 
@@ -1812,6 +1813,7 @@ COPY django_migrations (id, app, name, applied) FROM stdin;
 81	products	0039_product_price	2018-03-07 17:01:34.412259+05
 82	orders	0009_auto_20180307_2057	2018-03-07 20:57:56.422378+05
 83	products	0040_auto_20180307_2057	2018-03-07 20:57:57.26965+05
+84	products	0041_product_is_top	2018-03-09 12:44:44.81721+05
 \.
 
 
@@ -1819,7 +1821,7 @@ COPY django_migrations (id, app, name, applied) FROM stdin;
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-SELECT pg_catalog.setval('django_migrations_id_seq', 83, true);
+SELECT pg_catalog.setval('django_migrations_id_seq', 84, true);
 
 
 --
@@ -2171,15 +2173,15 @@ SELECT pg_catalog.setval('products_color_translation_id_seq', 6, true);
 -- Data for Name: products_product; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY products_product (id, name, description, characters, brand_id, category_id, owner_id, updated, available_in_stock, volume_id, is_recommended, price) FROM stdin;
-10	HAYAT PREMIUM FASAD Краска для нар. работ силикон	<p>Предназначена для наржной окраски зданий и сооружений, по кирпичным и бетонным, деревянным и другим пористым покрытиям по загрунтованной поверхности металла</p>	<p>Test info</p>	21	23	4	2018-03-07	t	1	t	61000.00
-9	HAYAT EXTRA Пена монтажная (аплик/пист) 700/750)			21	22	4	2018-03-07	t	1	t	60000.00
-8	HAYAT ECO Эмаль Универсал (белая)			21	19	4	2018-03-07	t	1	f	58000.00
-7	HAYAT ECO INTERIOR Краска для потолков	<p>Предназначена для отделочных работ внутри помещения (стен и потолков) и для нанесения по дереву, картону и другим пористым поверхностям.</p>		21	19	4	2018-03-07	t	1	f	55000.00
-6	FASAD+			20	21	3	2018-03-07	t	1	f	52000.00
-5	Eko (половая)			20	20	3	2018-03-07	t	1	f	51000.00
-4	Econom 118 (белая)			20	19	3	2018-03-07	t	1	f	50000.00
-37	OOOO			20	21	13	2018-03-07	t	1	f	1000.00
+COPY products_product (id, name, description, characters, brand_id, category_id, owner_id, updated, available_in_stock, volume_id, is_recommended, price, is_top) FROM stdin;
+10	HAYAT PREMIUM FASAD Краска для нар. работ силикон	<p>Предназначена для наржной окраски зданий и сооружений, по кирпичным и бетонным, деревянным и другим пористым покрытиям по загрунтованной поверхности металла</p>	<p>Test info</p>	21	23	4	2018-03-07	t	1	t	61000.00	f
+9	HAYAT EXTRA Пена монтажная (аплик/пист) 700/750)			21	22	4	2018-03-07	t	1	t	60000.00	f
+8	HAYAT ECO Эмаль Универсал (белая)			21	19	4	2018-03-07	t	1	f	58000.00	f
+7	HAYAT ECO INTERIOR Краска для потолков	<p>Предназначена для отделочных работ внутри помещения (стен и потолков) и для нанесения по дереву, картону и другим пористым поверхностям.</p>		21	19	4	2018-03-07	t	1	f	55000.00	f
+6	FASAD+			20	21	3	2018-03-07	t	1	f	52000.00	f
+5	Eko (половая)			20	20	3	2018-03-07	t	1	f	51000.00	f
+4	Econom 118 (белая)			20	19	3	2018-03-07	t	1	f	50000.00	f
+37	OOOO			20	21	13	2018-03-07	t	1	f	1000.00	f
 \.
 
 

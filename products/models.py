@@ -117,6 +117,7 @@ class Product(models.Model):
     available_in_stock = models.BooleanField(default=True, verbose_name=_('Available in stock'))
     is_recommended = models.BooleanField(default=False, verbose_name=_('Is recommended'))
     price = models.DecimalField(decimal_places=2, max_digits=10, verbose_name=_('Price'), null=True, blank=True, )
+    is_top = models.BooleanField(default=False)
 
     def __str__(self):
         return "{}".format(self.name)
