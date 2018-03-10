@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-07 20:49+0500\n"
+"POT-Creation-Date: 2018-03-10 15:38+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,7 +27,7 @@ msgstr "Имя"
 
 #: main/models.py:10 main/models.py:23 main/models.py:37 products/models.py:20
 msgid "Slug"
-msgstr ""
+msgstr "Строка"
 
 #: main/models.py:13 main/models.py:27
 msgid "Order"
@@ -37,7 +37,7 @@ msgstr "Заказ"
 msgid "Image"
 msgstr "Изображение"
 
-#: orders/models.py:13 templates/pages/cart.html:35
+#: orders/models.py:13 templates/pages/cart.html:37
 #: templates/pages/product_detail.html:64
 msgid "Available"
 msgstr "Доступно"
@@ -58,33 +58,39 @@ msgstr "Отменен"
 msgid "Delivered"
 msgstr "Доставлен"
 
-#: orders/models.py:20
+#: orders/models.py:20 templates/pages/checkout.html:33
 msgid "Client name"
 msgstr "Имя клиента"
 
-#: orders/models.py:21 templates/pages/checkout.html:29
-#: templates/pages/login.html:27
+#: orders/models.py:21 templates/pages/checkout.html:44
+#: templates/pages/login.html:29
 msgid "Phone number"
 msgstr "Номер телефона"
 
-#: orders/models.py:22
+#: orders/models.py:22 templates/pages/checkout.html:56
 msgid "Shipping address"
 msgstr "Адрес доставки"
 
-#: orders/models.py:52
+#: orders/models.py:26
+#, fuzzy
+#| msgid "Order"
+msgid "Order Id"
+msgstr "Заказ"
+
+#: orders/models.py:53
 msgid "Cart item"
 msgstr "Корзина товара"
 
-#: orders/models.py:53 templates/pages/cart.html:14
+#: orders/models.py:54 templates/pages/cart.html:16
 msgid "Cart items"
 msgstr "Корзина товара"
 
-#: products/admin.py:34 products/models.py:80
+#: products/admin.py:33 products/models.py:80
 #: templates/pages/product_detail.html:78
 msgid "Color"
 msgstr "Цвет"
 
-#: products/models.py:34 products/models.py:115
+#: products/models.py:34 products/models.py:110
 msgid "Category"
 msgstr "Категория"
 
@@ -96,7 +102,7 @@ msgstr "Категории"
 msgid "Logo"
 msgstr "Логотип"
 
-#: products/models.py:56 products/models.py:116
+#: products/models.py:56 products/models.py:111
 msgid "Brand"
 msgstr "Бренд"
 
@@ -104,7 +110,7 @@ msgstr "Бренд"
 msgid "Brands"
 msgstr "Бренды"
 
-#: products/models.py:65 products/models.py:97 products/models.py:157
+#: products/models.py:65 products/models.py:97 products/models.py:153
 msgid "Product"
 msgstr "Продукт"
 
@@ -112,11 +118,11 @@ msgstr "Продукт"
 msgid "Colors"
 msgstr "Цвета"
 
-#: products/models.py:95 products/models.py:124
+#: products/models.py:95 products/models.py:119
 msgid "Price"
 msgstr "Цена"
 
-#: products/models.py:96 templates/pages/cart.html:41
+#: products/models.py:96 templates/pages/cart.html:43
 msgid "Quantity"
 msgstr "Количество"
 
@@ -128,27 +134,31 @@ msgstr "Вариация"
 msgid "Variations"
 msgstr "Вариации"
 
-#: products/models.py:114
+#: products/models.py:109
 msgid "Product name"
 msgstr "Название продукта"
 
-#: products/models.py:117 templates/pages/product_detail.html:110
+#: products/models.py:112 templates/pages/product_detail.html:110
 msgid "Description"
 msgstr "Описание"
 
-#: products/models.py:118 templates/pages/product_detail.html:104
+#: products/models.py:113 templates/pages/product_detail.html:104
 msgid "Characters"
 msgstr "Параметры"
 
-#: products/models.py:119
+#: products/models.py:114
 msgid "Product Owner"
 msgstr "Владелец продукта"
 
-#: products/models.py:122
+#: products/models.py:115 products/models.py:118 products/views.py:26
+msgid "Is recommended"
+msgstr "Рекомендовано"
+
+#: products/models.py:117
 msgid "Available in stock"
 msgstr "Есть в наличии"
 
-#: products/models.py:158
+#: products/models.py:154
 msgid "Products"
 msgstr "Продукты"
 
@@ -176,6 +186,10 @@ msgstr "Повышение цен"
 msgid "Price decreasing"
 msgstr "Снижение цены"
 
+#: products/views.py:102
+msgid "All"
+msgstr "Все"
+
 #: project/settings.py:207
 msgid "KG"
 msgstr "КГ"
@@ -192,7 +206,7 @@ msgstr "Корзина успешно обновлена"
 msgid "Successful added"
 msgstr "Успешно добавлено"
 
-#: rest_app/views.py:88 templates/base.html:83
+#: rest_app/views.py:88 templates/base.html:90
 msgid "Successful removed"
 msgstr "Удалено"
 
@@ -200,93 +214,115 @@ msgstr "Удалено"
 msgid "Successful saved"
 msgstr "Успешное сохранение"
 
-#: templates/pages/cart.html:31 templates/pages/cart.html:61
-#: templates/pages/product_detail.html:32
-#: templates/pages/product_detail.html:59 templates/pages/product_list.html:50
-#: templates/pages/product_list.html:113 templates/parts/header.html:50
+#: templates/pages/cart.html:4 templates/parts/header.html:49
+msgid "Cart"
+msgstr "Корзина"
+
+#: templates/pages/cart.html:33 templates/pages/cart.html:63
+#: templates/pages/main.html:62 templates/pages/product_detail.html:32
+#: templates/pages/product_detail.html:59 templates/pages/product_list.html:54
+#: templates/pages/product_list.html:117 templates/parts/header.html:50
 msgid "sum"
 msgstr "Сум"
 
-#: templates/pages/cart.html:37 templates/pages/product_detail.html:64
+#: templates/pages/cart.html:39 templates/pages/product_detail.html:64
 msgid "Not available"
 msgstr "Не доступно"
 
-#: templates/pages/cart.html:48
+#: templates/pages/cart.html:50
 msgid "Save"
 msgstr "Сохранить"
 
-#: templates/pages/cart.html:49
+#: templates/pages/cart.html:51
 msgid "Delete"
 msgstr "Удалить"
 
-#: templates/pages/cart.html:60
+#: templates/pages/cart.html:62
 msgid "Total price"
 msgstr "Итоговая цена"
 
-#: templates/pages/cart.html:62 templates/pages/checkout.html:15
-#: templates/pages/order_detail.html:15 templates/parts/header.html:57
+#: templates/pages/cart.html:64 templates/pages/checkout.html:15
+#: templates/parts/header.html:57
 msgid "Checkout"
 msgstr "Оформление заказа"
 
-#: templates/pages/checkout.html:25
-msgid "Login OR continue without authorization"
-msgstr "Войти или продолжить без авторизации"
+#: templates/pages/checkout.html:25 templates/pages/login.html:5
+#: templates/pages/login.html:17 templates/parts/header.html:16
+msgid "Login"
+msgstr "Войти"
 
-#: templates/pages/checkout.html:37 templates/pages/login.html:35
-#: templates/pages/register.html:43 users/forms.py:18
+#: templates/pages/checkout.html:26
+msgid "OR"
+msgstr "ИЛИ"
+
+#: templates/pages/checkout.html:26
+msgid "Continue as guest"
+msgstr "продолжить в качестве гостя"
+
+#: templates/pages/checkout.html:67
+msgid "Continue"
+msgstr "Продолжить"
+
+#: templates/pages/login.html:37 templates/pages/register.html:45
+#: users/forms.py:18
 msgid "Password"
 msgstr "Пароль"
 
-#: templates/pages/checkout.html:47 templates/pages/checkout.html:68
-#: templates/pages/login.html:45
+#: templates/pages/login.html:47
 msgid "Log In"
 msgstr "Войти"
 
-#: templates/pages/checkout.html:55 templates/pages/login.html:53
+#: templates/pages/login.html:55
 msgid "Forgot Password"
 msgstr "Забыли пароль"
 
-#: templates/pages/login.html:15 templates/parts/header.html:16
-msgid "Login"
-msgstr "Логин"
-
-#: templates/pages/main.html:6 templates/pages/static.html:6
+#: templates/pages/main.html:5
 msgid "Home"
 msgstr "Главная"
 
-#: templates/pages/main.html:14
+#: templates/pages/main.html:13
 msgid "Working with us very easy"
 msgstr "Работать с нами легко"
 
-#: templates/pages/main.html:18
+#: templates/pages/main.html:17
 msgid "Choose a product"
 msgstr "Выбрать продукт"
 
-#: templates/pages/main.html:21
+#: templates/pages/main.html:20
 msgid "Payment method"
 msgstr "Способ оплаты"
 
-#: templates/pages/main.html:24
+#: templates/pages/main.html:23
 msgid "And we'll deliver your order"
 msgstr "И мы доставим ваш заказ"
 
-#: templates/pages/main.html:30
+#: templates/pages/main.html:29
 msgid "Quick access"
 msgstr "Быстрый доступ"
 
-#: templates/pages/main.html:43
+#: templates/pages/main.html:42
 msgid "Top products of Stroyshop"
 msgstr "Лучшие продукты Stroyshop"
+
+#: templates/pages/main.html:69 templates/pages/product_detail.html:35
+#: templates/pages/product_detail.html:99 templates/pages/product_list.html:60
+#: templates/pages/product_list.html:123
+msgid "Add to cart"
+msgstr "Добавить в карту"
+
+#: templates/pages/main.html:101
+#, fuzzy
+#| msgid "Found products"
+msgid "More products"
+msgstr "Найденные товары"
+
+#: templates/pages/order_detail.html:5 templates/pages/order_detail.html:17
+msgid "Order info"
+msgstr "Информация о заказе"
 
 #: templates/pages/product_detail.html:19
 msgid "Similar products"
 msgstr "Похожие продукты"
-
-#: templates/pages/product_detail.html:35
-#: templates/pages/product_detail.html:99 templates/pages/product_list.html:56
-#: templates/pages/product_list.html:119
-msgid "Add to cart"
-msgstr "Добавить в карту"
 
 #: templates/pages/product_detail.html:63
 msgid "In stock"
@@ -304,7 +340,7 @@ msgstr "Последнее обновление"
 msgid "Feedbacks"
 msgstr "Отзывы"
 
-#: templates/pages/product_detail.html:121 templates/pages/search.html:7
+#: templates/pages/product_detail.html:121 templates/pages/search.html:9
 msgid "Found"
 msgstr "Найдено"
 
@@ -312,7 +348,7 @@ msgstr "Найдено"
 msgid "feedbacks"
 msgstr "Отзывы"
 
-#: templates/pages/product_detail.html:124 templates/pages/product_list.html:92
+#: templates/pages/product_detail.html:124 templates/pages/product_list.html:96
 msgid "Sorting"
 msgstr "Сортировка"
 
@@ -348,41 +384,52 @@ msgstr "из"
 msgid "More feedbacks"
 msgstr "Больше отзывов"
 
-#: templates/pages/product_list.html:10
+#: templates/pages/product_list.html:12
 msgid "Choose category"
 msgstr "Выберите категорию"
 
-#: templates/pages/product_list.html:37
+#: templates/pages/product_list.html:29
+msgid "Filter"
+msgstr "Фильтр"
+
+#: templates/pages/product_list.html:39
 msgid "Recommended products"
 msgstr "Рекомендуемые продукты"
 
-#: templates/pages/product_list.html:89
+#: templates/pages/product_list.html:93
 msgid "Found products"
 msgstr "Найденные товары"
 
-#: templates/pages/product_list.html:150
+#: templates/pages/product_list.html:154
 msgid "Back"
 msgstr "Назад"
 
-#: templates/pages/product_list.html:168
+#: templates/pages/product_list.html:172
 msgid "Next"
 msgstr "Следущий"
 
-#: templates/pages/register.html:15 templates/parts/header.html:21
+#: templates/pages/register.html:5 templates/pages/register.html:17
+#: templates/parts/header.html:21
 msgid "Registration"
 msgstr "Регистрация"
 
-#: templates/pages/register.html:27
+#: templates/pages/register.html:29
 msgid "Full name"
 msgstr "Полное имя"
 
-#: templates/pages/register.html:35
+#: templates/pages/register.html:37
 msgid "Phone"
 msgstr "Телефон"
 
-#: templates/pages/register.html:51 users/forms.py:19
+#: templates/pages/register.html:53 users/forms.py:19
 msgid "Confirm password"
 msgstr "Подтвердите пароль"
+
+#: templates/pages/search.html:4
+#, fuzzy
+#| msgid "Search product"
+msgid "Search"
+msgstr "Найти продукт"
 
 #: templates/parts/banner.html:10
 msgid "more"
@@ -399,10 +446,6 @@ msgstr "Выйти"
 #: templates/parts/header.html:35
 msgid "Search product"
 msgstr "Найти продукт"
-
-#: templates/parts/header.html:49
-msgid "Cart"
-msgstr "Корзина"
 
 #: users/admin.py:17
 msgid "Personal info"
@@ -424,59 +467,69 @@ msgstr "Полноеимя"
 msgid "Passwords not match"
 msgstr "Пароль не указан"
 
-#: users/models.py:44
+#: users/models.py:46
+msgid "File"
+msgstr "Файл"
+
+#: users/models.py:47
+msgid "Files"
+msgstr "Файлы"
+
+#: users/models.py:52
 msgid "Phone number or Username"
 msgstr "Номер телефона или Имя пользователя"
 
-#: users/models.py:45
+#: users/models.py:53
 msgid "First name"
 msgstr "Имя"
 
-#: users/models.py:46
+#: users/models.py:54
 msgid "Last name"
 msgstr "Фамилия"
 
-#: users/models.py:47
+#: users/models.py:55
 msgid "Date joined"
 msgstr "Дата вступления"
 
-#: users/models.py:48
+#: users/models.py:56
 msgid "Active"
 msgstr "Активный"
 
-#: users/models.py:49
+#: users/models.py:57
 msgid "Avatar"
 msgstr "Аватар"
 
-#: users/models.py:56
+#: users/models.py:64
 msgid "User"
 msgstr "Пользователь"
 
-#: users/models.py:57
+#: users/models.py:65
 msgid "Users"
 msgstr "Пользователи"
 
-#: users/models.py:64
+#: users/models.py:72
 msgid "Client user"
 msgstr "Клиент пользователя"
 
-#: users/models.py:65
+#: users/models.py:73
 msgid "Client address"
 msgstr "Адрес клиента"
 
-#: users/models.py:75
+#: users/models.py:83
 msgid "Producer"
 msgstr "Производитель"
 
-#: users/models.py:76
+#: users/models.py:84
 msgid "Supplier"
 msgstr "Поставшик"
 
-#: users/models.py:78
+#: users/models.py:86
 msgid "Merchant user"
 msgstr "Продавец"
 
-#: users/models.py:79
+#: users/models.py:87
 msgid "Merchant type"
 msgstr "Топ торговца"
 
+#~ msgid "Login OR continue without authorization"
+#~ msgstr "Войти или продолжить без авторизации"

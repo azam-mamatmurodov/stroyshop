@@ -1,8 +1,6 @@
 from django.contrib import admin
 from django.utils.translation import ugettext as _
 
-
-
 from parler.admin import TranslatableAdmin
 from mptt.admin import DraggableMPTTAdmin
 

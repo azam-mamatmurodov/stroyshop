@@ -50,7 +50,7 @@ class CartViews(generics.ListAPIView, generics.CreateAPIView):
 
         total_price = Decimal(variation.price) * Decimal(quantity)
 
-        new_cart_item, created = Cart.objects.get_or_create(session_key=self.session_key, variation=variation, defaults={
+        new_cart_item, created = Cart.objects.get_or_create(session_key=self.session_key, variation=variation, order=None, defaults={
             "count": quantity,
             "total_price": total_price
         })

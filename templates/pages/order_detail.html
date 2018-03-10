@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load i18n %}
-
+{% block title %}
+    {% trans 'Order info' %}
+{% endblock %}
 {% block content %}
     {{ header }}
     <div class="container">
@@ -12,7 +14,7 @@
 						<div class="row">
 							<div class="col-xs-6">
 								<h2 class="page_title">
-                                    {% trans 'Checkout' %}
+                                    {% trans 'Order info' %}
                                 </h2>
 							</div>
 						</div>
@@ -21,7 +23,20 @@
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
-                                {{ object }}
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Идентификатор заказа</th>
+                                            <th>Статус заказа</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ order.order_unique_id }}</td>
+                                            <td>{{ order.get_status }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
 						</div>
 					</div>

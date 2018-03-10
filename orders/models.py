@@ -23,6 +23,7 @@ class Order(models.Model):
     total_price = models.DecimalField(null=True, blank=True, max_digits=10, decimal_places=2)
     created = models.DateTimeField(auto_now_add=True, )
     state = models.IntegerField(choices=ORDER_STATUS, default=ORDER_STATUS[0][0], blank=True)
+    order_unique_id = models.CharField(unique=True, blank=True, null=True, max_length=120, verbose_name=_('Order Id'), editable=False)
 
     def str(self):
         return "Order - {}".format(self.pk)

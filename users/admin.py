@@ -5,7 +5,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from django.utils.translation import ugettext_lazy as _
 
-from users.models import Client, Merchant
+from users.models import Client, Merchant, Files
 
 from .models import User
 
@@ -14,7 +14,7 @@ from .models import User
 class UserAdmin(DjangoUserAdmin, admin.ModelAdmin):
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        (_('Personal info'), {'fields': ('first_name', 'last_name', 'avatar',  'phone',)}),
+        (_('Personal info'), {'fields': ('first_name', 'last_name', 'avatar',  'phone', )}),
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
                                        'groups', 'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login',)}),
@@ -43,3 +43,4 @@ class MerchantAdmin(admin.ModelAdmin):
 
 admin.site.register(Client)
 admin.site.register(Merchant, MerchantAdmin)
+admin.site.register(Files)

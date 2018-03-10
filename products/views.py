@@ -71,7 +71,7 @@ class ProductFilter(django_filters.FilterSet):
 class ProductListView(ListView):
     template_name = 'pages/product_list.html'
     model = Product
-    paginate_by = 1
+    paginate_by = 60
 
     def get_queryset(self):
         queryset = self.model.objects.all()

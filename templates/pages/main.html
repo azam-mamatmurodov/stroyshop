@@ -2,12 +2,22 @@
 
 {% load i18n static humanize %}
 
-{% block title %}{% trans 'Home' %}{% endblock %}
+{% block title %}{{ request.META.HTTP_HOST }}|{% trans 'Home' %}{% endblock %}
 
 {% block content %}
     {{ header }}
     {{ banner }}
-    {% include 'parts/partners.html' %}
+    <section id="partners">
+        <div class="owl-carousel">
+            {% for brand in brands %}
+                <div class="row">
+                    <a href="{% url 'products:product_list' slug='all' %}?brand={{ brand.pk }}">
+                        <img src="{{ brand.logo.url }}">
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
     <section id="iseasy">
         <div class="block-title">
             {% trans 'Working with us very easy' %}
@@ -98,7 +108,7 @@
             </div>
         </div>
         <div class="block-footer">
-            <a href="">More products</a>
+            <a href="{% url 'products:product_list' slug='all' %}">{% trans 'More products' %}</a>
         </div>
     </section>
     <section id="superprice">
@@ -158,27 +168,21 @@
     </section>
     <section id="feedbacks">
         <div class="owl-carousel">
-            <div class="row">
-                <div class="image"><img src="{% static 'images/face.jpg' %}"></div>
-                <div class="text">
-                    <div class="title">Steve Jobs</div>
-                    <div class="body">I learnt English, I speak in English, but I don't understood what I'm said!</div>
+            {% for review in reviews %}
+                <div class="row">
+                    <div class="image">
+                        <img src="{% static 'images/face.jpg' %}">
+                    </div>
+                    <div class="text">
+                        <div class="title">
+                            {{ review.subject }}
+                        </div>
+                        <div class="body">
+                            {{ review.text }}
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="image"><img src="{% static 'images/face.jpg' %}"></div>
-                <div class="text">
-                    <div class="title">Steve Jobs</div>
-                    <div class="body">I learnt English, I speak in English, but I don't understood what I'm said!</div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="image"><img src="{% static 'images/face.jpg' %}"></div>
-                <div class="text">
-                    <div class="title">Steve Jobs</div>
-                    <div class="body">I learnt English, I speak in English, but I don't understood what I'm said!</div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </section>
     {{ footer }}

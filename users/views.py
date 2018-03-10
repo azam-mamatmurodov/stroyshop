@@ -21,12 +21,6 @@ class LoginView(generic.FormView):
         context.update(get_default(request=self.request))
         return context
 
-    def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            return redirect(to=self.get_success_url())
-        else:
-            return super().dispatch(request=request, *args, **kwargs)
-
     def form_valid(self, form):
         username = form.cleaned_data.get('username')
         password = form.cleaned_data.get('passwd')

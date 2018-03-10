@@ -2,7 +2,7 @@ from django.views.generic import TemplateView, DetailView
 
 from main.modules import get_default
 from main.models import Static
-from products.models import Product
+from products.models import Product, Review, Brands
 
 
 class HomeView(TemplateView):
@@ -12,6 +12,8 @@ class HomeView(TemplateView):
         context = super().get_context_data(**kwargs)
         context.update(get_default(request=self.request))
         context['top_products'] = Product.objects.filter(is_top=True)
+        context['reviews'] = Review.objects.filter(is_approved=True)
+        context['brands'] = Brands.objects.all()
         return context
 
 

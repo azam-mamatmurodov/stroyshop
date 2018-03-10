@@ -39,6 +39,14 @@ class UserManager(BaseUserManager):
         return self._create_user(phone, password, **extra_fields)
 
 
+class Files(models.Model):
+    file = models.FileField(upload_to='files/', default='default.png')
+
+    class Meta:
+        verbose_name = _('File')
+        verbose_name_plural = _('Files')
+
+
 class User(AbstractUser):
     username = None
     phone = models.CharField(max_length=12, unique=True, verbose_name=_('Phone number or Username'))
@@ -46,7 +54,7 @@ class User(AbstractUser):
     last_name = models.CharField(max_length=30, blank=True, verbose_name=_('Last name'))
     date_joined = models.DateTimeField(auto_now_add=True, verbose_name=_('Date joined'),)
     is_active = models.BooleanField(default=True, verbose_name=_('Active'),)
-    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True, verbose_name=_('Avatar'), )
+    avatar = models.OneToOneField(to=Files, null=True, blank=True, verbose_name=_('Avatar'), )
 
     USERNAME_FIELD = 'phone'
     REQUIRED_FIELDS = ['first_name', ]

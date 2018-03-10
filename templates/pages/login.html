@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load i18n %}
-
+{% block title %}
+    {% trans 'Login' %}
+{% endblock %}
 {% block content %}
     {{ header }}
     <div class="container">
@@ -21,7 +23,7 @@
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
-								<form id="login-form" action="{% url 'users:login' %}" method="post" role="form" style="display: block;">
+								<form id="login-form" action="{% url 'users:login' %}{% if 'next' in request.GET %}?next={{ request.GET.next }}{% endif %}" method="post" role="form" style="display: block;">
                                     {% csrf_token %}
 									<div class="form-group">
 										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="{% trans 'Phone number' %}" value="">

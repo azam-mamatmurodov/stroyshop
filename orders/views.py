@@ -1,10 +1,13 @@
 from decimal import Decimal
+import uuid
 from django.views.generic import ListView, CreateView, DetailView
+from django.shortcuts import reverse, redirect
 
 from main.modules import get_default
 from orders.models import Cart, Order
 from orders.forms import OrderForm
 from users.forms import LoginForm
+
 
 class CartView(ListView):
     model = Cart
@@ -25,11 +28,17 @@ class CheckoutView(CreateView):
     model = Order
     template_name = 'pages/checkout.html'
     form_class = OrderForm
+    success_url = None
 
     def get_cart_items(self, request):
         current_user_session_key = request.COOKIES.get('client_id')
         cart_items = Cart.objects.filter(session_key=current_user_session_key, status=True, order__isnull=True)
         return cart_items
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.get_cart_items(request=request).count() == 0:
+            return redirect(reverse('main:home'))
+        return super().dispatch(request=request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         cart_items = self.get_cart_items(self.request)
@@ -52,8 +61,9 @@ class CheckoutView(CreateView):
             total_price += cart_item.total_price
             cart_item.save()
         instance.total_price = Decimal(total_price)
+        instance.order_unique_id = uuid.uuid4()
         instance.save()
-        return super().form_valid(form)
+        return redirect(to=reverse('orders:order_detail', args=[instance.phone, instance.order_unique_id]))
 
 
 class OrderDetail(DetailView):
@@ -62,8 +72,8 @@ class OrderDetail(DetailView):
 
     def get_object(self, queryset=None):
         phone = self.kwargs.get('phone')
-        pk = self.kwargs.get('pk')
-        return self.model.objects.get(pk=pk, phone=phone)
+        order_unique_id = self.kwargs.get('order_unique_id')
+        return self.model.objects.get(order_unique_id=order_unique_id, phone=phone)
 
     def get_context_data(self, **kwargs):
 
