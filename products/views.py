@@ -1,4 +1,4 @@
-from django.views.generic import ListView, DetailView, TemplateView
+from django.views.generic import ListView, DetailView, TemplateView, FormView
 from django.views.generic.edit import ProcessFormView
 from django.utils.translation import ugettext as _
 from django.shortcuts import Http404
@@ -7,7 +7,11 @@ import django_filters
 
 from main.modules import get_default
 from products.models import Product, Category
-from products.forms import LeaveReviewForm
+from products.forms import LeaveReviewForm, ProductsImportForm
+
+import pandas
+from openpyxl import load_workbook
+import xlrd
 
 
 class ProductFilter(django_filters.FilterSet):
@@ -146,3 +150,20 @@ class SearchView(ListView):
         context = super().get_context_data(**kwargs)
         context.update(get_default(request=self.request))
         return context
+
+
+class ProductsImportView(FormView):
+    template_name = 'pages/products_import.html'
+    form_class = ProductsImportForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(get_default(request=self.request))
+        return context
+
+    def form_valid(self, form):
+        file = self.request.FILES.get('file')
+        excel = pandas.ExcelFile(file)
+        sheet = excel.parse(excel.sheet_names[0])
+        # excel = xlrd.open_workbook(file)
+        return super().form_valid(form)
