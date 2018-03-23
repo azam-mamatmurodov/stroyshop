@@ -61,7 +61,7 @@ class Brands(models.Model):
 
 
 class ProductImage(models.Model):
-    image = models.ImageField(upload_to='products/%Y/%m/%d/', verbose_name=_('Image'), default='default.png')
+    image = models.ImageField(upload_to='products/', verbose_name=_('Image'), default='default.png')
     product = models.ForeignKey('Product', verbose_name=_('Product'), related_name='images')
 
 
