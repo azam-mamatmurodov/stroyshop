@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+    {{ header }}
+    <div id="main">
+        <div id="center">
+            <section id="breadcrumbs">
+                <a href="">Main</a>
+                <a href="" class="last">Cart</a>
+            </section>
+            <section id="cart-content">
+                <div id="page-title">
+                    {% trans 'Export products' %}
+                </div>
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="{% trans 'Export' %}">
+                </form>
+            </section>
+        </div>
+    </div>
+    {{ footer }}
+{% endblock %}
