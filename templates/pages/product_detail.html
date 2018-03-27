@@ -20,9 +20,11 @@
                         <div class="block-content">
                             {% for similar_product in similar_products %}
                                 <div class="product-row">
-                                    <div class="image">
-                                        <img src="{{ similar_product.get_default_image.image.url }}">
-                                    </div>
+                                    {% if similar_product.get_default_image %}
+                                        <div class="image">
+                                            <img src="{{ similar_product.get_default_image.url }}">
+                                        </div>
+                                    {% endif %}
                                     <div class="title">
                                         <a href="{{ similar_product.get_absolute_url }}">
                                             {{ similar_product.name }}
@@ -40,11 +42,14 @@
                     </div>
                 {% endif %}
                 <div class="images">
-                    <img id="img_01" style="width: 100%; height: 200px;" src="{{ product.get_default_image.image.url }}" data-zoom-image="{{ product.get_default_image.image.url }}" />
+                    <img id="img_01" style="width: 100%; height: 200px;" src="{{ product.get_default_image.url }}" \
+                         data-zoom-image="{{ product.get_default_image.url }}" />
                     <div id="gal1">
                         {% for image_object in product.get_all_images %}
-                            <a href="#" data-image="{{ image_object.image.url }}" data-zoom-image="{{ image_object.image.url }}">
-                                <img style="height: 100px;" id="img_{{ forloop.counter }}" src="{{ image_object.image.url }}" />
+                            <a href="#" data-image="{{ image_object.url }}"
+                               data-zoom-image="{{ image_object.url }}">
+                                <img style="height: 100px;" id="img_{{ forloop.counter }}"
+                                     src="{{ image_object.url }}" />
                             </a>
                         {% endfor %}
                     </div>
