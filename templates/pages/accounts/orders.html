@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static i18n humanize %}
+
+{% block content %}
+    {{ header }}
+        <div id="main">
+            {{ breadcrumbs }}
+            <section id="history">
+                <h1 id="page-title">{% trans 'Orders history' %}</h1>
+                <div class="content">
+                    {% for order in order_list %}
+                        <div class="row">
+                            <div class="row-title">
+                                <div class="date">
+                                    <span>{% trans 'Order date' %}</span>
+                                    <span>{{ order.created|date:'d-F Y' }}</span>
+                                </div>
+                                <div class="summa">
+                                    <span>{% trans 'Amount' %}</span>
+                                    <span>{{ order.total_price|floatformat }} {% trans 'sum' %}</span>
+                                </div>
+                                <div class="delivery">
+                                    <span>Deliver to</span>
+                                    <div class="delto">
+                                        <div class="title">maqsud@dst.uz</div>
+                                        <div class="description">
+                                            <strong>{{ order.client_name }}</strong>
+                                            <p>
+                                                {{ order.shipping_address }}
+                                            </p>
+                                            <strong>Tel.: +998 {{ order.phone|safe }}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="actions">
+                                    <a href="">Information</a>
+                                    <a href="">Schot</a>
+                                </div>
+                            </div>
+                            <div class="row-content">
+                                <h2>Dostavlen 19-march 2018</h2>
+                                <span>vash zakaz bil prinyatvasya</span>
+                                {% for cart_product in order.cart_set.all %}
+                                    <div class="product-row">
+                                        <div class="image">
+                                            <img src="{{ cart_product.variation.product.get_default_image.url }}">
+                                        </div>
+                                        <div class="title">
+                                            {{ cart_product.variation.product.name }} {{ cart_product.variation }}
+                                        </div>
+                                        <div class="price">{{ cart_product.total_price|floatformat }} {% trans 'sum' %}</div>
+                                        <div class="quantity">
+                                            <span>{% trans 'Quantity' %}</span><span>{{ cart_product.count }}</span>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% include 'parts/pagination.html' %}
+                </div>
+            </section>
+        </div>
+    {{ footer }}
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+
+{% block content %}
+    {{ header }}
+    <div id="main">
+        {{ breadcrumbs }}
+        <section id="settings">
+            <h1 id="page-title">
+                {% trans 'Account Settings' %}
+            </h1>
+            <div class="block-content">
+                <a href="{% url 'users:profile_orders' %}" class="row">
+                    <div class="image"><img src="{% static 'images/orders.png' %}"></div>
+                    <div class="title">
+                        {% trans 'My orders' %}
+                    </div>
+                    <div class="desc">{% trans 'My orders' %}</div>
+                </a>
+                <a href="{% url 'users:profile_security' %}" class="row">
+                    <div class="image"><img src="{% static 'images/safety.png' %}"></div>
+                    <div class="title">
+                        {% trans 'Security' %}
+                    </div>
+                    <div class="desc">{% trans 'Security' %}</div>
+                </a>
+                <a href="{% url 'users:profile_delivery' %}" class="row">
+                    <div class="image"><img src="{% static 'images/address.png' %}"></div>
+                    <div class="title">
+                        {% trans 'Delevery address' %}
+                    </div>
+                    <div class="desc">{% trans 'Delevery address' %}</div>
+                </a>
+                <a href="{% url 'users:profile_payment' %}" class="row">
+                    <div class="image"><img src="{% static 'images/payment.png' %}"></div>
+                    <div class="title">
+                        {% trans 'Payment methods' %}
+                    </div>
+                    <div class="desc">{% trans 'Payment methods' %}</div>
+                </a>
+            </div>
+        </section>
+    </div>
+    {{ footer }}
+{% endblock %}

@@ -6,14 +6,14 @@
 
 {% block content %}
     {{ header }}
-    {{ banner }}
-    {% include 'parts/partners.html' %}
-
-    <section id="page" class="content">
-        <h3 class="title">{{ object.name }}</h3>
-        <div class="content">
-            {{ object.body|safe }}
-        </div>
-    </section>
+    <div id="main">
+        {{ breadcrumbs }}
+        <section id="page" class="content">
+            <h3 class="title">{{ object.name }}</h3>
+            <div class="content">
+                {{ object.body|safe }}
+            </div>
+        </section>
+    </div>
     {{ footer }}
 {% endblock %}

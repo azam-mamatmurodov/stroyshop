@@ -5,7 +5,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from django.utils.translation import ugettext_lazy as _
 
-from users.models import Client, Merchant, Files
+from users.models import Client, Merchant, Files, DeliveryAddress, PaymentCards
 
 from .models import User
 
@@ -41,6 +41,12 @@ class MerchantAdmin(admin.ModelAdmin):
     list_filter = ['merchant_type']
 
 
+class DeliveryAddressAdmin(admin.ModelAdmin):
+    list_display = ['user', 'phone', 'is_default', ]
+
+
 admin.site.register(Client)
 admin.site.register(Merchant, MerchantAdmin)
 admin.site.register(Files)
+admin.site.register(DeliveryAddress, DeliveryAddressAdmin)
+admin.site.register(PaymentCards)

@@ -5,9 +5,10 @@
 {% endblock %}
 {% block content %}
     {{ header }}
-    <div id="search_page">
+    <div id="main">
+        {{ breadcrumbs }}
         {% trans 'Found' %}: {{ product_list.count }}
-        <div class="results">
+        <div class="results" style="font-size: 14px;">
             {% for product in product_list %}
                 <div class="product-item">
                     <a href="{{ product.get_absolute_url }}">

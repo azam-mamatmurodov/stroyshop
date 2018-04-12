@@ -9,5 +9,5 @@ class LeaveReviewForm(forms.ModelForm):
         exclude = ['user', 'is_approved', 'created_at', 'product', ]
 
 
-class ProductsImportForm(forms.Form):
+class ImportForm(forms.Form):
     file = forms.FileField(required=False)

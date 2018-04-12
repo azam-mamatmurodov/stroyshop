@@ -1,75 +1,20 @@
-from django.views.generic import ListView, DetailView, TemplateView, FormView
+from django.views.generic import ListView, DetailView
 from django.views.generic.edit import ProcessFormView
 from django.utils.translation import ugettext as _
 from django.shortcuts import Http404
-from django.db.models import Q, F
-import django_filters
+from django.db.models import Q
 
-from main.modules import get_default
-from products.models import Product, Category
-from products.forms import LeaveReviewForm, ProductsImportForm
+from products.models import Product, Category, Brands
+from products.forms import LeaveReviewForm
 
-import pandas
-from openpyxl import load_workbook
-import xlrd
-
-
-class ProductFilter(django_filters.FilterSet):
-    SORTING_RULES = {
-        'price_asc': 'price',
-        'price_desc': '-price',
-        'a_z': 'name',
-        'z_a': '-name',
-        'new_first': '-pk',
-        'old_first': 'pk'
-    }
-
-    order_by_field = 'order_by'
-    min = django_filters.NumberFilter(field_name='price', lookup_expr='gte', )
-    max = django_filters.NumberFilter(field_name='price', lookup_expr='lte', )
-    is_recommended = django_filters.NumberFilter(field_name='is_recommended', label=_('Is recommended'))
-
-    class Meta:
-        model = Product
-        fields = ['min', 'max', 'brand', 'is_recommended']
-
-    order_by = django_filters.OrderingFilter(
-        choices=(
-            ('a_z', _('Title a-z')),
-            ('z_a', _('Title z-a')),
-            ('new_first', _('New products first')),
-            ('old_first', _('Old products first')),
-            ('price_asc', _('Price increasing')),
-            ('price_desc', _('Price decreasing')),
-        ),
-    )
-
-    @property
-    def qs(self):
-        _qs = super(ProductFilter, self).qs
-        if self.request.GET.get('order_by', None):
-            order_by = self.request.GET.get('order_by')
-            ordering_rule = self.SORTING_RULES.get(order_by)
-            _qs = _qs.order_by(ordering_rule)
-
-        if self.request.GET.get('is_recommended', False):
-            is_recommended = self.request.GET.get('is_recommended')
-            _qs = _qs.filter(is_recommended=is_recommended)
-
-        if self.request.GET.get('brand', None):
-            brand = self.request.GET.get('brand')
-            _qs = _qs.filter(brand=brand)
-
-        if self.request.GET.get('min', None):
-            min = self.request.GET.get('min')
-            _qs = _qs.filter(price__gte=min)
-
-        if self.request.GET.get('max', None):
-            max = self.request.GET.get('max')
-            print(max)
-            _qs = _qs.filter(price__lte=max)
-
-        return _qs
+ORDER_BY = (
+    ('new_first', _('New first')),
+    ('old_first', _('Old first')),
+    ('a_z', _('Title asc')),
+    ('z_a', _('Title desc')),
+    ('price_asc',  _('Price asc')),
+    ('price_desc', _('Price desc')),
+)
 
 
 class ProductListView(ListView):
@@ -85,17 +30,32 @@ class ProductListView(ListView):
             except Category.DoesNotExist:
                 raise Http404
             queryset = queryset.filter(category__in=[cat_item.id for cat_item in category.get_family()])
-        queryset = ProductFilter(request=self.request, queryset=queryset).qs
+
+        brands = self.request.GET.getlist('brand')
+        if brands:
+            queryset = queryset.filter(brand__in=brands)
+        order_by = self.request.GET.get('order_by')
+        if order_by:
+            if order_by == 'z_a':
+                ordering = '-name'
+            elif order_by == 'a_z':
+                ordering = 'name'
+            elif order_by == 'price_asc':
+                ordering = '-price'
+            elif order_by == 'price_desc':
+                ordering = 'price'
+            elif order_by == 'new_first':
+                ordering = '-pk'
+            else:
+                ordering = 'pk'
+            queryset = queryset.order_by(ordering)
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super(ProductListView, self).get_context_data(**kwargs)
-        context.update(get_default(request=self.request))
-        dj_filter = ProductFilter(request=self.request, queryset=self.queryset)
-        context['filter'] = dj_filter
+        context['brands'] = Brands.objects.all()
         context['recommended_products'] = self.model.objects.filter(is_recommended=True)
-        context['filter_query'] = self.request.build_absolute_uri().replace(self.request.build_absolute_uri('/').strip("/"), '')
-
+        context['selected_brands'] = self.request.GET.getlist('brand')
         if self.kwargs.get('slug') != 'all':
             try:
                 category = Category.objects.get(translations__slug=self.kwargs.get('slug'))
@@ -104,6 +64,7 @@ class ProductListView(ListView):
             context['title'] = category.name
         else:
             context['title'] = _('All')
+        context['orders'] = ORDER_BY
         return context
 
 
@@ -114,7 +75,6 @@ class ProductDetail(DetailView, ProcessFormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context.update(get_default(request=self.request))
         context['review_form'] = LeaveReviewForm()
         context['similar_products'] = self.model.objects.filter(category=self.object.category).exclude(pk=self.object.pk)
         return context
@@ -145,25 +105,3 @@ class SearchView(ListView):
         else:
             qs = list()
         return qs
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context.update(get_default(request=self.request))
-        return context
-
-
-class ProductsImportView(FormView):
-    template_name = 'pages/products_import.html'
-    form_class = ProductsImportForm
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context.update(get_default(request=self.request))
-        return context
-
-    def form_valid(self, form):
-        file = self.request.FILES.get('file')
-        excel = pandas.ExcelFile(file)
-        sheet = excel.parse(excel.sheet_names[0])
-        # excel = xlrd.open_workbook(file)
-        return super().form_valid(form)

@@ -1,0 +1,34 @@
+{% load i18n %}
+{% if is_paginated %}
+    <div class="block-footer">
+        <div id="pager">
+            <ul>
+                {% if page_obj.has_previous %}
+                    <li class="prev">
+                        <a href="{{ filter_query }}{% if '?' in filter_query  %}&{% else %}?{% endif %}page={{ page_obj.previous_page_number }}">
+                            {% trans 'Back' %}
+                        </a>
+                    </li>
+                {% endif %}
+                {% for page in paginator.page_range %}
+                    {% if page_obj.number == page %}
+                        <li class="active">
+                            <a href="{{ filter_query }}{% if '?' in filter_query  %}&{% else %}?{% endif %}page={{ page }}">{{ page }}</a>
+                        </li>
+                    {% else %}
+                        <li class="">
+                            <a href="{{ filter_query }}{% if '?' in filter_query  %}&{% else %}?{% endif %}page={{ page }}">{{ page }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                    <li class="next">
+                        <a href="{{ filter_query }}{% if '?' in filter_query  %}&{% else %}?{% endif %}page={{ page_obj.next_page_number }}">
+                            {% trans 'Next' %}
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+{% endif %}

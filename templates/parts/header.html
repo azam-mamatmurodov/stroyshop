@@ -5,11 +5,40 @@
     <div class="header-top">
         <div id="user-block">
             {% if request.user.is_authenticated %}
-                <p>
-                    <a href="{% url 'users:logout' %}" class="logout">
-                        {% trans 'Logout' %}
-                    </a>
-                </p>
+                <ul class="dropdown">
+                    <li>
+                        <a href="{% url 'users:profile' %}" class="profile">
+                            {{ request.user.get_full_name }}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="{% url 'users:profile_orders' %}">
+                                    {% trans 'My orders' %}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'users:profile_security' %}">
+                                    {% trans 'Security' %}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'users:profile_delivery' %}">
+                                    {% trans 'Delevery address' %}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'users:profile_payment' %}">
+                                    {% trans 'Payment methods' %}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'users:logout' %}">
+                                    {% trans 'Logout' %}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             {% else %}
                 <p>
                     <a href="{% url 'users:login' %}" class="login">
@@ -25,8 +54,8 @@
         </div>
     </div>
     <div class="logo">
-        <a href="/">
-            <img src="{% static 'images/logo.png' %}">
+        <a href="{% url 'main:home' %}">
+            <img style="width: 100px;" src="{% static 'images/new_logo.png' %}">
         </a>
     </div>
     <div class="header-bottom">

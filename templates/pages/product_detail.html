@@ -8,10 +8,7 @@
 {% block content %}
     {{ header }}
     <div id="main">
-        <section id="breadcrumbs">
-            <a href="">Main</a>
-            <a href="" class="last">Cart</a>
-        </section>
+        {{ breadcrumbs }}
         <section id="product-content">
             <div class="product-info">
                 {% if similar_products %}

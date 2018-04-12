@@ -7,20 +7,17 @@
     {{ header }}
     <div id="main">
         <div id="center">
-            <section id="breadcrumbs">
-                <a href="">Main</a>
-                <a href="" class="last">Cart</a>
-            </section>
+            {{ breadcrumbs }}
             <section id="cart-content">
                 <div id="page-title">
-                    {% trans 'Cart items' %} ({{ cart_total_count }})
+                    {% trans 'Cart items' %} ({{ cart_items.count }})
                 </div>
                 {% for cart_item in cart_items %}
                     <div class="product-row">
                         <form>
                             <div class="product-info">
                                 <div class="image">
-                                    <img src="{{ cart_item.variation.product.get_default_image.image.url }}" alt="">
+                                    <img src="{{ cart_item.variation.product.get_default_image.url }}" alt="">
                                 </div>
                                 <div class="title">
                                     <a href="{{ cart_item.variation.product.get_absolute_url }}">
@@ -60,7 +57,7 @@
                 <section id="checkout">
                     <div class="itog">
                         <h5>{% trans 'Total price' %}</h5>
-                        <h2>{{ cart_total_price|floatformat|intcomma }} {% trans 'sum' %}</h2>
+                        <h2>{{ total_amount|floatformat|intcomma }} {% trans 'sum' %}</h2>
                         <a href="{% url 'orders:checkout' %}">{% trans 'Checkout' %}</a>
                     </div>
                 </section>

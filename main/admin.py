@@ -1,6 +1,6 @@
 from django.contrib import admin
 from parler.admin import TranslatableAdmin
-from main.models import Menu, Banner, Static
+from main.models import Menu, Banner, Static, UserMenu, CustomerMenu
 
 
 class MenuAdmin(TranslatableAdmin):
@@ -20,6 +20,8 @@ class StaticAdmin(TranslatableAdmin):
 
 
 admin.site.register(Menu, MenuAdmin)
+admin.site.register(UserMenu, TranslatableAdmin)
+admin.site.register(CustomerMenu, TranslatableAdmin)
 admin.site.register(Banner, BannerAdmin)
 admin.site.register(Static, StaticAdmin)
 

@@ -308,7 +308,7 @@ msgstr "Лучшие продукты Stroyshop"
 #: templates/pages/product_detail.html:99 templates/pages/product_list.html:60
 #: templates/pages/product_list.html:123
 msgid "Add to cart"
-msgstr "Добавить в карту"
+msgstr "в Корзину"
 
 #: templates/pages/main.html:101
 #, fuzzy

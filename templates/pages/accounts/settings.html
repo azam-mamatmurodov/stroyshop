@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+    {{ header }}
+    <div id="main">
+        {{ breadcrumbs }}
+        <section id="safety">
+            <h1 id="page-title">{% trans 'Security' %}</h1>
+            {% include 'parts/messages.html' %}
+            <div class="block-content">
+                <div class="settings">
+                    <form id="user_edit_form" action="" method="post">
+                        <input type="hidden" name="user_id" value="{{ user.id }}">
+                        <div class="row">
+                            <span class="label">{% trans 'Name' %}:</span>
+                            <p class="content">{{ user.first_name }}</p>
+                            <a href="" data-action_type="edit"  class="field_edit" data-save="{% trans 'Save' %}" data-edit="{% trans 'Edit' %}">{% trans 'Edit' %}</a>
+                            <input
+                                    class="form-input"
+                                    type="text"
+                                    name="first_name"
+                                    value="{{ user.first_name }}"
+                            >
+                        </div>
+                        <div class="row">
+                            <span class="label">{% trans 'Last name' %}:</span>
+                            <p class="content">{{ user.last_name }}</p>
+                            <a href="" data-action_type="edit"  class="field_edit" data-save="{% trans 'Save' %}" data-edit="{% trans 'Edit' %}">{% trans 'Edit' %}</a>
+                            <input
+                                    class="form-input"
+                                    type="text"
+                                    name="last_name"
+                                    value="{{ user.last_name }}"
+                            >
+                        </div>
+                        <div class="row">
+                            <span class="label">{% trans 'Email' %}:</span>
+                            <p class="content">{{ user.email }}</p>
+                            <a href="" data-action_type="edit"  class="field_edit" data-save="{% trans 'Save' %}" data-edit="{% trans 'Edit' %}">{% trans 'Edit' %}</a>
+                            <input
+                                    class="form-input"
+                                    type="email"
+                                    name="email"
+                                    value="{{ user.email }}"
+                            >
+
+                        </div>
+{#                        <div class="row">#}
+{#                            <span class="label">{% trans 'Phone number' %}:</span>#}
+{#                            <p class="content">+998 {{ user.phone }}</p>#}
+{#                            <a href="" data-action_type="edit"  class="field_edit" data-save="{% trans 'Save' %}" data-edit="{% trans 'Edit' %}">{% trans 'Edit' %}</a>#}
+{#                            <div class="input-group prefix">#}
+{#                                <span class="input-group-addon">+998</span>#}
+{#                                <input#}
+{#                                        class="form-input"#}
+{#                                        tabindex="1"#}
+{#                                        pattern="[0-9]{9}"#}
+{#                                        type="text"#}
+{#                                        name="phone"#}
+{#                                        size="9"#}
+{#                                        maxlength="9"#}
+{#                                        placeholder="{% trans 'Phone number' %}"#}
+{#                                        value="{{ user.phone }}"#}
+{#                                >#}
+{#                            </div>#}
+{##}
+{#                        </div>#}
+                        <div class="row">
+                            <span class="label">{% trans 'Address' %}:</span>
+                            <p class="content">{{ user.client.address }}</p>
+                            <a href="" data-action_type="edit"  class="field_edit" data-save="{% trans 'Save' %}" data-edit="{% trans 'Edit' %}">{% trans 'Edit' %}</a>
+                            <textarea
+                                    class="form-input"
+                                    autocomplete="off"
+                                    name="address">{{ user.client.address }}</textarea>
+                        </div>
+                        <div class="row">
+                            <span class="label">{% trans 'Password' %}:</span>
+                            <p class="content">**********</p>
+                            <a href="" data-action_type="edit" class="field_edit" data-save="{% trans 'Save' %}" data-edit="{% trans 'Edit' %}">{% trans 'Edit' %}</a>
+                            <input class="form-input" type="password" name="password">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+    {{ footer }}
+{% endblock %}
+
+{% block css %}
+    <style>
+        .form-input{
+            display: none;
+        }
+    </style>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(document).ready(function () {
+            $('.field_edit').click(function(e){
+                e.preventDefault();
+                var parent = $(this).parent('.row');
+
+                if ($(this).data('action_type') === 'edit')
+                {
+                    parent.addClass('active');
+                    {# Editing process #}
+                    $(this).text($(this).data('save'));
+                    $(this).data('action_type', 'save')
+                    parent.find('.form-input').show();
+                    parent.find('.content').hide();
+                }
+                else
+                {
+                    parent.removeClass('active');
+                    console.log('Saved');
+                    var user_id = $('#user_edit_form').find('input[name="user_id"]').val();
+                    var url = '/api/v1/users/' + user_id + '/update/';
+
+                    var form_input = parent.find('.form-input');
+                    var field_name = form_input.attr('name');
+                    $.post(url, {
+                        field_name: field_name,
+                        field_data: form_input.val()
+                    }, function (resp) {
+                        if(resp.status === 'success')
+                        {
+                            parent.find('.content').text(form_input.val())
+                        }
+                    });
+                    form_input.hide();
+                    {# Default process #}
+                    $(this).text($(this).data('edit'));
+                    $(this).data('action_type', 'edit')
+
+
+                    parent.find('.content').show();
+                }
+
+            })
+        });
+    </script>
+{% endblock %}

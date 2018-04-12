@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, PermissionsMixin, BaseUserManager
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
+from django.db.models.signals import post_save
+from django.utils import timezone
 
 from mptt.models import MPTTModel
 
@@ -55,6 +57,7 @@ class User(AbstractUser):
     date_joined = models.DateTimeField(auto_now_add=True, verbose_name=_('Date joined'),)
     is_active = models.BooleanField(default=True, verbose_name=_('Active'),)
     avatar = models.OneToOneField(to=Files, null=True, blank=True, verbose_name=_('Avatar'), )
+    email = models.EmailField(blank=True, null=True)
 
     USERNAME_FIELD = 'phone'
     REQUIRED_FIELDS = ['first_name', ]
@@ -71,6 +74,7 @@ class User(AbstractUser):
 class Client(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='client', verbose_name=_('Client user'))
     address = models.TextField(blank=True, null=True, verbose_name=_('Client address'))
+    delivery_address = models.ForeignKey('DeliveryAddress', blank=True, null=True)
 
     def __str__(self):
         return "{}".format(self.user.username)
@@ -88,3 +92,23 @@ class Merchant(models.Model):
 
     def __str__(self):
         return "{}".format(self.user.first_name)
+
+
+class DeliveryAddress(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,)
+    address = models.TextField()
+    email = models.EmailField(max_length=60)
+    phone = models.CharField(max_length=60)
+    is_default = models.BooleanField(default=False)
+
+
+class PaymentCards(models.Model):
+    holder = models.ForeignKey(settings.AUTH_USER_MODEL,)
+    card_holder = models.CharField(verbose_name=_('Name on card'), max_length=60)
+    cart_number = models.CharField(verbose_name=_('Card number'), max_length=60)
+    expiration_date = models.DateField(default=(timezone.now() + timezone.timedelta(days=10)))
+    billing_address = models.TextField(blank=True, null=True, )
+
+    class Meta:
+        verbose_name = _('Payment method')
+        verbose_name_plural = _('Payment methods')

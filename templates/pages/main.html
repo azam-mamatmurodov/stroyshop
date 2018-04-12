@@ -56,7 +56,7 @@
                 {% for top_product in top_products %}
                     <div class="product-row">
                         <div class="image">
-                            <img src="{{ top_product.get_default_image.image.url }}">
+                            <img src="{{ top_product.get_default_image.url }}">
                         </div>
                         <div class="title">
                             <a href="{{ top_product.get_absolute_url }}">

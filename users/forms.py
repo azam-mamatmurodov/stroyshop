@@ -1,6 +1,9 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext as _
+
+from users.models import Client, DeliveryAddress, PaymentCards
+
 User = get_user_model()
 
 
@@ -14,13 +17,17 @@ class LoginForm(forms.Form):
 
 
 class RegisterForm(forms.ModelForm):
-    first_name = forms.CharField(label=_('Fullname'))
+    first_name = forms.CharField(label=_('First name'))
+    last_name = forms.CharField(label=_('Last name'))
+    address = forms.CharField(widget=forms.Textarea(), required=False)
     password = forms.CharField(widget=forms.PasswordInput(), label=_('Password'))
     confirm_password = forms.CharField(widget=forms.PasswordInput(), label=_('Confirm password'))
+    object_id = forms.CharField(widget=forms.HiddenInput())
+    action_type = forms.CharField(widget=forms.HiddenInput())
 
     class Meta:
         model = User
-        fields = ['first_name', 'phone', 'password', ]
+        fields = ['first_name', 'last_name', 'phone', 'password', ]
 
     def clean(self):
         cleaned_data = super().clean()
@@ -33,5 +40,24 @@ class RegisterForm(forms.ModelForm):
         instance = super().save(commit=False)
         instance.set_password(self.cleaned_data.get('password'))
         instance.save()
+        client = Client()
+        client.user = instance
+        if self.cleaned_data.get('address'):
+            client.address = self.cleaned_data.get('address')
+        client.save()
         return instance
 
+
+class DeliveryAddressForm(forms.ModelForm):
+    is_default = forms.BooleanField(required=False, )
+
+    class Meta:
+        model = DeliveryAddress
+        exclude = ['user', ]
+
+
+class PaymentMethodForm(forms.ModelForm):
+
+    class Meta:
+        model = PaymentCards
+        exclude = ['holder']

@@ -1,0 +1,7 @@
+<section id="breadcrumbs">
+    {% for path in paths %}
+        <a href="{{ path.path }}" class="{% if forloop.last %}last{% endif %}">
+            {{ path.title }}
+        </a>
+    {% endfor %}
+</section>

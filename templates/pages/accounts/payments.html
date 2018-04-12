@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+
+{% block content %}
+{{ header }}
+<div id="main">
+    {{ breadcrumbs }}
+    <section id="payment">
+        <h1 id="page-title">Payment methods</h1>
+        <div id="billing-info">
+            <div class="default btitle">
+                <span>Default</span><a href="">edit</a>
+            </div>
+            <div class="block-content">
+                <div class="address">
+                    <strong>Address</strong>
+                    <p>Fuck'in st., Naked country, Bitch region, 6 h. 10000111</p>
+                </div>
+                <div class="nickname">
+                    <strong>Nickname</strong>
+                    <p>maqsud@dst.uz</p>
+                </div>
+                <div class="payment">
+                    <strong>Payment methods</strong>
+                    <p>
+                        <img src="{% static 'images/payme.jpg' %}">
+                        <span>**** **** **** 0107</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div id="cards">
+            <div class="block-title"><span>Your plastic cards</span> <span>Srok</span></div>
+            <div class="block-content">
+                {% for payment_card in object_list %}
+                    <div class="row">
+                        <div class="row-title">
+                            <p>
+                                <img src="{% static 'images/payme.jpg' %}">
+                                <span>{{ payment_card.cart_number }}</span>
+                            </p>
+                            <p>{{ payment_card.expiration_date }}</p>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="row-content">
+                            <div class="name">
+                                <strong>{% trans 'Name on card' %}</strong>
+                                <p>{{ payment_card.card_holder }}</p>
+                            </div>
+                            <div class="address">
+                                <strong>{% trans 'Payment address' %}</strong>
+                                <p>
+                                    {{ payment_card.billing_address }}
+                                </p>
+                            </div>
+                            <div class="actions">
+                                <a href="">Edit</a>
+                                <a href="">Remove</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div id="other">
+            {% if form.errors %}
+                {{ form.errors }}
+            {% endif %}
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="{% trans 'Save' %}">
+            </form>
+        </div>
+    </section>
+</div>
+{{ footer }}
+{% endblock %}

@@ -38,6 +38,8 @@ PROJECT_APPS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'grappelli',
+    'filebrowser',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -57,7 +59,6 @@ THIRD_PARTY_APPS = [
     'django_filters',
     'rest_framework',
     'rest_framework_swagger',
-    'import_export',
     'django_extensions',
 ]
 INSTALLED_APPS = INSTALLED_APPS + THIRD_PARTY_APPS + PROJECT_APPS
@@ -84,12 +85,12 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                'main.modules.cart',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.i18n',
+                'main.context.defaults',
             ],
         },
     },
@@ -255,3 +256,6 @@ REST_FRAMEWORK = {
 #         }
 #     }
 # }
+
+
+GRAPPELLI_ADMIN_TITLE = 'Stroyshop'

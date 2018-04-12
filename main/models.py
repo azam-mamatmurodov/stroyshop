@@ -4,7 +4,34 @@ from parler.models import TranslatableModel, TranslatedFields
 from parler.managers import TranslationManager
 from ckeditor_uploader.fields import RichTextUploadingField
 
+
 class Menu(TranslatableModel):
+    translations = TranslatedFields(
+        name=models.CharField(max_length=60, verbose_name=_('Name')),
+        slug=models.SlugField(max_length=60, verbose_name=_('Slug')),
+    )
+
+    order = models.IntegerField(default=0, verbose_name=_('Order'))
+    objects = TranslationManager()
+
+    def __str__(self):
+        return "{}".format(self.name)
+
+
+class UserMenu(TranslatableModel):
+    translations = TranslatedFields(
+        name=models.CharField(max_length=60, verbose_name=_('Name')),
+        slug=models.SlugField(max_length=60, verbose_name=_('Slug')),
+    )
+
+    order = models.IntegerField(default=0, verbose_name=_('Order'))
+    objects = TranslationManager()
+
+    def __str__(self):
+        return "{}".format(self.name)
+
+
+class CustomerMenu(TranslatableModel):
     translations = TranslatedFields(
         name=models.CharField(max_length=60, verbose_name=_('Name')),
         slug=models.SlugField(max_length=60, verbose_name=_('Slug')),

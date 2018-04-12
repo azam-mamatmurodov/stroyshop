@@ -27,10 +27,19 @@
         </section>
         <section id="filter">
             <h2>{% trans 'Filter' %}</h2>
-            <div class="filter-row">
-                <h3></h3>
-                <form action="" method="get">
-                    {{ filter.form.as_p }}
+            <br>
+            <div class="filter">
+                <form id="brand_filter" action="{{ request.get_full_path }}" method="get">
+                    {% for brand in brands %}
+                        <div class="form-group">
+                            <label for="brand_{{ brand.id }}">
+                                {{ brand.name }}
+                            </label>
+                            <input {% if brand.id|stringformat:"i" in selected_brands %}
+                                checked
+                            {% endif %} name="brand" id="brand_{{ brand.id }}" type="checkbox" value="{{ brand.id }}">
+                        </div>
+                    {% endfor %}
                     <input type="submit" />
                 </form>
             </div>
@@ -41,7 +50,7 @@
                 {% for recommended_product in recommended_products %}
                     <div class="product-row">
                         <div class="image">
-                            <img src="{{ recommended_product.get_default_image.image.url }}">
+                            <img src="{{ recommended_product.get_default_image.url }}">
                         </div>
                         <div class="title">
                             <a href="{{ recommended_product.get_absolute_url }}">
@@ -66,10 +75,7 @@
         </section>
     </div>
     <div id="center">
-        <section id="breadcrumbs">
-            <a href="">Category</a>
-            <a href="" class="last">Vodoemulsii</a>
-        </section>
+        {{ breadcrumbs }}
         <section id="inner-slider">
             <div class="owl-carousel">
                 <div class="row">
@@ -91,10 +97,17 @@
         </section>
         <section id="sort">
             <div class="found">{% trans 'Found products' %}: <span>{{ object_list.count }}</span></div>
-            <div class="sorting">
-                <form>
-                    <label>{% trans 'Sorting' %}:</label>
-                    {{ filter.form.order_by }}
+            <div class="">
+                <form action="{{ request.get_full_path }}">
+                    <label for="order_by">{% trans 'Sorting' %}:</label>
+                    <select name="order_by" id="order_by">
+                        {% for key, order  in orders %}
+                            <option value="{{ key }}">
+                                {{ order }}
+                            </option>
+                        {% endfor %}
+
+                    </select>
                 </form>
             </div>
         </section>
@@ -103,7 +116,7 @@
                 {% for product in object_list %}
                     <div class="product-row">
                         <div class="image">
-                            <img src="{{ product.get_default_image.image.url }}">
+                            <img src="{{ product.get_default_image.url }}">
                         </div>
                         <div class="title">
                             <a href="{{ product.get_absolute_url }}">
@@ -135,7 +148,7 @@
                                 <div class="color">
                                     <ul>
                                         {% for variation in product.get_variations %}
-                                            <li><span class="red" style="background-color: {{ variation.color }}"></span></li>
+                                            <li><span class="red" style="background-color: {{ variation.color.color }}"></span></li>
                                         {% endfor %}
                                     </ul>
                                 </div>
@@ -144,41 +157,65 @@
                     </div>
                 {% endfor %}
             </div>
-            {% if is_paginated %}
-                <div class="block-footer">
-                    <div id="pager">
-                        <ul>
-                            {% if page_obj.has_previous %}
-                                <li class="prev">
-                                    <a href="{{ filter_query }}{% if '?' in filter_query  %}&{% else %}?{% endif %}page={{ page_obj.previous_page_number }}">
-                                        {% trans 'Back' %}
-                                    </a>
-                                </li>
-                            {% endif %}
-                            {% for page in paginator.page_range %}
-                                {% if page_obj.number == page %}
-                                    <li class="active">
-                                        <a href="{{ filter_query }}{% if '?' in filter_query  %}&{% else %}?{% endif %}page={{ page }}">{{ page }}</a>
-                                    </li>
-                                {% else %}
-                                    <li class="">
-                                        <a href="{{ filter_query }}{% if '?' in filter_query  %}&{% else %}?{% endif %}page={{ page }}">{{ page }}</a>
-                                    </li>
-                                {% endif %}
-                            {% endfor %}
-                            {% if page_obj.has_next %}
-                                <li class="next">
-                                    <a href="{{ filter_query }}{% if '?' in filter_query  %}&{% else %}?{% endif %}page={{ page_obj.next_page_number }}">
-                                        {% trans 'Next' %}
-                                    </a>
-                                </li>
-                            {% endif %}
-                        </ul>
-                    </div>
-                </div>
-            {% endif %}
+            {% include 'parts/pagination.html' %}
         </section>
     </div>
 </div>
 {{ footer }}
+{% endblock %}
+{% block js %}
+    <script>
+        $(document).ready(function () {
+
+            function addParameter(url, parameterName, parameterValue, atStart/*Add param before others*/){
+                replaceDuplicates = true;
+                if(url.indexOf('#') > 0){
+                    var cl = url.indexOf('#');
+                    urlhash = url.substring(url.indexOf('#'),url.length);
+                } else {
+                    urlhash = '';
+                    cl = url.length;
+                }
+                sourceUrl = url.substring(0,cl);
+
+                var urlParts = sourceUrl.split("?");
+                var newQueryString = "";
+
+                if (urlParts.length > 1)
+                {
+                    var parameters = urlParts[1].split("&");
+                    for (var i=0; (i < parameters.length); i++)
+                    {
+                        var parameterParts = parameters[i].split("=");
+                        if (!(replaceDuplicates && parameterParts[0] == parameterName))
+                        {
+                            if (newQueryString == "")
+                                newQueryString = "?";
+                            else
+                                newQueryString += "&";
+                            newQueryString += parameterParts[0] + "=" + (parameterParts[1]?parameterParts[1]:'');
+                        }
+                    }
+                }
+                if (newQueryString == "")
+                    newQueryString = "?";
+
+                if(atStart){
+                    newQueryString = '?'+ parameterName + "=" + parameterValue + (newQueryString.length>1?'&'+newQueryString.substring(1):'');
+                } else {
+                    if (newQueryString !== "" && newQueryString != '?')
+                        newQueryString += "&";
+                    newQueryString += parameterName + "=" + (parameterValue?parameterValue:'');
+                }
+                return urlParts[0] + newQueryString + urlhash;
+            }
+
+            $('#order_by').change(function (e) {
+                var href = location.href;
+                var name = $(this).attr('name');
+                var value = $(this).val();
+                location = addParameter(href, 'order_by', value, true)
+            })
+        });
+    </script>
 {% endblock %}

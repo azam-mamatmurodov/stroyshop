@@ -12,6 +12,8 @@ from parler.managers import TranslationManager
 from ckeditor_uploader.fields import RichTextUploadingField
 from colorfield.fields import ColorField
 
+import os
+
 
 class Category(MPTTModel, TranslatableModel):
     parent = TreeForeignKey('self', null=True, blank=True,)
@@ -64,6 +66,13 @@ class ProductImage(models.Model):
     image = models.ImageField(upload_to='products/', verbose_name=_('Image'), default='default.png')
     product = models.ForeignKey('Product', verbose_name=_('Product'), related_name='images')
 
+    def rename(self, new_name):
+        old_path = self.image.path
+        self.image.name = new_name
+
+        os.rename(old_path, self.image.path)
+        self.save()
+
 
 class Color(TranslatableModel):
     translations = TranslatedFields(
@@ -98,7 +107,10 @@ class Variation(models.Model):
     color = models.ForeignKey(Color, null=True, blank=True,)
 
     def __str__(self):
-        return "{}".format(self.name)
+        if self.color:
+            return "{} {}".format(self.name, self.color)
+        else:
+            return "{}".format(self.name)
 
     class Meta:
         verbose_name = _('Variation')
@@ -112,12 +124,22 @@ class Product(models.Model):
     description = RichTextUploadingField(blank=True, null=True, verbose_name=_('Description'), )
     characters = RichTextUploadingField(blank=True, null=True, verbose_name=_('Characters'), )
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('Product Owner'), related_name='products', )
-    volume = models.ForeignKey(VolumeType, verbose_name=_('Is recommended'))
+    volume = models.ForeignKey(VolumeType, verbose_name=_('Volume type'))
     updated = models.DateField(auto_now=True, auto_created=True, )
     available_in_stock = models.BooleanField(default=True, verbose_name=_('Available in stock'))
     is_recommended = models.BooleanField(default=False, verbose_name=_('Is recommended'))
     price = models.DecimalField(decimal_places=2, max_digits=10, verbose_name=_('Price'), null=True, blank=True, )
     is_top = models.BooleanField(default=False)
+
+    image_0 = models.ImageField(verbose_name=_('First image'), upload_to='products/', null=True, )
+    image_1 = models.ImageField(verbose_name=_('Second image'), upload_to='products/', null=True, blank=True, )
+    image_2 = models.ImageField(verbose_name=_('Third image'), upload_to='products/', null=True, blank=True, )
+
+    default_image = models.CharField(choices=(
+        ('image_0', 'First image', ),
+        ('image_1', 'Second image', ),
+        ('image_2', 'Third image', ),
+    ), max_length=60, default='image_0')
 
     def __str__(self):
         return "{}".format(self.name)
@@ -126,10 +148,16 @@ class Product(models.Model):
         return self.variations.all().first().color
 
     def get_default_image(self):
-        return self.images.all().first()
+        return getattr(self, self.default_image)
 
     def get_all_images(self):
-        return self.images.all()
+        images = list()
+        images.append(self.image_0)
+        if self.image_1:
+            images.append(self.image_1)
+        if self.image_2:
+            images.append(self.image_2)
+        return images
 
     def get_price(self):
         if not self.price:
@@ -154,14 +182,14 @@ class Product(models.Model):
         verbose_name_plural = _('Products')
 
 
-def my_pre_save_handler(sender, instance, *args, **kwargs):
-    if not instance.product.price:
-        instance.product.price = instance.price
-        instance.product.save()
-        print(instance.price)
+# def my_pre_save_handler(sender, instance, *args, **kwargs):
+#     if not instance.variations.price:
+#         instance.variations.price = instance.price
+#         instance.variations.save()
+#         print(instance.price)
 
 
-pre_save.connect(my_pre_save_handler, sender=Variation)
+# pre_save.connect(my_pre_save_handler, sender=Variation)
 
 
 class Review(models.Model):

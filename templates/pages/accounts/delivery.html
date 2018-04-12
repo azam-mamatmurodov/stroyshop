@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static i18n humanize %}
+
+{% block content %}
+    {{ header }}
+    <div id="main">
+        {{ breadcrumbs }}
+        <section id="address">
+            <h1 id="page-title">{% trans 'Delivery address' %}</h1>
+            {% include 'parts/messages.html' %}
+            <div class="block-content">
+                <div class="row add">
+                    <a href="" id="add_address">{% trans 'Add an address' %}</a>
+                </div>
+                {% for deliveryaddress in deliveryaddress_list %}
+                    <div class="row delivery_item">
+                        <div class="default" data-is_default="{% if deliveryaddress.is_default %}1{% else %}0{% endif %}">
+                            {% if deliveryaddress.is_default %}
+                                <span>{% trans 'Default' %}:</span><span>stroyshop</span>
+                            {% endif %}
+                        </div>
+                        {% if deliveryaddress.email %}
+                            <div class="email">{{ deliveryaddress.email }}</div>
+                        {% endif %}
+                        <div class="address">{{ deliveryaddress.address }}</div>
+                        <div class="phone" data-phone="{{ deliveryaddress.phone }}">
+                            Tel. : +998 {{ deliveryaddress.phone }}
+                        </div>
+                        <div class="actions">
+                            <a href="" class="delivery_item_edit" data-object_id="{{ deliveryaddress.pk }}">{% trans 'Edit' %}</a>
+                            <a href="?remove_id={{ deliveryaddress.pk }}">{% trans 'Remove' %}</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+
+    <div id="add_popup" class="{% if form.errors %}add-address-popup{% endif %}" style="display: {% if form.errors %}block{% else %}none{% endif %}">
+        <form id="delivery_address_add" method="post">
+            <span class="close">x</span>
+            {% csrf_token %}
+            <h1>{% trans 'Add an address' %}</h1>
+            <div class="form-group">
+                <textarea placeholder="Address" name="{{ form.address.name }}">{% if form.address.value %}{{ form.address.value }}{% endif %}</textarea>
+                {% if form.address.errors %}
+                    {{ form.address.errors }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <input type="email" name="{{ form.email.name }}" placeholder="E-mail" value="{% if form.email.value %}{{ form.email.value }}{% endif %}">
+                {% if form.email.errors %}
+                    {{ form.email.errors }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <div class="input-group prefix">
+                    <span class="input-group-addon">+998</span>
+                    <input
+                            id="delivery_phone_number"
+                            pattern="[0-9]{9}"
+                            type="text"
+                            name="{{ form.phone.name }}"
+                            size="9"
+                            maxlength="9"
+                            placeholder="Phone number"
+                            value="{% if form.phone.value %}{{ form.phone.value }}{% endif %}"
+                    >
+                </div>
+                {% if form.phone.errors %}
+                    {{ form.phone.errors }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <input type="checkbox" name="{{ form.is_default.name }}"> <label>{% trans 'Is default' %}</label>
+            </div>
+            <input type="hidden" name="action_type" value="create">
+            <input type="hidden" name="object_id" value="">
+            <input type="submit" name="Submit" value="Submit">
+        </form>
+    </div>
+    {{ footer }}
+{% endblock %}
+{% block js %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#add_address').click(function (e) {
+                e.preventDefault();
+                var add_form_block = $('#add_popup');
+                    add_form_block.addClass('add-address-popup').fadeIn();
+                    add_form_block.find('input[name="object_id"]').val('');
+                    add_form_block.find('input[name="action_type"]').val('create');
+            });
+            $('#delivery_address_add span.close').click(function (e) {
+                e.preventDefault();
+                $('#add_popup').removeClass('add-address-popup').fadeOut();
+            });
+
+            $('.delivery_item_edit').click(function (e) {
+                e.preventDefault();
+                var is_default = $(this).parent('.actions').parent().find('.default').data('is_default');
+                var email = $(this).parent('.actions').parent().find('.email').text().trim();
+                var address = $(this).parent('.actions').parent().find('.address').text().trim();
+                var phone = $(this).parent('.actions').parent().find('.phone').data('phone');
+                var object_id = $(this).data('object_id');
+
+                $('#add_popup').addClass('add-address-popup').fadeIn();
+
+                var form = $('#delivery_address_add');
+
+                console.log(address);
+
+                form.find('textarea').val(address)
+                form.find('input[name="email"]').val(email);
+                form.find('input[name="phone"]').val(phone);
+                form.find('input[name="object_id"]').val(object_id);
+                form.find('input[name="action_type"]').val('update');
+                if (is_default)
+                {
+                    form.find('input[name="is_default"]').click();
+                }
+            })
+        });
+    </script>
+{% endblock %}
+
+{% block css %}
+    <style>
+    #delivery_address_add span.close {
+        float: right;
+        cursor: pointer;
+    }
+    </style>
+{% endblock %}
