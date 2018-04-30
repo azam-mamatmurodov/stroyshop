@@ -14,6 +14,13 @@
         });
         $('.row .fas').on('click', function() {
             $(this).parent().parent().toggleClass('active');
-        })
+        });
+        $(window).on('load', function(){
+            if ($('#cartview .item').length > 9){
+                $('#cartview').addClass('scroll');
+            }else{
+                $('#cartview').removeClass('scroll');
+            }
+        });
     }); //doc ready end--------------------------------
 }(jQuery));

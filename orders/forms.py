@@ -7,3 +7,4 @@ class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
         exclude = ['customer', 'state', 'created', 'total_price', ]
+

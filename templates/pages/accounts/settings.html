@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load i18n %}
-
+{% block title %}
+    {% trans 'Security' %}
+{% endblock %}
 {% block content %}
     {{ header }}
     <div id="main">
@@ -46,26 +48,6 @@
                             >
 
                         </div>
-{#                        <div class="row">#}
-{#                            <span class="label">{% trans 'Phone number' %}:</span>#}
-{#                            <p class="content">+998 {{ user.phone }}</p>#}
-{#                            <a href="" data-action_type="edit"  class="field_edit" data-save="{% trans 'Save' %}" data-edit="{% trans 'Edit' %}">{% trans 'Edit' %}</a>#}
-{#                            <div class="input-group prefix">#}
-{#                                <span class="input-group-addon">+998</span>#}
-{#                                <input#}
-{#                                        class="form-input"#}
-{#                                        tabindex="1"#}
-{#                                        pattern="[0-9]{9}"#}
-{#                                        type="text"#}
-{#                                        name="phone"#}
-{#                                        size="9"#}
-{#                                        maxlength="9"#}
-{#                                        placeholder="{% trans 'Phone number' %}"#}
-{#                                        value="{{ user.phone }}"#}
-{#                                >#}
-{#                            </div>#}
-{##}
-{#                        </div>#}
                         <div class="row">
                             <span class="label">{% trans 'Address' %}:</span>
                             <p class="content">{{ user.client.address }}</p>
@@ -78,8 +60,26 @@
                         <div class="row">
                             <span class="label">{% trans 'Password' %}:</span>
                             <p class="content">**********</p>
-                            <a href="" data-action_type="edit" class="field_edit" data-save="{% trans 'Save' %}" data-edit="{% trans 'Edit' %}">{% trans 'Edit' %}</a>
-                            <input class="form-input" type="password" name="password">
+                            <a
+                                    href=""
+                                    data-action_type="edit"
+                                    class="field_edit"
+                                    data-save="{% trans 'Save' %}"
+                                    data-edit="{% trans 'Edit' %}">
+                                {% trans 'Edit' %}
+                            </a>
+                            <label for="">
+                               {% trans 'Old password' %}:
+                            </label>
+                            <input class="form-input" type="password" name="password_old">
+                            <label for="">
+                                {% trans 'New password' %}:
+                            </label>
+                            <input class="form-input" type="password" name="new_password" id="password">
+                            <label for="">
+                                {% trans 'Confirm password' %}:
+                            </label>
+                            <input class="form-input" type="password" name="confirm_password" id="password_again">
                         </div>
                     </form>
                 </div>
@@ -102,45 +102,93 @@
         $(document).ready(function () {
             $('.field_edit').click(function(e){
                 e.preventDefault();
+                var action_this = $(this);
+
+
                 var parent = $(this).parent('.row');
 
-                if ($(this).data('action_type') === 'edit')
+                if (action_this.data('action_type') === 'edit')
                 {
                     parent.addClass('active');
-                    {# Editing process #}
-                    $(this).text($(this).data('save'));
-                    $(this).data('action_type', 'save')
+
+                    action_this.text(action_this.data('save'));
+                    action_this.data('action_type', 'save');
                     parent.find('.form-input').show();
                     parent.find('.content').hide();
                 }
                 else
                 {
-                    parent.removeClass('active');
-                    console.log('Saved');
                     var user_id = $('#user_edit_form').find('input[name="user_id"]').val();
                     var url = '/api/v1/users/' + user_id + '/update/';
 
                     var form_input = parent.find('.form-input');
                     var field_name = form_input.attr('name');
-                    $.post(url, {
-                        field_name: field_name,
-                        field_data: form_input.val()
-                    }, function (resp) {
+                    var post_data = [];
+                    console.log(field_name);
+
+                    if (field_name === 'password_old')
+                    {
+                        $.each(form_input, function (index, item) {
+                            console.log($(item).attr('name'))
+                            post_data.push({
+                                field_name: $(item).attr('name'),
+                                field_data: $(item).val()
+                            })
+                        })
+                    }
+                    else
+                    {
+                        post_data = {
+                            field_name: field_name,
+                            field_data: form_input.val()
+                        }
+                    }
+
+                    $.post(url, {'data': JSON.stringify(post_data)}, function (resp) {
                         if(resp.status === 'success')
                         {
-                            parent.find('.content').text(form_input.val())
+                            $.notify(resp.message, 'success');
+
+                            var content;
+                            if (field_name === 'password_old')
+                            {
+                                content = '**********'
+                            }
+                            else
+                            {
+                                content = form_input.val()
+                            }
+                            parent.find('.content').text(content);
+                            parent.removeClass('active');
+                            form_input.hide();
+
+                            action_this.text(action_this.data('edit'));
+                            action_this.data('action_type', 'edit')
+
+                            parent.find('.content').show();
+                        }
+                        else
+                        {
+                            $.notify(resp.message, 'error');
                         }
                     });
-                    form_input.hide();
-                    {# Default process #}
-                    $(this).text($(this).data('edit'));
-                    $(this).data('action_type', 'edit')
-
-
-                    parent.find('.content').show();
                 }
 
             })
         });
+        $(document).keyup(function(e) {
+            if (e.keyCode === 27) {
+                $('.form-input').css("display", 'none');
+                $('.row').removeClass("active");
+                $('.content').show();
+
+                var field_edit = $('.field_edit');
+                field_edit.text(field_edit.data('edit'));
+                field_edit.data('action_type', 'edit');
+
+            }
+        });
     </script>
+
+
 {% endblock %}

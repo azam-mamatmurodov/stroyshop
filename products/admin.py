@@ -15,18 +15,6 @@ from users.models import Merchant
 from products.forms import ImportForm
 
 
-from filebrowser.sites import site
-
-
-def delete_files_action(request, fileobjects):
-    pass
-
-delete_files_action.short_description = "Delete all"
-
-site.directory = "products/"
-site.add_action(delete_files_action)
-
-
 class CategoryAdmin(TranslatableAdmin, DraggableMPTTAdmin):
 
     def get_prepopulated_fields(self, request, obj=None):

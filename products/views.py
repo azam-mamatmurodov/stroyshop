@@ -4,7 +4,7 @@ from django.utils.translation import ugettext as _
 from django.shortcuts import Http404
 from django.db.models import Q
 
-from products.models import Product, Category, Brands
+from products.models import Product, Category, Brands, Variation
 from products.forms import LeaveReviewForm
 
 ORDER_BY = (
@@ -77,6 +77,9 @@ class ProductDetail(DetailView, ProcessFormView):
         context = super().get_context_data(**kwargs)
         context['review_form'] = LeaveReviewForm()
         context['similar_products'] = self.model.objects.filter(category=self.object.category).exclude(pk=self.object.pk)
+
+        context['sizes'] = Variation.objects.filter(product=self.object).distinct('name')
+
         return context
 
     def post(self, request, *args, **kwargs):

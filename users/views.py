@@ -103,7 +103,8 @@ class ProfileDeliveryView(generic.ListView, FormMixin):
                 })
                 self.model.objects.filter(user=self.request.user, is_default=True).update(is_default=False)
             pk = form.data.get('object_id')
-            if not pk: pk = None
+            if not pk:
+                pk = None
             obj, created = self.model.objects.update_or_create(pk=pk, defaults=_kwargs)
             if created:
                 message = _('Address successfully added')
@@ -130,15 +131,41 @@ class ProfilePaymentView(generic.CreateView):
     http_method_names = ['head', 'get', 'post', 'options', ]
 
     def get_context_data(self, **kwargs):
-        object_list = self.model.objects.filter(holder=self.request.user)
+        remove_id = self.request.GET.get('remove_id')
+        if remove_id:
+            objs = self.model.objects.filter(pk=remove_id)
+            if objs.exists():
+                objs.delete()
+        object_list = self.model.objects.filter(holder=self.request.user).exclude(is_default=True)
         context = super().get_context_data(**kwargs)
         context['object_list'] = object_list
+        context['default_cards'] = self.model.objects.filter(holder=self.request.user, is_default=True)
         return context
 
     def form_valid(self, form):
         instance = form.save(commit=False)
         instance.holder = self.request.user
+        is_default = form.data.get('is_default', 0)
+        if is_default == 'on':
+
+            self.model.objects.filter(holder=self.request.user, is_default=True).update(is_default=False)
+            instance.is_default = 1
+
         instance.save()
         messages.add_message(request=self.request, level=messages.INFO,
                              message=_('Card data successfully added'))
+        return super().form_valid(form)
+
+
+class ProfilePaymentEdit(generic.UpdateView):
+    template_name = 'pages/accounts/payments_edit.html'
+    model = PaymentCards
+    fields = ['card_holder', 'cart_number', 'expiration_date', 'billing_address', 'is_default', ]
+
+    def get_success_url(self):
+        return reverse('users:profile_payment')
+
+    def form_valid(self, form):
+        if form.data.get('is_default') == 'on':
+            self.model.objects.filter(holder=self.request.user, is_default=True).exclude(pk=self.kwargs.get('pk')).update(is_default=False)
         return super().form_valid(form)

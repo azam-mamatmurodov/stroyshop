@@ -1,8 +1,8 @@
-{% load static mptt_tags i18n %}
+{% load static mptt_tags i18n products_extras %}
 {% full_tree_for_model products.Category as tree %}
 <ul>
     <li class="expanded">
-        <a href="{% url 'products:product_list' slug='all' %}">{% trans 'Product categories' %}</a>
+        <a href="{% url 'products:product_list' slug='all' %}">{% trans 'Product catalog' %}</a>
         <ul>
             {% recursetree tree %}
                 <li class="{% if not node.is_leaf_node %}expanded{% endif %}">

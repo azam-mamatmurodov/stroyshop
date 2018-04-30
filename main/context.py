@@ -2,7 +2,7 @@ from django.template.loader import render_to_string
 from django.utils.translation import ugettext as _
 from django.shortcuts import reverse
 
-from main.models import Menu, Banner, Static
+from main.models import Menu, Banner, Static, StaticFooterPage
 from products.models import Category, Product
 from orders.models import Cart
 
@@ -44,6 +44,8 @@ def get_footer(request):
     context['csrf_token'] = request.COOKIES.get('csrftoken')
     context['login_form'] = LoginForm(request.POST) if request.method == 'POST' else LoginForm()
     context['register_form'] = RegisterForm(request.POST) if request.method == 'POST' else RegisterForm()
+    context['footer_clients'] = StaticFooterPage.objects.filter(menu_type=0)
+    context['footer_partners'] = StaticFooterPage.objects.filter(menu_type=1)
     return render_to_string('parts/footer.html', context=context)
 
 
@@ -52,7 +54,7 @@ def get_breadcrumbs(request, *args, **kwargs):
     kwargs = request.resolver_match.kwargs
     paths = list()
     paths.append({
-        'title': _('Home'),
+        'title': _('Shop'),
         'path': reverse('main:home')
     })
     print(view_name)
@@ -69,6 +71,19 @@ def get_breadcrumbs(request, *args, **kwargs):
         paths.append({
             'title': _('Payment methods'),
             'path': reverse(view_name)
+        })
+    elif view_name == 'users:profile_payment_edit':
+        paths.append({
+            'title': _('Account Settings'),
+            'path': reverse('users:profile')
+        })
+        paths.append({
+            'title': _('Payment methods'),
+            'path': reverse('users:profile_payment')
+        })
+        paths.append({
+            'title': _('Payment'),
+            'path': reverse(view_name, args=[kwargs.get('pk')])
         })
     elif view_name == 'users:profile_orders':
         paths.append({
@@ -122,10 +137,26 @@ def get_breadcrumbs(request, *args, **kwargs):
             'title': static_content.name,
             'path': reverse(view_name, args=[arg]),
         })
+    elif view_name == 'main:static_footer':
+        arg = kwargs.get('slug')
+        static_content = StaticFooterPage.objects.get(translations__slug=arg)
+        paths.append({
+            'title': static_content.name,
+            'path': reverse(view_name, args=[arg]),
+        })
     elif view_name == 'orders:cart':
         paths.append({
             'title': _('Cart'),
             'path': reverse(view_name),
+        })
+    elif view_name == 'orders:order_detail':
+        paths.append({
+            'title': _('Cart'),
+            'path': reverse('orders:cart'),
+        })
+        paths.append({
+            'title': _('Order info'),
+            'path': reverse(view_name, args=[kwargs.get('phone'), kwargs.get('order_unique_id')]),
         })
     elif view_name == 'products:product_detail':
         slug = kwargs.get('slug')

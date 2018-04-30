@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 from django.conf import global_settings
 from django.utils.translation import gettext_lazy as _
+import raven
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -34,6 +35,7 @@ PROJECT_APPS = [
     'main',
     'products',
     'orders',
+    'payment',
 ]
 # Application definition
 
@@ -60,6 +62,7 @@ THIRD_PARTY_APPS = [
     'rest_framework',
     'rest_framework_swagger',
     'django_extensions',
+    'raven.contrib.django.raven_compat',
 ]
 INSTALLED_APPS = INSTALLED_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 
@@ -259,3 +262,11 @@ REST_FRAMEWORK = {
 
 
 GRAPPELLI_ADMIN_TITLE = 'Stroyshop'
+
+
+RAVEN_CONFIG = {
+    'dsn': 'https://7d9bb4cd7a954c2f841ba88fd0eea88b:3c012f644643414e8f9e48d7148b5675@sentry.io/1198570',
+    # If you are using git, you can also automatically configure the
+    # release based on the git info.
+    'release': raven.fetch_git_sha(os.path.abspath(os.pardir)),
+}

@@ -1,0 +1,9 @@
+<ul class="category_brands">
+    {% for brand in brands %}
+        <li>
+            <a href="{% url 'products:product_list' slug='all' %}?brand={{ brand.id }}">
+                <img style="width: 100%; height: 60px;" src="{{ brand.logo.url }}">
+            </a>
+        </li>
+    {% endfor %}
+</ul>

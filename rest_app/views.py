@@ -1,16 +1,17 @@
-from rest_framework import views, generics, status, response
+from rest_framework.renderers import JSONRenderer
+from rest_framework import views, generics, status, response, viewsets
 from django.http.response import JsonResponse
 from django.utils.translation import ugettext as _
-from django.shortcuts import Http404
 from django.contrib.auth import authenticate, login
 
-from rest_app.serializers import CartSerializer
+from rest_app.serializers import CartSerializer, ProductSerializer, VariationSerializer
 from orders.models import Cart
-from products.models import Variation
+from products.models import Variation, Product
 from users.models import User, Client
 
 from decimal import Decimal
 
+from .paycom.Application import Application
 
 class CartViews(generics.ListAPIView, generics.CreateAPIView):
     serializer_class = CartSerializer
@@ -71,16 +72,28 @@ class CartViews(generics.ListAPIView, generics.CreateAPIView):
         return JsonResponse(data=message)
 
 
+class CartDetailViews(generics.RetrieveAPIView):
+    serializer_class = CartSerializer
+    queryset = None
+    model = Cart
+    lookup_field = "cart_item_id"
+
+    def get_object(self):
+        session_key = self.request.COOKIES.get('client_id')
+        cart_item = Cart.objects.filter(session_key=session_key, id=self.kwargs.get('cart_item_id')).first()
+        return cart_item
+
+
 class CartDeleteViews(generics.DestroyAPIView):
     serializer_class = CartSerializer
     queryset = None
     model = Cart
-    lookup_field = "variation_id"
+    lookup_field = "cart_item_id"
 
     def get_object(self):
         session_key = self.request.COOKIES.get('client_id')
-        variation = Variation.objects.get(id=self.kwargs.get('variation_id'))
-        cart_item = Cart.objects.filter(session_key=session_key, variation=variation).first()
+        cart_item_id = self.kwargs.get('cart_item_id')
+        cart_item = Cart.objects.get(id=cart_item_id)
         return cart_item
 
     def destroy(self, request, *args, **kwargs):
@@ -97,12 +110,11 @@ class CartUpdateViews(generics.UpdateAPIView):
     serializer_class = CartSerializer
     queryset = None
     model = Cart
-    lookup_field = "variation_id"
+    lookup_field = "cart_item_id"
 
     def get_object(self):
         session_key = self.request.COOKIES.get('client_id')
-        variation = Variation.objects.get(id=self.kwargs.get('variation_id'))
-        cart_item = Cart.objects.get(session_key=session_key, variation=variation)
+        cart_item = Cart.objects.get(session_key=session_key, id=self.kwargs.get('cart_item_id'))
         return cart_item
 
     def update(self, request, *args, **kwargs):
@@ -114,7 +126,8 @@ class CartUpdateViews(generics.UpdateAPIView):
         self.perform_update(instance)
         msg = {
             'message': _('Successful saved'),
-            'status': 'success'
+            'status': 'success',
+            'data': CartSerializer(instance=instance).data
         }
         return views.Response(data=msg, status=status.HTTP_202_ACCEPTED)
 
@@ -195,22 +208,63 @@ class UserUpdateView(views.APIView):
         except User.DoesNotExist:
             message = {'message': 'Sorry, something went wrong', 'status': 'fail'}
             return JsonResponse(data=message)
+        import json
+        available_fields = ['phone', 'first_name', 'last_name', 'password', 'password_old', 'address', 'email', ]
+        data_list = request.POST.get('data')
+        data = json.loads(data_list)
+        if isinstance(data, list):
+            field_name = data[0].get('field_name')
+            field_data = data[0].get('field_data')
+        else:
+            field_name = data.get('field_name')
+            field_data = data.get('field_data')
 
-        available_fields = ['phone', 'first_name', 'last_name', 'password', 'address', 'email', ]
-        data = request.POST
-        field_name = data.get('field_name')
-        field_data = data.get('field_data')
         if field_name in available_fields:
-            if field_name == 'password':
-                user.set_password(field_data)
+            if field_name == 'password_old':
+                new_password = data[1].get('field_data')
+                confirm_password = data[2].get('field_data')
+
+                if user.check_password(field_data):
+                    if new_password == confirm_password:
+                        user.set_password(new_password)
+                    else:
+                        message = {'message': 'Sorry, wrong confirm password', 'status': 'fail'}
+                        return JsonResponse(data=message)
+                else:
+                    message = {'message': 'Sorry, incorrect old password', 'status': 'fail'}
+                    return JsonResponse(data=message)
             elif field_name == 'address':
                 user.client.address = field_data
             else:
                 setattr(user, field_name, field_data)
-
             message = {'message': 'Successfully updated', 'status': 'success'}
             user.save()
         else:
             message = {'message': 'Sorry, something went wrong', 'status': 'fail'}
 
         return JsonResponse(data=message)
+
+
+class ProductDetailView(generics.RetrieveAPIView):
+    serializer_class = ProductSerializer
+    queryset = Product.objects.all()
+
+
+class VariationDetailView(generics.ListAPIView):
+    serializer_class = VariationSerializer
+
+    def get_queryset(self):
+        variations = Variation.objects.filter(product_id=self.kwargs.get('pk'))
+        name = self.request.GET.get('name')
+        if name:
+            variations = variations.filter(name=name)
+        return variations
+
+
+class PaycomView(views.APIView):
+    def post(self, request):
+        app = Application(request=request)
+        response = app.run()
+        import json
+        new_data = json.loads(response)
+        return JsonResponse(data=new_data, safe=False)

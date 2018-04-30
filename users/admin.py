@@ -2,13 +2,14 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
+from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin, Group
 from django.utils.translation import ugettext_lazy as _
 
 from users.models import Client, Merchant, Files, DeliveryAddress, PaymentCards
 
 from .models import User
 
+admin.site.unregister(Group)
 
 @admin.register(User)
 class UserAdmin(DjangoUserAdmin, admin.ModelAdmin):

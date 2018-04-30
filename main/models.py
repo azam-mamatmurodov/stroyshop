@@ -69,3 +69,23 @@ class Static(TranslatableModel):
 
     def __str__(self):
         return "{}".format(self.name)
+
+
+class StaticFooterPage(TranslatableModel):
+    TARGET_CHOICES = (
+        (0, 'For clients'),
+        (1, 'For partners'),
+    )
+
+    translations = TranslatedFields(
+        name=models.CharField(max_length=60, verbose_name=_('Name')),
+        slug=models.SlugField(max_length=60, verbose_name=_('Slug')),
+        body=RichTextUploadingField()
+    )
+    menu_type = models.IntegerField(choices=TARGET_CHOICES, blank=True, null=True)
+    # target_type = models.CharField(choices=TARGET_CHOICES, max_length=12, default='clients')
+    image = models.ImageField(upload_to='banners/%Y/%m/%d', verbose_name=_('Image')),
+    objects = TranslationManager()
+
+    def __str__(self):
+        return "{}".format(self.name)

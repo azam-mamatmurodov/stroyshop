@@ -2,7 +2,7 @@
 
 {% load i18n static humanize %}
 
-{% block title %}{{ request.META.HTTP_HOST }}|{% trans 'Home' %}{% endblock %}
+{% block title %}{% trans 'Home' %}{% endblock %}
 
 {% block content %}
     {{ header }}
@@ -53,54 +53,49 @@
         </div>
         <div class="block-content">
             <div class="owl-carousel">
-                {% for top_product in top_products %}
+                {% for product in top_products %}
                     <div class="product-row">
                         <div class="image">
-                            <img src="{{ top_product.get_default_image.url }}">
+                            <img src="{{ product.get_default_image.url }}">
                         </div>
                         <div class="title">
-                            <a href="{{ top_product.get_absolute_url }}">
-                                {{ top_product.name }} -
-                                <span class="product_variation">
-                                    {{ top_product.get_default_variation }} {{ top_product.volume }}
-                                </span>
+                            <a href="{{ product.get_absolute_url }}">
+                                {{ product.name }} -
+                                <span class="product_variation">{{ product.get_default_variation }} {{ product.volume }}</span>
                             </a>
                         </div>
                         <div class="price">
                             <strong>
-                                <span class="price_display">{{ top_product.get_price|floatformat|intcomma }}</span>
-                                {% trans 'sum' %}
+                                <span class="price_display">{{ product.get_price|floatformat|intcomma }}</span>
+                                <span class="price_label">{% trans 'sum' %}</span>
                             </strong>
                         </div>
-                        <div class="addtocart">
+                        <div style="display: none;" class="addtocart">
                             <form class="product_cart_add_form" action="">
-                                <input type="hidden" name="quantity" value="1"
-                                       data-variation="{{ top_product.get_default_variation.pk }}">
+                                <input type="hidden" name="quantity" value="1" data-variation="{{ product.get_default_variation.pk }}">
                                 <button type="submit">{% trans 'Add to cart' %}</button>
                             </form>
                         </div>
                         <div class="variation product_list_variation_list">
                             <div class="weight">
                                 <ul>
-                                    {% for variation in top_product.get_variations %}
-                                        <li class="product_list_variation" data-variation="{{ variation.pk }}"
-                                            data-price="{{ variation.price|floatformat|intcomma }}">
-                                            <span>{{ variation.name }} {{ top_product.volume }}</span>
+                                    {% for variation in product.get_variations %}
+                                        <li
+                                            class="product_list_variation"
+                                            data-variation="{{ variation.pk }}"
+                                            data-product_id="{{ variation.product_id }}"
+                                            data-variation_name="{{ variation.name }}"
+                                            data-quantity="{{ variation.quantity }}"
+                                            data-price="{{ variation.price }}"
+                                            data-color_has="{% if variation.color %}1{% else %}0{% endif %}"
+                                        >
+                                            <span>{{ variation.name }} {{ product.volume }}</span>
                                         </li>
                                     {% endfor %}
                                 </ul>
                             </div>
-                            {% if top_product.get_variations.0.color %}
-                                <div class="color">
-                                    <ul>
-                                        {% for variation in top_product.get_variations %}
-                                            <li>
-                                                <span class="red" style="background-color: {{ variation.color }}">
-                                                </span>
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
+                            {% if product.get_variations.0.color %}
+                                <div class="color"><ul class="colors_set"></ul></div>
                             {% endif %}
                         </div>
                     </div>
@@ -127,7 +122,7 @@
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </div>
                 <div class="link">
-                    <a href="">More products</a>
+                    <a href="">{% trans 'More products' %}</a>
                 </div>
             </div>
             <div class="row">
@@ -144,7 +139,7 @@
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </div>
                 <div class="link">
-                    <a href="">More products</a>
+                    <a href="">{% trans 'More products' %}</a>
                 </div>
             </div>
             <div class="row">
@@ -161,7 +156,7 @@
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </div>
                 <div class="link">
-                    <a href="">More products</a>
+                    <a href="">{% trans 'More products' %}</a>
                 </div>
             </div>
         </div>

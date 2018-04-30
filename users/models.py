@@ -4,9 +4,9 @@ from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 from django.db.models.signals import post_save
 from django.utils import timezone
+from django.core.urlresolvers import reverse
 
 from mptt.models import MPTTModel
-
 
 class UserManager(BaseUserManager):
     """Define a model manager for User model with no username field."""
@@ -103,11 +103,16 @@ class DeliveryAddress(models.Model):
 
 
 class PaymentCards(models.Model):
+    import datetime
     holder = models.ForeignKey(settings.AUTH_USER_MODEL,)
     card_holder = models.CharField(verbose_name=_('Name on card'), max_length=60)
     cart_number = models.CharField(verbose_name=_('Card number'), max_length=60)
-    expiration_date = models.DateField(default=(timezone.now() + timezone.timedelta(days=10)))
+    expiration_date = models.DateField(default=datetime.date(2030, 2, 3))
     billing_address = models.TextField(blank=True, null=True, )
+    is_default = models.BooleanField(default=False)
+    
+    def get_absolute_url(self):
+        return reverse('users:profile_payment')
 
     class Meta:
         verbose_name = _('Payment method')

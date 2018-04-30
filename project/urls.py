@@ -20,9 +20,10 @@ urlpatterns = [
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 
+    url(r'admin/', admin.site.urls),
+
     url(r'^admin/filebrowser/', include(filebrowser_site.urls)),
     url(r'grappelli/', include('grappelli.urls')),
-    url(r'admin/', admin.site.urls),
 ]
 
 urlpatterns += solid_i18n_patterns(

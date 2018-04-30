@@ -6,7 +6,8 @@ from users.views import (
     ProfileSettingsView,
     ProfileOrdersView,
     ProfileDeliveryView,
-    ProfilePaymentView
+    ProfilePaymentView,
+    ProfilePaymentEdit,
 )
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth.decorators import login_required
@@ -20,4 +21,5 @@ urlpatterns = [
     url(r'accounts/orders/$', login_required(ProfileOrdersView.as_view()), name='profile_orders', ),
     url(r'accounts/delivery/$', login_required(ProfileDeliveryView.as_view()), name='profile_delivery', ),
     url(r'accounts/payment/$', login_required(ProfilePaymentView.as_view()), name='profile_payment', ),
+    url(r'accounts/payment/(?P<pk>\d+)/edit/$', login_required(ProfilePaymentEdit.as_view()), name='profile_payment_edit', ),
 ]

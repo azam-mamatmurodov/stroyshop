@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load i18n humanize %}
-
+{% block title %}
+    {% trans 'My delivery addresses' %}
+{% endblock %}
 {% block content %}
     {{ header }}
     <div id="main">
@@ -13,7 +15,7 @@
             <div class="col-md-8">
                 {% if not user.is_authenticated %}
                     <a href="{% url 'users:login' %}?next={{ request.path }}">{% trans 'Login' %}</a>
-                    <h4>{% trans 'OR' %} {% trans 'Continue as guest' %}</h4>
+                    <h4>{% trans 'or' %} {% trans 'Continue as guest' %}</h4>
                 {% else %}
                     <h4>{% trans 'My delivery addresses' %}</h4>
                     <div class="block-content">
@@ -35,13 +37,16 @@
                         {% endfor %}
                     </div>
                 {% endif %}
+                {% if form.errors %}
+                    {{ form.errors }}
+                {% endif %}
                 <form id="checkout-form" action="" method="post" role="form" style="display: block;">
                     {% csrf_token %}
                     <div class="form-group">
                         <input type="text" name="client_name" maxlength="60"
                                required="" id="id_client_name"
                                placeholder="{% trans 'Client name' %}"
-                               value="{% if request.user.is_authenticated %}{{ user.first_name }} {{ user.last_name }}{% endif %}"
+                               value="{% if form.client_name.value %}{{ form.client_name.value }}{% elif request.user.is_authenticated %}{{ user.first_name }} {{ user.last_name }}{% endif %}"
                         >
                         {% if form.client_name.errors %}
                             <div class="help-block">
@@ -57,9 +62,9 @@
                                     type="text"
                                     name="phone"
                                     id="id_phone"
-                                    class="form-control"
+                                    class="form-control checkou-phone"
                                     placeholder="{% trans 'Phone' %}"
-                                    value="{% if request.user.is_authenticated %}{{ default_address.phone }}{% endif %}"
+                                    value="{% if form.phone.value %}{{ form.phone.value }}{% elif request.user.is_authenticated %}{{ default_address.phone }}{% endif %}"
                                     pattern="[0-9]{9}"
                                     size="9"
                                     maxlength="9"
@@ -72,16 +77,21 @@
                         {% endif %}
                     </div>
                     <div class="form-group">
-                        <textarea name="shipping_address" cols="40" rows="10" required=""
-                                  id="id_shipping_address"
-                                  placeholder="{% trans 'Shipping address' %}">{% if user.is_authenticated %}{{ default_address.address }}{% endif %}</textarea>
+                        <textarea
+                                name="shipping_address"
+                                cols="40"
+                                rows="5"
+                                required=""
+                                id="id_shipping_address"
+                                placeholder="{% trans 'Shipping address' %}"
+                        >{% if form.shipping_address.value %}{{ form.shipping_address.value }}{% elif user.is_authenticated %}{{ default_address.address }}{% endif %}</textarea>
                         {% if form.shipping_address.errors %}
                             <div class="help-block">
                                 {{ form.shipping_address.errors }}
                             </div>
                         {% endif %}
                     </div>
-                    <div class="form-group">
+                    <div class="form-actions">
                         <input type="submit" name="login-submit" id="login-submit" tabindex="4"
                                        class="form-control btn btn-login" value="{% trans 'Continue' %}">
                     </div>

@@ -169,7 +169,7 @@ class Product(models.Model):
         return self.variations.first()
 
     def get_variations(self):
-        return self.variations.filter(product=self)
+        return self.variations.filter(product=self).distinct('name')
 
     def get_reviews(self):
         return self.product_reviews.filter(is_approved=True)

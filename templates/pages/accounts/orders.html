@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static i18n humanize %}
-
+{% block title %}
+    {% trans 'Orders history' %}
+{% endblock %}
 {% block content %}
     {{ header }}
         <div id="main">
@@ -20,26 +22,27 @@
                                     <span>{{ order.total_price|floatformat }} {% trans 'sum' %}</span>
                                 </div>
                                 <div class="delivery">
-                                    <span>Deliver to</span>
+                                    <span>{% trans 'Deliver to' %}</span>
                                     <div class="delto">
-                                        <div class="title">maqsud@dst.uz</div>
+                                        <div class="title">
+                                            {{order.client_name}}
+                                        </div>
                                         <div class="description">
                                             <strong>{{ order.client_name }}</strong>
                                             <p>
                                                 {{ order.shipping_address }}
                                             </p>
-                                            <strong>Tel.: +998 {{ order.phone|safe }}</strong>
+                                            <strong>{% trans 'Phone' %}.: +998 {{ order.phone|safe }}</strong>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="actions">
-                                    <a href="">Information</a>
-                                    <a href="">Schot</a>
+                                    <a href="{% url 'orders:order_detail' phone=order.phone order_unique_id=order.order_unique_id %}">{% trans 'Detail info' %}</a>
+                                    <a href="{% url 'orders:order_invoice_detail' phone=order.phone order_unique_id=order.order_unique_id %}">{% trans 'Invoice' %}</a>
                                 </div>
                             </div>
                             <div class="row-content">
-                                <h2>Dostavlen 19-march 2018</h2>
-                                <span>vash zakaz bil prinyatvasya</span>
+                                <h2>{% trans 'Delivered on' %} {{ order.created|date:'d/m/Y' }}</h2>
                                 {% for cart_product in order.cart_set.all %}
                                     <div class="product-row">
                                         <div class="image">

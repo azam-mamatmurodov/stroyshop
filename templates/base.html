@@ -3,9 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width">
-
-<meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#b7c233">
     <meta name="msapplication-navbutton-color" content="#b7c233">
     <meta name="apple-mobile-web-app-status-bar-style" content="#b7c233">
@@ -55,8 +53,11 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.structure.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.theme.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom_style.css' %}">
     <script src="{% static 'js/scripts.js' %}"></script>
     <script src="{% static 'js/notify.min.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
     <style>
         .notifyjs-corner
         {
@@ -80,119 +81,240 @@
 <div id="body" style="opacity: 0;">
     {% block content %}{% endblock %}
 </div>
-        {% block js %}{% endblock %}
-        <script>
-            $(document).ready(function () {
+{% block js %}{% endblock %}
+<script>
+$(document).ready(function () {
 
-                window.onload = function () {
-                    $('.variation_item').click(function(){
+    function addParameter(url, parameterName, parameterValue, atStart/*Add param before others*/){
+        replaceDuplicates = true;
+        if(url.indexOf('#') > 0){
+            var cl = url.indexOf('#');
+            urlhash = url.substring(url.indexOf('#'),url.length);
+        } else {
+            urlhash = '';
+            cl = url.length;
+        }
+        sourceUrl = url.substring(0,cl);
 
-                        var price = $(this).data('price');
-                        var max = $(this).data('max');
-                        var variation = $(this).data('variation');
-                        var color_name = $(this).data('color_name');
+        var urlParts = sourceUrl.split("?");
+        var newQueryString = "";
 
-                        var color = $('.color_change');
-                        if (color)
-                        {
-                            color.css('display', 'none');
-                            $('.color_name').text(color_name);
-                            $('.color_change#variation_' + variation).css('display', 'block');
-                        }
+        if (urlParts.length > 1)
+        {
+            var parameters = urlParts[1].split("&");
+            for (var i=0; (i < parameters.length); i++)
+            {
+                var parameterParts = parameters[i].split("=");
+                if (!(replaceDuplicates && parameterParts[0] === parameterName))
+                {
+                    if (newQueryString === "")
+                        newQueryString = "?";
+                    else
+                        newQueryString += "&";
+                    newQueryString += parameterParts[0] + "=" + (parameterParts[1]?parameterParts[1]:'');
+                }
+            }
+        }
+        if (newQueryString === "")
+            newQueryString = "?";
 
-                        $('.product_price').text(price);
-                        var quantity_input = $('.product_cart_add_form').find('input[name="quantity"]');
-                        quantity_input.prop('max', max).data('variation', variation);
+        if(atStart){
+            newQueryString = '?'+ parameterName + "=" + parameterValue + (newQueryString.length>1?'&'+newQueryString.substring(1):'');
+        } else {
+            if (newQueryString !== "" && newQueryString !== '?')
+                newQueryString += "&";
+            newQueryString += parameterName + "=" + (parameterValue?parameterValue:'');
+        }
+        return urlParts[0] + newQueryString + urlhash;
+    }
 
-                    });
+    $('#order_by').change(function (e) {
+        var href = location.href;
+        var name = $(this).attr('name');
+        var value = $(this).val();
+        location = addParameter(href, 'order_by', value, true)
+    });
 
-                    function update_cart() {
-                        $.getJSON("{% url 'api:cart_list' %}", function(resp){
-                            $("#cart_price_total").text(resp.total_price);
-                        });
-                    }
-                    $('form.product_cart_add_form').submit(function (e) {
+    $(document).on('click', '.product_list_variation', function (elem) {
+        console.log('Clicked');
+        var variation_name = $(this).data('variation_name');
+        var product_id = $(this).data('product_id');
 
-                       e.preventDefault();
-                       var quantity = $(this).find('input[name="quantity"]').val();
-                       var variation = $(this).find('input[name="quantity"]').data('variation');
-                       $.ajax({
-                           url: '{% url "api:cart_list" %}',
-                           type: 'POST',
-                           data: {
-                               count: quantity,
-                               variation: variation
-                           },
-                           success: function (resp) {
-                               if (resp.status == 'success')
-                               {
-                                   update_cart();
-                                   $.notify(resp.message, 'success');
-                               }
-                           },
-                           error: function () {
-                               console.log('Error')
-                           }
-                       })
-                    });
+        var tmp_this = $(this);
 
-                    $(document).on('click', '.delete_item', function (e) {
-                        var variation_id = $(e.target).data('variation_id');
-                        $.ajax({
-                            url: '/api/v1/cart/' + variation_id +'/',
-                            type: 'DELETE',
-                            success: function (res) {
-                                $(e.target).parent().parent().parent('.product-row').hide();
-                                $.notify("{% trans 'Successful removed' %}", 'success');
-                                location.reload()
-                            },
-                            error: function (error) {
-                                console.log(error);
-                            }
-                        });
-                    });
+        var product_title = $(this).parent('ul').parent('.weight').parent('.product_list_variation_list').siblings('.title');
+        product_title.find('.product_variation').text($(this).children('span').text());
 
-                    $(document).on('click', '.save_item', function (e) {
-                        e.preventDefault();
-                        var variation_id = $(e.target).data('variation_id');
-                        var count = $(this).parent().siblings('.product-info').find('input[name="quantity"]').val();
-                        var data = {'count': count};
-                        $.ajax({
-                            url: '/api/v1/cart/' + variation_id +'/update/',
-                            type: 'PUT',
-                            data: data,
-                            success: function (res) {
-                                $.notify(res.message, 'success');
-                                update_cart();
-                                location.reload()
-                            },
-                            error: function (error) {
-                                console.log(error);
-                            }
-                        });
-                    });
-                    $(document).on('change', '.change_price_cart_item', function () {
-                        console.log('Changed');
-                        var price = $(this).data('price');
-                        $(this).parent('.quantity').siblings('.price').find('.price_total').text(price);
-                    });
 
-                    $(document).on('click', '.product_list_variation', function () {
-                        console.log('Clicked');
-                        var variation = $(this).data('variation');
-                        var price = $(this).data('price');
-                        var root_parent = $(this).parent('ul').parent('.weight').parent('.product_list_variation_list');
-                        root_parent.siblings('.addtocart').find('input[name="quantity"]').data('variation', variation);
-                        root_parent.siblings('.price').find('.price_display').text(price);
-                        root_parent.siblings('.title').find('.product_variation').html($(this).html());
-                    });
-                };
+        if ($(this).data('color_has'))
+        {
+           var url = '/api/v1/products/' + product_id +'/variations/?name=' + variation_name;
+           $.getJSON(url, function (resp) {
+               var results = resp.results;
 
-                $(window).load(function() {
-                    $('.loader').fadeOut();
-                    $('#body').css({ 'opacity': 1 });
-                });
-            });
+               var html = "";
+               var color_has = 0;
+
+               if (resp.count > 0)
+               {
+                   $.each(results, function (index, item) {
+                       if (item.color_code)
+                       {
+                            color_has++;
+                            var price = item.price;
+                            var attr_class = (index === 0)? 'active' : '';
+                            var attr_title = item.color_name;
+                            var attr_max = item.quantity;
+                            html += '<li  class="color_change" id="variation_' + item.id +'">';
+                                html += '<span data-variation="' + item.id +'" data-quantity="' + attr_max +'"  data-title="' + attr_title + '" data-price="' + price +'" class="'+ attr_class + '" style="background-color: '+ item.color_code +'"></span>';
+                            html += '</li>';
+                       }
+                   });
+                   if(color_has  > 0)
+                   {
+                       var color = tmp_this.parent().parent('.weight').siblings('.color');
+                       console.dir(tmp_this.data('variation_name'));
+                       color.css({
+                           'display': 'inline-block'
+                       });
+                       color.children('.colors_set').html(html);
+                       color.find('.color_change>span.active').click();
+                   }
+               }
+           });
+        }
+        else
+        {
+            var price = $(this).data('price');
+            var quantity = $(this).data('quantity');
+
+            var addtocart = tmp_this.parent().parent('.weight').parent('.product_list_variation_list').siblings('.addtocart');
+
+                if (quantity !== 0)
+                {
+                        addtocart.show();
+                    var quantity_input = addtocart.find('.product_cart_add_form input[name="quantity"]');
+                        quantity_input.prop('max', $(this).data('max'));
+                        quantity_input.data('variation', $(this).data('variation'));
+                        addtocart.siblings('.price').find('.price_display').text(price)
+                        addtocart.siblings('.price').find('.price_label').show()
+                }
+                else
+                {
+                        addtocart.hide();
+                        addtocart.siblings('.price').find('.price_display').text("{% trans 'Not available' %}")
+                        addtocart.siblings('.price').find('.price_label').hide()
+                }
+        }
+
+
+    });
+
+
+    $(document).on('click', '.color_change span', function (e) {
+        console.log('color clicked');
+        var color_change = $(this).parent('.color_change');
+        var colors_set = color_change.parent('ul.colors_set');
+        var addtocart = colors_set.parent('.color').parent('.product_list_variation_list').siblings('.addtocart');
+        var product_title = colors_set.parent('.color').parent('.product_list_variation_list').siblings('.title');
+
+        product_title.find('.product_color').text($(this).data('title'));
+
+        var tmp_this = $(this);
+        var price = $(this).data('price');
+        var quantity = $(this).data('quantity');
+
+        $.each(color_change.parent('ul').children('li'), function (index, item) {
+            $(item).children('span').removeClass('active')
+        });
+
+        $(this).addClass('active');
+
+        var quantity_input = addtocart.find('.product_cart_add_form input[name="quantity"]');
+
+        if (quantity !== 0)
+        {
+            addtocart.show();
+            quantity_input.prop('max', $(this).data('max'));
+            quantity_input.data('variation', $(this).data('variation'));
+            addtocart.siblings('.price').find('.price_display').text(price)
+            addtocart.siblings('.price').find('.price_label').show()
+        }
+        else
+        {
+            addtocart.hide();
+            addtocart.siblings('.price').find('.price_display').text("{% trans 'Not available' %}")
+            addtocart.siblings('.price').find('.price_label').hide()
+        }
+    });
+
+
+    $(document).on('click', '.delete_item', function (e) {
+        var cart_item_id = $(this).data('cart_item_id');
+
+        $.ajax({
+            url: '/api/v1/cart/' + cart_item_id +'/delete/',
+            type: 'DELETE',
+            success: function (res) {
+                $(e.target).parent().parent().parent('.product-row').hide();
+                $.notify("{% trans 'Successful removed' %}", 'success');
+                location.reload()
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    });
+
+});
+window.onload = function () {
+
+function update_cart() {
+    $.getJSON("{% url 'api:cart_list' %}", function(resp){
+        $("#cart_price_total").text(resp.total_price);
+    });
+}
+$('form.product_cart_add_form').submit(function (e) {
+
+   e.preventDefault();
+   var quantity = $(this).find('input[name="quantity"]').val();
+   var variation = $(this).find('input[name="quantity"]').data('variation');
+   $.ajax({
+       url: '{% url "api:cart_list" %}',
+       type: 'POST',
+       data: {
+           count: quantity,
+           variation: variation
+       },
+       success: function (resp) {
+           if (resp.status === 'success')
+           {
+               update_cart();
+               $.notify(resp.message, 'success');
+           }
+       },
+       error: function () {
+           console.log('Error')
+       }
+   })
+});
+
+
+
+
+$(document).on('change', '.change_price_cart_item', function () {
+    console.log('Changed');
+    var price = $(this).data('price');
+    $(this).parent('.quantity').siblings('.price').find('.price_total').text(price);
+});
+
+
+};
+
+$(window).load(function() {
+    $('.loader').fadeOut();
+    $('#body').css({ 'opacity': 1 });
+});
         </script>
 </body>
 </html>

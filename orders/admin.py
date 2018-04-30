@@ -27,7 +27,7 @@ class CartAdmin(admin.ModelAdmin):
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['client_name', 'phone', 'total_price', 'created', 'state', ]
+    list_display = ['id', 'order_unique_id', 'client_name', 'phone', 'total_price', 'created', 'state', ]
     search_fields = ['client_name', 'phone', 'shipping_address', ]
     list_filter = ['state', ]
 

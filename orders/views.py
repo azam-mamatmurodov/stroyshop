@@ -64,8 +64,9 @@ class CheckoutView(CreateView):
 
         if self.request.user.is_authenticated:
             context['delivery_addresses'] = DeliveryAddress.objects.filter(user=self.request.user)
+            context['default_address'] = DeliveryAddress.objects.filter(user=self.request.user, is_default=True).first()
         context['login_form'] = LoginForm()
-        context['default_address'] = DeliveryAddress.objects.filter(user=self.request.user, is_default=True).first()
+        context['default_address'] = None
         return context
 
     def form_valid(self, form):
@@ -86,6 +87,16 @@ class CheckoutView(CreateView):
 
 class OrderDetail(DetailView):
     template_name = 'pages/order_detail.html'
+    model = Order
+
+    def get_object(self, queryset=None):
+        phone = self.kwargs.get('phone')
+        order_unique_id = self.kwargs.get('order_unique_id')
+        return self.model.objects.get(order_unique_id=order_unique_id, phone=phone)
+
+
+class OrderInvoiceDetail(DetailView):
+    template_name = 'pages/invoice.html'
     model = Order
 
     def get_object(self, queryset=None):

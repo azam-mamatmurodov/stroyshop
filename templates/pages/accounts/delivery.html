@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static i18n humanize %}
-
+{% block title %}
+    {% trans 'Delivery address' %}
+{% endblock %}
 {% block content %}
     {{ header }}
     <div id="main">
@@ -76,7 +78,8 @@
             </div>
             <input type="hidden" name="action_type" value="create">
             <input type="hidden" name="object_id" value="">
-            <input type="submit" name="Submit" value="Submit">
+            {% trans 'Submit' as submit %}
+            <input type="submit" name="Submit" value={{submit}}>
         </form>
     </div>
     {{ footer }}

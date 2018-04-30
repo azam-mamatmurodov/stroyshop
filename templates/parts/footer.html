@@ -23,23 +23,29 @@
             <p>{% trans 'The site is located in the zone TAS-IX' %}</p>
         </div>
         <div class="forusers">
-            <h2>For Users</h2>
+            <h2>{% trans 'For Users' %}</h2>
+
             <ul>
-                <li><a href="">Bla bla and bla</a></li>
-                <li><a href="">Bla bla and bla</a></li>
-                <li><a href="">Bla bla and bla</a></li>
+                {% for menu in footer_partners %}
+
+                        <li><a href="{% url 'main:static_footer' slug=menu.slug %}">{{menu.name}}</a></li>
+
+
+                {% endfor %}
             </ul>
         </div>
         <div class="forsellers">
-            <h2>For customers</h2>
+            <h2> {% trans 'For customers' %}</h2>
             <ul>
-                <li><a href="">Bla bla and bla</a></li>
-                <li><a href="">Bla bla and bla</a></li>
-                <li><a href="">Bla bla and bla</a></li>
+                {% for menu in footer_clients %}
+
+                        <li><a href="{% url 'main:static_footer' slug=menu.slug %}">{{menu.name}}</a></li>
+
+                {% endfor %}
             </ul>
         </div>
         <div class="address">
-            <h2>Our address</h2>
+            <h2>{% trans 'Our address' %}</h2>
             <p>Fuck'in st., Naked country, Bitch region, 6 h. 10000111</p>
         </div>
         <div class="contacts">
@@ -54,16 +60,16 @@
 <div class="{% if login_form.errors or register_form.errors %}popup{% endif %}" style="display:none;" id="login_and_register">
     <div class="container">
         <div class="tabs-title">
-            <span class="login {% if login_form.errors %}active{% endif %}">Login</span>
-            <span class="register {% if register_form.errors %}active{% endif %}">Registration</span>
+            <span class="login {% if login_form.errors %}active{% endif %}">{% trans 'Login' %}</span>
+            <span class="register {% if register_form.errors %}active{% endif %}">{% trans 'Registration' %}</span>
             <span class="close">x</span>
         </div>
         <div class="tabs-content">
             <div class="login" style="{% if login_form.errors %}display:block;{% endif %}">
-                <h2 class="block-title">Login</h2>
+                <h2 class="block-title">{% trans 'Login' %}</h2>
                 <div class="socials">
-                    <a href="" class="google">Login via Google</a>
-                    <a href="" class="facebook">Login via Facebook</a>
+                    <a href="" class="google">{% trans 'Login with Google' %}</a>
+                    <a href="" class="facebook">{% trans 'Login with Facebook' %}</a>
                 </div>
                 <div class="delimeter">
                     <span>or</span>
@@ -115,7 +121,7 @@
                 </div>
             </div>
             <div class="registration" style="{% if register_form.errors %}display:block;{% endif %}">
-                <h2 class="block-title">Registration</h2>
+                <h2 class="block-title">{% trans 'Registration' %}</h2>
                 <div class="socials">
                     <a href="" class="google">Via Google</a>
                     <a href="" class="facebook">Via Facebook</a>

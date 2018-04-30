@@ -8,6 +8,7 @@
     {{ header }}
     <div class="container">
         <div class="row">
+            {{ breadcrumbs }}
             <div class="col-md-6 col-md-offset-3">
 				<div class="panel panel-login">
 					<div class="panel-heading">
@@ -16,6 +17,7 @@
 								<h2 class="page_title">
                                     {% trans 'Order info' %}
                                 </h2>
+                                <a href="{% url 'orders:order_invoice_detail' phone=order.phone order_unique_id=order.order_unique_id %}" style="text-align: right">{% trans 'Invoice' %}</a>
 							</div>
 						</div>
 						<hr>
@@ -26,14 +28,24 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>Идентификатор заказа</th>
-                                            <th>Статус заказа</th>
+                                            <th>{% trans 'Order id' %}</th>
+                                            <th>{% trans 'Order status' %}</th>
+                                            <th>{% trans 'Client name' %}</th>
+                                            <th>{% trans 'Phone' %}</th>
+                                            <th>{% trans 'Total price' %}</th>
+                                            <th>{% trans 'Created at' %}</th>
+                                            <th>{% trans 'Shipping address' %}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td>{{ order.order_unique_id }}</td>
                                             <td>{{ order.get_status }}</td>
+                                            <td>{{ order.client_name }}</td>
+                                            <td>+998 {{ order.phone }}</td>
+                                            <td>{{ order.total_price }} {% trans 'sum' %}</td>
+                                            <td>{{ order.created|date:'d/m/Y' }}</td>
+                                            <td>{{ order.shipping_address }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -43,13 +55,14 @@
                                     <form method="POST" action="https://test.paycom.uz">
 
                                         <!-- Идентификатор WEB Кассы -->
-                                        <input type="hidden" name="merchant" value="5acb11cfdcd4709f64b02cbb"/>
+                                        <input type="hidden" name="merchant" value="5ae1c9fae58cd1493d8a471d"/>
 
                                         <!-- Сумма платежа в тиинах -->
-                                        <input type="hidden" name="amount" value="600000"/>
+                                        <input type="hidden" name="amount" value="{{ order.get_total_price }}"/>
 
                                         <!-- Поля Объекта Account -->
-                                        <input type="hidden" name="account[order_id]" value="12"/>
+                                        <input type="hidden" name="account[customer_id]" value="{{ order.phone }}"/>
+                                        <input type="hidden" name="account[order_id]" value="{{ order.id }}"/>
 
                                         <!-- ==================== НЕ ОБЯЗАТЕЛЬНЫЕ ПОЛЯ ====================== -->
                                         <!-- Язык. Доступные значения: ru|uz|en
@@ -104,7 +117,7 @@
 {#                                        <input type="hidden" name="detail" value="{JSON объект детализации в BASE64}"/>#}
                                         <!-- ================================================================== -->
 
-                                        <button type="submit">Оплатить с помощью <b>PAYCOM</b></button>
+                                        <button type="submit" class="payme_submit" style="background-image: url('https://help.paycom.uz/images/payme_01_small.png')">{% trans 'Pay with' %}<b>PAYCOM</b></button>
                                     </form>
                                 </div>
                             </div>

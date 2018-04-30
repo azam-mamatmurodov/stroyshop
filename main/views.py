@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView, DetailView
 
-from main.models import Static
+from main.models import Static, StaticFooterPage
 from products.models import Product, Review, Brands
 
 
@@ -24,4 +24,13 @@ class StaticView(DetailView):
     template_name = 'pages/static.html'
 
     def get_object(self, queryset=None):
+        return self.model.objects.all().translated(slug=self.kwargs.get('slug')).first()
+
+
+class StaticFooterPageView(DetailView):
+    model = StaticFooterPage
+    template_name = 'pages/static.html'
+
+    def get_object(self, queryset=None):
+        a = 5
         return self.model.objects.all().translated(slug=self.kwargs.get('slug')).first()

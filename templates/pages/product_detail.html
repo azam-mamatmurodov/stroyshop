@@ -30,9 +30,9 @@
                                     <div class="price">
                                         <strong>{{ similar_product.get_price|floatformat|intcomma }} {% trans 'sum' %} </strong>
                                     </div>
-                                    <div class="addtocart">
-                                        <button>{% trans 'Add to cart' %}</button>
-                                    </div>
+                                    <!--<div class="addtocart">-->
+                                        <!--<button>{% trans 'Add to cart' %}</button>-->
+                                    <!--</div>-->
                                 </div>
                             {% endfor %}
                         </div>
@@ -63,31 +63,30 @@
                 </div>
                 <div class="isavailable">
                     <label>{% trans 'In stock' %}:</label>
-                    <span>{% if product.available_in_stock %}{% trans 'Available' %}{% else %}{% trans 'Not available' %}{% endif %}</span>
+                    <span class="is_available">{% if product.available_in_stock %}{% trans 'Available' %}{% else %}{% trans 'Not available' %}{% endif %}</span>
                 </div>
                 <div class="weight">
                     <label>{% trans 'Packing' %}:</label>
                     <ul>
-                        {% for variation in product.get_variations %}
-                            <li data-color_name="{{ variation.color.name }}" data-variation="{{ variation.id }}" data-max="{{ variation.quantity }}"  data-variation_id="{{ variation.id }}"  data-price="{{ variation.price|floatformat|intcomma }}" class="{% if forloop.counter0 == 0 %}active{% endif %} variation_item">
+                        {% for variation in sizes %}
+                            <li data-color_name="{{ variation.color.name }}" data-color_has="{% if variation.color %}1{% else %}0{% endif %}" {% if not variation.color %}data-quantity="{{ variation.quantity }}"{% endif %} data-product_id="{{ variation.product_id }}" data-variation_name="{{ variation.name }}" data-variation="{{ variation.id }}" data-max="{{ variation.quantity }}"  data-variation_id="{{ variation.id }}"  data-price="{{ variation.price|floatformat|intcomma }}" class="{% if forloop.counter0 == 0 %}active{% endif %} variation_item">
                                 <span>{{ variation.name }} {{ product.volume.name }}</span>
                             </li>
                         {% endfor %}
                     </ul>
                 </div>
-                {% if product.get_default_variation.color %}
-                    <div class="color">
-                        <label>{% trans 'Color' %}:</label>
-                        <span class="color_name">{{ product.get_default_variation.color }}</span>
-                        <ul>
-                            {% for variation in product.get_variations %}
-                                <li class="color_change" id="variation_{{ variation.id }}" style="{% if forloop.counter0 != 0 %}display: none;{% endif %}">
-                                    <span class="{% if forloop.counter0 == 0 %}active{% endif %}"style="background-color: {{ variation.color.color }}"></span>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                {% endif %}
+
+                <div style="display: none;" class="color">
+                    <label>{% trans 'Color' %}:</label>
+                    <span class="color_name">{{ product.get_default_variation.color }}</span>
+                    <ul id="variation_color_list">
+                        {% for variation in product.get_variations %}
+                            <li class="color_change" id="variation_{{ variation.id }}" style="{% if forloop.counter0 != 0 %}display: none;{% endif %}">
+                                <span class="{% if forloop.counter0 == 0 %}active{% endif %}"style="background-color: {{ variation.color.color }}"></span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
                 <div class="nalichiye">
                     <span>{% trans 'Last updated' %}: {{ product.updated }}</span>
                 </div>
@@ -196,4 +195,107 @@
         {% endif %}
     </section>
     {{ footer }}
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(document).ready(function () {
+
+            var color_span = $('.color_change span.active');
+
+            $('.variation_item').click(function () {
+               var variation_name = $(this).data('variation_name');
+               var product_id = $(this).data('product_id');
+               if ($(this).data('color_has'))
+               {
+                   var url = '/api/v1/products/' + product_id +'/variations/?name=' + variation_name;
+                   $.getJSON(url, function (resp) {
+                       var results = resp.results;
+
+                       var html = "";
+                       var color_has = 0;
+
+                       if (resp.count > 0)
+                       {
+                           $.each(results, function (index, item) {
+                               if (item.color_code)
+                               {
+                                    color_has++;
+                                    var price = item.price;
+                                    var attr_class = (index === 0)? 'active' : '';
+                                    var attr_title = item.color_name;
+                                    var attr_max = item.quantity;
+                                    html += '<li  class="color_change" id="variation_' + item.id +'">';
+                                        html += '<span data-variation="' + item.id +'" data-quantity="' + attr_max +'"  data-title="' + attr_title + '" data-price="' + price +'" class="'+ attr_class + '" style="background-color: '+ item.color_code +'"></span>';
+                                    html += '</li>';
+                               }
+                           });
+                           if(color_has  > 0)
+                           {
+                               $('.color').css({
+                                   'display': 'block'
+                               });
+                               $('#variation_color_list').html(html);
+                               document.querySelector('.color_change span.active').click();
+                           }
+                       }
+                   })
+               }
+               else
+               {
+                    var price = $(this).data('price');
+                    var quantity = $(this).data('quantity');
+                   $('.price .product_price').text(price);
+
+                   var quantity_input = $('.product_cart_add_form input[name="quantity"]');
+                        quantity_input.prop('max', $(this).data('max'));
+                        quantity_input.data('variation', $(this).data('variation'));
+                        if (quantity === 0)
+                        {
+                            $('.is_available').text("{% trans 'Not available' %}")
+                        }
+                        else
+                        {
+                            $('.is_available').text("{% trans 'Available' %}")
+                        }
+               }
+
+            });
+            $(document).on('click', '.color_change span', function (e) {
+
+                var price = $(this).data('price');
+                var quantity = $(this).data('quantity');
+
+                $('.price .product_price').text(price);
+                $(this).parent('.color_change').parent('ul').siblings('.color_name').text($(this).data('title'));
+
+                $.each($(this).parent('.color_change').parent('ul').children('li'), function (index, item) {
+                    $(item).children('span').removeClass('active')
+                });
+
+                $(this).addClass('active');
+
+                var quantity_input = $('.product_cart_add_form input[name="quantity"]');
+                    quantity_input.prop('max', $(this).data('quantity'));
+                    quantity_input.data('variation', $(this).data('variation'));
+                if (quantity === 0)
+                {
+                    $('.is_available').text("{% trans 'Not available' %}")
+                }
+                else
+                {
+                    $('.is_available').text("{% trans 'Available' %}")
+                }
+            });
+
+            $('.variation_item.active').trigger('click');
+
+        });
+    </script>
+{% endblock %}
+
+{% block css %}
+    <style>
+
+    </style>
 {% endblock %}

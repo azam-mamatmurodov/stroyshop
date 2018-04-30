@@ -1,36 +1,40 @@
 {% extends 'base.html' %}
 {% load static i18n %}
-
+{% block title %}
+    {% trans 'Payment methods' %}
+{% endblock %}
 {% block content %}
 {{ header }}
 <div id="main">
     {{ breadcrumbs }}
     <section id="payment">
-        <h1 id="page-title">Payment methods</h1>
-        <div id="billing-info">
-            <div class="default btitle">
-                <span>Default</span><a href="">edit</a>
+        <h1 id="page-title">{% trans 'Payment methods' %}</h1>
+        {% for default_card in default_cards %}
+            <div id="billing-info">
+                <div class="default btitle">
+                    <span>{% trans 'Default' %}</span><a href="">{% trans 'Edit' %}</a>
+                    <button onclick="myAddButtonFunction()">{% trans 'Add' %}</button>
+                </div>
+                <div class="block-content">
+                    <div class="address">
+                        <strong>{% trans 'Address' %}</strong>
+                        <p>{{ default_card.billing_address}}</p>
+                    </div>
+                    <div class="nickname">
+                        <strong>{% trans 'Nicknames' %}</strong>
+                        <p>{{ default_card.card_holder }}</p>
+                    </div>
+                    <div class="payment">
+                        <p>
+                            <img src="{% static 'images/payme.jpg' %}">
+                            <span>{{ default_card.cart_number }}</span>
+                        </p>
+                    </div>
+                </div>
             </div>
-            <div class="block-content">
-                <div class="address">
-                    <strong>Address</strong>
-                    <p>Fuck'in st., Naked country, Bitch region, 6 h. 10000111</p>
-                </div>
-                <div class="nickname">
-                    <strong>Nickname</strong>
-                    <p>maqsud@dst.uz</p>
-                </div>
-                <div class="payment">
-                    <strong>Payment methods</strong>
-                    <p>
-                        <img src="{% static 'images/payme.jpg' %}">
-                        <span>**** **** **** 0107</span>
-                    </p>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
         <div id="cards">
-            <div class="block-title"><span>Your plastic cards</span> <span>Srok</span></div>
+            <div class="block-title"><span>{% trans 'Your plastic cards' %}</span> <span>{% trans 'Expiration date' %}</span></div>
             <div class="block-content">
                 {% for payment_card in object_list %}
                     <div class="row">
@@ -54,25 +58,114 @@
                                 </p>
                             </div>
                             <div class="actions">
-                                <a href="">Edit</a>
-                                <a href="">Remove</a>
+                                <a href="{% url 'users:profile_payment_edit' pk=payment_card.id %}">{% trans 'Edit' %}</a>
+                                <a href="?remove_id={{ payment_card.id }}">{% trans 'Remove' %}</a>
                             </div>
                         </div>
                     </div>
                 {% endfor %}
             </div>
         </div>
-        <div id="other">
-            {% if form.errors %}
-                {{ form.errors }}
-            {% endif %}
+         <div id="myDivClose" class="{% if form.errors %}add-payment-popup{% endif %}" style="display: none;">
             <form action="" method="post">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <input type="submit" value="{% trans 'Save' %}">
+                <span
+                        class="close"
+                        data-dismiss="modal"
+                        onclick="myCloseButtonFunction()"
+                >&times;</span>
+                <h1>{% trans 'Add new payment' %}</h1>
+                <div class="form-group">
+                    <input
+                            type="text"
+                            name="card_holder"
+                            placeholder="{% trans 'Name on card' %}"
+                            value="{% if form.card_holder.value %}{{form.card_holder.value}}{% endif %}"
+                    >
+                    {% if form.card_holder.errors %}
+                        {{form.card_holder.errors}}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <input
+                            type="text"
+                            name="cart_number"
+                            placeholder="{% trans 'Card number' %}"
+                            value="{% if form.cart_number.value %}{{form.cart_number.value}}{% endif %}"
+                    >
+                        {% if form.cart_number.errors %}
+                            {{form.cart_number.errors}}
+                        {% endif %}
+
+                </div>
+                <div class="form-group">
+                    <input
+                            id="datepicker"
+
+                            value="2018-04-23"
+                            type="text"
+                            name="expiration_date"
+                            placeholder="{% trans 'Expiration date' %}"
+
+                    >
+                    {% if form.expiration_date.errors %}
+                            {{form.expiration_date.errors}}
+                        {% endif %}
+                </div>
+                <div class="form-group">
+                    <textarea
+                            name="billing_address"
+                            placeholder="{% trans 'Billing address' %}"
+                            value="{% if form.billing_address.value %}{{form.billing_address.value}}{% endif %}"
+                    ></textarea>
+                     {% if form.billing_address.errors %}
+                            {{form.billing_address.errors}}
+                        {% endif %}
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="{{ form.is_default.name }}"> <label>{% trans 'Is default' %}</label>
+                </div>
+                <input type="submit" name="Submit" value="{% trans 'Submit' %}">
+
             </form>
         </div>
     </section>
 </div>
 {{ footer }}
+{% endblock %}
+
+{% block css %}
+<style>
+    ul.errorlist{
+        font-size: 14px;
+    }
+    .add-payment-popup
+    {
+        display: block !important;
+    }
+    .close{
+        font-size: 30px;
+        margin-right: -100%;
+
+    }
+</style>
+{% endblock %}
+
+{% block js %}
+<script>
+function myCloseButtonFunction() {
+   var element = document.getElementById("myDivClose");
+   element.style.display = 'none';
+   element.classList.remove("add-payment-popup");
+}
+function myAddButtonFunction() {
+   var element = document.getElementById("myDivClose");
+   element.style.display = 'block';
+   element.classList.add("add-payment-popup");
+}
+
+ $(function() {
+$( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
+});
+</script>
 {% endblock %}

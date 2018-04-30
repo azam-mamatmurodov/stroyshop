@@ -1,0 +1,141 @@
+{% load i18n static %}
+
+<div class="container" id="invoice_detail">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-login">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <h2 class="page_title">
+                                {% trans 'Order info' %}
+                            </h2>
+                            <a id="pdf_generate" href="#" onclick="printPDF('D:/invoice_{{ order.id }}.Pdf')">
+                                {% trans 'Print invoice' %}
+                            </a>
+                            <p>{% trans 'Created at' %}: {{ order.created|date:'d/m/Y' }}</p>
+                            <p>{% trans 'Order Id' %}: {{ order.order_unique_id }}</p>
+                            <p>{% trans 'Total price' %}: {{ order.total_price }} {% trans 'sum' %}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row" style="font-size: 14px">
+                        <div class="col-lg-12">
+                            <table class="table" width="400" CELLPADDING=3 CELLSPACING=1 RULES=ROWS FRAME=BOX>
+                                <thead>
+                                    <tr>
+                                      <td colspan="4">
+                                          <h2>
+                                              {% trans 'Delivered'%}:
+                                              <span class="shipped_at">{{ order.created|date:'d/m/Y' }}</span>
+                                          </h2>
+                                      </td>
+                                    </tr>
+                                </thead>
+                                <tbody style="border: 1px solid black">
+                                    <tr>
+                                        <td>{% trans 'Items ordered' %}</td>
+                                        <td>{% trans 'Price' %}</td>
+                                        <td>{% trans 'Quantity' %}</td>
+                                        <td>{% trans 'Total price' %}</td>
+                                    </tr>
+                                     {% for item in order.get_items %}
+                                        <tr>
+                                            <td>{{item.variation.product.name}}</td>
+                                            <td>{{item.variation.product.price}}</td>
+                                            <td>{{item.count}}</td>
+                                            <td>{{item.total_price}}</td>
+                                        </tr>
+                                     {% endfor %}
+                                    <tr>
+                                         <td colspan="2">{% trans 'Shipping address' %}</td>
+                                        <td colspan="2">{{order.shipping_address}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            <table class="table" width="400"  CELLPADDING=3 CELLSPACING=1 RULES=ROWS FRAME=BOX>
+                                <thead>
+                                    <tr>
+                                      <td colspan="3"><h2>{% trans 'Payment information'%}</h2></td>
+                                    </tr>
+                                </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>{% trans 'Client name' %}</td>
+                                        <td>{% trans 'Phone' %}</td>
+                                        <td>{% trans 'Total price' %}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{order.client_name}}</td>
+                                        <td>+998{{order.phone}}</td>
+                                        <td>{{ order.total_price }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="1">
+                                            {% trans 'Payment method' %}:
+                                        </td>
+                                        <td colspan="2">
+                                            Uzcard
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    body{
+        max-width: 1500px;
+        margin: auto;
+    }
+    a, .page_title{
+        text-align: center;
+        margin: auto;
+    }
+    .panel.panel-login {
+        width: 60%;
+        margin: 0 auto;
+    }
+
+    table.table {
+        width: 100%;
+    }
+    #pdf_generate
+    {
+        float: right;
+    }
+    span.shipped_at {
+        font-weight: 100;
+        font-size: 16px;
+        vertical-align: middle;
+    }
+    @media print {
+        body {
+            border: 1px solid;
+            padding: 4px;
+        }
+        .panel.panel-login {
+            width: 100%;
+            margin: 0 auto;
+    }
+        #pdf_generate
+        {
+            display: none;
+        }
+    }
+</style>
+<script>
+    function printPDF()
+    {
+        var w = window.open("about:blank");
+        w.document.write(document.body.outerHTML);
+        if (navigator.appName == 'Microsoft Internet Explorer') window.print();
+        else w.print();
+    }
+</script>
