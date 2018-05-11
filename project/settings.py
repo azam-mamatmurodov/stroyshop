@@ -18,6 +18,12 @@ import raven
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+ADMINS = (
+    ('A\'zam', 'azam.mamatmurodov@gmail.com'),
+)
+
+MANAGERS = ADMINS
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -40,8 +46,7 @@ PROJECT_APPS = [
 # Application definition
 
 INSTALLED_APPS = [
-    'grappelli',
-    'filebrowser',
+    'suit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -52,6 +57,8 @@ INSTALLED_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
+    'easy_thumbnails',
+    'filer',
     'mptt',
     'parler',
     'ckeditor',
@@ -67,6 +74,7 @@ THIRD_PARTY_APPS = [
 INSTALLED_APPS = INSTALLED_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 
 MIDDLEWARE = [
+    'raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -93,6 +101,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.i18n',
+                'django.template.context_processors.request',
                 'main.context.defaults',
             ],
         },
@@ -261,12 +270,63 @@ REST_FRAMEWORK = {
 # }
 
 
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'root': {
+        'level': 'WARNING',
+        'handlers': ['sentry'],
+    },
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s '
+                      '%(process)d %(thread)d %(message)s'
+        },
+    },
+    'handlers': {
+        'sentry': {
+            'level': 'ERROR', # To capture more than ERROR, change to WARNING, INFO, etc.
+            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+            'tags': {'custom-tag': 'x'},
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        }
+    },
+    'loggers': {
+        'django.db.backends': {
+            'level': 'ERROR',
+            'handlers': ['sentry', 'console'],
+            'propagate': False,
+        },
+        'raven': {
+            'level': 'ERROR',
+            'handlers': ['sentry', 'console'],
+            'propagate': False,
+        },
+        'sentry.errors': {
+            'level': 'ERROR',
+            'handlers': ['sentry', 'console'],
+            'propagate': False,
+        },
+    },
+}
+
 GRAPPELLI_ADMIN_TITLE = 'Stroyshop'
 
+
+pardir = os.path.abspath(BASE_DIR)
 
 RAVEN_CONFIG = {
     'dsn': 'https://7d9bb4cd7a954c2f841ba88fd0eea88b:3c012f644643414e8f9e48d7148b5675@sentry.io/1198570',
     # If you are using git, you can also automatically configure the
     # release based on the git info.
-    'release': raven.fetch_git_sha(os.path.abspath(os.pardir)),
+    'release': raven.fetch_git_sha(pardir),
+}
+
+SUIT_CONFIG = {
+    'ADMIN_NAME': _('Administration')
 }

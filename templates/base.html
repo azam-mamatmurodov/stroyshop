@@ -68,6 +68,10 @@
             margin: 6px;
             padding: 2px;
         }
+        #delivery_address_add span.close {
+            float: right;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body class="product">
@@ -267,48 +271,49 @@ $(document).ready(function () {
     });
 
 });
-window.onload = function () {
-
 function update_cart() {
     $.getJSON("{% url 'api:cart_list' %}", function(resp){
         $("#cart_price_total").text(resp.total_price);
     });
+
+    $.get("{% url 'api:cart_html_list' %}", function(resp){
+        $('#cartview').html(resp);
+    });
 }
-$('form.product_cart_add_form').submit(function (e) {
+window.onload = function () {
 
-   e.preventDefault();
-   var quantity = $(this).find('input[name="quantity"]').val();
-   var variation = $(this).find('input[name="quantity"]').data('variation');
-   $.ajax({
-       url: '{% url "api:cart_list" %}',
-       type: 'POST',
-       data: {
-           count: quantity,
-           variation: variation
-       },
-       success: function (resp) {
-           if (resp.status === 'success')
-           {
-               update_cart();
-               $.notify(resp.message, 'success');
+    update_cart();
+
+
+    $('form.product_cart_add_form').submit(function (e) {
+
+       e.preventDefault();
+       var quantity = $(this).find('input[name="quantity"]').val();
+       var variation = $(this).find('input[name="quantity"]').data('variation');
+       $.ajax({
+           url: '{% url "api:cart_list" %}',
+           type: 'POST',
+           data: {
+               count: quantity,
+               variation: variation
+           },
+           success: function (resp) {
+               if (resp.status === 'success')
+               {
+                   update_cart();
+                   $.notify(resp.message, 'success');
+               }
+           },
+           error: function () {
+               console.log('Error')
            }
-       },
-       error: function () {
-           console.log('Error')
-       }
-   })
-});
+       })
+    });
 
-
-
-
-$(document).on('change', '.change_price_cart_item', function () {
-    console.log('Changed');
-    var price = $(this).data('price');
-    $(this).parent('.quantity').siblings('.price').find('.price_total').text(price);
-});
-
-
+    $(document).on('change', '.change_price_cart_item', function () {
+        var price = $(this).data('price');
+        $(this).parent('.quantity').siblings('.price').find('.price_total').text(price);
+    });
 };
 
 $(window).load(function() {
@@ -318,3 +323,16 @@ $(window).load(function() {
         </script>
 </body>
 </html>
+<!-- Sentry JS SDK 2.1.+ required -->
+<script src="https://cdn.ravenjs.com/2.3.0/raven.min.js"></script>
+
+{% if request.sentry.id %}
+  <script>
+  Raven.showReportDialog({
+    eventId: '{{ request.sentry.id }}',
+
+    // use the public DSN (dont include your secret!)
+    dsn: 'https://7d9bb4cd7a954c2f841ba88fd0eea88b:3c012f644643414e8f9e48d7148b5675@sentry.io/1198570'
+  });
+  </script>
+{% endif %}

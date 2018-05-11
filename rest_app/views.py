@@ -1,8 +1,10 @@
-from rest_framework.renderers import JSONRenderer
-from rest_framework import views, generics, status, response, viewsets
 from django.http.response import JsonResponse
 from django.utils.translation import ugettext as _
 from django.contrib.auth import authenticate, login
+from django.db.models import Sum
+
+from rest_framework.renderers import TemplateHTMLRenderer
+from rest_framework import views, generics, status, response, viewsets, parsers
 
 from rest_app.serializers import CartSerializer, ProductSerializer, VariationSerializer
 from orders.models import Cart
@@ -10,8 +12,10 @@ from products.models import Variation, Product
 from users.models import User, Client
 
 from decimal import Decimal
+import json
 
 from .paycom.Application import Application
+
 
 class CartViews(generics.ListAPIView, generics.CreateAPIView):
     serializer_class = CartSerializer
@@ -132,6 +136,19 @@ class CartUpdateViews(generics.UpdateAPIView):
         return views.Response(data=msg, status=status.HTTP_202_ACCEPTED)
 
 
+class CartHtmlViews(generics.ListAPIView):
+    session_key = None
+    model = Cart
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'rest/cart.html'
+
+    def list(self, request, *args, **kwargs):
+        session_key = self.request.COOKIES.get('client_id')
+        cart_items = self.model.objects.filter(session_key=session_key, status=True, order__isnull=True)
+        order_total = cart_items.aggregate(Sum('total_price')).get('total_price__sum', 0)
+        return response.Response({'cart_items': cart_items, 'order_total': order_total}, template_name=self.template_name)
+
+
 class UserAuthView(views.APIView):
     def post(self, request):
         if request.POST.get('username') and request.POST.get('passwd'):
@@ -206,9 +223,8 @@ class UserUpdateView(views.APIView):
         try:
             user = User.objects.get(pk=user_id)
         except User.DoesNotExist:
-            message = {'message': 'Sorry, something went wrong', 'status': 'fail'}
+            message = {'message': _('Sorry, something went wrong'), 'status': 'fail'}
             return JsonResponse(data=message)
-        import json
         available_fields = ['phone', 'first_name', 'last_name', 'password', 'password_old', 'address', 'email', ]
         data_list = request.POST.get('data')
         data = json.loads(data_list)
@@ -228,19 +244,20 @@ class UserUpdateView(views.APIView):
                     if new_password == confirm_password:
                         user.set_password(new_password)
                     else:
-                        message = {'message': 'Sorry, wrong confirm password', 'status': 'fail'}
+                        message = {'message': _('Sorry, wrong confirm password'), 'status': 'fail'}
                         return JsonResponse(data=message)
                 else:
-                    message = {'message': 'Sorry, incorrect old password', 'status': 'fail'}
+                    message = {'message': _('Sorry, incorrect old password'), 'status': 'fail'}
                     return JsonResponse(data=message)
             elif field_name == 'address':
                 user.client.address = field_data
+                user.client.save()
             else:
                 setattr(user, field_name, field_data)
-            message = {'message': 'Successfully updated', 'status': 'success'}
+            message = {'message': _('Successfully updated'), 'status': 'success'}
             user.save()
         else:
-            message = {'message': 'Sorry, something went wrong', 'status': 'fail'}
+            message = {'message': _('Sorry, something went wrong'), 'status': 'fail'}
 
         return JsonResponse(data=message)
 

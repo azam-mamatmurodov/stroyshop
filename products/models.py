@@ -3,14 +3,12 @@ from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 from django.shortcuts import reverse
 
-from django.db.models.signals import pre_save
-from django.dispatch import receiver
-
 from mptt.models import MPTTModel, TreeForeignKey
 from parler.models import TranslatableModel, TranslatedFields
 from parler.managers import TranslationManager
 from ckeditor_uploader.fields import RichTextUploadingField
 from colorfield.fields import ColorField
+from filer.fields import image
 
 import os
 
@@ -131,9 +129,9 @@ class Product(models.Model):
     price = models.DecimalField(decimal_places=2, max_digits=10, verbose_name=_('Price'), null=True, blank=True, )
     is_top = models.BooleanField(default=False)
 
-    image_0 = models.ImageField(verbose_name=_('First image'), upload_to='products/', null=True, )
-    image_1 = models.ImageField(verbose_name=_('Second image'), upload_to='products/', null=True, blank=True, )
-    image_2 = models.ImageField(verbose_name=_('Third image'), upload_to='products/', null=True, blank=True, )
+    image_0 = image.FilerImageField(verbose_name=_('First image'), null=True, related_name='product_image0')
+    image_1 = image.FilerImageField(verbose_name=_('Second image'),  null=True, blank=True, related_name='product_image1')
+    image_2 = image.FilerImageField(verbose_name=_('Third image'),  null=True, blank=True, related_name='product_image2')
 
     default_image = models.CharField(choices=(
         ('image_0', 'First image', ),

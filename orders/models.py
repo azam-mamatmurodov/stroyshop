@@ -48,29 +48,6 @@ class Order(models.Model):
         return obj.total_price * 100
 
 
-# def order_save(sender, **kwargs):
-#     if kwargs.get('created'):
-#         instance = kwargs.get('instance')
-#         cart_items = instance.cart_set.all()
-#         json_data = []
-#         for cart_item in cart_items:
-#             title = "{} {}".format(cart_item.variation.product.name, cart_item.variation.name)
-#             if cart_item.variation.color:
-#                 title = "{} {}".format(title, cart_item.variation.color.name)
-#             json_data.append({
-#                 'title': title,
-#                 'price': float(cart_item.variation.price),
-#                 'count': cart_item.count,
-#                 'total_price': float(cart_item.total_price)
-#             })
-#         print(json_data)
-#         instance.products = json_data
-#         # instance.save()
-
-
-# post_save.connect(receiver=order_save, sender=Order)
-
-
 class Cart(models.Model):
     session_key = models.CharField(max_length=255)
     variation = models.ForeignKey(to=Variation, )

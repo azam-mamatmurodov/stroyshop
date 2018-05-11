@@ -208,4 +208,5 @@ def defaults(request, *args, **kwargs):
     banner = get_banner(request)
     footer = get_footer(request)
     breadcrumbs = get_breadcrumbs(request, *args, **kwargs)
+    address_example = _('Tashkent, Yashnabad district, st. Tinchlik / 1-quarter, 1-house, 1-kvart')
     return locals()

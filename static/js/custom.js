@@ -5,6 +5,7 @@
             margin: 0,
             items: 1,
             autoplay: true,
+            autoplayHoverPause: true,
             responsiveClass: true,
             responsive: {
                 0: { items: 1 },

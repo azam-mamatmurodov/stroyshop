@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
+
 {% load static i18n humanize %}
+
 {% block title %}
     {% trans 'Delivery address' %}
 {% endblock %}
@@ -44,7 +46,10 @@
             {% csrf_token %}
             <h1>{% trans 'Add an address' %}</h1>
             <div class="form-group">
-                <textarea placeholder="Address" name="{{ form.address.name }}">{% if form.address.value %}{{ form.address.value }}{% endif %}</textarea>
+                <textarea
+                        placeholder="{{ address_example }}"
+                        name="{{ form.address.name }}"
+                >{% if form.address.value %}{{ form.address.value }}{% endif %}</textarea>
                 {% if form.address.errors %}
                     {{ form.address.errors }}
                 {% endif %}
@@ -130,9 +135,6 @@
 
 {% block css %}
     <style>
-    #delivery_address_add span.close {
-        float: right;
-        cursor: pointer;
-    }
+
     </style>
 {% endblock %}

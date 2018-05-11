@@ -28,6 +28,7 @@ class ProductSerializer(serializers.ModelSerializer):
 class VariationSerializer(serializers.ModelSerializer):
     color_name = serializers.SerializerMethodField()
     color_code = serializers.SerializerMethodField()
+    price = serializers.SerializerMethodField()
 
     class Meta:
         model = Variation
@@ -40,3 +41,7 @@ class VariationSerializer(serializers.ModelSerializer):
     @staticmethod
     def get_color_code(obj):
         return obj.color.color if obj.color else None
+
+    @staticmethod
+    def get_price(obj):
+        return humanize.intcomma(int(obj.price))

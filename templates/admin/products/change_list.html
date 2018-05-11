@@ -2,20 +2,17 @@
 {% load i18n %}
 
 {% block object-tools-items %}
-    <li>
-        <a href="/admin/filebrowser/browse/" class="grp-add-link grp-state-focus">
-            {% trans 'File browser' %}
-        </a>
-    </li>
-    <li>
-        <a href="export/" class="grp-add-link grp-state-focus">
-            {% trans 'Export' %}
-        </a>
-    </li>
-    <li>
-        <a href="import/" class="grp-add-link grp-state-focus">
-            {% trans 'Import' %}
-        </a>
-    </li>
+    <a href="/admin/filer/folder/" class="btn btn-success">
+        <i class="icon-folder-open icon-white"></i>
+        {% trans 'File browser' %}
+    </a>
+    <a href="export/" class="btn btn-success">
+        <i class="icon-circle-arrow-up icon-white"></i>
+        {% trans 'Export' %}
+    </a>
+    <a href="import/" class="btn btn-success">
+        <i class="icon-circle-arrow-down icon-white"></i>
+        {% trans 'Import' %}
+    </a>
     {{ block.super }}
 {% endblock %}

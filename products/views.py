@@ -20,7 +20,7 @@ ORDER_BY = (
 class ProductListView(ListView):
     template_name = 'pages/product_list.html'
     model = Product
-    paginate_by = 60
+    paginate_by = 1
 
     def get_queryset(self):
         queryset = self.model.objects.all()

@@ -2,42 +2,33 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.8
--- Dumped by pg_dump version 9.6.8
-
 SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
+SET standard_conforming_strings = off;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
-SET row_security = off;
+SET escape_string_warning = off;
 
 --
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+-- Name: plpgsql; Type: PROCEDURAL LANGUAGE; Schema: -; Owner: postgres
 --
 
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+CREATE OR REPLACE PROCEDURAL LANGUAGE plpgsql;
 
 
---
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
---
+ALTER PROCEDURAL LANGUAGE plpgsql OWNER TO postgres;
 
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
-
+SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
 
 SET default_with_oids = false;
 
 --
--- Name: auth_group; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE TABLE public.auth_group (
+CREATE TABLE auth_group (
     id integer NOT NULL,
     name character varying(80) NOT NULL
 );
@@ -49,7 +40,7 @@ ALTER TABLE public.auth_group OWNER TO stroyshop;
 -- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.auth_group_id_seq
+CREATE SEQUENCE auth_group_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -63,14 +54,21 @@ ALTER TABLE public.auth_group_id_seq OWNER TO stroyshop;
 -- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.auth_group_id_seq OWNED BY public.auth_group.id;
+ALTER SEQUENCE auth_group_id_seq OWNED BY auth_group.id;
 
 
 --
--- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.auth_group_permissions (
+SELECT pg_catalog.setval('auth_group_id_seq', 1, false);
+
+
+--
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE auth_group_permissions (
     id integer NOT NULL,
     group_id integer NOT NULL,
     permission_id integer NOT NULL
@@ -83,7 +81,7 @@ ALTER TABLE public.auth_group_permissions OWNER TO stroyshop;
 -- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.auth_group_permissions_id_seq
+CREATE SEQUENCE auth_group_permissions_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -97,14 +95,21 @@ ALTER TABLE public.auth_group_permissions_id_seq OWNER TO stroyshop;
 -- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.auth_group_permissions_id_seq OWNED BY public.auth_group_permissions.id;
+ALTER SEQUENCE auth_group_permissions_id_seq OWNED BY auth_group_permissions.id;
 
 
 --
--- Name: auth_permission; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.auth_permission (
+SELECT pg_catalog.setval('auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE auth_permission (
     id integer NOT NULL,
     name character varying(255) NOT NULL,
     content_type_id integer NOT NULL,
@@ -118,7 +123,7 @@ ALTER TABLE public.auth_permission OWNER TO stroyshop;
 -- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.auth_permission_id_seq
+CREATE SEQUENCE auth_permission_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -132,14 +137,21 @@ ALTER TABLE public.auth_permission_id_seq OWNER TO stroyshop;
 -- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.auth_permission_id_seq OWNED BY public.auth_permission.id;
+ALTER SEQUENCE auth_permission_id_seq OWNED BY auth_permission.id;
 
 
 --
--- Name: django_admin_log; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.django_admin_log (
+SELECT pg_catalog.setval('auth_permission_id_seq', 136, true);
+
+
+--
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE django_admin_log (
     id integer NOT NULL,
     action_time timestamp with time zone NOT NULL,
     object_id text,
@@ -158,7 +170,7 @@ ALTER TABLE public.django_admin_log OWNER TO stroyshop;
 -- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.django_admin_log_id_seq
+CREATE SEQUENCE django_admin_log_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -172,14 +184,21 @@ ALTER TABLE public.django_admin_log_id_seq OWNER TO stroyshop;
 -- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.django_admin_log_id_seq OWNED BY public.django_admin_log.id;
+ALTER SEQUENCE django_admin_log_id_seq OWNED BY django_admin_log.id;
 
 
 --
--- Name: django_content_type; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.django_content_type (
+SELECT pg_catalog.setval('django_admin_log_id_seq', 493, true);
+
+
+--
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE django_content_type (
     id integer NOT NULL,
     app_label character varying(100) NOT NULL,
     model character varying(100) NOT NULL
@@ -192,7 +211,7 @@ ALTER TABLE public.django_content_type OWNER TO stroyshop;
 -- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.django_content_type_id_seq
+CREATE SEQUENCE django_content_type_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -206,14 +225,21 @@ ALTER TABLE public.django_content_type_id_seq OWNER TO stroyshop;
 -- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.django_content_type_id_seq OWNED BY public.django_content_type.id;
+ALTER SEQUENCE django_content_type_id_seq OWNED BY django_content_type.id;
 
 
 --
--- Name: django_migrations; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.django_migrations (
+SELECT pg_catalog.setval('django_content_type_id_seq', 56, true);
+
+
+--
+-- Name: django_migrations; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE django_migrations (
     id integer NOT NULL,
     app character varying(255) NOT NULL,
     name character varying(255) NOT NULL,
@@ -227,7 +253,7 @@ ALTER TABLE public.django_migrations OWNER TO stroyshop;
 -- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.django_migrations_id_seq
+CREATE SEQUENCE django_migrations_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -241,14 +267,21 @@ ALTER TABLE public.django_migrations_id_seq OWNER TO stroyshop;
 -- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.django_migrations_id_seq OWNED BY public.django_migrations.id;
+ALTER SEQUENCE django_migrations_id_seq OWNED BY django_migrations.id;
 
 
 --
--- Name: django_session; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.django_session (
+SELECT pg_catalog.setval('django_migrations_id_seq', 153, true);
+
+
+--
+-- Name: django_session; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE django_session (
     session_key character varying(40) NOT NULL,
     session_data text NOT NULL,
     expire_date timestamp with time zone NOT NULL
@@ -258,10 +291,10 @@ CREATE TABLE public.django_session (
 ALTER TABLE public.django_session OWNER TO stroyshop;
 
 --
--- Name: easy_thumbnails_source; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: easy_thumbnails_source; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE TABLE public.easy_thumbnails_source (
+CREATE TABLE easy_thumbnails_source (
     id integer NOT NULL,
     storage_hash character varying(40) NOT NULL,
     name character varying(255) NOT NULL,
@@ -275,7 +308,7 @@ ALTER TABLE public.easy_thumbnails_source OWNER TO stroyshop;
 -- Name: easy_thumbnails_source_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.easy_thumbnails_source_id_seq
+CREATE SEQUENCE easy_thumbnails_source_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -289,14 +322,21 @@ ALTER TABLE public.easy_thumbnails_source_id_seq OWNER TO stroyshop;
 -- Name: easy_thumbnails_source_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.easy_thumbnails_source_id_seq OWNED BY public.easy_thumbnails_source.id;
+ALTER SEQUENCE easy_thumbnails_source_id_seq OWNED BY easy_thumbnails_source.id;
 
 
 --
--- Name: easy_thumbnails_thumbnail; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: easy_thumbnails_source_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.easy_thumbnails_thumbnail (
+SELECT pg_catalog.setval('easy_thumbnails_source_id_seq', 143, true);
+
+
+--
+-- Name: easy_thumbnails_thumbnail; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE easy_thumbnails_thumbnail (
     id integer NOT NULL,
     storage_hash character varying(40) NOT NULL,
     name character varying(255) NOT NULL,
@@ -311,7 +351,7 @@ ALTER TABLE public.easy_thumbnails_thumbnail OWNER TO stroyshop;
 -- Name: easy_thumbnails_thumbnail_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.easy_thumbnails_thumbnail_id_seq
+CREATE SEQUENCE easy_thumbnails_thumbnail_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -325,14 +365,21 @@ ALTER TABLE public.easy_thumbnails_thumbnail_id_seq OWNER TO stroyshop;
 -- Name: easy_thumbnails_thumbnail_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.easy_thumbnails_thumbnail_id_seq OWNED BY public.easy_thumbnails_thumbnail.id;
+ALTER SEQUENCE easy_thumbnails_thumbnail_id_seq OWNED BY easy_thumbnails_thumbnail.id;
 
 
 --
--- Name: easy_thumbnails_thumbnaildimensions; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: easy_thumbnails_thumbnail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.easy_thumbnails_thumbnaildimensions (
+SELECT pg_catalog.setval('easy_thumbnails_thumbnail_id_seq', 721, true);
+
+
+--
+-- Name: easy_thumbnails_thumbnaildimensions; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE easy_thumbnails_thumbnaildimensions (
     id integer NOT NULL,
     thumbnail_id integer NOT NULL,
     width integer,
@@ -348,7 +395,7 @@ ALTER TABLE public.easy_thumbnails_thumbnaildimensions OWNER TO stroyshop;
 -- Name: easy_thumbnails_thumbnaildimensions_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.easy_thumbnails_thumbnaildimensions_id_seq
+CREATE SEQUENCE easy_thumbnails_thumbnaildimensions_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -362,14 +409,21 @@ ALTER TABLE public.easy_thumbnails_thumbnaildimensions_id_seq OWNER TO stroyshop
 -- Name: easy_thumbnails_thumbnaildimensions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.easy_thumbnails_thumbnaildimensions_id_seq OWNED BY public.easy_thumbnails_thumbnaildimensions.id;
+ALTER SEQUENCE easy_thumbnails_thumbnaildimensions_id_seq OWNED BY easy_thumbnails_thumbnaildimensions.id;
 
 
 --
--- Name: filer_clipboard; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: easy_thumbnails_thumbnaildimensions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.filer_clipboard (
+SELECT pg_catalog.setval('easy_thumbnails_thumbnaildimensions_id_seq', 1, false);
+
+
+--
+-- Name: filer_clipboard; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE filer_clipboard (
     id integer NOT NULL,
     user_id integer NOT NULL
 );
@@ -381,7 +435,7 @@ ALTER TABLE public.filer_clipboard OWNER TO stroyshop;
 -- Name: filer_clipboard_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.filer_clipboard_id_seq
+CREATE SEQUENCE filer_clipboard_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -395,14 +449,21 @@ ALTER TABLE public.filer_clipboard_id_seq OWNER TO stroyshop;
 -- Name: filer_clipboard_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.filer_clipboard_id_seq OWNED BY public.filer_clipboard.id;
+ALTER SEQUENCE filer_clipboard_id_seq OWNED BY filer_clipboard.id;
 
 
 --
--- Name: filer_clipboarditem; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: filer_clipboard_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.filer_clipboarditem (
+SELECT pg_catalog.setval('filer_clipboard_id_seq', 1, true);
+
+
+--
+-- Name: filer_clipboarditem; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE filer_clipboarditem (
     id integer NOT NULL,
     clipboard_id integer NOT NULL,
     file_id integer NOT NULL
@@ -415,7 +476,7 @@ ALTER TABLE public.filer_clipboarditem OWNER TO stroyshop;
 -- Name: filer_clipboarditem_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.filer_clipboarditem_id_seq
+CREATE SEQUENCE filer_clipboarditem_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -429,14 +490,21 @@ ALTER TABLE public.filer_clipboarditem_id_seq OWNER TO stroyshop;
 -- Name: filer_clipboarditem_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.filer_clipboarditem_id_seq OWNED BY public.filer_clipboarditem.id;
+ALTER SEQUENCE filer_clipboarditem_id_seq OWNED BY filer_clipboarditem.id;
 
 
 --
--- Name: filer_file; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: filer_clipboarditem_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.filer_file (
+SELECT pg_catalog.setval('filer_clipboarditem_id_seq', 1, false);
+
+
+--
+-- Name: filer_file; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE filer_file (
     id integer NOT NULL,
     file character varying(255),
     _file_size bigint,
@@ -460,7 +528,7 @@ ALTER TABLE public.filer_file OWNER TO stroyshop;
 -- Name: filer_file_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.filer_file_id_seq
+CREATE SEQUENCE filer_file_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -474,14 +542,21 @@ ALTER TABLE public.filer_file_id_seq OWNER TO stroyshop;
 -- Name: filer_file_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.filer_file_id_seq OWNED BY public.filer_file.id;
+ALTER SEQUENCE filer_file_id_seq OWNED BY filer_file.id;
 
 
 --
--- Name: filer_folder; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: filer_file_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.filer_folder (
+SELECT pg_catalog.setval('filer_file_id_seq', 143, true);
+
+
+--
+-- Name: filer_folder; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE filer_folder (
     id integer NOT NULL,
     name character varying(255) NOT NULL,
     uploaded_at timestamp with time zone NOT NULL,
@@ -506,7 +581,7 @@ ALTER TABLE public.filer_folder OWNER TO stroyshop;
 -- Name: filer_folder_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.filer_folder_id_seq
+CREATE SEQUENCE filer_folder_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -520,14 +595,21 @@ ALTER TABLE public.filer_folder_id_seq OWNER TO stroyshop;
 -- Name: filer_folder_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.filer_folder_id_seq OWNED BY public.filer_folder.id;
+ALTER SEQUENCE filer_folder_id_seq OWNED BY filer_folder.id;
 
 
 --
--- Name: filer_folderpermission; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: filer_folder_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.filer_folderpermission (
+SELECT pg_catalog.setval('filer_folder_id_seq', 4, true);
+
+
+--
+-- Name: filer_folderpermission; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE filer_folderpermission (
     id integer NOT NULL,
     type smallint NOT NULL,
     everybody boolean NOT NULL,
@@ -546,7 +628,7 @@ ALTER TABLE public.filer_folderpermission OWNER TO stroyshop;
 -- Name: filer_folderpermission_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.filer_folderpermission_id_seq
+CREATE SEQUENCE filer_folderpermission_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -560,14 +642,21 @@ ALTER TABLE public.filer_folderpermission_id_seq OWNER TO stroyshop;
 -- Name: filer_folderpermission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.filer_folderpermission_id_seq OWNED BY public.filer_folderpermission.id;
+ALTER SEQUENCE filer_folderpermission_id_seq OWNED BY filer_folderpermission.id;
 
 
 --
--- Name: filer_image; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: filer_folderpermission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.filer_image (
+SELECT pg_catalog.setval('filer_folderpermission_id_seq', 1, false);
+
+
+--
+-- Name: filer_image; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE filer_image (
     file_ptr_id integer NOT NULL,
     _height integer,
     _width integer,
@@ -584,10 +673,10 @@ CREATE TABLE public.filer_image (
 ALTER TABLE public.filer_image OWNER TO stroyshop;
 
 --
--- Name: filer_thumbnailoption; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: filer_thumbnailoption; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE TABLE public.filer_thumbnailoption (
+CREATE TABLE filer_thumbnailoption (
     id integer NOT NULL,
     name character varying(100) NOT NULL,
     width integer NOT NULL,
@@ -603,7 +692,7 @@ ALTER TABLE public.filer_thumbnailoption OWNER TO stroyshop;
 -- Name: filer_thumbnailoption_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.filer_thumbnailoption_id_seq
+CREATE SEQUENCE filer_thumbnailoption_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -617,14 +706,21 @@ ALTER TABLE public.filer_thumbnailoption_id_seq OWNER TO stroyshop;
 -- Name: filer_thumbnailoption_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.filer_thumbnailoption_id_seq OWNED BY public.filer_thumbnailoption.id;
+ALTER SEQUENCE filer_thumbnailoption_id_seq OWNED BY filer_thumbnailoption.id;
 
 
 --
--- Name: main_banner; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: filer_thumbnailoption_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.main_banner (
+SELECT pg_catalog.setval('filer_thumbnailoption_id_seq', 1, false);
+
+
+--
+-- Name: main_banner; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE main_banner (
     id integer NOT NULL,
     "order" integer NOT NULL
 );
@@ -636,7 +732,7 @@ ALTER TABLE public.main_banner OWNER TO stroyshop;
 -- Name: main_banner_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.main_banner_id_seq
+CREATE SEQUENCE main_banner_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -650,14 +746,21 @@ ALTER TABLE public.main_banner_id_seq OWNER TO stroyshop;
 -- Name: main_banner_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.main_banner_id_seq OWNED BY public.main_banner.id;
+ALTER SEQUENCE main_banner_id_seq OWNED BY main_banner.id;
 
 
 --
--- Name: main_banner_translation; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: main_banner_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.main_banner_translation (
+SELECT pg_catalog.setval('main_banner_id_seq', 2, true);
+
+
+--
+-- Name: main_banner_translation; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE main_banner_translation (
     id integer NOT NULL,
     language_code character varying(15) NOT NULL,
     name character varying(60) NOT NULL,
@@ -673,7 +776,7 @@ ALTER TABLE public.main_banner_translation OWNER TO stroyshop;
 -- Name: main_banner_translation_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.main_banner_translation_id_seq
+CREATE SEQUENCE main_banner_translation_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -687,14 +790,21 @@ ALTER TABLE public.main_banner_translation_id_seq OWNER TO stroyshop;
 -- Name: main_banner_translation_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.main_banner_translation_id_seq OWNED BY public.main_banner_translation.id;
+ALTER SEQUENCE main_banner_translation_id_seq OWNED BY main_banner_translation.id;
 
 
 --
--- Name: main_customermenu; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: main_banner_translation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.main_customermenu (
+SELECT pg_catalog.setval('main_banner_translation_id_seq', 4, true);
+
+
+--
+-- Name: main_customermenu; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE main_customermenu (
     id integer NOT NULL,
     "order" integer NOT NULL
 );
@@ -706,7 +816,7 @@ ALTER TABLE public.main_customermenu OWNER TO stroyshop;
 -- Name: main_customermenu_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.main_customermenu_id_seq
+CREATE SEQUENCE main_customermenu_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -720,14 +830,21 @@ ALTER TABLE public.main_customermenu_id_seq OWNER TO stroyshop;
 -- Name: main_customermenu_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.main_customermenu_id_seq OWNED BY public.main_customermenu.id;
+ALTER SEQUENCE main_customermenu_id_seq OWNED BY main_customermenu.id;
 
 
 --
--- Name: main_customermenu_translation; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: main_customermenu_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.main_customermenu_translation (
+SELECT pg_catalog.setval('main_customermenu_id_seq', 1, false);
+
+
+--
+-- Name: main_customermenu_translation; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE main_customermenu_translation (
     id integer NOT NULL,
     language_code character varying(15) NOT NULL,
     name character varying(60) NOT NULL,
@@ -742,7 +859,7 @@ ALTER TABLE public.main_customermenu_translation OWNER TO stroyshop;
 -- Name: main_customermenu_translation_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.main_customermenu_translation_id_seq
+CREATE SEQUENCE main_customermenu_translation_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -756,14 +873,21 @@ ALTER TABLE public.main_customermenu_translation_id_seq OWNER TO stroyshop;
 -- Name: main_customermenu_translation_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.main_customermenu_translation_id_seq OWNED BY public.main_customermenu_translation.id;
+ALTER SEQUENCE main_customermenu_translation_id_seq OWNED BY main_customermenu_translation.id;
 
 
 --
--- Name: main_customersmenu; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: main_customermenu_translation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.main_customersmenu (
+SELECT pg_catalog.setval('main_customermenu_translation_id_seq', 1, false);
+
+
+--
+-- Name: main_customersmenu; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE main_customersmenu (
     menu_ptr_id integer NOT NULL
 );
 
@@ -771,10 +895,10 @@ CREATE TABLE public.main_customersmenu (
 ALTER TABLE public.main_customersmenu OWNER TO stroyshop;
 
 --
--- Name: main_menu; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: main_menu; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE TABLE public.main_menu (
+CREATE TABLE main_menu (
     id integer NOT NULL,
     "order" integer NOT NULL
 );
@@ -786,7 +910,7 @@ ALTER TABLE public.main_menu OWNER TO stroyshop;
 -- Name: main_menu_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.main_menu_id_seq
+CREATE SEQUENCE main_menu_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -800,14 +924,21 @@ ALTER TABLE public.main_menu_id_seq OWNER TO stroyshop;
 -- Name: main_menu_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.main_menu_id_seq OWNED BY public.main_menu.id;
+ALTER SEQUENCE main_menu_id_seq OWNED BY main_menu.id;
 
 
 --
--- Name: main_menu_translation; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: main_menu_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.main_menu_translation (
+SELECT pg_catalog.setval('main_menu_id_seq', 4, true);
+
+
+--
+-- Name: main_menu_translation; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE main_menu_translation (
     id integer NOT NULL,
     language_code character varying(15) NOT NULL,
     name character varying(60) NOT NULL,
@@ -822,7 +953,7 @@ ALTER TABLE public.main_menu_translation OWNER TO stroyshop;
 -- Name: main_menu_translation_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.main_menu_translation_id_seq
+CREATE SEQUENCE main_menu_translation_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -836,14 +967,21 @@ ALTER TABLE public.main_menu_translation_id_seq OWNER TO stroyshop;
 -- Name: main_menu_translation_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.main_menu_translation_id_seq OWNED BY public.main_menu_translation.id;
+ALTER SEQUENCE main_menu_translation_id_seq OWNED BY main_menu_translation.id;
 
 
 --
--- Name: main_static; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: main_menu_translation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.main_static (
+SELECT pg_catalog.setval('main_menu_translation_id_seq', 6, true);
+
+
+--
+-- Name: main_static; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE main_static (
     id integer NOT NULL
 );
 
@@ -854,7 +992,7 @@ ALTER TABLE public.main_static OWNER TO stroyshop;
 -- Name: main_static_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.main_static_id_seq
+CREATE SEQUENCE main_static_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -868,14 +1006,21 @@ ALTER TABLE public.main_static_id_seq OWNER TO stroyshop;
 -- Name: main_static_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.main_static_id_seq OWNED BY public.main_static.id;
+ALTER SEQUENCE main_static_id_seq OWNED BY main_static.id;
 
 
 --
--- Name: main_static_translation; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: main_static_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.main_static_translation (
+SELECT pg_catalog.setval('main_static_id_seq', 4, true);
+
+
+--
+-- Name: main_static_translation; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE main_static_translation (
     id integer NOT NULL,
     language_code character varying(15) NOT NULL,
     name character varying(60) NOT NULL,
@@ -892,7 +1037,7 @@ ALTER TABLE public.main_static_translation OWNER TO stroyshop;
 -- Name: main_static_translation_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.main_static_translation_id_seq
+CREATE SEQUENCE main_static_translation_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -906,14 +1051,21 @@ ALTER TABLE public.main_static_translation_id_seq OWNER TO stroyshop;
 -- Name: main_static_translation_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.main_static_translation_id_seq OWNED BY public.main_static_translation.id;
+ALTER SEQUENCE main_static_translation_id_seq OWNED BY main_static_translation.id;
 
 
 --
--- Name: main_staticfooterpage; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: main_static_translation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.main_staticfooterpage (
+SELECT pg_catalog.setval('main_static_translation_id_seq', 7, true);
+
+
+--
+-- Name: main_staticfooterpage; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE main_staticfooterpage (
     id integer NOT NULL,
     menu_type integer
 );
@@ -925,7 +1077,7 @@ ALTER TABLE public.main_staticfooterpage OWNER TO stroyshop;
 -- Name: main_staticfooterpage_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.main_staticfooterpage_id_seq
+CREATE SEQUENCE main_staticfooterpage_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -939,14 +1091,21 @@ ALTER TABLE public.main_staticfooterpage_id_seq OWNER TO stroyshop;
 -- Name: main_staticfooterpage_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.main_staticfooterpage_id_seq OWNED BY public.main_staticfooterpage.id;
+ALTER SEQUENCE main_staticfooterpage_id_seq OWNED BY main_staticfooterpage.id;
 
 
 --
--- Name: main_staticfooterpage_translation; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: main_staticfooterpage_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.main_staticfooterpage_translation (
+SELECT pg_catalog.setval('main_staticfooterpage_id_seq', 2, true);
+
+
+--
+-- Name: main_staticfooterpage_translation; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE main_staticfooterpage_translation (
     id integer NOT NULL,
     language_code character varying(15) NOT NULL,
     name character varying(60) NOT NULL,
@@ -962,7 +1121,7 @@ ALTER TABLE public.main_staticfooterpage_translation OWNER TO stroyshop;
 -- Name: main_staticfooterpage_translation_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.main_staticfooterpage_translation_id_seq
+CREATE SEQUENCE main_staticfooterpage_translation_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -976,14 +1135,21 @@ ALTER TABLE public.main_staticfooterpage_translation_id_seq OWNER TO stroyshop;
 -- Name: main_staticfooterpage_translation_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.main_staticfooterpage_translation_id_seq OWNED BY public.main_staticfooterpage_translation.id;
+ALTER SEQUENCE main_staticfooterpage_translation_id_seq OWNED BY main_staticfooterpage_translation.id;
 
 
 --
--- Name: main_usermenu; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: main_staticfooterpage_translation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.main_usermenu (
+SELECT pg_catalog.setval('main_staticfooterpage_translation_id_seq', 5, true);
+
+
+--
+-- Name: main_usermenu; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE main_usermenu (
     id integer NOT NULL,
     "order" integer NOT NULL
 );
@@ -995,7 +1161,7 @@ ALTER TABLE public.main_usermenu OWNER TO stroyshop;
 -- Name: main_usermenu_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.main_usermenu_id_seq
+CREATE SEQUENCE main_usermenu_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1009,14 +1175,21 @@ ALTER TABLE public.main_usermenu_id_seq OWNER TO stroyshop;
 -- Name: main_usermenu_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.main_usermenu_id_seq OWNED BY public.main_usermenu.id;
+ALTER SEQUENCE main_usermenu_id_seq OWNED BY main_usermenu.id;
 
 
 --
--- Name: main_usermenu_translation; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: main_usermenu_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.main_usermenu_translation (
+SELECT pg_catalog.setval('main_usermenu_id_seq', 1, false);
+
+
+--
+-- Name: main_usermenu_translation; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE main_usermenu_translation (
     id integer NOT NULL,
     language_code character varying(15) NOT NULL,
     name character varying(60) NOT NULL,
@@ -1031,7 +1204,7 @@ ALTER TABLE public.main_usermenu_translation OWNER TO stroyshop;
 -- Name: main_usermenu_translation_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.main_usermenu_translation_id_seq
+CREATE SEQUENCE main_usermenu_translation_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1045,14 +1218,21 @@ ALTER TABLE public.main_usermenu_translation_id_seq OWNER TO stroyshop;
 -- Name: main_usermenu_translation_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.main_usermenu_translation_id_seq OWNED BY public.main_usermenu_translation.id;
+ALTER SEQUENCE main_usermenu_translation_id_seq OWNED BY main_usermenu_translation.id;
 
 
 --
--- Name: main_usersmenu; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: main_usermenu_translation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.main_usersmenu (
+SELECT pg_catalog.setval('main_usermenu_translation_id_seq', 1, false);
+
+
+--
+-- Name: main_usersmenu; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE main_usersmenu (
     menu_ptr_id integer NOT NULL
 );
 
@@ -1060,10 +1240,10 @@ CREATE TABLE public.main_usersmenu (
 ALTER TABLE public.main_usersmenu OWNER TO stroyshop;
 
 --
--- Name: orders_cart; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: orders_cart; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE TABLE public.orders_cart (
+CREATE TABLE orders_cart (
     id integer NOT NULL,
     session_key character varying(255) NOT NULL,
     count integer NOT NULL,
@@ -1080,7 +1260,7 @@ ALTER TABLE public.orders_cart OWNER TO stroyshop;
 -- Name: orders_cart_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.orders_cart_id_seq
+CREATE SEQUENCE orders_cart_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1094,14 +1274,21 @@ ALTER TABLE public.orders_cart_id_seq OWNER TO stroyshop;
 -- Name: orders_cart_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.orders_cart_id_seq OWNED BY public.orders_cart.id;
+ALTER SEQUENCE orders_cart_id_seq OWNED BY orders_cart.id;
 
 
 --
--- Name: orders_order; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: orders_cart_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.orders_order (
+SELECT pg_catalog.setval('orders_cart_id_seq', 331, true);
+
+
+--
+-- Name: orders_order; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE orders_order (
     id integer NOT NULL,
     client_name character varying(60) NOT NULL,
     created timestamp with time zone NOT NULL,
@@ -1111,7 +1298,7 @@ CREATE TABLE public.orders_order (
     state integer NOT NULL,
     total_price numeric(10,2),
     order_unique_id character varying(120),
-    products text NOT NULL
+    products text
 );
 
 
@@ -1121,7 +1308,7 @@ ALTER TABLE public.orders_order OWNER TO stroyshop;
 -- Name: orders_order_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.orders_order_id_seq
+CREATE SEQUENCE orders_order_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1135,14 +1322,21 @@ ALTER TABLE public.orders_order_id_seq OWNER TO stroyshop;
 -- Name: orders_order_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.orders_order_id_seq OWNED BY public.orders_order.id;
+ALTER SEQUENCE orders_order_id_seq OWNED BY orders_order.id;
 
 
 --
--- Name: payment_paycomtransaction; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: orders_order_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.payment_paycomtransaction (
+SELECT pg_catalog.setval('orders_order_id_seq', 52, true);
+
+
+--
+-- Name: payment_paycomtransaction; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE payment_paycomtransaction (
     id integer NOT NULL,
     paycom_transaction_id character varying(255) NOT NULL,
     paycom_time character varying(15) NOT NULL,
@@ -1164,7 +1358,7 @@ ALTER TABLE public.payment_paycomtransaction OWNER TO stroyshop;
 -- Name: payment_paycomtransaction_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.payment_paycomtransaction_id_seq
+CREATE SEQUENCE payment_paycomtransaction_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1178,14 +1372,21 @@ ALTER TABLE public.payment_paycomtransaction_id_seq OWNER TO stroyshop;
 -- Name: payment_paycomtransaction_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.payment_paycomtransaction_id_seq OWNED BY public.payment_paycomtransaction.id;
+ALTER SEQUENCE payment_paycomtransaction_id_seq OWNED BY payment_paycomtransaction.id;
 
 
 --
--- Name: products_brands; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: payment_paycomtransaction_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.products_brands (
+SELECT pg_catalog.setval('payment_paycomtransaction_id_seq', 1, false);
+
+
+--
+-- Name: products_brands; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE products_brands (
     id integer NOT NULL,
     name character varying(60) NOT NULL,
     logo character varying(100) NOT NULL,
@@ -1199,7 +1400,7 @@ ALTER TABLE public.products_brands OWNER TO stroyshop;
 -- Name: products_brands_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.products_brands_id_seq
+CREATE SEQUENCE products_brands_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1213,14 +1414,21 @@ ALTER TABLE public.products_brands_id_seq OWNER TO stroyshop;
 -- Name: products_brands_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.products_brands_id_seq OWNED BY public.products_brands.id;
+ALTER SEQUENCE products_brands_id_seq OWNED BY products_brands.id;
 
 
 --
--- Name: products_category; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: products_brands_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.products_category (
+SELECT pg_catalog.setval('products_brands_id_seq', 22, true);
+
+
+--
+-- Name: products_category; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE products_category (
     id integer NOT NULL,
     "order" integer NOT NULL,
     lft integer NOT NULL,
@@ -1241,7 +1449,7 @@ ALTER TABLE public.products_category OWNER TO stroyshop;
 -- Name: products_category_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.products_category_id_seq
+CREATE SEQUENCE products_category_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1255,14 +1463,21 @@ ALTER TABLE public.products_category_id_seq OWNER TO stroyshop;
 -- Name: products_category_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.products_category_id_seq OWNED BY public.products_category.id;
+ALTER SEQUENCE products_category_id_seq OWNED BY products_category.id;
 
 
 --
--- Name: products_category_translation; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: products_category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.products_category_translation (
+SELECT pg_catalog.setval('products_category_id_seq', 24, true);
+
+
+--
+-- Name: products_category_translation; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE products_category_translation (
     id integer NOT NULL,
     language_code character varying(15) NOT NULL,
     name character varying(60) NOT NULL,
@@ -1277,7 +1492,7 @@ ALTER TABLE public.products_category_translation OWNER TO stroyshop;
 -- Name: products_category_translation_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.products_category_translation_id_seq
+CREATE SEQUENCE products_category_translation_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1291,14 +1506,21 @@ ALTER TABLE public.products_category_translation_id_seq OWNER TO stroyshop;
 -- Name: products_category_translation_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.products_category_translation_id_seq OWNED BY public.products_category_translation.id;
+ALTER SEQUENCE products_category_translation_id_seq OWNED BY products_category_translation.id;
 
 
 --
--- Name: products_color; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: products_category_translation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.products_color (
+SELECT pg_catalog.setval('products_category_translation_id_seq', 26, true);
+
+
+--
+-- Name: products_color; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE products_color (
     id integer NOT NULL,
     color character varying(18) NOT NULL
 );
@@ -1307,10 +1529,10 @@ CREATE TABLE public.products_color (
 ALTER TABLE public.products_color OWNER TO stroyshop;
 
 --
--- Name: products_color_translation; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: products_color_translation; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE TABLE public.products_color_translation (
+CREATE TABLE products_color_translation (
     id integer NOT NULL,
     language_code character varying(15) NOT NULL,
     name character varying(60) NOT NULL,
@@ -1324,7 +1546,7 @@ ALTER TABLE public.products_color_translation OWNER TO stroyshop;
 -- Name: products_color_translation_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.products_color_translation_id_seq
+CREATE SEQUENCE products_color_translation_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1338,14 +1560,21 @@ ALTER TABLE public.products_color_translation_id_seq OWNER TO stroyshop;
 -- Name: products_color_translation_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.products_color_translation_id_seq OWNED BY public.products_color_translation.id;
+ALTER SEQUENCE products_color_translation_id_seq OWNED BY products_color_translation.id;
 
 
 --
--- Name: products_product; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: products_color_translation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.products_product (
+SELECT pg_catalog.setval('products_color_translation_id_seq', 18, true);
+
+
+--
+-- Name: products_product; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE products_product (
     id integer NOT NULL,
     name character varying(120) NOT NULL,
     description text,
@@ -1360,9 +1589,9 @@ CREATE TABLE public.products_product (
     price numeric(10,2),
     is_top boolean NOT NULL,
     default_image character varying(60) NOT NULL,
-    image_0 character varying(100),
-    image_1 character varying(100),
-    image_2 character varying(100)
+    image_0_id integer,
+    image_1_id integer,
+    image_2_id integer
 );
 
 
@@ -1372,7 +1601,7 @@ ALTER TABLE public.products_product OWNER TO stroyshop;
 -- Name: products_product_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.products_product_id_seq
+CREATE SEQUENCE products_product_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1386,14 +1615,21 @@ ALTER TABLE public.products_product_id_seq OWNER TO stroyshop;
 -- Name: products_product_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.products_product_id_seq OWNED BY public.products_product.id;
+ALTER SEQUENCE products_product_id_seq OWNED BY products_product.id;
+
+
+--
+-- Name: products_product_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
+--
+
+SELECT pg_catalog.setval('products_product_id_seq', 137, true);
 
 
 --
 -- Name: products_productcolor_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.products_productcolor_id_seq
+CREATE SEQUENCE products_productcolor_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1407,14 +1643,21 @@ ALTER TABLE public.products_productcolor_id_seq OWNER TO stroyshop;
 -- Name: products_productcolor_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.products_productcolor_id_seq OWNED BY public.products_color.id;
+ALTER SEQUENCE products_productcolor_id_seq OWNED BY products_color.id;
 
 
 --
--- Name: products_productimage; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: products_productcolor_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.products_productimage (
+SELECT pg_catalog.setval('products_productcolor_id_seq', 14, true);
+
+
+--
+-- Name: products_productimage; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE products_productimage (
     id integer NOT NULL,
     image character varying(100) NOT NULL,
     product_id integer NOT NULL
@@ -1427,7 +1670,7 @@ ALTER TABLE public.products_productimage OWNER TO stroyshop;
 -- Name: products_productimage_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.products_productimage_id_seq
+CREATE SEQUENCE products_productimage_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1441,14 +1684,21 @@ ALTER TABLE public.products_productimage_id_seq OWNER TO stroyshop;
 -- Name: products_productimage_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.products_productimage_id_seq OWNED BY public.products_productimage.id;
+ALTER SEQUENCE products_productimage_id_seq OWNED BY products_productimage.id;
 
 
 --
--- Name: products_review; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: products_productimage_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.products_review (
+SELECT pg_catalog.setval('products_productimage_id_seq', 31, true);
+
+
+--
+-- Name: products_review; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE products_review (
     created_at timestamp with time zone NOT NULL,
     id integer NOT NULL,
     text text NOT NULL,
@@ -1466,7 +1716,7 @@ ALTER TABLE public.products_review OWNER TO stroyshop;
 -- Name: products_review_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.products_review_id_seq
+CREATE SEQUENCE products_review_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1480,14 +1730,21 @@ ALTER TABLE public.products_review_id_seq OWNER TO stroyshop;
 -- Name: products_review_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.products_review_id_seq OWNED BY public.products_review.id;
+ALTER SEQUENCE products_review_id_seq OWNED BY products_review.id;
 
 
 --
--- Name: products_variation; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: products_review_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.products_variation (
+SELECT pg_catalog.setval('products_review_id_seq', 18, true);
+
+
+--
+-- Name: products_variation; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE products_variation (
     id integer NOT NULL,
     price numeric(10,2) NOT NULL,
     quantity integer NOT NULL,
@@ -1503,7 +1760,7 @@ ALTER TABLE public.products_variation OWNER TO stroyshop;
 -- Name: products_variation_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.products_variation_id_seq
+CREATE SEQUENCE products_variation_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1517,14 +1774,21 @@ ALTER TABLE public.products_variation_id_seq OWNER TO stroyshop;
 -- Name: products_variation_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.products_variation_id_seq OWNED BY public.products_variation.id;
+ALTER SEQUENCE products_variation_id_seq OWNED BY products_variation.id;
 
 
 --
--- Name: products_volumetype; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: products_variation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.products_volumetype (
+SELECT pg_catalog.setval('products_variation_id_seq', 268, true);
+
+
+--
+-- Name: products_volumetype; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE products_volumetype (
     id integer NOT NULL
 );
 
@@ -1535,7 +1799,7 @@ ALTER TABLE public.products_volumetype OWNER TO stroyshop;
 -- Name: products_volumetype_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.products_volumetype_id_seq
+CREATE SEQUENCE products_volumetype_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1549,14 +1813,21 @@ ALTER TABLE public.products_volumetype_id_seq OWNER TO stroyshop;
 -- Name: products_volumetype_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.products_volumetype_id_seq OWNED BY public.products_volumetype.id;
+ALTER SEQUENCE products_volumetype_id_seq OWNED BY products_volumetype.id;
 
 
 --
--- Name: products_volumetype_translation; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: products_volumetype_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.products_volumetype_translation (
+SELECT pg_catalog.setval('products_volumetype_id_seq', 1, true);
+
+
+--
+-- Name: products_volumetype_translation; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE products_volumetype_translation (
     id integer NOT NULL,
     language_code character varying(15) NOT NULL,
     name character varying(60) NOT NULL,
@@ -1570,7 +1841,7 @@ ALTER TABLE public.products_volumetype_translation OWNER TO stroyshop;
 -- Name: products_volumetype_translation_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.products_volumetype_translation_id_seq
+CREATE SEQUENCE products_volumetype_translation_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1584,14 +1855,21 @@ ALTER TABLE public.products_volumetype_translation_id_seq OWNER TO stroyshop;
 -- Name: products_volumetype_translation_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.products_volumetype_translation_id_seq OWNED BY public.products_volumetype_translation.id;
+ALTER SEQUENCE products_volumetype_translation_id_seq OWNED BY products_volumetype_translation.id;
 
 
 --
--- Name: users_client; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: products_volumetype_translation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.users_client (
+SELECT pg_catalog.setval('products_volumetype_translation_id_seq', 3, true);
+
+
+--
+-- Name: users_client; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE users_client (
     id integer NOT NULL,
     address text,
     user_id integer NOT NULL,
@@ -1605,7 +1883,7 @@ ALTER TABLE public.users_client OWNER TO stroyshop;
 -- Name: users_client_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.users_client_id_seq
+CREATE SEQUENCE users_client_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1619,14 +1897,21 @@ ALTER TABLE public.users_client_id_seq OWNER TO stroyshop;
 -- Name: users_client_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.users_client_id_seq OWNED BY public.users_client.id;
+ALTER SEQUENCE users_client_id_seq OWNED BY users_client.id;
 
 
 --
--- Name: users_deliveryaddress; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: users_client_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.users_deliveryaddress (
+SELECT pg_catalog.setval('users_client_id_seq', 5, true);
+
+
+--
+-- Name: users_deliveryaddress; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE users_deliveryaddress (
     id integer NOT NULL,
     address text NOT NULL,
     email character varying(60) NOT NULL,
@@ -1642,7 +1927,7 @@ ALTER TABLE public.users_deliveryaddress OWNER TO stroyshop;
 -- Name: users_deliveryaddress_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.users_deliveryaddress_id_seq
+CREATE SEQUENCE users_deliveryaddress_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1656,14 +1941,21 @@ ALTER TABLE public.users_deliveryaddress_id_seq OWNER TO stroyshop;
 -- Name: users_deliveryaddress_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.users_deliveryaddress_id_seq OWNED BY public.users_deliveryaddress.id;
+ALTER SEQUENCE users_deliveryaddress_id_seq OWNED BY users_deliveryaddress.id;
 
 
 --
--- Name: users_files; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: users_deliveryaddress_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.users_files (
+SELECT pg_catalog.setval('users_deliveryaddress_id_seq', 19, true);
+
+
+--
+-- Name: users_files; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE users_files (
     id integer NOT NULL,
     file character varying(100) NOT NULL
 );
@@ -1675,7 +1967,7 @@ ALTER TABLE public.users_files OWNER TO stroyshop;
 -- Name: users_files_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.users_files_id_seq
+CREATE SEQUENCE users_files_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1689,14 +1981,21 @@ ALTER TABLE public.users_files_id_seq OWNER TO stroyshop;
 -- Name: users_files_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.users_files_id_seq OWNED BY public.users_files.id;
+ALTER SEQUENCE users_files_id_seq OWNED BY users_files.id;
 
 
 --
--- Name: users_merchant; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: users_files_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.users_merchant (
+SELECT pg_catalog.setval('users_files_id_seq', 1, true);
+
+
+--
+-- Name: users_merchant; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE users_merchant (
     id integer NOT NULL,
     merchant_type integer NOT NULL,
     user_id integer NOT NULL
@@ -1709,7 +2008,7 @@ ALTER TABLE public.users_merchant OWNER TO stroyshop;
 -- Name: users_merchant_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.users_merchant_id_seq
+CREATE SEQUENCE users_merchant_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1723,14 +2022,21 @@ ALTER TABLE public.users_merchant_id_seq OWNER TO stroyshop;
 -- Name: users_merchant_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.users_merchant_id_seq OWNED BY public.users_merchant.id;
+ALTER SEQUENCE users_merchant_id_seq OWNED BY users_merchant.id;
 
 
 --
--- Name: users_paymentcards; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: users_merchant_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.users_paymentcards (
+SELECT pg_catalog.setval('users_merchant_id_seq', 2, true);
+
+
+--
+-- Name: users_paymentcards; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE users_paymentcards (
     id integer NOT NULL,
     card_holder character varying(60) NOT NULL,
     cart_number character varying(60) NOT NULL,
@@ -1747,7 +2053,7 @@ ALTER TABLE public.users_paymentcards OWNER TO stroyshop;
 -- Name: users_paymentcards_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.users_paymentcards_id_seq
+CREATE SEQUENCE users_paymentcards_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1761,14 +2067,21 @@ ALTER TABLE public.users_paymentcards_id_seq OWNER TO stroyshop;
 -- Name: users_paymentcards_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.users_paymentcards_id_seq OWNED BY public.users_paymentcards.id;
+ALTER SEQUENCE users_paymentcards_id_seq OWNED BY users_paymentcards.id;
 
 
 --
--- Name: users_user; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: users_paymentcards_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.users_user (
+SELECT pg_catalog.setval('users_paymentcards_id_seq', 12, true);
+
+
+--
+-- Name: users_user; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE users_user (
     id integer NOT NULL,
     password character varying(128) NOT NULL,
     last_login timestamp with time zone,
@@ -1787,10 +2100,10 @@ CREATE TABLE public.users_user (
 ALTER TABLE public.users_user OWNER TO stroyshop;
 
 --
--- Name: users_user_groups; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: users_user_groups; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE TABLE public.users_user_groups (
+CREATE TABLE users_user_groups (
     id integer NOT NULL,
     user_id integer NOT NULL,
     group_id integer NOT NULL
@@ -1803,7 +2116,7 @@ ALTER TABLE public.users_user_groups OWNER TO stroyshop;
 -- Name: users_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.users_user_groups_id_seq
+CREATE SEQUENCE users_user_groups_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1817,14 +2130,21 @@ ALTER TABLE public.users_user_groups_id_seq OWNER TO stroyshop;
 -- Name: users_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.users_user_groups_id_seq OWNED BY public.users_user_groups.id;
+ALTER SEQUENCE users_user_groups_id_seq OWNED BY users_user_groups.id;
+
+
+--
+-- Name: users_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
+--
+
+SELECT pg_catalog.setval('users_user_groups_id_seq', 1, false);
 
 
 --
 -- Name: users_user_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.users_user_id_seq
+CREATE SEQUENCE users_user_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1838,14 +2158,21 @@ ALTER TABLE public.users_user_id_seq OWNER TO stroyshop;
 -- Name: users_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.users_user_id_seq OWNED BY public.users_user.id;
+ALTER SEQUENCE users_user_id_seq OWNED BY users_user.id;
 
 
 --
--- Name: users_user_user_permissions; Type: TABLE; Schema: public; Owner: stroyshop
+-- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-CREATE TABLE public.users_user_user_permissions (
+SELECT pg_catalog.setval('users_user_id_seq', 22, true);
+
+
+--
+-- Name: users_user_user_permissions; Type: TABLE; Schema: public; Owner: stroyshop; Tablespace: 
+--
+
+CREATE TABLE users_user_user_permissions (
     id integer NOT NULL,
     user_id integer NOT NULL,
     permission_id integer NOT NULL
@@ -1858,7 +2185,7 @@ ALTER TABLE public.users_user_user_permissions OWNER TO stroyshop;
 -- Name: users_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: stroyshop
 --
 
-CREATE SEQUENCE public.users_user_user_permissions_id_seq
+CREATE SEQUENCE users_user_user_permissions_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1872,387 +2199,380 @@ ALTER TABLE public.users_user_user_permissions_id_seq OWNER TO stroyshop;
 -- Name: users_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: stroyshop
 --
 
-ALTER SEQUENCE public.users_user_user_permissions_id_seq OWNED BY public.users_user_user_permissions.id;
+ALTER SEQUENCE users_user_user_permissions_id_seq OWNED BY users_user_user_permissions.id;
 
 
 --
--- Name: auth_group id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: users_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.auth_group ALTER COLUMN id SET DEFAULT nextval('public.auth_group_id_seq'::regclass);
+SELECT pg_catalog.setval('users_user_user_permissions_id_seq', 1, false);
 
 
 --
--- Name: auth_group_permissions id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_group_permissions_id_seq'::regclass);
+ALTER TABLE ONLY auth_group ALTER COLUMN id SET DEFAULT nextval('auth_group_id_seq'::regclass);
 
 
 --
--- Name: auth_permission id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.auth_permission ALTER COLUMN id SET DEFAULT nextval('public.auth_permission_id_seq'::regclass);
+ALTER TABLE ONLY auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('auth_group_permissions_id_seq'::regclass);
 
 
 --
--- Name: django_admin_log id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.django_admin_log ALTER COLUMN id SET DEFAULT nextval('public.django_admin_log_id_seq'::regclass);
+ALTER TABLE ONLY auth_permission ALTER COLUMN id SET DEFAULT nextval('auth_permission_id_seq'::regclass);
 
 
 --
--- Name: django_content_type id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.django_content_type ALTER COLUMN id SET DEFAULT nextval('public.django_content_type_id_seq'::regclass);
+ALTER TABLE ONLY django_admin_log ALTER COLUMN id SET DEFAULT nextval('django_admin_log_id_seq'::regclass);
 
 
 --
--- Name: django_migrations id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.django_migrations ALTER COLUMN id SET DEFAULT nextval('public.django_migrations_id_seq'::regclass);
+ALTER TABLE ONLY django_content_type ALTER COLUMN id SET DEFAULT nextval('django_content_type_id_seq'::regclass);
 
 
 --
--- Name: easy_thumbnails_source id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.easy_thumbnails_source ALTER COLUMN id SET DEFAULT nextval('public.easy_thumbnails_source_id_seq'::regclass);
+ALTER TABLE ONLY django_migrations ALTER COLUMN id SET DEFAULT nextval('django_migrations_id_seq'::regclass);
 
 
 --
--- Name: easy_thumbnails_thumbnail id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.easy_thumbnails_thumbnail ALTER COLUMN id SET DEFAULT nextval('public.easy_thumbnails_thumbnail_id_seq'::regclass);
+ALTER TABLE ONLY easy_thumbnails_source ALTER COLUMN id SET DEFAULT nextval('easy_thumbnails_source_id_seq'::regclass);
 
 
 --
--- Name: easy_thumbnails_thumbnaildimensions id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.easy_thumbnails_thumbnaildimensions ALTER COLUMN id SET DEFAULT nextval('public.easy_thumbnails_thumbnaildimensions_id_seq'::regclass);
+ALTER TABLE ONLY easy_thumbnails_thumbnail ALTER COLUMN id SET DEFAULT nextval('easy_thumbnails_thumbnail_id_seq'::regclass);
 
 
 --
--- Name: filer_clipboard id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.filer_clipboard ALTER COLUMN id SET DEFAULT nextval('public.filer_clipboard_id_seq'::regclass);
+ALTER TABLE ONLY easy_thumbnails_thumbnaildimensions ALTER COLUMN id SET DEFAULT nextval('easy_thumbnails_thumbnaildimensions_id_seq'::regclass);
 
 
 --
--- Name: filer_clipboarditem id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.filer_clipboarditem ALTER COLUMN id SET DEFAULT nextval('public.filer_clipboarditem_id_seq'::regclass);
+ALTER TABLE ONLY filer_clipboard ALTER COLUMN id SET DEFAULT nextval('filer_clipboard_id_seq'::regclass);
 
 
 --
--- Name: filer_file id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.filer_file ALTER COLUMN id SET DEFAULT nextval('public.filer_file_id_seq'::regclass);
+ALTER TABLE ONLY filer_clipboarditem ALTER COLUMN id SET DEFAULT nextval('filer_clipboarditem_id_seq'::regclass);
 
 
 --
--- Name: filer_folder id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.filer_folder ALTER COLUMN id SET DEFAULT nextval('public.filer_folder_id_seq'::regclass);
+ALTER TABLE ONLY filer_file ALTER COLUMN id SET DEFAULT nextval('filer_file_id_seq'::regclass);
 
 
 --
--- Name: filer_folderpermission id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.filer_folderpermission ALTER COLUMN id SET DEFAULT nextval('public.filer_folderpermission_id_seq'::regclass);
+ALTER TABLE ONLY filer_folder ALTER COLUMN id SET DEFAULT nextval('filer_folder_id_seq'::regclass);
 
 
 --
--- Name: filer_thumbnailoption id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.filer_thumbnailoption ALTER COLUMN id SET DEFAULT nextval('public.filer_thumbnailoption_id_seq'::regclass);
+ALTER TABLE ONLY filer_folderpermission ALTER COLUMN id SET DEFAULT nextval('filer_folderpermission_id_seq'::regclass);
 
 
 --
--- Name: main_banner id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.main_banner ALTER COLUMN id SET DEFAULT nextval('public.main_banner_id_seq'::regclass);
+ALTER TABLE ONLY filer_thumbnailoption ALTER COLUMN id SET DEFAULT nextval('filer_thumbnailoption_id_seq'::regclass);
 
 
 --
--- Name: main_banner_translation id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.main_banner_translation ALTER COLUMN id SET DEFAULT nextval('public.main_banner_translation_id_seq'::regclass);
+ALTER TABLE ONLY main_banner ALTER COLUMN id SET DEFAULT nextval('main_banner_id_seq'::regclass);
 
 
 --
--- Name: main_customermenu id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.main_customermenu ALTER COLUMN id SET DEFAULT nextval('public.main_customermenu_id_seq'::regclass);
+ALTER TABLE ONLY main_banner_translation ALTER COLUMN id SET DEFAULT nextval('main_banner_translation_id_seq'::regclass);
 
 
 --
--- Name: main_customermenu_translation id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.main_customermenu_translation ALTER COLUMN id SET DEFAULT nextval('public.main_customermenu_translation_id_seq'::regclass);
+ALTER TABLE ONLY main_customermenu ALTER COLUMN id SET DEFAULT nextval('main_customermenu_id_seq'::regclass);
 
 
 --
--- Name: main_menu id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.main_menu ALTER COLUMN id SET DEFAULT nextval('public.main_menu_id_seq'::regclass);
+ALTER TABLE ONLY main_customermenu_translation ALTER COLUMN id SET DEFAULT nextval('main_customermenu_translation_id_seq'::regclass);
 
 
 --
--- Name: main_menu_translation id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.main_menu_translation ALTER COLUMN id SET DEFAULT nextval('public.main_menu_translation_id_seq'::regclass);
+ALTER TABLE ONLY main_menu ALTER COLUMN id SET DEFAULT nextval('main_menu_id_seq'::regclass);
 
 
 --
--- Name: main_static id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.main_static ALTER COLUMN id SET DEFAULT nextval('public.main_static_id_seq'::regclass);
+ALTER TABLE ONLY main_menu_translation ALTER COLUMN id SET DEFAULT nextval('main_menu_translation_id_seq'::regclass);
 
 
 --
--- Name: main_static_translation id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.main_static_translation ALTER COLUMN id SET DEFAULT nextval('public.main_static_translation_id_seq'::regclass);
+ALTER TABLE ONLY main_static ALTER COLUMN id SET DEFAULT nextval('main_static_id_seq'::regclass);
 
 
 --
--- Name: main_staticfooterpage id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.main_staticfooterpage ALTER COLUMN id SET DEFAULT nextval('public.main_staticfooterpage_id_seq'::regclass);
+ALTER TABLE ONLY main_static_translation ALTER COLUMN id SET DEFAULT nextval('main_static_translation_id_seq'::regclass);
 
 
 --
--- Name: main_staticfooterpage_translation id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.main_staticfooterpage_translation ALTER COLUMN id SET DEFAULT nextval('public.main_staticfooterpage_translation_id_seq'::regclass);
+ALTER TABLE ONLY main_staticfooterpage ALTER COLUMN id SET DEFAULT nextval('main_staticfooterpage_id_seq'::regclass);
 
 
 --
--- Name: main_usermenu id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.main_usermenu ALTER COLUMN id SET DEFAULT nextval('public.main_usermenu_id_seq'::regclass);
+ALTER TABLE ONLY main_staticfooterpage_translation ALTER COLUMN id SET DEFAULT nextval('main_staticfooterpage_translation_id_seq'::regclass);
 
 
 --
--- Name: main_usermenu_translation id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.main_usermenu_translation ALTER COLUMN id SET DEFAULT nextval('public.main_usermenu_translation_id_seq'::regclass);
+ALTER TABLE ONLY main_usermenu ALTER COLUMN id SET DEFAULT nextval('main_usermenu_id_seq'::regclass);
 
 
 --
--- Name: orders_cart id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.orders_cart ALTER COLUMN id SET DEFAULT nextval('public.orders_cart_id_seq'::regclass);
+ALTER TABLE ONLY main_usermenu_translation ALTER COLUMN id SET DEFAULT nextval('main_usermenu_translation_id_seq'::regclass);
 
 
 --
--- Name: orders_order id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.orders_order ALTER COLUMN id SET DEFAULT nextval('public.orders_order_id_seq'::regclass);
+ALTER TABLE ONLY orders_cart ALTER COLUMN id SET DEFAULT nextval('orders_cart_id_seq'::regclass);
 
 
 --
--- Name: payment_paycomtransaction id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.payment_paycomtransaction ALTER COLUMN id SET DEFAULT nextval('public.payment_paycomtransaction_id_seq'::regclass);
+ALTER TABLE ONLY orders_order ALTER COLUMN id SET DEFAULT nextval('orders_order_id_seq'::regclass);
 
 
 --
--- Name: products_brands id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.products_brands ALTER COLUMN id SET DEFAULT nextval('public.products_brands_id_seq'::regclass);
+ALTER TABLE ONLY payment_paycomtransaction ALTER COLUMN id SET DEFAULT nextval('payment_paycomtransaction_id_seq'::regclass);
 
 
 --
--- Name: products_category id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.products_category ALTER COLUMN id SET DEFAULT nextval('public.products_category_id_seq'::regclass);
+ALTER TABLE ONLY products_brands ALTER COLUMN id SET DEFAULT nextval('products_brands_id_seq'::regclass);
 
 
 --
--- Name: products_category_translation id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.products_category_translation ALTER COLUMN id SET DEFAULT nextval('public.products_category_translation_id_seq'::regclass);
+ALTER TABLE ONLY products_category ALTER COLUMN id SET DEFAULT nextval('products_category_id_seq'::regclass);
 
 
 --
--- Name: products_color id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.products_color ALTER COLUMN id SET DEFAULT nextval('public.products_productcolor_id_seq'::regclass);
+ALTER TABLE ONLY products_category_translation ALTER COLUMN id SET DEFAULT nextval('products_category_translation_id_seq'::regclass);
 
 
 --
--- Name: products_color_translation id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.products_color_translation ALTER COLUMN id SET DEFAULT nextval('public.products_color_translation_id_seq'::regclass);
+ALTER TABLE ONLY products_color ALTER COLUMN id SET DEFAULT nextval('products_productcolor_id_seq'::regclass);
 
 
 --
--- Name: products_product id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.products_product ALTER COLUMN id SET DEFAULT nextval('public.products_product_id_seq'::regclass);
+ALTER TABLE ONLY products_color_translation ALTER COLUMN id SET DEFAULT nextval('products_color_translation_id_seq'::regclass);
 
 
 --
--- Name: products_productimage id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.products_productimage ALTER COLUMN id SET DEFAULT nextval('public.products_productimage_id_seq'::regclass);
+ALTER TABLE ONLY products_product ALTER COLUMN id SET DEFAULT nextval('products_product_id_seq'::regclass);
 
 
 --
--- Name: products_review id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.products_review ALTER COLUMN id SET DEFAULT nextval('public.products_review_id_seq'::regclass);
+ALTER TABLE ONLY products_productimage ALTER COLUMN id SET DEFAULT nextval('products_productimage_id_seq'::regclass);
 
 
 --
--- Name: products_variation id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.products_variation ALTER COLUMN id SET DEFAULT nextval('public.products_variation_id_seq'::regclass);
+ALTER TABLE ONLY products_review ALTER COLUMN id SET DEFAULT nextval('products_review_id_seq'::regclass);
 
 
 --
--- Name: products_volumetype id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.products_volumetype ALTER COLUMN id SET DEFAULT nextval('public.products_volumetype_id_seq'::regclass);
+ALTER TABLE ONLY products_variation ALTER COLUMN id SET DEFAULT nextval('products_variation_id_seq'::regclass);
 
 
 --
--- Name: products_volumetype_translation id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.products_volumetype_translation ALTER COLUMN id SET DEFAULT nextval('public.products_volumetype_translation_id_seq'::regclass);
+ALTER TABLE ONLY products_volumetype ALTER COLUMN id SET DEFAULT nextval('products_volumetype_id_seq'::regclass);
 
 
 --
--- Name: users_client id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.users_client ALTER COLUMN id SET DEFAULT nextval('public.users_client_id_seq'::regclass);
+ALTER TABLE ONLY products_volumetype_translation ALTER COLUMN id SET DEFAULT nextval('products_volumetype_translation_id_seq'::regclass);
 
 
 --
--- Name: users_deliveryaddress id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.users_deliveryaddress ALTER COLUMN id SET DEFAULT nextval('public.users_deliveryaddress_id_seq'::regclass);
+ALTER TABLE ONLY users_client ALTER COLUMN id SET DEFAULT nextval('users_client_id_seq'::regclass);
 
 
 --
--- Name: users_files id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.users_files ALTER COLUMN id SET DEFAULT nextval('public.users_files_id_seq'::regclass);
+ALTER TABLE ONLY users_deliveryaddress ALTER COLUMN id SET DEFAULT nextval('users_deliveryaddress_id_seq'::regclass);
 
 
 --
--- Name: users_merchant id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.users_merchant ALTER COLUMN id SET DEFAULT nextval('public.users_merchant_id_seq'::regclass);
+ALTER TABLE ONLY users_files ALTER COLUMN id SET DEFAULT nextval('users_files_id_seq'::regclass);
 
 
 --
--- Name: users_paymentcards id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.users_paymentcards ALTER COLUMN id SET DEFAULT nextval('public.users_paymentcards_id_seq'::regclass);
+ALTER TABLE ONLY users_merchant ALTER COLUMN id SET DEFAULT nextval('users_merchant_id_seq'::regclass);
 
 
 --
--- Name: users_user id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.users_user ALTER COLUMN id SET DEFAULT nextval('public.users_user_id_seq'::regclass);
+ALTER TABLE ONLY users_paymentcards ALTER COLUMN id SET DEFAULT nextval('users_paymentcards_id_seq'::regclass);
 
 
 --
--- Name: users_user_groups id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.users_user_groups ALTER COLUMN id SET DEFAULT nextval('public.users_user_groups_id_seq'::regclass);
+ALTER TABLE ONLY users_user ALTER COLUMN id SET DEFAULT nextval('users_user_id_seq'::regclass);
 
 
 --
--- Name: users_user_user_permissions id; Type: DEFAULT; Schema: public; Owner: stroyshop
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.users_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('public.users_user_user_permissions_id_seq'::regclass);
+ALTER TABLE ONLY users_user_groups ALTER COLUMN id SET DEFAULT nextval('users_user_groups_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: stroyshop
+--
+
+ALTER TABLE ONLY users_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('users_user_user_permissions_id_seq'::regclass);
 
 
 --
 -- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.auth_group (id, name) FROM stdin;
+COPY auth_group (id, name) FROM stdin;
 \.
-
-
---
--- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.auth_group_id_seq', 1, false);
 
 
 --
 -- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.auth_group_permissions (id, group_id, permission_id) FROM stdin;
+COPY auth_group_permissions (id, group_id, permission_id) FROM stdin;
 \.
-
-
---
--- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 1, false);
 
 
 --
 -- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
+COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
 1	Can add log entry	1	add_logentry
 2	Can change log entry	1	change_logentry
 3	Can delete log entry	1	delete_logentry
@@ -2393,17 +2713,10 @@ COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
 
 
 --
--- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.auth_permission_id_seq', 136, true);
-
-
---
 -- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+COPY django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
 1	2018-02-22 02:06:20.38367+05	1	998389478	2	[{"changed": {"fields": ["phone"]}}]	6	1
 2	2018-02-23 00:49:58.337403+05	2	Водоэмульсионная краска	1	[{"added": {}}]	14	1
 3	2018-02-23 00:50:56.10817+05	2	Vodoimulsiya kraska	2	[{"changed": {"fields": ["name", "slug"]}}]	14	1
@@ -2764,21 +3077,147 @@ COPY public.django_admin_log (id, action_time, object_id, object_repr, action_fl
 358	2018-04-26 14:29:14.651039+05	2	Для партнеров	1	[{"added": {}}]	54	1
 359	2018-04-26 14:30:14.700739+05	2	For partners	2	[{"changed": {"fields": ["name", "slug", "body"]}}]	54	1
 360	2018-04-26 17:10:59.865218+05	2	Hamkorlar	2	[{"changed": {"fields": ["name", "slug", "body"]}}]	54	1
+361	2018-04-27 18:43:20.284273+05	31	Order object	2	[{"changed": {"fields": ["products"]}}]	34	1
+362	2018-04-30 17:27:53.374333+05	16	Screenshot from 2018-04-27 16-54-24.png	3		50	1
+363	2018-04-30 17:28:57.679976+05	6	Screenshot from 2018-03-28 23-04-22.png	3		50	1
+364	2018-04-30 17:37:49.644741+05	116	Test product	2	[{"changed": {"fields": ["image"]}}]	23	1
+365	2018-04-30 18:12:37.44465+05	117	asasas	1	[{"added": {}}, {"added": {"name": "Variation", "object": "a"}}]	23	1
+366	2018-04-30 18:15:11.673473+05	17	Screenshot from 2018-04-27 16-54-27.png	3		50	1
+367	2018-04-30 18:15:11.881296+05	19	Screenshot from 2018-04-22 14-49-04.png	3		50	1
+368	2018-04-30 18:15:12.013972+05	20	Screenshot from 2018-04-21 17-57-45.png	3		50	1
+369	2018-04-30 18:15:12.290927+05	21	Screenshot from 2018-04-22 13-37-49.png	3		50	1
+370	2018-04-30 18:15:12.446167+05	22	Screenshot from 2018-04-20 22-05-07.png	3		50	1
+371	2018-04-30 18:15:12.623321+05	23	Screenshot from 2018-04-20 22-05-27.png	3		50	1
+372	2018-04-30 18:15:12.778111+05	24	Screenshot from 2018-04-20 13-59-15.png	3		50	1
+373	2018-04-30 18:15:12.932832+05	25	Screenshot from 2018-04-20 11-36-27.png	3		50	1
+374	2018-04-30 18:15:13.065917+05	26	Screenshot from 2018-04-20 10-48-48.png	3		50	1
+375	2018-04-30 18:15:13.209702+05	27	Screenshot from 2018-04-20 10-43-50.png	3		50	1
+376	2018-04-30 18:15:13.342651+05	28	Screenshot from 2018-04-20 10-43-26.png	3		50	1
+377	2018-04-30 18:15:13.542065+05	29	Screenshot from 2018-04-20 10-43-12.png	3		50	1
+378	2018-04-30 18:15:13.741289+05	30	Screenshot from 2018-04-20 09-32-33.png	3		50	1
+379	2018-04-30 18:15:13.929451+05	31	Screenshot from 2018-04-19 21-30-21.png	3		50	1
+380	2018-04-30 18:15:14.106743+05	32	Screenshot from 2018-04-19 18-52-48.png	3		50	1
+381	2018-04-30 18:15:14.261657+05	33	Screenshot from 2018-04-19 18-42-03.png	3		50	1
+382	2018-04-30 18:15:14.405611+05	34	Screenshot from 2018-04-19 18-41-47.png	3		50	1
+383	2018-04-30 18:15:14.549354+05	35	Screenshot from 2018-04-19 18-27-12.png	3		50	1
+384	2018-04-30 18:15:14.748785+05	36	Screenshot from 2018-04-19 18-25-48.png	3		50	1
+385	2018-04-30 18:15:14.892698+05	37	Screenshot from 2018-04-19 18-12-16.png	3		50	1
+386	2018-04-30 18:15:37.245814+05	7	Screenshot from 2018-04-27 17-41-24.png	3		50	1
+387	2018-04-30 18:15:37.452968+05	8	Screenshot from 2018-04-29 20-57-56.png	3		50	1
+388	2018-04-30 18:15:37.608078+05	9	Screenshot from 2018-04-29 17-06-21.png	3		50	1
+389	2018-04-30 18:15:37.76294+05	10	Screenshot from 2018-04-27 17-29-08.png	3		50	1
+390	2018-04-30 18:15:38.117193+05	11	Screenshot from 2018-04-27 17-02-27.png	3		50	1
+391	2018-04-30 18:15:38.272256+05	12	Screenshot from 2018-04-27 17-06-39.png	3		50	1
+392	2018-04-30 18:15:38.405001+05	13	Screenshot from 2018-04-27 17-00-23.png	3		50	1
+393	2018-04-30 18:15:38.537903+05	14	Screenshot from 2018-04-27 17-00-20.png	3		50	1
+394	2018-04-30 18:15:38.67131+05	15	Screenshot from 2018-04-27 16-55-33.png	3		50	1
+395	2018-04-30 18:16:13.018074+05	38	Screenshot from 2018-04-13 08-03-23.png	3		50	1
+396	2018-04-30 18:16:13.213318+05	39	Screenshot from 2018-04-13 10-45-34.png	3		50	1
+397	2018-04-30 18:16:13.368223+05	40	Screenshot from 2018-04-13 09-55-23.png	3		50	1
+398	2018-04-30 18:16:13.556371+05	41	Screenshot from 2018-04-13 10-47-18.png	3		50	1
+399	2018-04-30 18:16:13.722631+05	42	Screenshot from 2018-04-13 15-06-18.png	3		50	1
+400	2018-04-30 18:16:13.866211+05	43	Screenshot from 2018-04-13 15-07-03.png	3		50	1
+401	2018-04-30 18:16:13.998923+05	44	Screenshot from 2018-04-13 15-09-52.png	3		50	1
+402	2018-04-30 18:16:14.165158+05	45	Screenshot from 2018-04-13 15-17-33.png	3		50	1
+403	2018-04-30 18:16:14.320358+05	46	Screenshot from 2018-04-13 15-17-42.png	3		50	1
+404	2018-04-30 18:16:14.442201+05	47	Screenshot from 2018-04-13 19-57-57.png	3		50	1
+405	2018-04-30 18:16:14.630187+05	48	Screenshot from 2018-04-13 19-59-30.png	3		50	1
+406	2018-04-30 18:16:14.796512+05	49	Screenshot from 2018-04-13 20-04-54.png	3		50	1
+407	2018-04-30 18:16:15.062111+05	50	Screenshot from 2018-04-13 20-04-58.png	3		50	1
+408	2018-04-30 18:16:15.261178+05	51	Screenshot from 2018-04-13 20-05-51.png	3		50	1
+409	2018-04-30 18:16:15.604761+05	52	Screenshot from 2018-04-13 20-07-10.png	3		50	1
+410	2018-04-30 18:16:15.858921+05	53	Screenshot from 2018-04-13 23-21-38.png	3		50	1
+411	2018-04-30 18:16:15.991758+05	54	Screenshot from 2018-04-13 23-21-45.png	3		50	1
+412	2018-04-30 18:16:16.157907+05	55	Screenshot from 2018-04-14 21-06-47.png	3		50	1
+413	2018-04-30 18:16:16.313068+05	56	Screenshot from 2018-04-14 22-32-54.png	3		50	1
+414	2018-04-30 18:16:16.468022+05	57	Screenshot from 2018-04-14 22-50-44.png	3		50	1
+415	2018-04-30 18:24:30.050009+05	1	maps.png	3		50	1
+416	2018-04-30 18:24:30.370359+05	18	Screenshot from 2018-04-19 17-46-07.png	3		50	1
+417	2018-04-30 18:24:52.746476+05	58	Screenshot from 2018-04-14 22-50-48.png	3		50	1
+418	2018-04-30 18:24:53.019451+05	59	Screenshot from 2018-04-15 14-56-24.png	3		50	1
+419	2018-04-30 18:24:53.218462+05	60	Screenshot from 2018-04-15 15-00-39.png	3		50	1
+420	2018-04-30 18:24:53.35117+05	61	Screenshot from 2018-04-15 15-02-28.png	3		50	1
+421	2018-04-30 18:24:53.484028+05	62	Screenshot from 2018-04-15 20-18-24.png	3		50	1
+422	2018-04-30 18:24:53.694341+05	63	Screenshot from 2018-04-15 20-52-38.png	3		50	1
+423	2018-04-30 18:24:53.882771+05	64	Screenshot from 2018-04-15 22-42-37.png	3		50	1
+424	2018-04-30 18:24:54.070866+05	65	Screenshot from 2018-04-15 23-14-30.png	3		50	1
+425	2018-04-30 18:24:54.259224+05	66	Screenshot from 2018-04-15 23-25-19.png	3		50	1
+426	2018-04-30 18:24:54.447608+05	67	Screenshot from 2018-04-15 23-25-55.png	3		50	1
+427	2018-04-30 18:24:54.635594+05	68	Screenshot from 2018-04-16 23-37-45.png	3		50	1
+428	2018-04-30 18:24:54.823768+05	69	Screenshot from 2018-04-17 18-14-53.png	3		50	1
+429	2018-04-30 18:24:55.012278+05	70	Screenshot from 2018-04-17 18-14-57.png	3		50	1
+430	2018-04-30 18:24:55.144805+05	71	Screenshot from 2018-04-19 12-48-48.png	3		50	1
+431	2018-04-30 18:24:55.299894+05	72	Screenshot from 2018-04-19 12-48-55.png	3		50	1
+432	2018-04-30 18:24:55.74718+05	73	Screenshot from 2018-04-19 13-09-57.png	3		50	1
+433	2018-04-30 19:01:59.661065+05	120	Test - Hayat	3		23	1
+434	2018-04-30 19:01:59.692863+05	119	HAYAT PREMIUM FASAD Краска для нар. работ силикон2	3		23	1
+435	2018-04-30 19:01:59.70407+05	118	HAYAT Эмаль ПФ-115	3		23	1
+436	2018-04-30 19:02:58.925795+05	123	Test - Hayat	3		23	1
+437	2018-04-30 19:02:58.939413+05	122	HAYAT PREMIUM FASAD Краска для нар. работ силикон2	3		23	1
+438	2018-04-30 19:02:58.950376+05	121	HAYAT Эмаль ПФ-115	3		23	1
+439	2018-04-30 19:32:48.872353+05	126	Test - Hayat	3		23	1
+440	2018-04-30 19:32:48.916424+05	125	HAYAT PREMIUM FASAD Краска для нар. работ силикон2	3		23	1
+441	2018-04-30 19:32:48.993922+05	124	HAYAT Эмаль ПФ-115	3		23	1
+442	2018-04-30 19:46:58.862493+05	129	Test - Hayat	3		23	1
+443	2018-04-30 19:46:58.898923+05	128	HAYAT PREMIUM FASAD Краска для нар. работ силикон2	3		23	1
+444	2018-04-30 19:46:58.909793+05	127	HAYAT Эмаль ПФ-115	3		23	1
+445	2018-05-05 17:02:58.215669+05	132	Test - Hayat	3		23	1
+446	2018-05-05 17:02:58.325101+05	131	HAYAT PREMIUM FASAD Краска для нар. работ силикон2	3		23	1
+447	2018-05-05 17:02:58.327805+05	130	HAYAT Эмаль ПФ-115	3		23	1
+448	2018-05-05 17:15:51.664569+05	1	Files object	1	[{"added": {}}]	35	1
+449	2018-05-05 17:16:09.215598+05	1	Files object	3		35	1
+450	2018-05-05 17:17:14.892462+05	74	dota_2_igra_logotip_fon_92935_1920x1080.jpg	3		50	1
+451	2018-05-05 17:17:14.936677+05	75	earth_by_n4u2k.jpg	3		50	1
+452	2018-05-05 17:17:14.98776+05	76	prod.png	3		50	1
+453	2018-05-05 17:17:15.019864+05	77	JSJ6EBorAEE.jpg	3		50	1
+454	2018-05-05 17:17:15.053313+05	1	products	3		48	1
+455	2018-05-05 17:29:25.222085+05	22	Weber	1	[{"added": {}}]	19	1
+456	2018-05-05 17:37:38.032286+05	2	products	3		48	1
+457	2018-05-05 18:03:31.013727+05	110	MATTROSS Краcка половая (красно-коричневая).jpg	3		50	1
+458	2018-05-05 18:03:31.047487+05	111	MATTROSS Эмулсионная Краcка Внутренняя.jpg	3		50	1
+459	2018-05-05 18:03:31.074782+05	112	MATTROSS Краcка (белая).jpg	3		50	1
+460	2018-05-05 18:03:31.101744+05	113	WEBER NEOLITE Нитро Краcка (белая).jpg	3		50	1
+461	2018-05-05 18:03:31.128807+05	114	WEBER NEOLITE Нитро Краcка (желтая).jpg	3		50	1
+462	2018-05-05 18:03:31.155886+05	115	MATTROSS Эмулсионная Краcка Фасадная.jpg	3		50	1
+463	2018-05-05 18:03:31.183939+05	116	WEBER NEOLITE Нитро Краcка (красная).jpg	3		50	1
+464	2018-05-05 18:03:31.213856+05	117	WEBER NEOLITE Нитро Краcка (серая).jpg	3		50	1
+465	2018-05-05 18:03:31.242406+05	118	WEBER NEOLITE Нитро Краcка (черная).jpg	3		50	1
+466	2018-05-05 18:03:31.269884+05	119	WEBER PF-115 Premium Алкидная Краcка (белая).jpg	3		50	1
+467	2018-05-05 18:03:31.297111+05	120	WEBER PF-266 Premium Алкидная Краcка половая (красно-коричневая).jpg	3		50	1
+468	2018-05-05 18:03:31.32477+05	121	WEBER PF-266 Standart Алкидная Краcка половая (желто-коричневая).jpg	3		50	1
+469	2018-05-05 18:03:31.352631+05	122	WEBER Premium Эмулсионная Краcка Внутренняя Моющая.jpg	3		50	1
+470	2018-05-05 18:03:31.379721+05	123	WEBER Premium Эмульсионная Краска Цветная.jpg	3		50	1
+471	2018-05-05 18:03:31.422349+05	124	WEBER Standart Алкидная Краcка (белая).jpg	3		50	1
+472	2018-05-05 18:03:31.449885+05	125	WEBER Standart Эмулсионная Краcка Внутренняя.jpg	3		50	1
+473	2018-05-05 18:03:31.477247+05	126	WEBER Standart Эмулсионная Краcка Фасадная.jpg	3		50	1
+474	2018-05-05 18:03:31.504701+05	127	WEBER Surik Алкидная Краcка Для Крыш.jpg	3		50	1
+475	2018-05-05 18:03:31.532259+05	128	WEBER Universal Алкидная Краcка (белая).jpg	3		50	1
+476	2018-05-05 18:03:31.559356+05	129	WEBER Wood Stain Алкидная Краcка Lak.jpg	3		50	1
+477	2018-05-05 18:03:31.586258+05	130	WEBER Алкидная Краcка (бордовая).jpg	3		50	1
+478	2018-05-05 18:03:31.613672+05	131	WEBER Алкидная Краcка (голубая).jpg	3		50	1
+479	2018-05-05 18:03:31.641688+05	132	WEBER Алкидная Краcка (желтая).jpg	3		50	1
+480	2018-05-05 18:03:31.669324+05	133	WEBER Алкидная Краcка (зеленая).jpg	3		50	1
+481	2018-05-05 18:03:31.696553+05	134	WEBER Алкидная Краcка (красная).jpg	3		50	1
+482	2018-05-05 18:03:31.727176+05	135	WEBER Алкидная Краcка (серая).jpg	3		50	1
+483	2018-05-05 18:03:31.754404+05	136	WEBER Алкидная Краcка (синяя).jpg	3		50	1
+484	2018-05-05 18:03:31.782096+05	137	WEBER Алкидная Краcка (черная).jpg	3		50	1
+485	2018-05-05 18:03:31.809442+05	138	WEBER Разбавитель 112.jpg	3		50	1
+486	2018-05-05 18:03:31.839852+05	139	WEBER Яхтовый Лак - Exterior.jpg	3		50	1
+487	2018-05-05 18:03:31.868652+05	140	WEBER Яхтовый Лак - Interior&Exterior.jpg	3		50	1
+488	2018-05-05 18:03:31.897257+05	3	Images	3		48	1
+489	2018-05-05 18:16:21.083402+05	133	MATTROSS краcка эмалевая	3		23	1
+490	2018-05-05 18:16:38.335385+05	141	MATTROSS краcка эмалевая.jpg	3		50	1
+491	2018-05-05 18:24:38.283033+05	142	MATTROSS краcка эмалевая.jpg	3		50	1
+492	2018-05-05 18:32:05.812298+05	135	MATTROSS краcка эмалевая	3		23	1
+493	2018-05-05 18:33:11.12297+05	136	MATTROSS краcка эмалевая	3		23	1
 \.
-
-
---
--- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.django_admin_log_id_seq', 360, true);
 
 
 --
 -- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.django_content_type (id, app_label, model) FROM stdin;
+COPY django_content_type (id, app_label, model) FROM stdin;
 1	admin	logentry
 2	auth	permission
 3	auth	group
@@ -2839,17 +3278,10 @@ COPY public.django_content_type (id, app_label, model) FROM stdin;
 
 
 --
--- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.django_content_type_id_seq', 56, true);
-
-
---
 -- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.django_migrations (id, app, name, applied) FROM stdin;
+COPY django_migrations (id, app, name, applied) FROM stdin;
 1	contenttypes	0001_initial	2018-02-14 01:14:58.850219+05
 2	contenttypes	0002_remove_content_type_name	2018-02-14 01:14:58.938906+05
 3	auth	0001_initial	2018-02-14 01:14:59.649186+05
@@ -2999,21 +3431,18 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 147	main	0016_auto_20180426_1415	2018-04-26 14:15:31.052725+05
 148	main	0017_auto_20180426_1416	2018-04-26 14:16:56.367245+05
 149	payment	0001_initial	2018-04-26 16:55:11.036347+05
+150	orders	0017_auto_20180430_1352	2018-04-30 13:52:31.591975+05
+151	orders	0018_auto_20180430_1424	2018-04-30 14:24:49.590196+05
+152	products	0048_product_image	2018-04-30 17:36:59.95412+05
+153	products	0049_auto_20180430_1748	2018-04-30 17:50:43.815941+05
 \.
-
-
---
--- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.django_migrations_id_seq', 149, true);
 
 
 --
 -- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
+COPY django_session (session_key, session_data, expire_date) FROM stdin;
 oxr7hxshvn5rov26rbllhnrbfmk7cev0	MTM4NjVlM2IwNDBjZmEzYWE1NzY0MzM2NDU1NzZlYjYwMGYxZDhlYzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkMjY5MGZlMGIwYTRlYWZmMTYyNDAxZjkzNjg3Y2IyMWMyZGM2OTNiIn0=	2018-02-28 01:25:35.034684+05
 a7k6adi6ac6uaroshpqlho0nsgfgsvbw	MjA5MDFjNjUxMmM3MDE5ZDVhOWUzYzM3YzE4OWE4Zjc5Mjg2MTYyMjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlOTE2NDYyYjZmMWEzN2JiMmE2YTMyNDFkODk0YzU4MDM2MDZlOTMzIn0=	2018-03-08 02:06:03.175184+05
 fii5m7pfwnufcjmwokikupas5atuph1n	MjA5MDFjNjUxMmM3MDE5ZDVhOWUzYzM3YzE4OWE4Zjc5Mjg2MTYyMjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlOTE2NDYyYjZmMWEzN2JiMmE2YTMyNDFkODk0YzU4MDM2MDZlOTMzIn0=	2018-03-08 23:49:57.589949+05
@@ -3053,15 +3482,20 @@ peg8hid9w6nxgcd0fjxqae6evt0x9qbq	MWQwMjZkMmE1ZjE2NzVjNzIxYjBlZDBiNmE1YjY3YmQyOTM
 ovbjo0yhr1fvwy6hlx427flpx45hyjqa	MWQwMjZkMmE1ZjE2NzVjNzIxYjBlZDBiNmE1YjY3YmQyOTMxMmJiMzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIyNDNjYjUzODE2ZWNkZGM0Y2RiMmY5ZDljNjU3N2U2MTY5ODkwYTU5In0=	2018-04-27 18:24:31.381813+05
 n7nidqltmk2f13p7zdmnsqjab0ij61h6	MWQwMjZkMmE1ZjE2NzVjNzIxYjBlZDBiNmE1YjY3YmQyOTMxMmJiMzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIyNDNjYjUzODE2ZWNkZGM0Y2RiMmY5ZDljNjU3N2U2MTY5ODkwYTU5In0=	2018-04-28 16:52:55.657989+05
 vi6nrioprfk7yif2p2il59xil4lkkg7d	MWQwMjZkMmE1ZjE2NzVjNzIxYjBlZDBiNmE1YjY3YmQyOTMxMmJiMzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIyNDNjYjUzODE2ZWNkZGM0Y2RiMmY5ZDljNjU3N2U2MTY5ODkwYTU5In0=	2018-04-30 22:58:59.46094+05
-ht946gt01l32lr7edhc54tv55t3womqz	M2RkMmM1OTYxZWZlMzk4NjZkNGViY2I3NjA4ODY3M2QwYWYwMDdhMjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIyNTM2YzAyNDA0MDAyYmVlNDBhNGVmZGM3YmE0Y2NkMmQxZTQxNWNlIn0=	2018-05-10 13:58:19.529695+05
 zol08nxcyh5zh58pjrlt6ksp4362whjt	MWQwMjZkMmE1ZjE2NzVjNzIxYjBlZDBiNmE1YjY3YmQyOTMxMmJiMzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIyNDNjYjUzODE2ZWNkZGM0Y2RiMmY5ZDljNjU3N2U2MTY5ODkwYTU5In0=	2018-05-02 19:52:03.347213+05
 4czgfc1tjp7f0cedg4wipsdqi4q97e2s	M2RkMmM1OTYxZWZlMzk4NjZkNGViY2I3NjA4ODY3M2QwYWYwMDdhMjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIyNTM2YzAyNDA0MDAyYmVlNDBhNGVmZGM3YmE0Y2NkMmQxZTQxNWNlIn0=	2018-05-10 16:27:22.63358+05
+ucbudkrgzqku69odonpublsb6dkckyhp	M2RkMmM1OTYxZWZlMzk4NjZkNGViY2I3NjA4ODY3M2QwYWYwMDdhMjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIyNTM2YzAyNDA0MDAyYmVlNDBhNGVmZGM3YmE0Y2NkMmQxZTQxNWNlIn0=	2018-05-11 18:34:41.107546+05
 chych1c7cqacn38zr06bw2kwdr13ncuy	MjA5MDFjNjUxMmM3MDE5ZDVhOWUzYzM3YzE4OWE4Zjc5Mjg2MTYyMjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlOTE2NDYyYjZmMWEzN2JiMmE2YTMyNDFkODk0YzU4MDM2MDZlOTMzIn0=	2018-04-20 16:34:33.039439+05
 zo0u2xk28skz92vhcjwp7v9yv85wijng	MWQwMjZkMmE1ZjE2NzVjNzIxYjBlZDBiNmE1YjY3YmQyOTMxMmJiMzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIyNDNjYjUzODE2ZWNkZGM0Y2RiMmY5ZDljNjU3N2U2MTY5ODkwYTU5In0=	2018-04-27 06:56:27.220043+05
 od4e6ok9difor38ua7h2ur99z58zrc2c	ODI5MWE5Mzg3ODA2ZWM3YmFhYmQ2NjI0NzQwMGVkMjEzMGYxYzY1YTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkZmU4NjBmNGZlMDcxZjU5NjZjZTIwODYyZmI0MzMzY2I1NDU0NDkyIn0=	2018-05-07 20:44:18.270598+05
 e11zz4n7ovdcuf341pe0adyiwskw79zw	ODI5MWE5Mzg3ODA2ZWM3YmFhYmQ2NjI0NzQwMGVkMjEzMGYxYzY1YTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkZmU4NjBmNGZlMDcxZjU5NjZjZTIwODYyZmI0MzMzY2I1NDU0NDkyIn0=	2018-05-08 16:12:24.009969+05
+4g1e8n72es5uo8p85cfhziqnhieg187n	M2RkMmM1OTYxZWZlMzk4NjZkNGViY2I3NjA4ODY3M2QwYWYwMDdhMjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIyNTM2YzAyNDA0MDAyYmVlNDBhNGVmZGM3YmE0Y2NkMmQxZTQxNWNlIn0=	2018-05-10 18:45:39.746288+05
+58wotr3d3l8x3n7dxe51egzbm2m3uxu4	M2RkMmM1OTYxZWZlMzk4NjZkNGViY2I3NjA4ODY3M2QwYWYwMDdhMjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIyNTM2YzAyNDA0MDAyYmVlNDBhNGVmZGM3YmE0Y2NkMmQxZTQxNWNlIn0=	2018-05-11 18:50:01.49747+05
 exh3kotubsokgpvl4wtj67ivg5ysr9bv	MWQwMjZkMmE1ZjE2NzVjNzIxYjBlZDBiNmE1YjY3YmQyOTMxMmJiMzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIyNDNjYjUzODE2ZWNkZGM0Y2RiMmY5ZDljNjU3N2U2MTY5ODkwYTU5In0=	2018-04-21 18:43:14.85056+05
+353y52av4o61asvmpjgjshz7vptazli4	MDRhYWQ1YjIxZDlhMDlhYzNjZGUyYTI1MGQ2MzM2NWYzZjQ5NzNhMzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIyNTM2YzAyNDA0MDAyYmVlNDBhNGVmZGM3YmE0Y2NkMmQxZTQxNWNlIiwiZmlsZXJfbGFzdF9mb2xkZXJfaWQiOiIxIn0=	2018-05-14 18:41:30.563913+05
 zvkbaxhr02584cfb3oxomoniuadr444b	MWQwMjZkMmE1ZjE2NzVjNzIxYjBlZDBiNmE1YjY3YmQyOTMxMmJiMzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIyNDNjYjUzODE2ZWNkZGM0Y2RiMmY5ZDljNjU3N2U2MTY5ODkwYTU5In0=	2018-04-21 19:32:13.291068+05
+cov5hfympppniiewncz2b1nb0afn7ghk	ZDcxYmU4YjQzNzQ1ZmY5YjEwMWJiNDg0ODhkYTUxODlhMTEwZjhiYzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIyNTM2YzAyNDA0MDAyYmVlNDBhNGVmZGM3YmE0Y2NkMmQxZTQxNWNlIiwiZmlsZXJfbGFzdF9mb2xkZXJfaWQiOiI0In0=	2018-05-21 21:03:42.227756+05
+vz6u03hhnfvatrtu97rimtw07vk6kx31	N2FhYjY4YTlkODhmYmMxYTlhZGU0M2ZmMDg5ZTgzMTc1NzMyOTMyYTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIyNTM2YzAyNDA0MDAyYmVlNDBhNGVmZGM3YmE0Y2NkMmQxZTQxNWNlIiwiZmlsZXJfbGFzdF9mb2xkZXJfaWQiOm51bGx9	2018-05-22 09:40:46.265028+05
 \.
 
 
@@ -3069,145 +3503,337 @@ zvkbaxhr02584cfb3oxomoniuadr444b	MWQwMjZkMmE1ZjE2NzVjNzIxYjBlZDBiNmE1YjY3YmQyOTM
 -- Data for Name: easy_thumbnails_source; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.easy_thumbnails_source (id, storage_hash, name, modified) FROM stdin;
-1	f9bde26a1556cd667f742bd34ec7c55e	filer_public/85/e3/85e3d702-cc48-4921-969e-ac80ae3d8b02/maps.png	2018-03-29 02:06:38.495586+05
+COPY easy_thumbnails_source (id, storage_hash, name, modified) FROM stdin;
 6	52617e6399d6f38ea9cbf527bf430616	filer_public/f1/e9/f1e9918d-1517-4c00-9cbf-8a06937d9358/screenshot_from_2018-03-28_23-04-22.png	2018-03-29 16:08:46.025578+05
+79	f9bde26a1556cd667f742bd34ec7c55e	filer_public/06/18/06185613-e8d4-4a8d-87cb-ad7fa5559428/mattross_kracka_polovaia_krasno-korichnevaia.jpg	2018-05-05 17:17:36.288979+05
+80	f9bde26a1556cd667f742bd34ec7c55e	filer_public/14/4e/144e3de4-1d9f-4873-b5f5-5554e3cc0135/mattross_emulsionnaia_kracka_vnutrenniaia.jpg	2018-05-05 17:17:36.289808+05
+78	f9bde26a1556cd667f742bd34ec7c55e	filer_public/3c/8c/3c8cfbf9-948c-4301-9ca5-e8a8672a475b/mattross_kracka_belaia.jpg	2018-05-05 17:17:36.290885+05
+81	f9bde26a1556cd667f742bd34ec7c55e	filer_public/60/e3/60e3f722-bde4-4c63-b935-20d7d48c2a27/mattross_emulsionnaia_kracka_fasadnaia.jpg	2018-05-05 17:17:36.561402+05
+82	f9bde26a1556cd667f742bd34ec7c55e	filer_public/80/66/8066721d-cf07-44ef-98c9-c6432082110c/weber_neolite_nitro_kracka_belaia.jpg	2018-05-05 17:17:36.639443+05
+83	f9bde26a1556cd667f742bd34ec7c55e	filer_public/0a/fc/0afcd1f9-e151-4463-936e-f64b0f32a1e9/weber_neolite_nitro_kracka_zheltaia.jpg	2018-05-05 17:17:36.952143+05
+84	f9bde26a1556cd667f742bd34ec7c55e	filer_public/59/b8/59b81aec-41fc-418e-a77e-563d019fb398/weber_neolite_nitro_kracka_krasnaia.jpg	2018-05-05 17:17:37.058853+05
+85	f9bde26a1556cd667f742bd34ec7c55e	filer_public/0f/8c/0f8c9b85-2948-4cf2-b9a2-5c20853182b3/weber_neolite_nitro_kracka_seraia.jpg	2018-05-05 17:17:37.676727+05
+87	f9bde26a1556cd667f742bd34ec7c55e	filer_public/37/b5/37b51b3c-eb0a-4eb5-8519-522ee16a6c19/thumbs.db	2018-05-05 17:17:37.889842+05
+86	f9bde26a1556cd667f742bd34ec7c55e	filer_public/be/d6/bed6bc1f-2939-4e41-9e52-f0a9c6a3b092/weber_neolite_nitro_kracka_chernaia.jpg	2018-05-05 17:17:37.906508+05
+88	f9bde26a1556cd667f742bd34ec7c55e	filer_public/1f/80/1f80651b-bd1d-40d3-89da-b57c28c77404/weber_pf-115_premium_alkidnaia_kracka_belaia.jpg	2018-05-05 17:17:37.959262+05
+89	f9bde26a1556cd667f742bd34ec7c55e	filer_public/37/68/376802af-000a-4eaf-b930-781cbd9ac7e2/weber_pf-266_premium_alkidnaia_kracka_polovaia_krasno-korichnevaia.jpg	2018-05-05 17:17:38.04256+05
+90	f9bde26a1556cd667f742bd34ec7c55e	filer_public/0a/59/0a59a2bf-910e-4bbc-b147-3f2bd7632555/weber_pf-266_standart_alkidnaia_kracka_polovaia_zhelto-korichnevaia.jpg	2018-05-05 17:17:38.189789+05
+91	f9bde26a1556cd667f742bd34ec7c55e	filer_public/9b/9e/9b9edba9-2e9f-44f9-abe9-f11e44b4ca05/weber_premium_emulsionnaia_kracka_vnutrenniaia_moiushchaia.jpg	2018-05-05 17:17:38.226852+05
+92	f9bde26a1556cd667f742bd34ec7c55e	filer_public/56/e0/56e05e8d-ef36-4e38-a46c-36ea0fc43234/weber_premium_emulsionnaia_kraska_tsvetnaia.jpg	2018-05-05 17:17:38.291107+05
+93	f9bde26a1556cd667f742bd34ec7c55e	filer_public/83/16/831657ff-43b1-4a31-8407-350eb4dbbdd5/weber_standart_emulsionnaia_kracka_vnutrenniaia.jpg	2018-05-05 17:17:38.599214+05
+94	f9bde26a1556cd667f742bd34ec7c55e	filer_public/6c/f8/6cf86470-3966-48b2-a014-d025fa741a94/weber_standart_alkidnaia_kracka_belaia.jpg	2018-05-05 17:17:38.608572+05
+95	f9bde26a1556cd667f742bd34ec7c55e	filer_public/2f/59/2f596f66-67e5-4a37-ba7a-8a69d8ef46a1/weber_standart_emulsionnaia_kracka_fasadnaia.jpg	2018-05-05 17:17:38.61717+05
+96	f9bde26a1556cd667f742bd34ec7c55e	filer_public/a6/c6/a6c69908-f225-42a8-bfca-c1c9eb65c257/weber_surik_alkidnaia_kracka_dlia_krysh.jpg	2018-05-05 17:17:38.809631+05
+97	f9bde26a1556cd667f742bd34ec7c55e	filer_public/ce/3c/ce3cf3a4-857b-4728-9afd-0ed26c59122f/weber_universal_alkidnaia_kracka_belaia.jpg	2018-05-05 17:17:38.880132+05
+98	f9bde26a1556cd667f742bd34ec7c55e	filer_public/d7/d9/d7d963aa-6214-472f-8abc-b60702e82e0e/weber_wood_stain_alkidnaia_kracka_lak.jpg	2018-05-05 17:17:38.920551+05
+99	f9bde26a1556cd667f742bd34ec7c55e	filer_public/79/6f/796f0674-eed9-4faa-aacf-38954b20827e/weber_alkidnaia_kracka_bordovaia.jpg	2018-05-05 17:17:39.034877+05
+100	f9bde26a1556cd667f742bd34ec7c55e	filer_public/31/94/319470ad-b59f-4f25-877e-2cc43d7a9d26/weber_alkidnaia_kracka_golubaia.jpg	2018-05-05 17:17:39.094624+05
+101	f9bde26a1556cd667f742bd34ec7c55e	filer_public/90/fe/90fecc92-bb81-425d-ad2f-74464c8f5d86/weber_alkidnaia_kracka_zheltaia.jpg	2018-05-05 17:17:39.153792+05
+102	f9bde26a1556cd667f742bd34ec7c55e	filer_public/fd/92/fd92933a-9b53-438f-9cb7-a5995696f9fb/weber_alkidnaia_kracka_zelenaia.jpg	2018-05-05 17:17:39.266012+05
+103	f9bde26a1556cd667f742bd34ec7c55e	filer_public/89/1a/891abf3e-686a-42aa-87fc-692d245c9608/weber_alkidnaia_kracka_krasnaia.jpg	2018-05-05 17:17:39.348027+05
+104	f9bde26a1556cd667f742bd34ec7c55e	filer_public/96/cb/96cbf45e-b41f-4acc-b1d3-47e327e619ce/weber_alkidnaia_kracka_seraia.jpg	2018-05-05 17:17:39.396028+05
+105	f9bde26a1556cd667f742bd34ec7c55e	filer_public/3e/29/3e295a36-5a99-41df-bf18-dcb771bc77ec/weber_alkidnaia_kracka_siniaia.jpg	2018-05-05 17:17:39.546212+05
+106	f9bde26a1556cd667f742bd34ec7c55e	filer_public/cf/79/cf791b37-addb-4f86-98f9-9a90fa5cd9c3/weber_alkidnaia_kracka_chernaia.jpg	2018-05-05 17:17:39.666504+05
+107	f9bde26a1556cd667f742bd34ec7c55e	filer_public/b7/29/b7296070-0f38-4942-8a51-9225bf46c8b2/weber_razbavitel_112.jpg	2018-05-05 17:17:39.698555+05
+108	f9bde26a1556cd667f742bd34ec7c55e	filer_public/33/c8/33c81ad8-a0e5-41a4-b72a-614e86e64b70/weber_iakhtovyi_lak_-_exterior.jpg	2018-05-05 17:17:39.842248+05
+109	f9bde26a1556cd667f742bd34ec7c55e	filer_public/ed/cb/edcb0f5e-7231-46d4-a388-09871ed95353/weber_iakhtovyi_lak_-_interiorexterior.jpg	2018-05-05 17:17:39.933881+05
+143	f9bde26a1556cd667f742bd34ec7c55e	filer_public/2b/43/2b43ad66-ac38-488f-b0a2-d8913c96be87/mattross_kracka_emalevaia.jpg	2018-05-05 18:28:58.137241+05
 \.
-
-
---
--- Name: easy_thumbnails_source_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.easy_thumbnails_source_id_seq', 6, true);
 
 
 --
 -- Data for Name: easy_thumbnails_thumbnail; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.easy_thumbnails_thumbnail (id, storage_hash, name, modified, source_id) FROM stdin;
-1	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/85/e3/85e3d702-cc48-4921-969e-ac80ae3d8b02/maps.png__16x16_q85_crop_subsampling-2_upscale.png	2018-03-29 02:06:38.523567+05	1
-2	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/85/e3/85e3d702-cc48-4921-969e-ac80ae3d8b02/maps.png__32x32_q85_crop_subsampling-2_upscale.png	2018-03-29 02:06:38.572335+05	1
-3	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/85/e3/85e3d702-cc48-4921-969e-ac80ae3d8b02/maps.png__48x48_q85_crop_subsampling-2_upscale.png	2018-03-29 02:06:38.605381+05	1
-4	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/85/e3/85e3d702-cc48-4921-969e-ac80ae3d8b02/maps.png__64x64_q85_crop_subsampling-2_upscale.png	2018-03-29 02:06:38.651922+05	1
-5	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/85/e3/85e3d702-cc48-4921-969e-ac80ae3d8b02/maps.png__180x180_q85_crop_subsampling-2_upscale.png	2018-03-29 02:06:38.724787+05	1
+COPY easy_thumbnails_thumbnail (id, storage_hash, name, modified, source_id) FROM stdin;
 32	52617e6399d6f38ea9cbf527bf430616	filer_public_thumbnails/filer_public/f1/e9/f1e9918d-1517-4c00-9cbf-8a06937d9358/screenshot_from_2018-03-28_23-04-22.png__16x16_q85_crop_subsampling-2_upscale.png	2018-03-29 16:08:46.087681+05	6
 33	52617e6399d6f38ea9cbf527bf430616	filer_public_thumbnails/filer_public/f1/e9/f1e9918d-1517-4c00-9cbf-8a06937d9358/screenshot_from_2018-03-28_23-04-22.png__32x32_q85_crop_subsampling-2_upscale.png	2018-03-29 16:08:46.179535+05	6
 34	52617e6399d6f38ea9cbf527bf430616	filer_public_thumbnails/filer_public/f1/e9/f1e9918d-1517-4c00-9cbf-8a06937d9358/screenshot_from_2018-03-28_23-04-22.png__48x48_q85_crop_subsampling-2_upscale.png	2018-03-29 16:08:46.236169+05	6
 35	52617e6399d6f38ea9cbf527bf430616	filer_public_thumbnails/filer_public/f1/e9/f1e9918d-1517-4c00-9cbf-8a06937d9358/screenshot_from_2018-03-28_23-04-22.png__64x64_q85_crop_subsampling-2_upscale.png	2018-03-29 16:08:46.269062+05	6
 36	52617e6399d6f38ea9cbf527bf430616	filer_public_thumbnails/filer_public/f1/e9/f1e9918d-1517-4c00-9cbf-8a06937d9358/screenshot_from_2018-03-28_23-04-22.png__180x180_q85_crop_subsampling-2_upscale.png	2018-03-29 16:08:46.322964+05	6
+396	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/14/4e/144e3de4-1d9f-4873-b5f5-5554e3cc0135/mattross_emulsionnaia_kracka_vnutrenniaia.jpg__16x16_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:36.294065+05	80
+397	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/06/18/06185613-e8d4-4a8d-87cb-ad7fa5559428/mattross_kracka_polovaia_krasno-korichnevaia.jpg__16x16_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:36.292897+05	79
+398	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/3c/8c/3c8cfbf9-948c-4301-9ca5-e8a8672a475b/mattross_kracka_belaia.jpg__16x16_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:36.29468+05	78
+399	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/14/4e/144e3de4-1d9f-4873-b5f5-5554e3cc0135/mattross_emulsionnaia_kracka_vnutrenniaia.jpg__32x32_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:36.346325+05	80
+400	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/3c/8c/3c8cfbf9-948c-4301-9ca5-e8a8672a475b/mattross_kracka_belaia.jpg__32x32_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:36.357305+05	78
+401	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/06/18/06185613-e8d4-4a8d-87cb-ad7fa5559428/mattross_kracka_polovaia_krasno-korichnevaia.jpg__32x32_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:36.357691+05	79
+402	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/14/4e/144e3de4-1d9f-4873-b5f5-5554e3cc0135/mattross_emulsionnaia_kracka_vnutrenniaia.jpg__48x48_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:36.369321+05	80
+403	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/14/4e/144e3de4-1d9f-4873-b5f5-5554e3cc0135/mattross_emulsionnaia_kracka_vnutrenniaia.jpg__64x64_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:36.3909+05	80
+404	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/06/18/06185613-e8d4-4a8d-87cb-ad7fa5559428/mattross_kracka_polovaia_krasno-korichnevaia.jpg__48x48_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:36.392091+05	79
+405	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/3c/8c/3c8cfbf9-948c-4301-9ca5-e8a8672a475b/mattross_kracka_belaia.jpg__48x48_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:36.39285+05	78
+406	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/14/4e/144e3de4-1d9f-4873-b5f5-5554e3cc0135/mattross_emulsionnaia_kracka_vnutrenniaia.jpg__180x180_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:36.42134+05	80
+407	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/06/18/06185613-e8d4-4a8d-87cb-ad7fa5559428/mattross_kracka_polovaia_krasno-korichnevaia.jpg__64x64_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:36.427877+05	79
+408	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/3c/8c/3c8cfbf9-948c-4301-9ca5-e8a8672a475b/mattross_kracka_belaia.jpg__64x64_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:36.428119+05	78
+409	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/06/18/06185613-e8d4-4a8d-87cb-ad7fa5559428/mattross_kracka_polovaia_krasno-korichnevaia.jpg__180x180_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:36.460706+05	79
+410	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/3c/8c/3c8cfbf9-948c-4301-9ca5-e8a8672a475b/mattross_kracka_belaia.jpg__180x180_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:36.474005+05	78
+411	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/60/e3/60e3f722-bde4-4c63-b935-20d7d48c2a27/mattross_emulsionnaia_kracka_fasadnaia.jpg__16x16_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:36.565157+05	81
+412	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/60/e3/60e3f722-bde4-4c63-b935-20d7d48c2a27/mattross_emulsionnaia_kracka_fasadnaia.jpg__32x32_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:36.596789+05	81
+413	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/60/e3/60e3f722-bde4-4c63-b935-20d7d48c2a27/mattross_emulsionnaia_kracka_fasadnaia.jpg__48x48_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:36.631825+05	81
+414	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/80/66/8066721d-cf07-44ef-98c9-c6432082110c/weber_neolite_nitro_kracka_belaia.jpg__16x16_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:36.642878+05	82
+415	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/60/e3/60e3f722-bde4-4c63-b935-20d7d48c2a27/mattross_emulsionnaia_kracka_fasadnaia.jpg__64x64_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:36.659803+05	81
+416	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/80/66/8066721d-cf07-44ef-98c9-c6432082110c/weber_neolite_nitro_kracka_belaia.jpg__32x32_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:36.664409+05	82
+417	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/80/66/8066721d-cf07-44ef-98c9-c6432082110c/weber_neolite_nitro_kracka_belaia.jpg__48x48_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:36.685916+05	82
+418	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/60/e3/60e3f722-bde4-4c63-b935-20d7d48c2a27/mattross_emulsionnaia_kracka_fasadnaia.jpg__180x180_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:36.69098+05	81
+419	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/80/66/8066721d-cf07-44ef-98c9-c6432082110c/weber_neolite_nitro_kracka_belaia.jpg__64x64_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:36.707417+05	82
+420	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/80/66/8066721d-cf07-44ef-98c9-c6432082110c/weber_neolite_nitro_kracka_belaia.jpg__180x180_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:36.738753+05	82
+421	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/0a/fc/0afcd1f9-e151-4463-936e-f64b0f32a1e9/weber_neolite_nitro_kracka_zheltaia.jpg__16x16_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:36.957046+05	83
+422	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/0a/fc/0afcd1f9-e151-4463-936e-f64b0f32a1e9/weber_neolite_nitro_kracka_zheltaia.jpg__32x32_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:36.981021+05	83
+423	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/0a/fc/0afcd1f9-e151-4463-936e-f64b0f32a1e9/weber_neolite_nitro_kracka_zheltaia.jpg__48x48_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:37.003136+05	83
+424	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/0a/fc/0afcd1f9-e151-4463-936e-f64b0f32a1e9/weber_neolite_nitro_kracka_zheltaia.jpg__64x64_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:37.029988+05	83
+425	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/0a/fc/0afcd1f9-e151-4463-936e-f64b0f32a1e9/weber_neolite_nitro_kracka_zheltaia.jpg__180x180_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:37.060287+05	83
+426	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/59/b8/59b81aec-41fc-418e-a77e-563d019fb398/weber_neolite_nitro_kracka_krasnaia.jpg__16x16_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:37.062119+05	84
+427	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/59/b8/59b81aec-41fc-418e-a77e-563d019fb398/weber_neolite_nitro_kracka_krasnaia.jpg__32x32_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:37.082656+05	84
+428	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/59/b8/59b81aec-41fc-418e-a77e-563d019fb398/weber_neolite_nitro_kracka_krasnaia.jpg__48x48_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:37.119842+05	84
+429	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/59/b8/59b81aec-41fc-418e-a77e-563d019fb398/weber_neolite_nitro_kracka_krasnaia.jpg__64x64_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:37.154672+05	84
+430	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/59/b8/59b81aec-41fc-418e-a77e-563d019fb398/weber_neolite_nitro_kracka_krasnaia.jpg__180x180_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:37.190655+05	84
+431	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/0f/8c/0f8c9b85-2948-4cf2-b9a2-5c20853182b3/weber_neolite_nitro_kracka_seraia.jpg__16x16_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:37.679929+05	85
+432	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/0f/8c/0f8c9b85-2948-4cf2-b9a2-5c20853182b3/weber_neolite_nitro_kracka_seraia.jpg__32x32_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:37.701579+05	85
+433	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/0f/8c/0f8c9b85-2948-4cf2-b9a2-5c20853182b3/weber_neolite_nitro_kracka_seraia.jpg__48x48_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:37.722879+05	85
+434	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/0f/8c/0f8c9b85-2948-4cf2-b9a2-5c20853182b3/weber_neolite_nitro_kracka_seraia.jpg__64x64_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:37.7443+05	85
+435	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/0f/8c/0f8c9b85-2948-4cf2-b9a2-5c20853182b3/weber_neolite_nitro_kracka_seraia.jpg__180x180_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:37.773437+05	85
+436	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/be/d6/bed6bc1f-2939-4e41-9e52-f0a9c6a3b092/weber_neolite_nitro_kracka_chernaia.jpg__16x16_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:37.909862+05	86
+437	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/be/d6/bed6bc1f-2939-4e41-9e52-f0a9c6a3b092/weber_neolite_nitro_kracka_chernaia.jpg__32x32_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:37.930676+05	86
+438	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/be/d6/bed6bc1f-2939-4e41-9e52-f0a9c6a3b092/weber_neolite_nitro_kracka_chernaia.jpg__48x48_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:37.959202+05	86
+439	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/1f/80/1f80651b-bd1d-40d3-89da-b57c28c77404/weber_pf-115_premium_alkidnaia_kracka_belaia.jpg__16x16_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:37.963362+05	88
+440	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/1f/80/1f80651b-bd1d-40d3-89da-b57c28c77404/weber_pf-115_premium_alkidnaia_kracka_belaia.jpg__32x32_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:37.984929+05	88
+441	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/be/d6/bed6bc1f-2939-4e41-9e52-f0a9c6a3b092/weber_neolite_nitro_kracka_chernaia.jpg__64x64_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:37.994627+05	86
+442	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/1f/80/1f80651b-bd1d-40d3-89da-b57c28c77404/weber_pf-115_premium_alkidnaia_kracka_belaia.jpg__48x48_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.008232+05	88
+443	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/be/d6/bed6bc1f-2939-4e41-9e52-f0a9c6a3b092/weber_neolite_nitro_kracka_chernaia.jpg__180x180_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.026461+05	86
+444	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/1f/80/1f80651b-bd1d-40d3-89da-b57c28c77404/weber_pf-115_premium_alkidnaia_kracka_belaia.jpg__64x64_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.028218+05	88
+445	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/37/68/376802af-000a-4eaf-b930-781cbd9ac7e2/weber_pf-266_premium_alkidnaia_kracka_polovaia_krasno-korichnevaia.jpg__16x16_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.045614+05	89
+446	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/1f/80/1f80651b-bd1d-40d3-89da-b57c28c77404/weber_pf-115_premium_alkidnaia_kracka_belaia.jpg__180x180_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.056688+05	88
+447	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/37/68/376802af-000a-4eaf-b930-781cbd9ac7e2/weber_pf-266_premium_alkidnaia_kracka_polovaia_krasno-korichnevaia.jpg__32x32_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.066004+05	89
+448	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/37/68/376802af-000a-4eaf-b930-781cbd9ac7e2/weber_pf-266_premium_alkidnaia_kracka_polovaia_krasno-korichnevaia.jpg__48x48_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.087571+05	89
+449	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/37/68/376802af-000a-4eaf-b930-781cbd9ac7e2/weber_pf-266_premium_alkidnaia_kracka_polovaia_krasno-korichnevaia.jpg__64x64_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.10825+05	89
+450	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/37/68/376802af-000a-4eaf-b930-781cbd9ac7e2/weber_pf-266_premium_alkidnaia_kracka_polovaia_krasno-korichnevaia.jpg__180x180_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.137255+05	89
+451	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/0a/59/0a59a2bf-910e-4bbc-b147-3f2bd7632555/weber_pf-266_standart_alkidnaia_kracka_polovaia_zhelto-korichnevaia.jpg__16x16_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.194042+05	90
+452	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/0a/59/0a59a2bf-910e-4bbc-b147-3f2bd7632555/weber_pf-266_standart_alkidnaia_kracka_polovaia_zhelto-korichnevaia.jpg__32x32_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.22669+05	90
+453	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/9b/9e/9b9edba9-2e9f-44f9-abe9-f11e44b4ca05/weber_premium_emulsionnaia_kracka_vnutrenniaia_moiushchaia.jpg__16x16_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.232219+05	91
+454	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/0a/59/0a59a2bf-910e-4bbc-b147-3f2bd7632555/weber_pf-266_standart_alkidnaia_kracka_polovaia_zhelto-korichnevaia.jpg__48x48_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.258653+05	90
+456	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/0a/59/0a59a2bf-910e-4bbc-b147-3f2bd7632555/weber_pf-266_standart_alkidnaia_kracka_polovaia_zhelto-korichnevaia.jpg__64x64_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.289408+05	90
+459	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/0a/59/0a59a2bf-910e-4bbc-b147-3f2bd7632555/weber_pf-266_standart_alkidnaia_kracka_polovaia_zhelto-korichnevaia.jpg__180x180_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.318832+05	90
+717	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/2b/43/2b43ad66-ac38-488f-b0a2-d8913c96be87/mattross_kracka_emalevaia.jpg__16x16_q85_crop_subsampling-2_upscale.jpg	2018-05-05 18:28:58.140012+05	143
+718	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/2b/43/2b43ad66-ac38-488f-b0a2-d8913c96be87/mattross_kracka_emalevaia.jpg__32x32_q85_crop_subsampling-2_upscale.jpg	2018-05-05 18:28:58.161545+05	143
+719	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/2b/43/2b43ad66-ac38-488f-b0a2-d8913c96be87/mattross_kracka_emalevaia.jpg__48x48_q85_crop_subsampling-2_upscale.jpg	2018-05-05 18:28:58.183111+05	143
+720	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/2b/43/2b43ad66-ac38-488f-b0a2-d8913c96be87/mattross_kracka_emalevaia.jpg__64x64_q85_crop_subsampling-2_upscale.jpg	2018-05-05 18:28:58.203733+05	143
+721	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/2b/43/2b43ad66-ac38-488f-b0a2-d8913c96be87/mattross_kracka_emalevaia.jpg__180x180_q85_crop_subsampling-2_upscale.jpg	2018-05-05 18:28:58.231581+05	143
+455	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/9b/9e/9b9edba9-2e9f-44f9-abe9-f11e44b4ca05/weber_premium_emulsionnaia_kracka_vnutrenniaia_moiushchaia.jpg__32x32_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.264731+05	91
+457	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/56/e0/56e05e8d-ef36-4e38-a46c-36ea0fc43234/weber_premium_emulsionnaia_kraska_tsvetnaia.jpg__16x16_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.294001+05	92
+458	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/9b/9e/9b9edba9-2e9f-44f9-abe9-f11e44b4ca05/weber_premium_emulsionnaia_kracka_vnutrenniaia_moiushchaia.jpg__48x48_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.296498+05	91
+460	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/9b/9e/9b9edba9-2e9f-44f9-abe9-f11e44b4ca05/weber_premium_emulsionnaia_kracka_vnutrenniaia_moiushchaia.jpg__64x64_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.32718+05	91
+461	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/56/e0/56e05e8d-ef36-4e38-a46c-36ea0fc43234/weber_premium_emulsionnaia_kraska_tsvetnaia.jpg__32x32_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.332572+05	92
+462	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/9b/9e/9b9edba9-2e9f-44f9-abe9-f11e44b4ca05/weber_premium_emulsionnaia_kracka_vnutrenniaia_moiushchaia.jpg__180x180_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.355399+05	91
+463	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/56/e0/56e05e8d-ef36-4e38-a46c-36ea0fc43234/weber_premium_emulsionnaia_kraska_tsvetnaia.jpg__48x48_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.367382+05	92
+464	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/56/e0/56e05e8d-ef36-4e38-a46c-36ea0fc43234/weber_premium_emulsionnaia_kraska_tsvetnaia.jpg__64x64_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.394706+05	92
+465	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/56/e0/56e05e8d-ef36-4e38-a46c-36ea0fc43234/weber_premium_emulsionnaia_kraska_tsvetnaia.jpg__180x180_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.422678+05	92
+466	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/83/16/831657ff-43b1-4a31-8407-350eb4dbbdd5/weber_standart_emulsionnaia_kracka_vnutrenniaia.jpg__16x16_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.60283+05	93
+467	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/6c/f8/6cf86470-3966-48b2-a014-d025fa741a94/weber_standart_alkidnaia_kracka_belaia.jpg__16x16_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.611696+05	94
+468	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/2f/59/2f596f66-67e5-4a37-ba7a-8a69d8ef46a1/weber_standart_emulsionnaia_kracka_fasadnaia.jpg__16x16_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.621169+05	95
+469	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/83/16/831657ff-43b1-4a31-8407-350eb4dbbdd5/weber_standart_emulsionnaia_kracka_vnutrenniaia.jpg__32x32_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.623245+05	93
+470	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/6c/f8/6cf86470-3966-48b2-a014-d025fa741a94/weber_standart_alkidnaia_kracka_belaia.jpg__32x32_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.633536+05	94
+471	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/83/16/831657ff-43b1-4a31-8407-350eb4dbbdd5/weber_standart_emulsionnaia_kracka_vnutrenniaia.jpg__48x48_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.643034+05	93
+472	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/6c/f8/6cf86470-3966-48b2-a014-d025fa741a94/weber_standart_alkidnaia_kracka_belaia.jpg__48x48_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.654092+05	94
+473	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/2f/59/2f596f66-67e5-4a37-ba7a-8a69d8ef46a1/weber_standart_emulsionnaia_kracka_fasadnaia.jpg__32x32_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.654838+05	95
+474	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/83/16/831657ff-43b1-4a31-8407-350eb4dbbdd5/weber_standart_emulsionnaia_kracka_vnutrenniaia.jpg__64x64_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.662623+05	93
+475	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/6c/f8/6cf86470-3966-48b2-a014-d025fa741a94/weber_standart_alkidnaia_kracka_belaia.jpg__64x64_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.674022+05	94
+476	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/83/16/831657ff-43b1-4a31-8407-350eb4dbbdd5/weber_standart_emulsionnaia_kracka_vnutrenniaia.jpg__180x180_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.689712+05	93
+477	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/2f/59/2f596f66-67e5-4a37-ba7a-8a69d8ef46a1/weber_standart_emulsionnaia_kracka_fasadnaia.jpg__48x48_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.689237+05	95
+478	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/6c/f8/6cf86470-3966-48b2-a014-d025fa741a94/weber_standart_alkidnaia_kracka_belaia.jpg__180x180_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.702185+05	94
+479	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/2f/59/2f596f66-67e5-4a37-ba7a-8a69d8ef46a1/weber_standart_emulsionnaia_kracka_fasadnaia.jpg__64x64_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.710272+05	95
+480	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/2f/59/2f596f66-67e5-4a37-ba7a-8a69d8ef46a1/weber_standart_emulsionnaia_kracka_fasadnaia.jpg__180x180_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.736842+05	95
+481	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/a6/c6/a6c69908-f225-42a8-bfca-c1c9eb65c257/weber_surik_alkidnaia_kracka_dlia_krysh.jpg__16x16_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.812697+05	96
+482	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/a6/c6/a6c69908-f225-42a8-bfca-c1c9eb65c257/weber_surik_alkidnaia_kracka_dlia_krysh.jpg__32x32_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.833563+05	96
+483	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/a6/c6/a6c69908-f225-42a8-bfca-c1c9eb65c257/weber_surik_alkidnaia_kracka_dlia_krysh.jpg__48x48_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.853921+05	96
+484	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/a6/c6/a6c69908-f225-42a8-bfca-c1c9eb65c257/weber_surik_alkidnaia_kracka_dlia_krysh.jpg__64x64_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.873263+05	96
+485	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/ce/3c/ce3cf3a4-857b-4728-9afd-0ed26c59122f/weber_universal_alkidnaia_kracka_belaia.jpg__16x16_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.883674+05	97
+486	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/a6/c6/a6c69908-f225-42a8-bfca-c1c9eb65c257/weber_surik_alkidnaia_kracka_dlia_krysh.jpg__180x180_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.902385+05	96
+487	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/ce/3c/ce3cf3a4-857b-4728-9afd-0ed26c59122f/weber_universal_alkidnaia_kracka_belaia.jpg__32x32_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.905204+05	97
+488	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/d7/d9/d7d963aa-6214-472f-8abc-b60702e82e0e/weber_wood_stain_alkidnaia_kracka_lak.jpg__16x16_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.923675+05	98
+490	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/d7/d9/d7d963aa-6214-472f-8abc-b60702e82e0e/weber_wood_stain_alkidnaia_kracka_lak.jpg__32x32_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.942518+05	98
+492	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/d7/d9/d7d963aa-6214-472f-8abc-b60702e82e0e/weber_wood_stain_alkidnaia_kracka_lak.jpg__48x48_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.961649+05	98
+494	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/d7/d9/d7d963aa-6214-472f-8abc-b60702e82e0e/weber_wood_stain_alkidnaia_kracka_lak.jpg__64x64_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.980645+05	98
+495	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/d7/d9/d7d963aa-6214-472f-8abc-b60702e82e0e/weber_wood_stain_alkidnaia_kracka_lak.jpg__180x180_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.008654+05	98
+489	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/ce/3c/ce3cf3a4-857b-4728-9afd-0ed26c59122f/weber_universal_alkidnaia_kracka_belaia.jpg__48x48_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.925704+05	97
+491	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/ce/3c/ce3cf3a4-857b-4728-9afd-0ed26c59122f/weber_universal_alkidnaia_kracka_belaia.jpg__64x64_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.944465+05	97
+493	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/ce/3c/ce3cf3a4-857b-4728-9afd-0ed26c59122f/weber_universal_alkidnaia_kracka_belaia.jpg__180x180_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:38.97223+05	97
+496	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/79/6f/796f0674-eed9-4faa-aacf-38954b20827e/weber_alkidnaia_kracka_bordovaia.jpg__16x16_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.037644+05	99
+497	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/79/6f/796f0674-eed9-4faa-aacf-38954b20827e/weber_alkidnaia_kracka_bordovaia.jpg__32x32_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.057758+05	99
+498	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/79/6f/796f0674-eed9-4faa-aacf-38954b20827e/weber_alkidnaia_kracka_bordovaia.jpg__48x48_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.078093+05	99
+499	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/31/94/319470ad-b59f-4f25-877e-2cc43d7a9d26/weber_alkidnaia_kracka_golubaia.jpg__16x16_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.097828+05	100
+500	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/79/6f/796f0674-eed9-4faa-aacf-38954b20827e/weber_alkidnaia_kracka_bordovaia.jpg__64x64_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.098475+05	99
+501	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/31/94/319470ad-b59f-4f25-877e-2cc43d7a9d26/weber_alkidnaia_kracka_golubaia.jpg__32x32_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.118859+05	100
+502	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/79/6f/796f0674-eed9-4faa-aacf-38954b20827e/weber_alkidnaia_kracka_bordovaia.jpg__180x180_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.137293+05	99
+503	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/31/94/319470ad-b59f-4f25-877e-2cc43d7a9d26/weber_alkidnaia_kracka_golubaia.jpg__48x48_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.140396+05	100
+504	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/90/fe/90fecc92-bb81-425d-ad2f-74464c8f5d86/weber_alkidnaia_kracka_zheltaia.jpg__16x16_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.156852+05	101
+505	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/31/94/319470ad-b59f-4f25-877e-2cc43d7a9d26/weber_alkidnaia_kracka_golubaia.jpg__64x64_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.160415+05	100
+506	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/90/fe/90fecc92-bb81-425d-ad2f-74464c8f5d86/weber_alkidnaia_kracka_zheltaia.jpg__32x32_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.176873+05	101
+507	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/31/94/319470ad-b59f-4f25-877e-2cc43d7a9d26/weber_alkidnaia_kracka_golubaia.jpg__180x180_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.1889+05	100
+508	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/90/fe/90fecc92-bb81-425d-ad2f-74464c8f5d86/weber_alkidnaia_kracka_zheltaia.jpg__48x48_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.198427+05	101
+509	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/90/fe/90fecc92-bb81-425d-ad2f-74464c8f5d86/weber_alkidnaia_kracka_zheltaia.jpg__64x64_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.218798+05	101
+510	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/90/fe/90fecc92-bb81-425d-ad2f-74464c8f5d86/weber_alkidnaia_kracka_zheltaia.jpg__180x180_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.258746+05	101
+511	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/fd/92/fd92933a-9b53-438f-9cb7-a5995696f9fb/weber_alkidnaia_kracka_zelenaia.jpg__16x16_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.26978+05	102
+512	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/fd/92/fd92933a-9b53-438f-9cb7-a5995696f9fb/weber_alkidnaia_kracka_zelenaia.jpg__32x32_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.293847+05	102
+513	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/fd/92/fd92933a-9b53-438f-9cb7-a5995696f9fb/weber_alkidnaia_kracka_zelenaia.jpg__48x48_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.319157+05	102
+514	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/fd/92/fd92933a-9b53-438f-9cb7-a5995696f9fb/weber_alkidnaia_kracka_zelenaia.jpg__64x64_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.343377+05	102
+515	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/89/1a/891abf3e-686a-42aa-87fc-692d245c9608/weber_alkidnaia_kracka_krasnaia.jpg__16x16_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.3524+05	103
+516	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/fd/92/fd92933a-9b53-438f-9cb7-a5995696f9fb/weber_alkidnaia_kracka_zelenaia.jpg__180x180_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.373838+05	102
+517	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/89/1a/891abf3e-686a-42aa-87fc-692d245c9608/weber_alkidnaia_kracka_krasnaia.jpg__32x32_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.386796+05	103
+518	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/96/cb/96cbf45e-b41f-4acc-b1d3-47e327e619ce/weber_alkidnaia_kracka_seraia.jpg__16x16_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.400484+05	104
+519	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/89/1a/891abf3e-686a-42aa-87fc-692d245c9608/weber_alkidnaia_kracka_krasnaia.jpg__48x48_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.422107+05	103
+520	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/96/cb/96cbf45e-b41f-4acc-b1d3-47e327e619ce/weber_alkidnaia_kracka_seraia.jpg__32x32_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.433309+05	104
+521	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/89/1a/891abf3e-686a-42aa-87fc-692d245c9608/weber_alkidnaia_kracka_krasnaia.jpg__64x64_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.46079+05	103
+522	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/96/cb/96cbf45e-b41f-4acc-b1d3-47e327e619ce/weber_alkidnaia_kracka_seraia.jpg__48x48_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.468976+05	104
+523	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/96/cb/96cbf45e-b41f-4acc-b1d3-47e327e619ce/weber_alkidnaia_kracka_seraia.jpg__64x64_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.5043+05	104
+524	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/89/1a/891abf3e-686a-42aa-87fc-692d245c9608/weber_alkidnaia_kracka_krasnaia.jpg__180x180_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.509964+05	103
+525	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/96/cb/96cbf45e-b41f-4acc-b1d3-47e327e619ce/weber_alkidnaia_kracka_seraia.jpg__180x180_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.550117+05	104
+526	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/3e/29/3e295a36-5a99-41df-bf18-dcb771bc77ec/weber_alkidnaia_kracka_siniaia.jpg__16x16_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.55064+05	105
+527	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/3e/29/3e295a36-5a99-41df-bf18-dcb771bc77ec/weber_alkidnaia_kracka_siniaia.jpg__32x32_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.585205+05	105
+528	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/3e/29/3e295a36-5a99-41df-bf18-dcb771bc77ec/weber_alkidnaia_kracka_siniaia.jpg__48x48_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.613364+05	105
+529	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/3e/29/3e295a36-5a99-41df-bf18-dcb771bc77ec/weber_alkidnaia_kracka_siniaia.jpg__64x64_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.644538+05	105
+530	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/cf/79/cf791b37-addb-4f86-98f9-9a90fa5cd9c3/weber_alkidnaia_kracka_chernaia.jpg__16x16_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.670313+05	106
+531	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/3e/29/3e295a36-5a99-41df-bf18-dcb771bc77ec/weber_alkidnaia_kracka_siniaia.jpg__180x180_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.688694+05	105
+532	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/cf/79/cf791b37-addb-4f86-98f9-9a90fa5cd9c3/weber_alkidnaia_kracka_chernaia.jpg__32x32_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.702483+05	106
+533	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/b7/29/b7296070-0f38-4942-8a51-9225bf46c8b2/weber_razbavitel_112.jpg__16x16_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.704529+05	107
+534	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/cf/79/cf791b37-addb-4f86-98f9-9a90fa5cd9c3/weber_alkidnaia_kracka_chernaia.jpg__48x48_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.7286+05	106
+535	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/b7/29/b7296070-0f38-4942-8a51-9225bf46c8b2/weber_razbavitel_112.jpg__32x32_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.741512+05	107
+536	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/cf/79/cf791b37-addb-4f86-98f9-9a90fa5cd9c3/weber_alkidnaia_kracka_chernaia.jpg__64x64_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.752214+05	106
+537	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/b7/29/b7296070-0f38-4942-8a51-9225bf46c8b2/weber_razbavitel_112.jpg__48x48_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.778109+05	107
+538	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/cf/79/cf791b37-addb-4f86-98f9-9a90fa5cd9c3/weber_alkidnaia_kracka_chernaia.jpg__180x180_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.799102+05	106
+539	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/b7/29/b7296070-0f38-4942-8a51-9225bf46c8b2/weber_razbavitel_112.jpg__64x64_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.813642+05	107
+540	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/b7/29/b7296070-0f38-4942-8a51-9225bf46c8b2/weber_razbavitel_112.jpg__180x180_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.842285+05	107
+541	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/33/c8/33c81ad8-a0e5-41a4-b72a-614e86e64b70/weber_iakhtovyi_lak_-_exterior.jpg__16x16_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.847102+05	108
+542	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/33/c8/33c81ad8-a0e5-41a4-b72a-614e86e64b70/weber_iakhtovyi_lak_-_exterior.jpg__32x32_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.874241+05	108
+543	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/33/c8/33c81ad8-a0e5-41a4-b72a-614e86e64b70/weber_iakhtovyi_lak_-_exterior.jpg__48x48_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.902455+05	108
+544	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/33/c8/33c81ad8-a0e5-41a4-b72a-614e86e64b70/weber_iakhtovyi_lak_-_exterior.jpg__64x64_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.931681+05	108
+545	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/ed/cb/edcb0f5e-7231-46d4-a388-09871ed95353/weber_iakhtovyi_lak_-_interiorexterior.jpg__16x16_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.936966+05	109
+546	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/ed/cb/edcb0f5e-7231-46d4-a388-09871ed95353/weber_iakhtovyi_lak_-_interiorexterior.jpg__32x32_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.95876+05	109
+547	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/33/c8/33c81ad8-a0e5-41a4-b72a-614e86e64b70/weber_iakhtovyi_lak_-_exterior.jpg__180x180_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.968825+05	108
+548	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/ed/cb/edcb0f5e-7231-46d4-a388-09871ed95353/weber_iakhtovyi_lak_-_interiorexterior.jpg__48x48_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:39.986892+05	109
+549	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/ed/cb/edcb0f5e-7231-46d4-a388-09871ed95353/weber_iakhtovyi_lak_-_interiorexterior.jpg__64x64_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:40.016774+05	109
+550	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/ed/cb/edcb0f5e-7231-46d4-a388-09871ed95353/weber_iakhtovyi_lak_-_interiorexterior.jpg__180x180_q85_crop_subsampling-2_upscale.jpg	2018-05-05 17:17:40.051824+05	109
 \.
-
-
---
--- Name: easy_thumbnails_thumbnail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.easy_thumbnails_thumbnail_id_seq', 36, true);
 
 
 --
 -- Data for Name: easy_thumbnails_thumbnaildimensions; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.easy_thumbnails_thumbnaildimensions (id, thumbnail_id, width, height) FROM stdin;
+COPY easy_thumbnails_thumbnaildimensions (id, thumbnail_id, width, height) FROM stdin;
 \.
-
-
---
--- Name: easy_thumbnails_thumbnaildimensions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.easy_thumbnails_thumbnaildimensions_id_seq', 1, false);
 
 
 --
 -- Data for Name: filer_clipboard; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.filer_clipboard (id, user_id) FROM stdin;
+COPY filer_clipboard (id, user_id) FROM stdin;
 1	1
 \.
-
-
---
--- Name: filer_clipboard_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.filer_clipboard_id_seq', 1, true);
 
 
 --
 -- Data for Name: filer_clipboarditem; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.filer_clipboarditem (id, clipboard_id, file_id) FROM stdin;
+COPY filer_clipboarditem (id, clipboard_id, file_id) FROM stdin;
 \.
-
-
---
--- Name: filer_clipboarditem_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.filer_clipboarditem_id_seq', 1, false);
 
 
 --
 -- Data for Name: filer_file; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.filer_file (id, file, _file_size, sha1, has_all_mandatory_data, original_filename, name, description, uploaded_at, modified_at, is_public, folder_id, owner_id, polymorphic_ctype_id) FROM stdin;
-1	filer_public/85/e3/85e3d702-cc48-4921-969e-ac80ae3d8b02/maps.png	9279	20042fc4955052ed6eaa4bd2c1bd2c0c08c14533	f	maps.png		\N	2018-03-29 02:06:38.360508+05	2018-03-29 02:06:38.3606+05	t	\N	1	50
-6	filer_public/f1/e9/f1e9918d-1517-4c00-9cbf-8a06937d9358/screenshot_from_2018-03-28_23-04-22.png	26495	956e5ff1edc9657910b3e4e7a8ce0e128a480d90	f	Screenshot from 2018-03-28 23-04-22.png		\N	2018-03-29 16:08:45.93756+05	2018-03-29 16:08:45.937652+05	t	1	1	50
+COPY filer_file (id, file, _file_size, sha1, has_all_mandatory_data, original_filename, name, description, uploaded_at, modified_at, is_public, folder_id, owner_id, polymorphic_ctype_id) FROM stdin;
+78	filer_public/06/18/06185613-e8d4-4a8d-87cb-ad7fa5559428/mattross_kracka_polovaia_krasno-korichnevaia.jpg	23974	dfc52b3bfb428b6d5f983e6da01def60e8562d7d	f	MATTROSS Краcка половая (красно-коричневая).jpg		\N	2018-05-05 17:17:36.169398+05	2018-05-05 17:17:36.169436+05	t	\N	1	50
+79	filer_public/3c/8c/3c8cfbf9-948c-4301-9ca5-e8a8672a475b/mattross_kracka_belaia.jpg	24155	32d8e05bf15f58c9330523bc7d2494cb2e7086d4	f	MATTROSS Краcка (белая).jpg		\N	2018-05-05 17:17:36.169405+05	2018-05-05 17:17:36.169438+05	t	\N	1	50
+80	filer_public/14/4e/144e3de4-1d9f-4873-b5f5-5554e3cc0135/mattross_emulsionnaia_kracka_vnutrenniaia.jpg	25658	d159cc6ac32a043e747542b867c65af5c9e09f79	f	MATTROSS Эмулсионная Краcка Внутренняя.jpg		\N	2018-05-05 17:17:36.192572+05	2018-05-05 17:17:36.192595+05	t	\N	1	50
+81	filer_public/60/e3/60e3f722-bde4-4c63-b935-20d7d48c2a27/mattross_emulsionnaia_kracka_fasadnaia.jpg	24147	615e6fef86c7f024cf671f22bbeeef5350b13995	f	MATTROSS Эмулсионная Краcка Фасадная.jpg		\N	2018-05-05 17:17:36.525232+05	2018-05-05 17:17:36.52526+05	t	\N	1	50
+82	filer_public/80/66/8066721d-cf07-44ef-98c9-c6432082110c/weber_neolite_nitro_kracka_belaia.jpg	22550	21972dd5db27a34f02565cdc587934663b7d2a70	f	WEBER NEOLITE Нитро Краcка (белая).jpg		\N	2018-05-05 17:17:36.618157+05	2018-05-05 17:17:36.618184+05	t	\N	1	50
+83	filer_public/0a/fc/0afcd1f9-e151-4463-936e-f64b0f32a1e9/weber_neolite_nitro_kracka_zheltaia.jpg	25062	7d8a2f8d3c9431b95436635c8f4dd75f32a504a1	f	WEBER NEOLITE Нитро Краcка (желтая).jpg		\N	2018-05-05 17:17:36.929777+05	2018-05-05 17:17:36.929801+05	t	\N	1	50
+84	filer_public/59/b8/59b81aec-41fc-418e-a77e-563d019fb398/weber_neolite_nitro_kracka_krasnaia.jpg	25084	d180e659d52adb1018693775aa5a7ed30677155b	f	WEBER NEOLITE Нитро Краcка (красная).jpg		\N	2018-05-05 17:17:37.036037+05	2018-05-05 17:17:37.03606+05	t	\N	1	50
+85	filer_public/0f/8c/0f8c9b85-2948-4cf2-b9a2-5c20853182b3/weber_neolite_nitro_kracka_seraia.jpg	23277	62309c1f544316bd1a94d8d6fe87c94be22fc7e5	f	WEBER NEOLITE Нитро Краcка (серая).jpg		\N	2018-05-05 17:17:37.653166+05	2018-05-05 17:17:37.653205+05	t	\N	1	50
+86	filer_public/be/d6/bed6bc1f-2939-4e41-9e52-f0a9c6a3b092/weber_neolite_nitro_kracka_chernaia.jpg	23858	f1b554b880df33844e9de5b515b7715e710caab3	f	WEBER NEOLITE Нитро Краcка (черная).jpg		\N	2018-05-05 17:17:37.884534+05	2018-05-05 17:17:37.88456+05	t	\N	1	50
+87	filer_public/37/b5/37b51b3c-eb0a-4eb5-8519-522ee16a6c19/thumbs.db	516608	32616c2649cd558f4c5e9da3e192d37beeca0e44	f	Thumbs.db		\N	2018-05-05 17:17:37.895502+05	2018-05-05 17:17:37.895542+05	t	\N	1	47
+88	filer_public/1f/80/1f80651b-bd1d-40d3-89da-b57c28c77404/weber_pf-115_premium_alkidnaia_kracka_belaia.jpg	24029	bed9a936cdcc35178b340d7c803324d855eda7d4	f	WEBER PF-115 Premium Алкидная Краcка (белая).jpg		\N	2018-05-05 17:17:37.934323+05	2018-05-05 17:17:37.934362+05	t	\N	1	50
+89	filer_public/37/68/376802af-000a-4eaf-b930-781cbd9ac7e2/weber_pf-266_premium_alkidnaia_kracka_polovaia_krasno-korichnevaia.jpg	22474	bfa3a94e79a67080211355254c9a093a907b93a8	f	WEBER PF-266 Premium Алкидная Краcка половая (красно-коричневая).jpg		\N	2018-05-05 17:17:38.014448+05	2018-05-05 17:17:38.014485+05	t	\N	1	50
+90	filer_public/0a/59/0a59a2bf-910e-4bbc-b147-3f2bd7632555/weber_pf-266_standart_alkidnaia_kracka_polovaia_zhelto-korichnevaia.jpg	23413	c83060c48ff6bf6ec5da0e409ff701f493cf3e87	f	WEBER PF-266 Standart Алкидная Краcка половая (желто-коричневая).jpg		\N	2018-05-05 17:17:38.154474+05	2018-05-05 17:17:38.154513+05	t	\N	1	50
+91	filer_public/9b/9e/9b9edba9-2e9f-44f9-abe9-f11e44b4ca05/weber_premium_emulsionnaia_kracka_vnutrenniaia_moiushchaia.jpg	21676	8d9a8bc74ec1380951bee43fb0dc1d02adefacde	f	WEBER Premium Эмулсионная Краcка Внутренняя Моющая.jpg		\N	2018-05-05 17:17:38.195241+05	2018-05-05 17:17:38.195263+05	t	\N	1	50
+92	filer_public/56/e0/56e05e8d-ef36-4e38-a46c-36ea0fc43234/weber_premium_emulsionnaia_kraska_tsvetnaia.jpg	23383	f81097a62aeda482eefb66a2b0e5ecab24822152	f	WEBER Premium Эмульсионная Краска Цветная.jpg		\N	2018-05-05 17:17:38.263498+05	2018-05-05 17:17:38.263539+05	t	\N	1	50
+93	filer_public/83/16/831657ff-43b1-4a31-8407-350eb4dbbdd5/weber_standart_emulsionnaia_kracka_vnutrenniaia.jpg	21687	e194d22c6583918b50c612d2e0150d319c01fa66	f	WEBER Standart Эмулсионная Краcка Внутренняя.jpg		\N	2018-05-05 17:17:38.578508+05	2018-05-05 17:17:38.578531+05	t	\N	1	50
+94	filer_public/6c/f8/6cf86470-3966-48b2-a014-d025fa741a94/weber_standart_alkidnaia_kracka_belaia.jpg	24370	256442d5b748da00eb91b0a788cb6b8df491b0cd	f	WEBER Standart Алкидная Краcка (белая).jpg		\N	2018-05-05 17:17:38.582637+05	2018-05-05 17:17:38.582682+05	t	\N	1	50
+95	filer_public/2f/59/2f596f66-67e5-4a37-ba7a-8a69d8ef46a1/weber_standart_emulsionnaia_kracka_fasadnaia.jpg	22032	75dcc8ac8ffbb2b8d039f26371c4fd9170409b3b	f	WEBER Standart Эмулсионная Краcка Фасадная.jpg		\N	2018-05-05 17:17:38.58298+05	2018-05-05 17:17:38.583042+05	t	\N	1	50
+96	filer_public/a6/c6/a6c69908-f225-42a8-bfca-c1c9eb65c257/weber_surik_alkidnaia_kracka_dlia_krysh.jpg	20689	90d890d1a7ae9b0eccd55c95c2b8068b744b41b7	f	WEBER Surik Алкидная Краcка Для Крыш.jpg		\N	2018-05-05 17:17:38.790844+05	2018-05-05 17:17:38.790867+05	t	\N	1	50
+97	filer_public/ce/3c/ce3cf3a4-857b-4728-9afd-0ed26c59122f/weber_universal_alkidnaia_kracka_belaia.jpg	24970	124f89f41febf07f9c5ba74293f9060685754dc6	f	WEBER Universal Алкидная Краcка (белая).jpg		\N	2018-05-05 17:17:38.858034+05	2018-05-05 17:17:38.858058+05	t	\N	1	50
+98	filer_public/d7/d9/d7d963aa-6214-472f-8abc-b60702e82e0e/weber_wood_stain_alkidnaia_kracka_lak.jpg	22581	ba796335aeca6b9692e8bc21e550a3a3b95a2d77	f	WEBER Wood Stain Алкидная Краcка Lak.jpg		\N	2018-05-05 17:17:38.901084+05	2018-05-05 17:17:38.901108+05	t	\N	1	50
+99	filer_public/79/6f/796f0674-eed9-4faa-aacf-38954b20827e/weber_alkidnaia_kracka_bordovaia.jpg	25598	51654ba481a0edf0f799242f81a261497b934135	f	WEBER Алкидная Краcка (бордовая).jpg		\N	2018-05-05 17:17:39.014721+05	2018-05-05 17:17:39.014752+05	t	\N	1	50
+100	filer_public/31/94/319470ad-b59f-4f25-877e-2cc43d7a9d26/weber_alkidnaia_kracka_golubaia.jpg	23661	747e5d4316910abaa0070f770c0d6657caa3e5e8	f	WEBER Алкидная Краcка (голубая).jpg		\N	2018-05-05 17:17:39.073794+05	2018-05-05 17:17:39.073817+05	t	\N	1	50
+101	filer_public/90/fe/90fecc92-bb81-425d-ad2f-74464c8f5d86/weber_alkidnaia_kracka_zheltaia.jpg	26541	2549ed22352df994fdc3b206cd3aa26d25307884	f	WEBER Алкидная Краcка (желтая).jpg		\N	2018-05-05 17:17:39.132543+05	2018-05-05 17:17:39.132567+05	t	\N	1	50
+102	filer_public/fd/92/fd92933a-9b53-438f-9cb7-a5995696f9fb/weber_alkidnaia_kracka_zelenaia.jpg	22688	0ca8d0d12cc32e00498e804b4bd546086472d3bf	f	WEBER Алкидная Краcка (зеленая).jpg		\N	2018-05-05 17:17:39.244717+05	2018-05-05 17:17:39.244741+05	t	\N	1	50
+103	filer_public/89/1a/891abf3e-686a-42aa-87fc-692d245c9608/weber_alkidnaia_kracka_krasnaia.jpg	27104	c445f39be4c7350891ad6dc558f18c3cca2d89fe	f	WEBER Алкидная Краcка (красная).jpg		\N	2018-05-05 17:17:39.31297+05	2018-05-05 17:17:39.313012+05	t	\N	1	50
+104	filer_public/96/cb/96cbf45e-b41f-4acc-b1d3-47e327e619ce/weber_alkidnaia_kracka_seraia.jpg	22751	f1d2183e81d76d08227b6002bab5e7cfa9483111	f	WEBER Алкидная Краcка (серая).jpg		\N	2018-05-05 17:17:39.363353+05	2018-05-05 17:17:39.363395+05	t	\N	1	50
+105	filer_public/3e/29/3e295a36-5a99-41df-bf18-dcb771bc77ec/weber_alkidnaia_kracka_siniaia.jpg	24739	163a2a5af2900f98bbaf4889f87f46d00a8eb0ec	f	WEBER Алкидная Краcка (синяя).jpg		\N	2018-05-05 17:17:39.511399+05	2018-05-05 17:17:39.511436+05	t	\N	1	50
+106	filer_public/cf/79/cf791b37-addb-4f86-98f9-9a90fa5cd9c3/weber_alkidnaia_kracka_chernaia.jpg	23582	4252fe550c83ea08d9d8fd13b72911a7d2c2ad8e	f	WEBER Алкидная Краcка (черная).jpg		\N	2018-05-05 17:17:39.632083+05	2018-05-05 17:17:39.632119+05	t	\N	1	50
+107	filer_public/b7/29/b7296070-0f38-4942-8a51-9225bf46c8b2/weber_razbavitel_112.jpg	15398	f6ab30f1abe814ec131d8317c3db5c549d291e1e	f	WEBER Разбавитель 112.jpg		\N	2018-05-05 17:17:39.661645+05	2018-05-05 17:17:39.661684+05	t	\N	1	50
+108	filer_public/33/c8/33c81ad8-a0e5-41a4-b72a-614e86e64b70/weber_iakhtovyi_lak_-_exterior.jpg	25460	e1a2873959c6a583ae17a21884e1d523c7ab062a	f	WEBER Яхтовый Лак - Exterior.jpg		\N	2018-05-05 17:17:39.814439+05	2018-05-05 17:17:39.814463+05	t	\N	1	50
+109	filer_public/ed/cb/edcb0f5e-7231-46d4-a388-09871ed95353/weber_iakhtovyi_lak_-_interiorexterior.jpg	26310	2c0e149aff6a5131c9f0141e18b6eb90ed18d2c4	f	WEBER Яхтовый Лак - Interior&Exterior.jpg		\N	2018-05-05 17:17:39.91151+05	2018-05-05 17:17:39.911553+05	t	\N	1	50
+143	filer_public/2b/43/2b43ad66-ac38-488f-b0a2-d8913c96be87/mattross_kracka_emalevaia.jpg	24155	32d8e05bf15f58c9330523bc7d2494cb2e7086d4	f	MATTROSS краcка эмалевая.jpg		\N	2018-05-05 18:28:58.116872+05	2018-05-05 18:28:58.116942+05	t	4	1	50
 \.
-
-
---
--- Name: filer_file_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.filer_file_id_seq', 6, true);
 
 
 --
 -- Data for Name: filer_folder; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.filer_folder (id, name, uploaded_at, created_at, modified_at, lft, rght, tree_id, level, owner_id, parent_id) FROM stdin;
-1	products	2018-03-29 02:06:59.976683+05	2018-03-29 02:06:59.976769+05	2018-03-29 02:06:59.976826+05	1	2	1	0	1	\N
+COPY filer_folder (id, name, uploaded_at, created_at, modified_at, lft, rght, tree_id, level, owner_id, parent_id) FROM stdin;
+4	Products	2018-05-05 18:03:42.649976+05	2018-05-05 18:03:42.650009+05	2018-05-05 18:03:42.650024+05	1	2	1	0	1	\N
 \.
-
-
---
--- Name: filer_folder_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.filer_folder_id_seq', 1, true);
 
 
 --
 -- Data for Name: filer_folderpermission; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.filer_folderpermission (id, type, everybody, can_edit, can_read, can_add_children, folder_id, group_id, user_id) FROM stdin;
+COPY filer_folderpermission (id, type, everybody, can_edit, can_read, can_add_children, folder_id, group_id, user_id) FROM stdin;
 \.
-
-
---
--- Name: filer_folderpermission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.filer_folderpermission_id_seq', 1, false);
 
 
 --
 -- Data for Name: filer_image; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.filer_image (file_ptr_id, _height, _width, date_taken, default_alt_text, default_caption, author, must_always_publish_author_credit, must_always_publish_copyright, subject_location) FROM stdin;
-1	256	256	2018-03-29 02:06:38.243514+05	\N	\N	\N	f	f	
-6	157	277	2018-03-29 16:08:45.775719+05	\N	\N	\N	f	f	
+COPY filer_image (file_ptr_id, _height, _width, date_taken, default_alt_text, default_caption, author, must_always_publish_author_credit, must_always_publish_copyright, subject_location) FROM stdin;
+79	640	640	2018-05-05 17:17:36.101962+05	\N	\N	\N	f	f	
+80	640	640	2018-05-05 17:17:36.172088+05	\N	\N	\N	f	f	
+78	640	640	2018-05-05 17:17:36.144402+05	\N	\N	\N	f	f	
+81	640	640	2018-05-05 17:17:36.518721+05	\N	\N	\N	f	f	
+82	640	640	2018-05-05 17:17:36.612913+05	\N	\N	\N	f	f	
+83	640	640	2018-05-05 17:17:36.924921+05	\N	\N	\N	f	f	
+84	640	640	2018-05-05 17:17:37.03187+05	\N	\N	\N	f	f	
+85	640	640	2018-05-05 17:17:37.645001+05	\N	\N	\N	f	f	
+86	640	640	2018-05-05 17:17:37.879298+05	\N	\N	\N	f	f	
+88	640	640	2018-05-05 17:17:37.927506+05	\N	\N	\N	f	f	
+89	640	640	2018-05-05 17:17:38.008086+05	\N	\N	\N	f	f	
+90	640	640	2018-05-05 17:17:38.148169+05	\N	\N	\N	f	f	
+91	640	640	2018-05-05 17:17:38.190525+05	\N	\N	\N	f	f	
+92	640	640	2018-05-05 17:17:38.253367+05	\N	\N	\N	f	f	
+93	640	640	2018-05-05 17:17:38.574325+05	\N	\N	\N	f	f	
+95	640	640	2018-05-05 17:17:38.577188+05	\N	\N	\N	f	f	
+94	640	640	2018-05-05 17:17:38.574587+05	\N	\N	\N	f	f	
+96	640	640	2018-05-05 17:17:38.786508+05	\N	\N	\N	f	f	
+97	640	640	2018-05-05 17:17:38.850399+05	\N	\N	\N	f	f	
+98	640	640	2018-05-05 17:17:38.896218+05	\N	\N	\N	f	f	
+99	640	640	2018-05-05 17:17:39.010442+05	\N	\N	\N	f	f	
+100	640	640	2018-05-05 17:17:39.069277+05	\N	\N	\N	f	f	
+101	640	640	2018-05-05 17:17:39.127464+05	\N	\N	\N	f	f	
+102	640	640	2018-05-05 17:17:39.240021+05	\N	\N	\N	f	f	
+103	640	640	2018-05-05 17:17:39.306059+05	\N	\N	\N	f	f	
+104	640	640	2018-05-05 17:17:39.356494+05	\N	\N	\N	f	f	
+105	640	640	2018-05-05 17:17:39.504295+05	\N	\N	\N	f	f	
+106	640	640	2018-05-05 17:17:39.625504+05	\N	\N	\N	f	f	
+107	640	640	2018-05-05 17:17:39.655354+05	\N	\N	\N	f	f	
+108	640	640	2018-05-05 17:17:39.809487+05	\N	\N	\N	f	f	
+109	640	640	2018-05-05 17:17:39.90463+05	\N	\N	\N	f	f	
+143	640	640	2018-05-05 18:28:58.112374+05	\N	\N	\N	f	f	
 \.
 
 
@@ -3215,39 +3841,25 @@ COPY public.filer_image (file_ptr_id, _height, _width, date_taken, default_alt_t
 -- Data for Name: filer_thumbnailoption; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.filer_thumbnailoption (id, name, width, height, crop, upscale) FROM stdin;
+COPY filer_thumbnailoption (id, name, width, height, crop, upscale) FROM stdin;
 \.
-
-
---
--- Name: filer_thumbnailoption_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.filer_thumbnailoption_id_seq', 1, false);
 
 
 --
 -- Data for Name: main_banner; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.main_banner (id, "order") FROM stdin;
+COPY main_banner (id, "order") FROM stdin;
 1	0
 2	0
 \.
 
 
 --
--- Name: main_banner_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.main_banner_id_seq', 2, true);
-
-
---
 -- Data for Name: main_banner_translation; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.main_banner_translation (id, language_code, name, slug, image, master_id) FROM stdin;
+COPY main_banner_translation (id, language_code, name, slug, image, master_id) FROM stdin;
 1	ru	Супер-прочные краски от "SICO"	super-prochnye-kraski-ot-sico	banners/2018/02/22/lion.jpg	1
 2	ru	Супер-прочные краски от "SICO"	super-prochnye-kraski-ot-sico2	banners/2018/02/22/hmk1.jpg	2
 3	en	Super power	super-power	banners/2018/02/27/hmk1.jpg	2
@@ -3256,47 +3868,26 @@ COPY public.main_banner_translation (id, language_code, name, slug, image, maste
 
 
 --
--- Name: main_banner_translation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.main_banner_translation_id_seq', 4, true);
-
-
---
 -- Data for Name: main_customermenu; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.main_customermenu (id, "order") FROM stdin;
+COPY main_customermenu (id, "order") FROM stdin;
 \.
-
-
---
--- Name: main_customermenu_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.main_customermenu_id_seq', 1, false);
 
 
 --
 -- Data for Name: main_customermenu_translation; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.main_customermenu_translation (id, language_code, name, slug, master_id) FROM stdin;
+COPY main_customermenu_translation (id, language_code, name, slug, master_id) FROM stdin;
 \.
-
-
---
--- Name: main_customermenu_translation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.main_customermenu_translation_id_seq', 1, false);
 
 
 --
 -- Data for Name: main_customersmenu; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.main_customersmenu (menu_ptr_id) FROM stdin;
+COPY main_customersmenu (menu_ptr_id) FROM stdin;
 \.
 
 
@@ -3304,7 +3895,7 @@ COPY public.main_customersmenu (menu_ptr_id) FROM stdin;
 -- Data for Name: main_menu; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.main_menu (id, "order") FROM stdin;
+COPY main_menu (id, "order") FROM stdin;
 1	0
 2	0
 4	0
@@ -3313,17 +3904,10 @@ COPY public.main_menu (id, "order") FROM stdin;
 
 
 --
--- Name: main_menu_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.main_menu_id_seq', 4, true);
-
-
---
 -- Data for Name: main_menu_translation; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.main_menu_translation (id, language_code, name, slug, master_id) FROM stdin;
+COPY main_menu_translation (id, language_code, name, slug, master_id) FROM stdin;
 1	ru	Доставка	dostavka	1
 2	ru	Оплата	oplata	2
 3	ru	Контакты	kontakty	3
@@ -3334,17 +3918,10 @@ COPY public.main_menu_translation (id, language_code, name, slug, master_id) FRO
 
 
 --
--- Name: main_menu_translation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.main_menu_translation_id_seq', 6, true);
-
-
---
 -- Data for Name: main_static; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.main_static (id) FROM stdin;
+COPY main_static (id) FROM stdin;
 1
 2
 3
@@ -3353,17 +3930,10 @@ COPY public.main_static (id) FROM stdin;
 
 
 --
--- Name: main_static_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.main_static_id_seq', 4, true);
-
-
---
 -- Data for Name: main_static_translation; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.main_static_translation (id, language_code, name, slug, image, body, master_id) FROM stdin;
+COPY main_static_translation (id, language_code, name, slug, image, body, master_id) FROM stdin;
 1	ru	Доставка	dostavka		<p>ДоставкаДоставкаДоставкаДоставкаДоставкаДоставкаДоставкаДоставкаДоставкаДоставка</p>	1
 2	ru	Оплата	oplata		<p>ОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплатаОплата</p>	2
 3	ru	Контакты	kontakty		<p>КонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтактыКонтакты</p>	3
@@ -3375,34 +3945,20 @@ COPY public.main_static_translation (id, language_code, name, slug, image, body,
 
 
 --
--- Name: main_static_translation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.main_static_translation_id_seq', 7, true);
-
-
---
 -- Data for Name: main_staticfooterpage; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.main_staticfooterpage (id, menu_type) FROM stdin;
+COPY main_staticfooterpage (id, menu_type) FROM stdin;
 1	0
 2	1
 \.
 
 
 --
--- Name: main_staticfooterpage_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.main_staticfooterpage_id_seq', 2, true);
-
-
---
 -- Data for Name: main_staticfooterpage_translation; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.main_staticfooterpage_translation (id, language_code, name, slug, body, master_id) FROM stdin;
+COPY main_staticfooterpage_translation (id, language_code, name, slug, body, master_id) FROM stdin;
 1	en	For clients	clients	<p>For Clients site is a direct communication channel designed with our clients in mind. Initiate and manage support requests, view announcements and alerts, visit discussion boards, and search product information through this convenient online hub.</p>	1
 2	ru	Для клиентов	dlya-klientov	<p>Для клиентов - это прямой канал связи, разработанный с учетом наших клиентов. Инициируйте и управляйте запросами поддержки, просматривайте объявления и предупреждения, посещайте доски обсуждений и просматривайте информацию о продукте через этот удобный онлайн-концентратор.</p>	1
 3	ru	Для партнеров	dlya-partnerov	<p>Мы сотрудничаем с более чем 6 000 реселлерами по всему миру, предоставляя услуги, продукты и знания, необходимые им для обеспечения безопасности своих клиентов в Интернете.</p>	2
@@ -3412,47 +3968,26 @@ COPY public.main_staticfooterpage_translation (id, language_code, name, slug, bo
 
 
 --
--- Name: main_staticfooterpage_translation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.main_staticfooterpage_translation_id_seq', 5, true);
-
-
---
 -- Data for Name: main_usermenu; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.main_usermenu (id, "order") FROM stdin;
+COPY main_usermenu (id, "order") FROM stdin;
 \.
-
-
---
--- Name: main_usermenu_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.main_usermenu_id_seq', 1, false);
 
 
 --
 -- Data for Name: main_usermenu_translation; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.main_usermenu_translation (id, language_code, name, slug, master_id) FROM stdin;
+COPY main_usermenu_translation (id, language_code, name, slug, master_id) FROM stdin;
 \.
-
-
---
--- Name: main_usermenu_translation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.main_usermenu_translation_id_seq', 1, false);
 
 
 --
 -- Data for Name: main_usersmenu; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.main_usersmenu (menu_ptr_id) FROM stdin;
+COPY main_usersmenu (menu_ptr_id) FROM stdin;
 \.
 
 
@@ -3460,61 +3995,27 @@ COPY public.main_usersmenu (menu_ptr_id) FROM stdin;
 -- Data for Name: orders_cart; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.orders_cart (id, session_key, count, status, total_price, order_id, variation_id) FROM stdin;
-132	04d7fca2-8a4f-438b-912b-94404bfa41bb	1	t	5500.00	22	184
-133	04d7fca2-8a4f-438b-912b-94404bfa41bb	2	t	9200.00	22	195
-153	04d7fca2-8a4f-438b-912b-94404bfa41bb	1	t	4600.00	23	195
-154	04d7fca2-8a4f-438b-912b-94404bfa41bb	1	t	5500.00	23	184
-201	28c52191-15b5-4142-a3be-ca90503d6969	1	t	6600.00	\N	196
-113	1d599997-4f17-416b-b8cd-552f820afb4b	1	t	17600.00	\N	197
-156	04d7fca2-8a4f-438b-912b-94404bfa41bb	2	t	9200.00	24	195
-155	04d7fca2-8a4f-438b-912b-94404bfa41bb	2	t	11000.00	24	184
-203	28c52191-15b5-4142-a3be-ca90503d6969	1	t	50000.00	\N	198
-116	1aa4b5f0-b345-4cb1-bfe1-71471912dfcf	1	t	5500.00	17	184
-117	1aa4b5f0-b345-4cb1-bfe1-71471912dfcf	1	t	5502.00	17	187
-157	04d7fca2-8a4f-438b-912b-94404bfa41bb	1	t	5500.00	25	184
-158	04d7fca2-8a4f-438b-912b-94404bfa41bb	1	t	4600.00	25	195
-202	28c52191-15b5-4142-a3be-ca90503d6969	3	t	13800.00	\N	195
-159	04d7fca2-8a4f-438b-912b-94404bfa41bb	1	t	5500.00	26	184
-160	04d7fca2-8a4f-438b-912b-94404bfa41bb	1	t	4600.00	26	195
-186	2aac4573-5ebe-4138-a592-235667ac842b	1	t	5500.00	30	184
-185	2aac4573-5ebe-4138-a592-235667ac842b	1	t	4600.00	30	195
-204	cb827b5e-cdb3-426f-848e-99e793dda9a8	1	t	5502.00	\N	187
-191	04d7fca2-8a4f-438b-912b-94404bfa41bb	1	t	17600.00	\N	197
-125	28c52191-15b5-4142-a3be-ca90503d6969	1	t	6600.00	19	196
-205	28c52191-15b5-4142-a3be-ca90503d6969	2	t	35200.00	\N	197
-192	04d7fca2-8a4f-438b-912b-94404bfa41bb	2	t	11012.00	\N	194
-126	04d7fca2-8a4f-438b-912b-94404bfa41bb	4	t	18400.00	20	195
-127	04d7fca2-8a4f-438b-912b-94404bfa41bb	1	t	5500.00	20	184
-187	2aac4573-5ebe-4138-a592-235667ac842b	1	t	17600.00	\N	197
-129	04d7fca2-8a4f-438b-912b-94404bfa41bb	1	t	5500.00	21	184
-131	04d7fca2-8a4f-438b-912b-94404bfa41bb	1	t	4600.00	21	195
-195	533845b0-c715-4cd3-8ea0-20ba03e2b61e	10	t	56030.00	\N	189
-196	533845b0-c715-4cd3-8ea0-20ba03e2b61e	1	t	6600.00	\N	196
-194	533845b0-c715-4cd3-8ea0-20ba03e2b61e	3	t	52800.00	\N	197
-197	533845b0-c715-4cd3-8ea0-20ba03e2b61e	1	t	5504.00	\N	190
-200	533845b0-c715-4cd3-8ea0-20ba03e2b61e	1	t	5001.00	\N	185
-199	533845b0-c715-4cd3-8ea0-20ba03e2b61e	6	t	33606.00	\N	186
-198	533845b0-c715-4cd3-8ea0-20ba03e2b61e	16	t	80080.00	\N	191
-181	28c52191-15b5-4142-a3be-ca90503d6969	1	t	17600.00	31	197
-182	28c52191-15b5-4142-a3be-ca90503d6969	1	t	5502.00	31	187
-183	28c52191-15b5-4142-a3be-ca90503d6969	1	t	5503.00	31	188
+COPY orders_cart (id, session_key, count, status, total_price, order_id, variation_id) FROM stdin;
+329	d612d029-831f-44b2-a211-b8fcb368debf	1	t	206250.00	51	268
+320	d612d029-831f-44b2-a211-b8fcb368debf	1	t	206250.00	43	268
+321	d612d029-831f-44b2-a211-b8fcb368debf	1	t	206250.00	44	268
+330	d612d029-831f-44b2-a211-b8fcb368debf	24	t	4950000.00	52	268
+322	d612d029-831f-44b2-a211-b8fcb368debf	1	t	206250.00	45	268
+331	d612d029-831f-44b2-a211-b8fcb368debf	1	t	206250.00	\N	268
+323	d612d029-831f-44b2-a211-b8fcb368debf	1	t	206250.00	46	268
+324	d612d029-831f-44b2-a211-b8fcb368debf	5	t	1031250.00	47	268
+325	54218d08-dacf-490f-a989-28ae00aa0482	1	t	206250.00	\N	268
+326	d612d029-831f-44b2-a211-b8fcb368debf	1	t	206250.00	48	268
+327	d612d029-831f-44b2-a211-b8fcb368debf	1	t	206250.00	49	268
+328	d612d029-831f-44b2-a211-b8fcb368debf	1	t	206250.00	50	268
 \.
-
-
---
--- Name: orders_cart_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.orders_cart_id_seq', 205, true);
 
 
 --
 -- Data for Name: orders_order; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.orders_order (id, client_name, created, customer_id, phone, shipping_address, state, total_price, order_unique_id, products) FROM stdin;
-31	A'zam	2018-04-21 18:23:50.885917+05	\N	998389478	123, maxam	0	28605.00	18eab986-cf28-43ea-9a7c-519c5f619f22	
+COPY orders_order (id, client_name, created, customer_id, phone, shipping_address, state, total_price, order_unique_id, products) FROM stdin;
 16	A'zam Mamatmurodov	2018-04-04 22:57:10.176104+05	1	998389478	Address test	0	11200.00	af9a1bcb-7ea4-45de-a021-f00680f6b992	
 17	asasasnkkans	2018-04-07 16:54:05.942561+05	\N	q9u0192u019u	asnxkajsnkasnkajs	0	11002.00	3822d671-aa07-4624-8c37-3a4cebf43421	
 18	A'zam Mamatmurodov	2018-04-09 12:06:45.329305+05	1	123412121	asasas	0	36718.00	3d03a479-5d03-4c58-87c9-d945943b8ca0	
@@ -3530,53 +4031,55 @@ COPY public.orders_order (id, client_name, created, customer_id, phone, shipping
 28	Maxam	2018-04-18 18:25:57.259075+05	\N	998389478	Tashkent, stret, karatash	0	23103.00	49011ef7-e4da-4546-984b-1578ebd76f7e	
 29	A'zam	2018-04-18 19:49:38.220376+05	\N	998389478	Tashkent, Karatash str.	0	15003.00	e18aa668-9c94-4ad5-863e-3583eb54e1e1	
 30	hfhhfhg	2018-04-21 12:16:24.617622+05	\N	434344343	hfhhfhfhfhfhfhfhgf	0	10100.00	32be7585-460c-40c8-815f-3d9197bbd911	
+31	A'zam	2018-04-21 18:23:50.885917+05	\N	998389478	123, maxam	0	28605.00	18eab986-cf28-43ea-9a7c-519c5f619f22	{}
+32	A'zam	2018-04-30 14:24:55.432511+05	\N	998389478	Ehtirom 12	0	75800.00	20528819-e970-4657-aac6-290f5553cdfb	
+33	A'zam	2018-04-30 14:32:42.956106+05	\N	998389478	Ehtirom, 12-uy.	0	100000.00	569b0ceb-b3cc-4d0e-b538-0b9e7dbcdd59	
+34	A'zamjon Mamatmurodov	2018-04-30 14:34:15.905642+05	1	998389478	22525252	0	11200.00	4930c74c-4af1-49e2-8137-8b2f7b21f3fe	[]
+35	A'zamjon Mamatmurodov	2018-04-30 14:35:46.779718+05	1	903239478	789654123	0	45308.00	c6471159-6c7c-495f-ba67-97a7ef175b3a	[]
+36	A'zamjon Mamatmurodov	2018-04-30 14:37:29.712789+05	1	909564484	asaasas	0	83311.00	42809262-4ba5-428c-9320-98b49825b97d	[]
+37	A'zamjon Mamatmurodov	2018-04-30 14:44:28.675264+05	1	993866546	Shoppers	0	55321.00	d63d0a42-234a-473f-a078-2e24a120d95d	
+38	A'zamjon Mamatmurodov	2018-04-30 16:42:49.412585+05	1	998389478	12122121	0	50000.00	1c5c545d-dde5-4512-9f3a-a3c5d737e9d7	[]
+39	A'zamjon Mamatmurodov	2018-04-30 16:59:16.488213+05	1	598529652	12aasasasasasasas	0	23102.00	b190b1ff-9e8a-4226-80d7-fccf031713bb	[{'title': 'HAYAT Эмаль ПФ-115 22 Зеленый', 'price': 5502.0, 'count': 1, 'total_price': 5502.0}]
+40	A'zamjon Mamatmurodov	2018-04-30 17:00:46.338462+05	1	585656256	asasasasasas	0	61222.00	2f47698f-0143-4fee-b69b-0cc5936d3c3c	[{'title': 'Test - Hayat 11 светло-бежевая', 'price': 17600.0, 'count': 2, 'total_price': 35200.0}]
+41	A'zamjon Mamatmurodov	2018-04-30 17:02:56.481376+05	1	111111111	aaaaaaaaaaaaaaaaaaaa	0	55420.00	48666a9b-5be8-4359-8ea4-bc9c084451f6	[{'title': 'HAYAT PREMIUM FASAD Краска для нар. работ силикон2 10 светло-бежевая', 'price': 6600.0, 'count': 1, 'total_price': 6600.0}, {'title': 'Test - Hayat 11 светло-бежевая', 'price': 17600.0, 'count': 1, 'total_price': 17600.0}, {'title': 'HAYAT Эмаль ПФ-115 22 Зеленый', 'price': 5502.0, 'count': 1, 'total_price': 5502.0}, {'title': 'HAYAT Эмаль ПФ-115 22 светло-бежевая', 'price': 5506.0, 'count': 3, 'total_price': 16518.0}, {'title': 'HAYAT PREMIUM FASAD Краска для нар. работ силикон2 20 черная', 'price': 4600.0, 'count': 2, 'total_price': 9200.0}]
+42	A'zamjon Mamatmurodov	2018-05-05 18:30:55.397907+05	1	121210900	aaasa	0	206250.00	8b410e0e-c86f-4b56-b299-009c5d3f1348	[{'title': 'MATTROSS краcка эмалевая 20 Красный', 'price': 206250.0, 'count': 1, 'total_price': 206250.0}]
+43	A'zamjon Mamatmurodov	2018-05-06 11:20:51.620474+05	1	121210900	aaasa	0	206250.00	03ccb001-13cb-4747-96ee-a102ef579c5f	[{'title': 'MATTROSS краcка эмалевая 20 Красный', 'price': 206250.0, 'count': 1, 'total_price': 206250.0}]
+44	Muzaffar	2018-05-06 11:35:22.859021+05	\N	909091492	Ass of the world	0	206250.00	40f9f5f4-d1e1-4eb1-b83c-6d24be80cf73	[{'title': 'MATTROSS краcка эмалевая 20 Красный', 'price': 206250.0, 'count': 1, 'total_price': 206250.0}]
+45	Muzaffar	2018-05-06 11:38:25.816445+05	\N	909091492	chilonzon	0	206250.00	3878d185-8d18-4a65-8e40-4d2d78778a45	[{'title': 'MATTROSS краcка эмалевая 20 Красный', 'price': 206250.0, 'count': 1, 'total_price': 206250.0}]
+46	Muzaffar	2018-05-06 11:53:50.80467+05	\N	909091492	Chilonzon	0	206250.00	3cb8e6ea-f54e-4873-beec-1e6d6b8878c0	[{'title': 'MATTROSS краcка эмалевая 20 Красный', 'price': 206250.0, 'count': 1, 'total_price': 206250.0}]
+47	Muxtor	2018-05-06 15:02:59.508535+05	22	909091492	Yakksarov	0	1031250.00	61b8e65b-7f6d-4f2b-98e0-5b0a63b04e67	[{'title': 'MATTROSS краcка эмалевая 20 Красный', 'price': 206250.0, 'count': 5, 'total_price': 1031250.0}]
+48	Muzaffar Nazarov	2018-05-07 14:48:21.484268+05	22	909091492	Chilonzon	0	206250.00	baf21e3f-d708-4c97-a395-ac85c163b59a	[{'title': 'MATTROSS краcка эмалевая 20 Красный', 'price': 206250.0, 'count': 1, 'total_price': 206250.0}]
+49	Muzaffar Nazarov	2018-05-07 14:49:22.128563+05	22	909091492	Chilonzon	0	206250.00	310deeff-0ae0-440c-98b8-7a612cfa5676	[{'title': 'MATTROSS краcка эмалевая 20 Красный', 'price': 206250.0, 'count': 1, 'total_price': 206250.0}]
+50	A'zamjon Mamatmurodov	2018-05-07 16:03:01.326093+05	1	121210900	aaasa	0	206250.00	76cc2e4b-921d-4eae-aa67-47d5b72d26fc	[{'title': 'MATTROSS краcка эмалевая 20 Красный', 'price': 206250.0, 'count': 1, 'total_price': 206250.0}]
+51	A'zamjon Mamatmurodov	2018-05-07 16:08:50.257907+05	1	121210900	aaasa	0	206250.00	e9152a7a-81c3-46d0-bdd5-ae72b27e124c	[{'title': 'MATTROSS краcка эмалевая 20 Красный', 'price': 206250.0, 'count': 1, 'total_price': 206250.0}]
+52	A'zamjon Mamatmurodov	2018-05-08 17:59:54.134622+05	1	535325235	3523	0	4950000.00	6e2c1f2f-155d-4ae6-a270-16feb4f20a5b	[{'title': 'MATTROSS краcка эмалевая 20 Красный', 'price': 206250.0, 'count': 24, 'total_price': 4950000.0}]
 \.
-
-
---
--- Name: orders_order_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.orders_order_id_seq', 31, true);
 
 
 --
 -- Data for Name: payment_paycomtransaction; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.payment_paycomtransaction (id, paycom_transaction_id, paycom_time, paycom_time_datetime, create_time, perform_time, cancel_time, amount, state, reason, receivers, order_id) FROM stdin;
+COPY payment_paycomtransaction (id, paycom_transaction_id, paycom_time, paycom_time_datetime, create_time, perform_time, cancel_time, amount, state, reason, receivers, order_id) FROM stdin;
 \.
-
-
---
--- Name: payment_paycomtransaction_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.payment_paycomtransaction_id_seq', 1, false);
 
 
 --
 -- Data for Name: products_brands; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.products_brands (id, name, logo, category_id) FROM stdin;
+COPY products_brands (id, name, logo, category_id) FROM stdin;
 21	Hayat	brands/VGjc50U.jpg	19
 20	Polard	brands/leones-fondos-de-pantalla-hd-Fotosdelanaturaleza-4-1024x640.jpg	20
+22	Weber	brands/Brand_logo.png	19
 \.
-
-
---
--- Name: products_brands_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.products_brands_id_seq', 21, true);
 
 
 --
 -- Data for Name: products_category; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.products_category (id, "order", lft, rght, tree_id, mptt_level, parent_id) FROM stdin;
+COPY products_category (id, "order", lft, rght, tree_id, mptt_level, parent_id) FROM stdin;
 4	0	1	2	3	0	\N
 11	0	2	3	4	1	5
 12	0	4	5	4	1	5
@@ -3604,17 +4107,10 @@ COPY public.products_category (id, "order", lft, rght, tree_id, mptt_level, pare
 
 
 --
--- Name: products_category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.products_category_id_seq', 24, true);
-
-
---
 -- Data for Name: products_category_translation; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.products_category_translation (id, language_code, name, master_id, slug) FROM stdin;
+COPY products_category_translation (id, language_code, name, master_id, slug) FROM stdin;
 2	ru	Водоэмульсионная краска	2	vodoimulsionnaya-kraska
 3	uz	Vodoimulsiya kraska	2	vodoimulsiya-kraska
 4	ru	Герметика и Монтаж пена	3	germetika-i-montazh-pena
@@ -3644,17 +4140,10 @@ COPY public.products_category_translation (id, language_code, name, master_id, s
 
 
 --
--- Name: products_category_translation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.products_category_translation_id_seq', 26, true);
-
-
---
 -- Data for Name: products_color; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.products_color (id, color) FROM stdin;
+COPY products_color (id, color) FROM stdin;
 1	#FF0000
 2	#3CB823
 3	#197DFF
@@ -3673,7 +4162,7 @@ COPY public.products_color (id, color) FROM stdin;
 -- Data for Name: products_color_translation; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.products_color_translation (id, language_code, name, master_id) FROM stdin;
+COPY products_color_translation (id, language_code, name, master_id) FROM stdin;
 1	ru	Красный	1
 2	en	Red	1
 3	uz	Qizil	1
@@ -3693,120 +4182,53 @@ COPY public.products_color_translation (id, language_code, name, master_id) FROM
 
 
 --
--- Name: products_color_translation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.products_color_translation_id_seq', 18, true);
-
-
---
 -- Data for Name: products_product; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.products_product (id, name, description, characters, brand_id, category_id, owner_id, updated, available_in_stock, volume_id, is_recommended, price, is_top, default_image, image_0, image_1, image_2) FROM stdin;
-114	HAYAT PREMIUM FASAD Краска для нар. работ силикон2	Предназначена для наржной окраски зданий и сооружений, по кирпичным и бетонным, деревянным и другим пористым покрытиям по загрунтованной поверхности металла2	Test info2	21	23	3	2018-03-31	f	1	t	4600.00	t	image_0	products/earth_by_n4u2k.jpg	products/prod.png	
-115	Test - Hayat	Test – Hayat – 2	Test – Hayat – 3	21	23	3	2018-04-02	f	1	f	17600.00	f	image_0	products/prod.png	products/earth_by_n4u2k.jpg	products/dota_2_igra_logotip_fon_92935_1920x1080.jpg
-113	HAYAT Эмаль ПФ-115	<p>Предназначена для окрашивания металлических, деревянных и других поверхностей, подвергающихся атмосферным восдействиям.</p>	<p>Предназначена для окрашивания металлических, деревянных и других поверхностей, подвергающихся атмосферным восдействиям.</p>	21	24	4	2018-04-14	t	1	t	5500.00	t	image_0	products/dota_2_igra_logotip_fon_92935_1920x1080.jpg	products/dota_2_igra_logotip_fon_92935_1920x1080.jpg	products/JSJ6EBorAEE.jpg
-116	Test product	<p>asaasas</p>	<p>asasasas</p>	21	21	18	2018-04-14	t	1	f	50000.00	f	image_0	products/leones-fondos-de-pantalla-hd-Fotosdelanaturaleza-4-1024x640.jpg		
+COPY products_product (id, name, description, characters, brand_id, category_id, owner_id, updated, available_in_stock, volume_id, is_recommended, price, is_top, default_image, image_0_id, image_1_id, image_2_id) FROM stdin;
+137	MATTROSS краcка эмалевая	Предназначена для окрашивания металлических, деревянных и других поверхностей, подвергающихся атмосферным восдействиям.		21	24	4	2018-05-05	t	1	t	206250.00	f	image_0	143	\N	\N
 \.
-
-
---
--- Name: products_product_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.products_product_id_seq', 116, true);
-
-
---
--- Name: products_productcolor_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.products_productcolor_id_seq', 14, true);
 
 
 --
 -- Data for Name: products_productimage; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.products_productimage (id, image, product_id) FROM stdin;
+COPY products_productimage (id, image, product_id) FROM stdin;
 \.
-
-
---
--- Name: products_productimage_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.products_productimage_id_seq', 31, true);
 
 
 --
 -- Data for Name: products_review; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.products_review (created_at, id, text, is_approved, product_id, reviewer_location, subject, reviewer) FROM stdin;
+COPY products_review (created_at, id, text, is_approved, product_id, reviewer_location, subject, reviewer) FROM stdin;
 \.
-
-
---
--- Name: products_review_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.products_review_id_seq', 18, true);
 
 
 --
 -- Data for Name: products_variation; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.products_variation (id, price, quantity, product_id, name, color_id) FROM stdin;
-184	5500.00	2	113	0.9	5
-185	5001.00	4	113	3	6
-186	5601.00	6	113	3	7
-187	5502.00	8	113	22	2
-188	5503.00	11	113	2.5	1
-189	5603.00	12	113	22	9
-190	5504.00	14	113	3	10
-191	5005.00	16	113	3	3
-193	5006.00	19	113	2.5	13
-194	5506.00	20	113	22	14
-195	4600.00	5	114	20	13
-196	6600.00	4	114	10	14
-197	17600.00	3	115	11	14
-192	5505.00	0	113	3	8
-198	50000.00	2	116	19	\N
-199	20000.00	0	116	22	\N
+COPY products_variation (id, price, quantity, product_id, name, color_id) FROM stdin;
+268	206250.00	100	137	20	1
 \.
-
-
---
--- Name: products_variation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.products_variation_id_seq', 199, true);
 
 
 --
 -- Data for Name: products_volumetype; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.products_volumetype (id) FROM stdin;
+COPY products_volumetype (id) FROM stdin;
 1
 \.
-
-
---
--- Name: products_volumetype_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.products_volumetype_id_seq', 1, true);
 
 
 --
 -- Data for Name: products_volumetype_translation; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.products_volumetype_translation (id, language_code, name, master_id) FROM stdin;
+COPY products_volumetype_translation (id, language_code, name, master_id) FROM stdin;
 1	ru	Кг	1
 2	en	Kg	1
 3	uz	Kg	1
@@ -3814,86 +4236,50 @@ COPY public.products_volumetype_translation (id, language_code, name, master_id)
 
 
 --
--- Name: products_volumetype_translation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.products_volumetype_translation_id_seq', 3, true);
-
-
---
 -- Data for Name: users_client; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.users_client (id, address, user_id, delivery_address_id) FROM stdin;
+COPY users_client (id, address, user_id, delivery_address_id) FROM stdin;
 2	Tashkent	18	\N
 3	Tashkent	19	\N
 1	Tashkent, Mirzo Ulug'bek district.	1	\N
 4	12	21	\N
+5	Chilonzon	22	\N
 \.
-
-
---
--- Name: users_client_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.users_client_id_seq', 4, true);
 
 
 --
 -- Data for Name: users_deliveryaddress; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.users_deliveryaddress (id, address, email, is_default, phone, user_id) FROM stdin;
-16	aaasa	asas#@aas.acomo	f	121210900	1
-17	asrrrr	asrrrr@asrrrr.asrrrr	f	123412112	1
-18	muqimiy	djsalf@jflasj.com	f	123412112	1
+COPY users_deliveryaddress (id, address, email, is_default, phone, user_id) FROM stdin;
+19	Chilonzon	pioneer077@gmail.com	t	909091492	22
 \.
-
-
---
--- Name: users_deliveryaddress_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.users_deliveryaddress_id_seq', 18, true);
 
 
 --
 -- Data for Name: users_files; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.users_files (id, file) FROM stdin;
+COPY users_files (id, file) FROM stdin;
 \.
-
-
---
--- Name: users_files_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.users_files_id_seq', 1, false);
 
 
 --
 -- Data for Name: users_merchant; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.users_merchant (id, merchant_type, user_id) FROM stdin;
+COPY users_merchant (id, merchant_type, user_id) FROM stdin;
 1	1	3
 2	1	4
 \.
 
 
 --
--- Name: users_merchant_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.users_merchant_id_seq', 2, true);
-
-
---
 -- Data for Name: users_paymentcards; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.users_paymentcards (id, card_holder, cart_number, expiration_date, billing_address, holder_id, is_default) FROM stdin;
+COPY users_paymentcards (id, card_holder, cart_number, expiration_date, billing_address, holder_id, is_default) FROM stdin;
 8	succsses	asdasdas	2018-04-13	asdcas	1	f
 9	default	ascasc	2018-04-13	cascasca	1	f
 10	secure	secure	2018-04-14	ascsaca	1	f
@@ -3905,17 +4291,10 @@ COPY public.users_paymentcards (id, card_holder, cart_number, expiration_date, b
 
 
 --
--- Name: users_paymentcards_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.users_paymentcards_id_seq', 12, true);
-
-
---
 -- Data for Name: users_user; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.users_user (id, password, last_login, is_superuser, is_staff, phone, email, first_name, last_name, date_joined, is_active, avatar_id) FROM stdin;
+COPY users_user (id, password, last_login, is_superuser, is_staff, phone, email, first_name, last_name, date_joined, is_active, avatar_id) FROM stdin;
 14	pbkdf2_sha256$36000$oYwb6del7oVe$e2SFCWUn7kwhy6z32Cj5FcB5oVWbuS977+FK+Kk1drg=	\N	f	f	99812312		Maxam		2018-03-03 18:11:20.079564+05	t	\N
 15	pbkdf2_sha256$36000$HOOZQHNqLuX4$qlyg6hArRImovqYBQCLrrQ9PzDxVFFQfG3VH2fZml8o=	\N	f	f	12312		asas		2018-03-07 05:54:41.298668+05	t	\N
 16	pbkdf2_sha256$36000$dTZAiIpWdoiW$XAsCma9iqN3t16g2CeQ807/KB14JpNjcUY0F7CSTwq0=	2018-03-07 05:57:50.127116+05	f	f	123		maxam		2018-03-07 05:57:06.657493+05	t	\N
@@ -3927,7 +4306,8 @@ COPY public.users_user (id, password, last_login, is_superuser, is_staff, phone,
 12	pbkdf2_sha256$36000$mi6hUfz6r2OZ$i3anJwfWPj92QI0Y3jh1gAfB3xwiGq1oV7SWqG93fTE=	\N	f	f	1234567		Mamatmurodov		2018-03-03 02:09:15.192667+05	t	\N
 13	pbkdf2_sha256$36000$OyPip0KnrHgB$8fLeZhVKAgAcogd/n9dAirWo2Gv2Q2gD8X5PKWxdbf4=	2018-03-03 02:09:49.258501+05	f	f	12345		Mamatmurodov		2018-03-03 02:09:40.723852+05	t	\N
 19	pbkdf2_sha256$36000$kkVBM20B4KMH$bYcduNLtjVuzjpFI5mc3Y3dy9GNld5gxtH7L7uF/z64=	2018-04-04 21:13:56.756841+05	f	f	998389472		A'zam	Mamatmurodov	2018-04-04 21:13:56.377763+05	t	\N
-1	pbkdf2_sha256$36000$rlsMmomCmGxK$veVUZ7drQ/0Shz6is5MhkmXLwYJyG2kmFGD/2pZNip4=	2018-04-26 16:27:22.610326+05	t	t	998389478	azam.mamatmurodov@gmail.com	A'zamjon	Mamatmurodov	2018-02-14 01:24:32.11251+05	t	\N
+22	pbkdf2_sha256$36000$M9tLxQCjJDqi$XXKvRta0KrMURJvGhCWHI3eAXGNfu+gAaXa8lok9f2M=	2018-05-07 16:21:03.336648+05	f	f	909091492	\N	Muzaffar	Nazarov	2018-05-06 12:15:08.190465+05	t	\N
+1	pbkdf2_sha256$36000$rlsMmomCmGxK$veVUZ7drQ/0Shz6is5MhkmXLwYJyG2kmFGD/2pZNip4=	2018-05-07 16:30:57.963222+05	t	t	998389478	azam.mamatmurodov@gmail.com	A'zamjon	Mamatmurodov	2018-02-14 01:24:32.11251+05	t	\N
 \.
 
 
@@ -3935,1801 +4315,1835 @@ COPY public.users_user (id, password, last_login, is_superuser, is_staff, phone,
 -- Data for Name: users_user_groups; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.users_user_groups (id, user_id, group_id) FROM stdin;
+COPY users_user_groups (id, user_id, group_id) FROM stdin;
 \.
-
-
---
--- Name: users_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.users_user_groups_id_seq', 1, false);
-
-
---
--- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
---
-
-SELECT pg_catalog.setval('public.users_user_id_seq', 21, true);
 
 
 --
 -- Data for Name: users_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: stroyshop
 --
 
-COPY public.users_user_user_permissions (id, user_id, permission_id) FROM stdin;
+COPY users_user_user_permissions (id, user_id, permission_id) FROM stdin;
 \.
 
 
 --
--- Name: users_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: stroyshop
+-- Name: auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-SELECT pg_catalog.setval('public.users_user_user_permissions_id_seq', 1, false);
-
-
---
--- Name: auth_group auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: stroyshop
---
-
-ALTER TABLE ONLY public.auth_group
+ALTER TABLE ONLY auth_group
     ADD CONSTRAINT auth_group_name_key UNIQUE (name);
 
 
 --
--- Name: auth_group_permissions auth_group_permissions_group_id_permission_id_0cd325b0_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: auth_group_permissions_group_id_permission_id_0cd325b0_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.auth_group_permissions
+ALTER TABLE ONLY auth_group_permissions
     ADD CONSTRAINT auth_group_permissions_group_id_permission_id_0cd325b0_uniq UNIQUE (group_id, permission_id);
 
 
 --
--- Name: auth_group_permissions auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.auth_group_permissions
+ALTER TABLE ONLY auth_group_permissions
     ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
 
 
 --
--- Name: auth_group auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.auth_group
+ALTER TABLE ONLY auth_group
     ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
 
 
 --
--- Name: auth_permission auth_permission_content_type_id_codename_01ab375a_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: auth_permission_content_type_id_codename_01ab375a_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.auth_permission
+ALTER TABLE ONLY auth_permission
     ADD CONSTRAINT auth_permission_content_type_id_codename_01ab375a_uniq UNIQUE (content_type_id, codename);
 
 
 --
--- Name: auth_permission auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.auth_permission
+ALTER TABLE ONLY auth_permission
     ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
 
 
 --
--- Name: django_admin_log django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.django_admin_log
+ALTER TABLE ONLY django_admin_log
     ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
 
 
 --
--- Name: django_content_type django_content_type_app_label_model_76bd3d3b_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: django_content_type_app_label_model_76bd3d3b_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.django_content_type
+ALTER TABLE ONLY django_content_type
     ADD CONSTRAINT django_content_type_app_label_model_76bd3d3b_uniq UNIQUE (app_label, model);
 
 
 --
--- Name: django_content_type django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.django_content_type
+ALTER TABLE ONLY django_content_type
     ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
 
 
 --
--- Name: django_migrations django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.django_migrations
+ALTER TABLE ONLY django_migrations
     ADD CONSTRAINT django_migrations_pkey PRIMARY KEY (id);
 
 
 --
--- Name: django_session django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.django_session
+ALTER TABLE ONLY django_session
     ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
 
 
 --
--- Name: easy_thumbnails_source easy_thumbnails_source_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: easy_thumbnails_source_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.easy_thumbnails_source
+ALTER TABLE ONLY easy_thumbnails_source
     ADD CONSTRAINT easy_thumbnails_source_pkey PRIMARY KEY (id);
 
 
 --
--- Name: easy_thumbnails_source easy_thumbnails_source_storage_hash_name_481ce32d_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: easy_thumbnails_source_storage_hash_name_481ce32d_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.easy_thumbnails_source
+ALTER TABLE ONLY easy_thumbnails_source
     ADD CONSTRAINT easy_thumbnails_source_storage_hash_name_481ce32d_uniq UNIQUE (storage_hash, name);
 
 
 --
--- Name: easy_thumbnails_thumbnail easy_thumbnails_thumbnai_storage_hash_name_source_fb375270_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: easy_thumbnails_thumbnai_storage_hash_name_source_fb375270_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.easy_thumbnails_thumbnail
+ALTER TABLE ONLY easy_thumbnails_thumbnail
     ADD CONSTRAINT easy_thumbnails_thumbnai_storage_hash_name_source_fb375270_uniq UNIQUE (storage_hash, name, source_id);
 
 
 --
--- Name: easy_thumbnails_thumbnail easy_thumbnails_thumbnail_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: easy_thumbnails_thumbnail_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.easy_thumbnails_thumbnail
+ALTER TABLE ONLY easy_thumbnails_thumbnail
     ADD CONSTRAINT easy_thumbnails_thumbnail_pkey PRIMARY KEY (id);
 
 
 --
--- Name: easy_thumbnails_thumbnaildimensions easy_thumbnails_thumbnaildimensions_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: easy_thumbnails_thumbnaildimensions_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.easy_thumbnails_thumbnaildimensions
+ALTER TABLE ONLY easy_thumbnails_thumbnaildimensions
     ADD CONSTRAINT easy_thumbnails_thumbnaildimensions_pkey PRIMARY KEY (id);
 
 
 --
--- Name: easy_thumbnails_thumbnaildimensions easy_thumbnails_thumbnaildimensions_thumbnail_id_key; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: easy_thumbnails_thumbnaildimensions_thumbnail_id_key; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.easy_thumbnails_thumbnaildimensions
+ALTER TABLE ONLY easy_thumbnails_thumbnaildimensions
     ADD CONSTRAINT easy_thumbnails_thumbnaildimensions_thumbnail_id_key UNIQUE (thumbnail_id);
 
 
 --
--- Name: filer_clipboard filer_clipboard_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: filer_clipboard_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.filer_clipboard
+ALTER TABLE ONLY filer_clipboard
     ADD CONSTRAINT filer_clipboard_pkey PRIMARY KEY (id);
 
 
 --
--- Name: filer_clipboarditem filer_clipboarditem_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: filer_clipboarditem_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.filer_clipboarditem
+ALTER TABLE ONLY filer_clipboarditem
     ADD CONSTRAINT filer_clipboarditem_pkey PRIMARY KEY (id);
 
 
 --
--- Name: filer_file filer_file_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: filer_file_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.filer_file
+ALTER TABLE ONLY filer_file
     ADD CONSTRAINT filer_file_pkey PRIMARY KEY (id);
 
 
 --
--- Name: filer_folder filer_folder_parent_id_name_bc773258_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: filer_folder_parent_id_name_bc773258_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.filer_folder
+ALTER TABLE ONLY filer_folder
     ADD CONSTRAINT filer_folder_parent_id_name_bc773258_uniq UNIQUE (parent_id, name);
 
 
 --
--- Name: filer_folder filer_folder_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: filer_folder_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.filer_folder
+ALTER TABLE ONLY filer_folder
     ADD CONSTRAINT filer_folder_pkey PRIMARY KEY (id);
 
 
 --
--- Name: filer_folderpermission filer_folderpermission_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: filer_folderpermission_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.filer_folderpermission
+ALTER TABLE ONLY filer_folderpermission
     ADD CONSTRAINT filer_folderpermission_pkey PRIMARY KEY (id);
 
 
 --
--- Name: filer_image filer_image_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: filer_image_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.filer_image
+ALTER TABLE ONLY filer_image
     ADD CONSTRAINT filer_image_pkey PRIMARY KEY (file_ptr_id);
 
 
 --
--- Name: filer_thumbnailoption filer_thumbnailoption_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: filer_thumbnailoption_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.filer_thumbnailoption
+ALTER TABLE ONLY filer_thumbnailoption
     ADD CONSTRAINT filer_thumbnailoption_pkey PRIMARY KEY (id);
 
 
 --
--- Name: main_banner main_banner_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: main_banner_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.main_banner
+ALTER TABLE ONLY main_banner
     ADD CONSTRAINT main_banner_pkey PRIMARY KEY (id);
 
 
 --
--- Name: main_banner_translation main_banner_translation_language_code_master_id_ebf3668a_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: main_banner_translation_language_code_master_id_ebf3668a_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.main_banner_translation
+ALTER TABLE ONLY main_banner_translation
     ADD CONSTRAINT main_banner_translation_language_code_master_id_ebf3668a_uniq UNIQUE (language_code, master_id);
 
 
 --
--- Name: main_banner_translation main_banner_translation_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: main_banner_translation_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.main_banner_translation
+ALTER TABLE ONLY main_banner_translation
     ADD CONSTRAINT main_banner_translation_pkey PRIMARY KEY (id);
 
 
 --
--- Name: main_customermenu main_customermenu_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: main_customermenu_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.main_customermenu
+ALTER TABLE ONLY main_customermenu
     ADD CONSTRAINT main_customermenu_pkey PRIMARY KEY (id);
 
 
 --
--- Name: main_customermenu_translation main_customermenu_transl_language_code_master_id_e197b468_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: main_customermenu_transl_language_code_master_id_e197b468_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.main_customermenu_translation
+ALTER TABLE ONLY main_customermenu_translation
     ADD CONSTRAINT main_customermenu_transl_language_code_master_id_e197b468_uniq UNIQUE (language_code, master_id);
 
 
 --
--- Name: main_customermenu_translation main_customermenu_translation_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: main_customermenu_translation_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.main_customermenu_translation
+ALTER TABLE ONLY main_customermenu_translation
     ADD CONSTRAINT main_customermenu_translation_pkey PRIMARY KEY (id);
 
 
 --
--- Name: main_customersmenu main_customersmenu_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: main_customersmenu_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.main_customersmenu
+ALTER TABLE ONLY main_customersmenu
     ADD CONSTRAINT main_customersmenu_pkey PRIMARY KEY (menu_ptr_id);
 
 
 --
--- Name: main_menu main_menu_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: main_menu_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.main_menu
+ALTER TABLE ONLY main_menu
     ADD CONSTRAINT main_menu_pkey PRIMARY KEY (id);
 
 
 --
--- Name: main_menu_translation main_menu_translation_language_code_master_id_a87e80af_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: main_menu_translation_language_code_master_id_a87e80af_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.main_menu_translation
+ALTER TABLE ONLY main_menu_translation
     ADD CONSTRAINT main_menu_translation_language_code_master_id_a87e80af_uniq UNIQUE (language_code, master_id);
 
 
 --
--- Name: main_menu_translation main_menu_translation_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: main_menu_translation_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.main_menu_translation
+ALTER TABLE ONLY main_menu_translation
     ADD CONSTRAINT main_menu_translation_pkey PRIMARY KEY (id);
 
 
 --
--- Name: main_static main_static_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: main_static_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.main_static
+ALTER TABLE ONLY main_static
     ADD CONSTRAINT main_static_pkey PRIMARY KEY (id);
 
 
 --
--- Name: main_static_translation main_static_translation_language_code_master_id_f27431bb_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: main_static_translation_language_code_master_id_f27431bb_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.main_static_translation
+ALTER TABLE ONLY main_static_translation
     ADD CONSTRAINT main_static_translation_language_code_master_id_f27431bb_uniq UNIQUE (language_code, master_id);
 
 
 --
--- Name: main_static_translation main_static_translation_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: main_static_translation_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.main_static_translation
+ALTER TABLE ONLY main_static_translation
     ADD CONSTRAINT main_static_translation_pkey PRIMARY KEY (id);
 
 
 --
--- Name: main_staticfooterpage main_staticfooterpage_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: main_staticfooterpage_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.main_staticfooterpage
+ALTER TABLE ONLY main_staticfooterpage
     ADD CONSTRAINT main_staticfooterpage_pkey PRIMARY KEY (id);
 
 
 --
--- Name: main_staticfooterpage_translation main_staticfooterpage_tr_language_code_master_id_fffcdf44_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: main_staticfooterpage_tr_language_code_master_id_fffcdf44_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.main_staticfooterpage_translation
+ALTER TABLE ONLY main_staticfooterpage_translation
     ADD CONSTRAINT main_staticfooterpage_tr_language_code_master_id_fffcdf44_uniq UNIQUE (language_code, master_id);
 
 
 --
--- Name: main_staticfooterpage_translation main_staticfooterpage_translation_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: main_staticfooterpage_translation_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.main_staticfooterpage_translation
+ALTER TABLE ONLY main_staticfooterpage_translation
     ADD CONSTRAINT main_staticfooterpage_translation_pkey PRIMARY KEY (id);
 
 
 --
--- Name: main_usermenu main_usermenu_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: main_usermenu_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.main_usermenu
+ALTER TABLE ONLY main_usermenu
     ADD CONSTRAINT main_usermenu_pkey PRIMARY KEY (id);
 
 
 --
--- Name: main_usermenu_translation main_usermenu_translation_language_code_master_id_c91aa177_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: main_usermenu_translation_language_code_master_id_c91aa177_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.main_usermenu_translation
+ALTER TABLE ONLY main_usermenu_translation
     ADD CONSTRAINT main_usermenu_translation_language_code_master_id_c91aa177_uniq UNIQUE (language_code, master_id);
 
 
 --
--- Name: main_usermenu_translation main_usermenu_translation_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: main_usermenu_translation_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.main_usermenu_translation
+ALTER TABLE ONLY main_usermenu_translation
     ADD CONSTRAINT main_usermenu_translation_pkey PRIMARY KEY (id);
 
 
 --
--- Name: main_usersmenu main_usersmenu_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: main_usersmenu_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.main_usersmenu
+ALTER TABLE ONLY main_usersmenu
     ADD CONSTRAINT main_usersmenu_pkey PRIMARY KEY (menu_ptr_id);
 
 
 --
--- Name: orders_cart orders_cart_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: orders_cart_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.orders_cart
+ALTER TABLE ONLY orders_cart
     ADD CONSTRAINT orders_cart_pkey PRIMARY KEY (id);
 
 
 --
--- Name: orders_order orders_order_order_unique_id_01fff898_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: orders_order_order_unique_id_01fff898_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.orders_order
+ALTER TABLE ONLY orders_order
     ADD CONSTRAINT orders_order_order_unique_id_01fff898_uniq UNIQUE (order_unique_id);
 
 
 --
--- Name: orders_order orders_order_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: orders_order_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.orders_order
+ALTER TABLE ONLY orders_order
     ADD CONSTRAINT orders_order_pkey PRIMARY KEY (id);
 
 
 --
--- Name: payment_paycomtransaction payment_paycomtransaction_paycom_transaction_id_key; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: payment_paycomtransaction_paycom_transaction_id_key; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.payment_paycomtransaction
+ALTER TABLE ONLY payment_paycomtransaction
     ADD CONSTRAINT payment_paycomtransaction_paycom_transaction_id_key UNIQUE (paycom_transaction_id);
 
 
 --
--- Name: payment_paycomtransaction payment_paycomtransaction_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: payment_paycomtransaction_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.payment_paycomtransaction
+ALTER TABLE ONLY payment_paycomtransaction
     ADD CONSTRAINT payment_paycomtransaction_pkey PRIMARY KEY (id);
 
 
 --
--- Name: products_brands products_brands_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: products_brands_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.products_brands
+ALTER TABLE ONLY products_brands
     ADD CONSTRAINT products_brands_pkey PRIMARY KEY (id);
 
 
 --
--- Name: products_category products_category_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: products_category_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.products_category
+ALTER TABLE ONLY products_category
     ADD CONSTRAINT products_category_pkey PRIMARY KEY (id);
 
 
 --
--- Name: products_category_translation products_category_transl_language_code_master_id_03d12f31_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: products_category_transl_language_code_master_id_03d12f31_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.products_category_translation
+ALTER TABLE ONLY products_category_translation
     ADD CONSTRAINT products_category_transl_language_code_master_id_03d12f31_uniq UNIQUE (language_code, master_id);
 
 
 --
--- Name: products_category_translation products_category_translation_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: products_category_translation_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.products_category_translation
+ALTER TABLE ONLY products_category_translation
     ADD CONSTRAINT products_category_translation_pkey PRIMARY KEY (id);
 
 
 --
--- Name: products_category_translation products_category_translation_slug_d9e2774a_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: products_category_translation_slug_d9e2774a_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.products_category_translation
+ALTER TABLE ONLY products_category_translation
     ADD CONSTRAINT products_category_translation_slug_d9e2774a_uniq UNIQUE (slug);
 
 
 --
--- Name: products_color_translation products_color_translati_language_code_master_id_3b02aa43_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: products_color_translati_language_code_master_id_3b02aa43_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.products_color_translation
+ALTER TABLE ONLY products_color_translation
     ADD CONSTRAINT products_color_translati_language_code_master_id_3b02aa43_uniq UNIQUE (language_code, master_id);
 
 
 --
--- Name: products_color_translation products_color_translation_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: products_color_translation_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.products_color_translation
+ALTER TABLE ONLY products_color_translation
     ADD CONSTRAINT products_color_translation_pkey PRIMARY KEY (id);
 
 
 --
--- Name: products_product products_product_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: products_product_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.products_product
+ALTER TABLE ONLY products_product
     ADD CONSTRAINT products_product_pkey PRIMARY KEY (id);
 
 
 --
--- Name: products_color products_productcolor_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: products_productcolor_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.products_color
+ALTER TABLE ONLY products_color
     ADD CONSTRAINT products_productcolor_pkey PRIMARY KEY (id);
 
 
 --
--- Name: products_productimage products_productimage_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: products_productimage_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.products_productimage
+ALTER TABLE ONLY products_productimage
     ADD CONSTRAINT products_productimage_pkey PRIMARY KEY (id);
 
 
 --
--- Name: products_review products_review_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: products_review_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.products_review
+ALTER TABLE ONLY products_review
     ADD CONSTRAINT products_review_pkey PRIMARY KEY (id);
 
 
 --
--- Name: products_variation products_variation_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: products_variation_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.products_variation
+ALTER TABLE ONLY products_variation
     ADD CONSTRAINT products_variation_pkey PRIMARY KEY (id);
 
 
 --
--- Name: products_volumetype products_volumetype_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: products_volumetype_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.products_volumetype
+ALTER TABLE ONLY products_volumetype
     ADD CONSTRAINT products_volumetype_pkey PRIMARY KEY (id);
 
 
 --
--- Name: products_volumetype_translation products_volumetype_tran_language_code_master_id_fb95d2c8_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: products_volumetype_tran_language_code_master_id_fb95d2c8_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.products_volumetype_translation
+ALTER TABLE ONLY products_volumetype_translation
     ADD CONSTRAINT products_volumetype_tran_language_code_master_id_fb95d2c8_uniq UNIQUE (language_code, master_id);
 
 
 --
--- Name: products_volumetype_translation products_volumetype_translation_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: products_volumetype_translation_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.products_volumetype_translation
+ALTER TABLE ONLY products_volumetype_translation
     ADD CONSTRAINT products_volumetype_translation_pkey PRIMARY KEY (id);
 
 
 --
--- Name: users_client users_client_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: users_client_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.users_client
+ALTER TABLE ONLY users_client
     ADD CONSTRAINT users_client_pkey PRIMARY KEY (id);
 
 
 --
--- Name: users_client users_client_user_id_key; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: users_client_user_id_key; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.users_client
+ALTER TABLE ONLY users_client
     ADD CONSTRAINT users_client_user_id_key UNIQUE (user_id);
 
 
 --
--- Name: users_deliveryaddress users_deliveryaddress_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: users_deliveryaddress_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.users_deliveryaddress
+ALTER TABLE ONLY users_deliveryaddress
     ADD CONSTRAINT users_deliveryaddress_pkey PRIMARY KEY (id);
 
 
 --
--- Name: users_files users_files_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: users_files_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.users_files
+ALTER TABLE ONLY users_files
     ADD CONSTRAINT users_files_pkey PRIMARY KEY (id);
 
 
 --
--- Name: users_merchant users_merchant_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: users_merchant_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.users_merchant
+ALTER TABLE ONLY users_merchant
     ADD CONSTRAINT users_merchant_pkey PRIMARY KEY (id);
 
 
 --
--- Name: users_merchant users_merchant_user_id_key; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: users_merchant_user_id_key; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.users_merchant
+ALTER TABLE ONLY users_merchant
     ADD CONSTRAINT users_merchant_user_id_key UNIQUE (user_id);
 
 
 --
--- Name: users_paymentcards users_paymentcards_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: users_paymentcards_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.users_paymentcards
+ALTER TABLE ONLY users_paymentcards
     ADD CONSTRAINT users_paymentcards_pkey PRIMARY KEY (id);
 
 
 --
--- Name: users_user users_user_avatar_id_key; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: users_user_avatar_id_key; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.users_user
+ALTER TABLE ONLY users_user
     ADD CONSTRAINT users_user_avatar_id_key UNIQUE (avatar_id);
 
 
 --
--- Name: users_user_groups users_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: users_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.users_user_groups
+ALTER TABLE ONLY users_user_groups
     ADD CONSTRAINT users_user_groups_pkey PRIMARY KEY (id);
 
 
 --
--- Name: users_user_groups users_user_groups_user_id_group_id_b88eab82_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: users_user_groups_user_id_group_id_b88eab82_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.users_user_groups
+ALTER TABLE ONLY users_user_groups
     ADD CONSTRAINT users_user_groups_user_id_group_id_b88eab82_uniq UNIQUE (user_id, group_id);
 
 
 --
--- Name: users_user users_user_phone_fe37f55c_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: users_user_phone_fe37f55c_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.users_user
+ALTER TABLE ONLY users_user
     ADD CONSTRAINT users_user_phone_fe37f55c_uniq UNIQUE (phone);
 
 
 --
--- Name: users_user users_user_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: users_user_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.users_user
+ALTER TABLE ONLY users_user
     ADD CONSTRAINT users_user_pkey PRIMARY KEY (id);
 
 
 --
--- Name: users_user_user_permissions users_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: users_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.users_user_user_permissions
+ALTER TABLE ONLY users_user_user_permissions
     ADD CONSTRAINT users_user_user_permissions_pkey PRIMARY KEY (id);
 
 
 --
--- Name: users_user_user_permissions users_user_user_permissions_user_id_permission_id_43338c45_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: users_user_user_permissions_user_id_permission_id_43338c45_uniq; Type: CONSTRAINT; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.users_user_user_permissions
+ALTER TABLE ONLY users_user_user_permissions
     ADD CONSTRAINT users_user_user_permissions_user_id_permission_id_43338c45_uniq UNIQUE (user_id, permission_id);
 
 
 --
--- Name: auth_group_name_a6ea08ec_like; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: auth_group_name_a6ea08ec_like; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX auth_group_name_a6ea08ec_like ON public.auth_group USING btree (name varchar_pattern_ops);
+CREATE INDEX auth_group_name_a6ea08ec_like ON auth_group USING btree (name varchar_pattern_ops);
 
 
 --
--- Name: auth_group_permissions_group_id_b120cbf9; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: auth_group_permissions_group_id_b120cbf9; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX auth_group_permissions_group_id_b120cbf9 ON public.auth_group_permissions USING btree (group_id);
+CREATE INDEX auth_group_permissions_group_id_b120cbf9 ON auth_group_permissions USING btree (group_id);
 
 
 --
--- Name: auth_group_permissions_permission_id_84c5c92e; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: auth_group_permissions_permission_id_84c5c92e; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX auth_group_permissions_permission_id_84c5c92e ON public.auth_group_permissions USING btree (permission_id);
+CREATE INDEX auth_group_permissions_permission_id_84c5c92e ON auth_group_permissions USING btree (permission_id);
 
 
 --
--- Name: auth_permission_content_type_id_2f476e4b; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: auth_permission_content_type_id_2f476e4b; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX auth_permission_content_type_id_2f476e4b ON public.auth_permission USING btree (content_type_id);
+CREATE INDEX auth_permission_content_type_id_2f476e4b ON auth_permission USING btree (content_type_id);
 
 
 --
--- Name: django_admin_log_content_type_id_c4bce8eb; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: django_admin_log_content_type_id_c4bce8eb; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX django_admin_log_content_type_id_c4bce8eb ON public.django_admin_log USING btree (content_type_id);
+CREATE INDEX django_admin_log_content_type_id_c4bce8eb ON django_admin_log USING btree (content_type_id);
 
 
 --
--- Name: django_admin_log_user_id_c564eba6; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: django_admin_log_user_id_c564eba6; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX django_admin_log_user_id_c564eba6 ON public.django_admin_log USING btree (user_id);
+CREATE INDEX django_admin_log_user_id_c564eba6 ON django_admin_log USING btree (user_id);
 
 
 --
--- Name: django_session_expire_date_a5c62663; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: django_session_expire_date_a5c62663; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX django_session_expire_date_a5c62663 ON public.django_session USING btree (expire_date);
+CREATE INDEX django_session_expire_date_a5c62663 ON django_session USING btree (expire_date);
 
 
 --
--- Name: django_session_session_key_c0390e0f_like; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: django_session_session_key_c0390e0f_like; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX django_session_session_key_c0390e0f_like ON public.django_session USING btree (session_key varchar_pattern_ops);
+CREATE INDEX django_session_session_key_c0390e0f_like ON django_session USING btree (session_key varchar_pattern_ops);
 
 
 --
--- Name: easy_thumbnails_source_name_5fe0edc6; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: easy_thumbnails_source_name_5fe0edc6; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX easy_thumbnails_source_name_5fe0edc6 ON public.easy_thumbnails_source USING btree (name);
+CREATE INDEX easy_thumbnails_source_name_5fe0edc6 ON easy_thumbnails_source USING btree (name);
 
 
 --
--- Name: easy_thumbnails_source_name_5fe0edc6_like; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: easy_thumbnails_source_name_5fe0edc6_like; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX easy_thumbnails_source_name_5fe0edc6_like ON public.easy_thumbnails_source USING btree (name varchar_pattern_ops);
+CREATE INDEX easy_thumbnails_source_name_5fe0edc6_like ON easy_thumbnails_source USING btree (name varchar_pattern_ops);
 
 
 --
--- Name: easy_thumbnails_source_storage_hash_946cbcc9; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: easy_thumbnails_source_storage_hash_946cbcc9; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX easy_thumbnails_source_storage_hash_946cbcc9 ON public.easy_thumbnails_source USING btree (storage_hash);
+CREATE INDEX easy_thumbnails_source_storage_hash_946cbcc9 ON easy_thumbnails_source USING btree (storage_hash);
 
 
 --
--- Name: easy_thumbnails_source_storage_hash_946cbcc9_like; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: easy_thumbnails_source_storage_hash_946cbcc9_like; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX easy_thumbnails_source_storage_hash_946cbcc9_like ON public.easy_thumbnails_source USING btree (storage_hash varchar_pattern_ops);
+CREATE INDEX easy_thumbnails_source_storage_hash_946cbcc9_like ON easy_thumbnails_source USING btree (storage_hash varchar_pattern_ops);
 
 
 --
--- Name: easy_thumbnails_thumbnail_name_b5882c31; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: easy_thumbnails_thumbnail_name_b5882c31; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX easy_thumbnails_thumbnail_name_b5882c31 ON public.easy_thumbnails_thumbnail USING btree (name);
+CREATE INDEX easy_thumbnails_thumbnail_name_b5882c31 ON easy_thumbnails_thumbnail USING btree (name);
 
 
 --
--- Name: easy_thumbnails_thumbnail_name_b5882c31_like; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: easy_thumbnails_thumbnail_name_b5882c31_like; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX easy_thumbnails_thumbnail_name_b5882c31_like ON public.easy_thumbnails_thumbnail USING btree (name varchar_pattern_ops);
+CREATE INDEX easy_thumbnails_thumbnail_name_b5882c31_like ON easy_thumbnails_thumbnail USING btree (name varchar_pattern_ops);
 
 
 --
--- Name: easy_thumbnails_thumbnail_source_id_5b57bc77; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: easy_thumbnails_thumbnail_source_id_5b57bc77; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX easy_thumbnails_thumbnail_source_id_5b57bc77 ON public.easy_thumbnails_thumbnail USING btree (source_id);
+CREATE INDEX easy_thumbnails_thumbnail_source_id_5b57bc77 ON easy_thumbnails_thumbnail USING btree (source_id);
 
 
 --
--- Name: easy_thumbnails_thumbnail_storage_hash_f1435f49; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: easy_thumbnails_thumbnail_storage_hash_f1435f49; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX easy_thumbnails_thumbnail_storage_hash_f1435f49 ON public.easy_thumbnails_thumbnail USING btree (storage_hash);
+CREATE INDEX easy_thumbnails_thumbnail_storage_hash_f1435f49 ON easy_thumbnails_thumbnail USING btree (storage_hash);
 
 
 --
--- Name: easy_thumbnails_thumbnail_storage_hash_f1435f49_like; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: easy_thumbnails_thumbnail_storage_hash_f1435f49_like; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX easy_thumbnails_thumbnail_storage_hash_f1435f49_like ON public.easy_thumbnails_thumbnail USING btree (storage_hash varchar_pattern_ops);
+CREATE INDEX easy_thumbnails_thumbnail_storage_hash_f1435f49_like ON easy_thumbnails_thumbnail USING btree (storage_hash varchar_pattern_ops);
 
 
 --
--- Name: filer_clipboard_user_id_b52ff0bc; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: filer_clipboard_user_id_b52ff0bc; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX filer_clipboard_user_id_b52ff0bc ON public.filer_clipboard USING btree (user_id);
+CREATE INDEX filer_clipboard_user_id_b52ff0bc ON filer_clipboard USING btree (user_id);
 
 
 --
--- Name: filer_clipboarditem_clipboard_id_7a76518b; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: filer_clipboarditem_clipboard_id_7a76518b; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX filer_clipboarditem_clipboard_id_7a76518b ON public.filer_clipboarditem USING btree (clipboard_id);
+CREATE INDEX filer_clipboarditem_clipboard_id_7a76518b ON filer_clipboarditem USING btree (clipboard_id);
 
 
 --
--- Name: filer_clipboarditem_file_id_06196f80; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: filer_clipboarditem_file_id_06196f80; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX filer_clipboarditem_file_id_06196f80 ON public.filer_clipboarditem USING btree (file_id);
+CREATE INDEX filer_clipboarditem_file_id_06196f80 ON filer_clipboarditem USING btree (file_id);
 
 
 --
--- Name: filer_file_folder_id_af803bbb; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: filer_file_folder_id_af803bbb; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX filer_file_folder_id_af803bbb ON public.filer_file USING btree (folder_id);
+CREATE INDEX filer_file_folder_id_af803bbb ON filer_file USING btree (folder_id);
 
 
 --
--- Name: filer_file_owner_id_b9e32671; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: filer_file_owner_id_b9e32671; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX filer_file_owner_id_b9e32671 ON public.filer_file USING btree (owner_id);
+CREATE INDEX filer_file_owner_id_b9e32671 ON filer_file USING btree (owner_id);
 
 
 --
--- Name: filer_file_polymorphic_ctype_id_f44903c1; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: filer_file_polymorphic_ctype_id_f44903c1; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX filer_file_polymorphic_ctype_id_f44903c1 ON public.filer_file USING btree (polymorphic_ctype_id);
+CREATE INDEX filer_file_polymorphic_ctype_id_f44903c1 ON filer_file USING btree (polymorphic_ctype_id);
 
 
 --
--- Name: filer_folder_level_b631d28a; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: filer_folder_level_b631d28a; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX filer_folder_level_b631d28a ON public.filer_folder USING btree (level);
+CREATE INDEX filer_folder_level_b631d28a ON filer_folder USING btree (level);
 
 
 --
--- Name: filer_folder_lft_2c2b69f1; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: filer_folder_lft_2c2b69f1; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX filer_folder_lft_2c2b69f1 ON public.filer_folder USING btree (lft);
+CREATE INDEX filer_folder_lft_2c2b69f1 ON filer_folder USING btree (lft);
 
 
 --
--- Name: filer_folder_owner_id_be530fb4; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: filer_folder_owner_id_be530fb4; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX filer_folder_owner_id_be530fb4 ON public.filer_folder USING btree (owner_id);
+CREATE INDEX filer_folder_owner_id_be530fb4 ON filer_folder USING btree (owner_id);
 
 
 --
--- Name: filer_folder_parent_id_308aecda; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: filer_folder_parent_id_308aecda; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX filer_folder_parent_id_308aecda ON public.filer_folder USING btree (parent_id);
+CREATE INDEX filer_folder_parent_id_308aecda ON filer_folder USING btree (parent_id);
 
 
 --
--- Name: filer_folder_rght_34946267; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: filer_folder_rght_34946267; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX filer_folder_rght_34946267 ON public.filer_folder USING btree (rght);
+CREATE INDEX filer_folder_rght_34946267 ON filer_folder USING btree (rght);
 
 
 --
--- Name: filer_folder_tree_id_b016223c; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: filer_folder_tree_id_b016223c; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX filer_folder_tree_id_b016223c ON public.filer_folder USING btree (tree_id);
+CREATE INDEX filer_folder_tree_id_b016223c ON filer_folder USING btree (tree_id);
 
 
 --
--- Name: filer_folderpermission_folder_id_5d02f1da; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: filer_folderpermission_folder_id_5d02f1da; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX filer_folderpermission_folder_id_5d02f1da ON public.filer_folderpermission USING btree (folder_id);
+CREATE INDEX filer_folderpermission_folder_id_5d02f1da ON filer_folderpermission USING btree (folder_id);
 
 
 --
--- Name: filer_folderpermission_group_id_8901bafa; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: filer_folderpermission_group_id_8901bafa; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX filer_folderpermission_group_id_8901bafa ON public.filer_folderpermission USING btree (group_id);
+CREATE INDEX filer_folderpermission_group_id_8901bafa ON filer_folderpermission USING btree (group_id);
 
 
 --
--- Name: filer_folderpermission_user_id_7673d4b6; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: filer_folderpermission_user_id_7673d4b6; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX filer_folderpermission_user_id_7673d4b6 ON public.filer_folderpermission USING btree (user_id);
+CREATE INDEX filer_folderpermission_user_id_7673d4b6 ON filer_folderpermission USING btree (user_id);
 
 
 --
--- Name: main_banner_translation_language_code_18439eee; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: main_banner_translation_language_code_18439eee; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX main_banner_translation_language_code_18439eee ON public.main_banner_translation USING btree (language_code);
+CREATE INDEX main_banner_translation_language_code_18439eee ON main_banner_translation USING btree (language_code);
 
 
 --
--- Name: main_banner_translation_language_code_18439eee_like; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: main_banner_translation_language_code_18439eee_like; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX main_banner_translation_language_code_18439eee_like ON public.main_banner_translation USING btree (language_code varchar_pattern_ops);
+CREATE INDEX main_banner_translation_language_code_18439eee_like ON main_banner_translation USING btree (language_code varchar_pattern_ops);
 
 
 --
--- Name: main_banner_translation_master_id_f62e61c4; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: main_banner_translation_master_id_f62e61c4; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX main_banner_translation_master_id_f62e61c4 ON public.main_banner_translation USING btree (master_id);
+CREATE INDEX main_banner_translation_master_id_f62e61c4 ON main_banner_translation USING btree (master_id);
 
 
 --
--- Name: main_banner_translation_slug_f62a4547; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: main_banner_translation_slug_f62a4547; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX main_banner_translation_slug_f62a4547 ON public.main_banner_translation USING btree (slug);
+CREATE INDEX main_banner_translation_slug_f62a4547 ON main_banner_translation USING btree (slug);
 
 
 --
--- Name: main_banner_translation_slug_f62a4547_like; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: main_banner_translation_slug_f62a4547_like; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX main_banner_translation_slug_f62a4547_like ON public.main_banner_translation USING btree (slug varchar_pattern_ops);
+CREATE INDEX main_banner_translation_slug_f62a4547_like ON main_banner_translation USING btree (slug varchar_pattern_ops);
 
 
 --
--- Name: main_customermenu_translation_language_code_8821aca5; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: main_customermenu_translation_language_code_8821aca5; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX main_customermenu_translation_language_code_8821aca5 ON public.main_customermenu_translation USING btree (language_code);
+CREATE INDEX main_customermenu_translation_language_code_8821aca5 ON main_customermenu_translation USING btree (language_code);
 
 
 --
--- Name: main_customermenu_translation_language_code_8821aca5_like; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: main_customermenu_translation_language_code_8821aca5_like; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX main_customermenu_translation_language_code_8821aca5_like ON public.main_customermenu_translation USING btree (language_code varchar_pattern_ops);
+CREATE INDEX main_customermenu_translation_language_code_8821aca5_like ON main_customermenu_translation USING btree (language_code varchar_pattern_ops);
 
 
 --
--- Name: main_customermenu_translation_master_id_094e74e8; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: main_customermenu_translation_master_id_094e74e8; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX main_customermenu_translation_master_id_094e74e8 ON public.main_customermenu_translation USING btree (master_id);
+CREATE INDEX main_customermenu_translation_master_id_094e74e8 ON main_customermenu_translation USING btree (master_id);
 
 
 --
--- Name: main_customermenu_translation_slug_0b9f55a4; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: main_customermenu_translation_slug_0b9f55a4; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX main_customermenu_translation_slug_0b9f55a4 ON public.main_customermenu_translation USING btree (slug);
+CREATE INDEX main_customermenu_translation_slug_0b9f55a4 ON main_customermenu_translation USING btree (slug);
 
 
 --
--- Name: main_customermenu_translation_slug_0b9f55a4_like; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: main_customermenu_translation_slug_0b9f55a4_like; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX main_customermenu_translation_slug_0b9f55a4_like ON public.main_customermenu_translation USING btree (slug varchar_pattern_ops);
+CREATE INDEX main_customermenu_translation_slug_0b9f55a4_like ON main_customermenu_translation USING btree (slug varchar_pattern_ops);
 
 
 --
--- Name: main_menu_translation_language_code_b760b451; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: main_menu_translation_language_code_b760b451; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX main_menu_translation_language_code_b760b451 ON public.main_menu_translation USING btree (language_code);
+CREATE INDEX main_menu_translation_language_code_b760b451 ON main_menu_translation USING btree (language_code);
 
 
 --
--- Name: main_menu_translation_language_code_b760b451_like; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: main_menu_translation_language_code_b760b451_like; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX main_menu_translation_language_code_b760b451_like ON public.main_menu_translation USING btree (language_code varchar_pattern_ops);
+CREATE INDEX main_menu_translation_language_code_b760b451_like ON main_menu_translation USING btree (language_code varchar_pattern_ops);
 
 
 --
--- Name: main_menu_translation_master_id_6cb98964; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: main_menu_translation_master_id_6cb98964; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX main_menu_translation_master_id_6cb98964 ON public.main_menu_translation USING btree (master_id);
+CREATE INDEX main_menu_translation_master_id_6cb98964 ON main_menu_translation USING btree (master_id);
 
 
 --
--- Name: main_menu_translation_slug_155a9128; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: main_menu_translation_slug_155a9128; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX main_menu_translation_slug_155a9128 ON public.main_menu_translation USING btree (slug);
+CREATE INDEX main_menu_translation_slug_155a9128 ON main_menu_translation USING btree (slug);
 
 
 --
--- Name: main_menu_translation_slug_155a9128_like; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: main_menu_translation_slug_155a9128_like; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX main_menu_translation_slug_155a9128_like ON public.main_menu_translation USING btree (slug varchar_pattern_ops);
+CREATE INDEX main_menu_translation_slug_155a9128_like ON main_menu_translation USING btree (slug varchar_pattern_ops);
 
 
 --
--- Name: main_static_translation_language_code_a7e35ca0; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: main_static_translation_language_code_a7e35ca0; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX main_static_translation_language_code_a7e35ca0 ON public.main_static_translation USING btree (language_code);
+CREATE INDEX main_static_translation_language_code_a7e35ca0 ON main_static_translation USING btree (language_code);
 
 
 --
--- Name: main_static_translation_language_code_a7e35ca0_like; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: main_static_translation_language_code_a7e35ca0_like; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX main_static_translation_language_code_a7e35ca0_like ON public.main_static_translation USING btree (language_code varchar_pattern_ops);
+CREATE INDEX main_static_translation_language_code_a7e35ca0_like ON main_static_translation USING btree (language_code varchar_pattern_ops);
 
 
 --
--- Name: main_static_translation_master_id_6c9d2d70; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: main_static_translation_master_id_6c9d2d70; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX main_static_translation_master_id_6c9d2d70 ON public.main_static_translation USING btree (master_id);
+CREATE INDEX main_static_translation_master_id_6c9d2d70 ON main_static_translation USING btree (master_id);
 
 
 --
--- Name: main_static_translation_slug_7864d7f2; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: main_static_translation_slug_7864d7f2; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX main_static_translation_slug_7864d7f2 ON public.main_static_translation USING btree (slug);
+CREATE INDEX main_static_translation_slug_7864d7f2 ON main_static_translation USING btree (slug);
 
 
 --
--- Name: main_static_translation_slug_7864d7f2_like; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: main_static_translation_slug_7864d7f2_like; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX main_static_translation_slug_7864d7f2_like ON public.main_static_translation USING btree (slug varchar_pattern_ops);
+CREATE INDEX main_static_translation_slug_7864d7f2_like ON main_static_translation USING btree (slug varchar_pattern_ops);
 
 
 --
--- Name: main_staticfooterpage_translation_language_code_f269d333; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: main_staticfooterpage_translation_language_code_f269d333; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX main_staticfooterpage_translation_language_code_f269d333 ON public.main_staticfooterpage_translation USING btree (language_code);
+CREATE INDEX main_staticfooterpage_translation_language_code_f269d333 ON main_staticfooterpage_translation USING btree (language_code);
 
 
 --
--- Name: main_staticfooterpage_translation_language_code_f269d333_like; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: main_staticfooterpage_translation_language_code_f269d333_like; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX main_staticfooterpage_translation_language_code_f269d333_like ON public.main_staticfooterpage_translation USING btree (language_code varchar_pattern_ops);
+CREATE INDEX main_staticfooterpage_translation_language_code_f269d333_like ON main_staticfooterpage_translation USING btree (language_code varchar_pattern_ops);
 
 
 --
--- Name: main_staticfooterpage_translation_master_id_c8687dff; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: main_staticfooterpage_translation_master_id_c8687dff; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX main_staticfooterpage_translation_master_id_c8687dff ON public.main_staticfooterpage_translation USING btree (master_id);
+CREATE INDEX main_staticfooterpage_translation_master_id_c8687dff ON main_staticfooterpage_translation USING btree (master_id);
 
 
 --
--- Name: main_staticfooterpage_translation_slug_17211c5f; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: main_staticfooterpage_translation_slug_17211c5f; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX main_staticfooterpage_translation_slug_17211c5f ON public.main_staticfooterpage_translation USING btree (slug);
+CREATE INDEX main_staticfooterpage_translation_slug_17211c5f ON main_staticfooterpage_translation USING btree (slug);
 
 
 --
--- Name: main_staticfooterpage_translation_slug_17211c5f_like; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: main_staticfooterpage_translation_slug_17211c5f_like; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX main_staticfooterpage_translation_slug_17211c5f_like ON public.main_staticfooterpage_translation USING btree (slug varchar_pattern_ops);
+CREATE INDEX main_staticfooterpage_translation_slug_17211c5f_like ON main_staticfooterpage_translation USING btree (slug varchar_pattern_ops);
 
 
 --
--- Name: main_usermenu_translation_language_code_93134d44; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: main_usermenu_translation_language_code_93134d44; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX main_usermenu_translation_language_code_93134d44 ON public.main_usermenu_translation USING btree (language_code);
+CREATE INDEX main_usermenu_translation_language_code_93134d44 ON main_usermenu_translation USING btree (language_code);
 
 
 --
--- Name: main_usermenu_translation_language_code_93134d44_like; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: main_usermenu_translation_language_code_93134d44_like; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX main_usermenu_translation_language_code_93134d44_like ON public.main_usermenu_translation USING btree (language_code varchar_pattern_ops);
+CREATE INDEX main_usermenu_translation_language_code_93134d44_like ON main_usermenu_translation USING btree (language_code varchar_pattern_ops);
 
 
 --
--- Name: main_usermenu_translation_master_id_ec69a6aa; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: main_usermenu_translation_master_id_ec69a6aa; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX main_usermenu_translation_master_id_ec69a6aa ON public.main_usermenu_translation USING btree (master_id);
+CREATE INDEX main_usermenu_translation_master_id_ec69a6aa ON main_usermenu_translation USING btree (master_id);
 
 
 --
--- Name: main_usermenu_translation_slug_fff0b13a; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: main_usermenu_translation_slug_fff0b13a; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX main_usermenu_translation_slug_fff0b13a ON public.main_usermenu_translation USING btree (slug);
+CREATE INDEX main_usermenu_translation_slug_fff0b13a ON main_usermenu_translation USING btree (slug);
 
 
 --
--- Name: main_usermenu_translation_slug_fff0b13a_like; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: main_usermenu_translation_slug_fff0b13a_like; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX main_usermenu_translation_slug_fff0b13a_like ON public.main_usermenu_translation USING btree (slug varchar_pattern_ops);
+CREATE INDEX main_usermenu_translation_slug_fff0b13a_like ON main_usermenu_translation USING btree (slug varchar_pattern_ops);
 
 
 --
--- Name: orders_cart_order_id_8e8f80ce; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: orders_cart_order_id_8e8f80ce; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX orders_cart_order_id_8e8f80ce ON public.orders_cart USING btree (order_id);
+CREATE INDEX orders_cart_order_id_8e8f80ce ON orders_cart USING btree (order_id);
 
 
 --
--- Name: orders_cart_variation_id_09aeaf8e; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: orders_cart_variation_id_09aeaf8e; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX orders_cart_variation_id_09aeaf8e ON public.orders_cart USING btree (variation_id);
+CREATE INDEX orders_cart_variation_id_09aeaf8e ON orders_cart USING btree (variation_id);
 
 
 --
--- Name: orders_order_customer_id_0b76f6a4; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: orders_order_customer_id_0b76f6a4; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX orders_order_customer_id_0b76f6a4 ON public.orders_order USING btree (customer_id);
+CREATE INDEX orders_order_customer_id_0b76f6a4 ON orders_order USING btree (customer_id);
 
 
 --
--- Name: orders_order_order_unique_id_01fff898_like; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: orders_order_order_unique_id_01fff898_like; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX orders_order_order_unique_id_01fff898_like ON public.orders_order USING btree (order_unique_id varchar_pattern_ops);
+CREATE INDEX orders_order_order_unique_id_01fff898_like ON orders_order USING btree (order_unique_id varchar_pattern_ops);
 
 
 --
--- Name: payment_paycomtransaction_order_id_8061c1ba; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: payment_paycomtransaction_order_id_8061c1ba; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX payment_paycomtransaction_order_id_8061c1ba ON public.payment_paycomtransaction USING btree (order_id);
+CREATE INDEX payment_paycomtransaction_order_id_8061c1ba ON payment_paycomtransaction USING btree (order_id);
 
 
 --
--- Name: payment_paycomtransaction_paycom_transaction_id_a9016909_like; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: payment_paycomtransaction_paycom_transaction_id_a9016909_like; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX payment_paycomtransaction_paycom_transaction_id_a9016909_like ON public.payment_paycomtransaction USING btree (paycom_transaction_id varchar_pattern_ops);
+CREATE INDEX payment_paycomtransaction_paycom_transaction_id_a9016909_like ON payment_paycomtransaction USING btree (paycom_transaction_id varchar_pattern_ops);
 
 
 --
--- Name: products_brands_category_id_90ebd3a5; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: products_brands_category_id_90ebd3a5; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX products_brands_category_id_90ebd3a5 ON public.products_brands USING btree (category_id);
+CREATE INDEX products_brands_category_id_90ebd3a5 ON products_brands USING btree (category_id);
 
 
 --
--- Name: products_category_level_999bd550; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: products_category_level_999bd550; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX products_category_level_999bd550 ON public.products_category USING btree (mptt_level);
+CREATE INDEX products_category_level_999bd550 ON products_category USING btree (mptt_level);
 
 
 --
--- Name: products_category_lft_b068de9d; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: products_category_lft_b068de9d; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX products_category_lft_b068de9d ON public.products_category USING btree (lft);
+CREATE INDEX products_category_lft_b068de9d ON products_category USING btree (lft);
 
 
 --
--- Name: products_category_parent_id_3388f6c9; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: products_category_parent_id_3388f6c9; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX products_category_parent_id_3388f6c9 ON public.products_category USING btree (parent_id);
+CREATE INDEX products_category_parent_id_3388f6c9 ON products_category USING btree (parent_id);
 
 
 --
--- Name: products_category_rght_c5971abd; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: products_category_rght_c5971abd; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX products_category_rght_c5971abd ON public.products_category USING btree (rght);
+CREATE INDEX products_category_rght_c5971abd ON products_category USING btree (rght);
 
 
 --
--- Name: products_category_translation_language_code_ddf7527e; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: products_category_translation_language_code_ddf7527e; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX products_category_translation_language_code_ddf7527e ON public.products_category_translation USING btree (language_code);
+CREATE INDEX products_category_translation_language_code_ddf7527e ON products_category_translation USING btree (language_code);
 
 
 --
--- Name: products_category_translation_language_code_ddf7527e_like; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: products_category_translation_language_code_ddf7527e_like; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX products_category_translation_language_code_ddf7527e_like ON public.products_category_translation USING btree (language_code varchar_pattern_ops);
+CREATE INDEX products_category_translation_language_code_ddf7527e_like ON products_category_translation USING btree (language_code varchar_pattern_ops);
 
 
 --
--- Name: products_category_translation_master_id_f53287e3; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: products_category_translation_master_id_f53287e3; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX products_category_translation_master_id_f53287e3 ON public.products_category_translation USING btree (master_id);
+CREATE INDEX products_category_translation_master_id_f53287e3 ON products_category_translation USING btree (master_id);
 
 
 --
--- Name: products_category_translation_slug_d9e2774a_like; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: products_category_translation_slug_d9e2774a_like; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX products_category_translation_slug_d9e2774a_like ON public.products_category_translation USING btree (slug varchar_pattern_ops);
+CREATE INDEX products_category_translation_slug_d9e2774a_like ON products_category_translation USING btree (slug varchar_pattern_ops);
 
 
 --
--- Name: products_category_tree_id_7d9b3ae8; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: products_category_tree_id_7d9b3ae8; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX products_category_tree_id_7d9b3ae8 ON public.products_category USING btree (tree_id);
+CREATE INDEX products_category_tree_id_7d9b3ae8 ON products_category USING btree (tree_id);
 
 
 --
--- Name: products_color_translation_language_code_f0d74222; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: products_color_translation_language_code_f0d74222; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX products_color_translation_language_code_f0d74222 ON public.products_color_translation USING btree (language_code);
+CREATE INDEX products_color_translation_language_code_f0d74222 ON products_color_translation USING btree (language_code);
 
 
 --
--- Name: products_color_translation_language_code_f0d74222_like; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: products_color_translation_language_code_f0d74222_like; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX products_color_translation_language_code_f0d74222_like ON public.products_color_translation USING btree (language_code varchar_pattern_ops);
+CREATE INDEX products_color_translation_language_code_f0d74222_like ON products_color_translation USING btree (language_code varchar_pattern_ops);
 
 
 --
--- Name: products_color_translation_master_id_3e7ac7bb; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: products_color_translation_master_id_3e7ac7bb; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX products_color_translation_master_id_3e7ac7bb ON public.products_color_translation USING btree (master_id);
+CREATE INDEX products_color_translation_master_id_3e7ac7bb ON products_color_translation USING btree (master_id);
 
 
 --
--- Name: products_product_brand_id_3e2e8fd1; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: products_product_brand_id_3e2e8fd1; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX products_product_brand_id_3e2e8fd1 ON public.products_product USING btree (brand_id);
+CREATE INDEX products_product_brand_id_3e2e8fd1 ON products_product USING btree (brand_id);
 
 
 --
--- Name: products_product_category_id_9b594869; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: products_product_category_id_9b594869; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX products_product_category_id_9b594869 ON public.products_product USING btree (category_id);
+CREATE INDEX products_product_category_id_9b594869 ON products_product USING btree (category_id);
 
 
 --
--- Name: products_product_owner_id_f189d068; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: products_product_image_0_id_58589b97; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX products_product_owner_id_f189d068 ON public.products_product USING btree (owner_id);
+CREATE INDEX products_product_image_0_id_58589b97 ON products_product USING btree (image_0_id);
 
 
 --
--- Name: products_product_volume_id_9a242362; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: products_product_image_1_id_c82e1930; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX products_product_volume_id_9a242362 ON public.products_product USING btree (volume_id);
+CREATE INDEX products_product_image_1_id_c82e1930 ON products_product USING btree (image_1_id);
 
 
 --
--- Name: products_productimage_product_id_e747596a; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: products_product_image_2_id_429335ec; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX products_productimage_product_id_e747596a ON public.products_productimage USING btree (product_id);
+CREATE INDEX products_product_image_2_id_429335ec ON products_product USING btree (image_2_id);
 
 
 --
--- Name: products_review_product_id_d933ffa7; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: products_product_owner_id_f189d068; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX products_review_product_id_d933ffa7 ON public.products_review USING btree (product_id);
+CREATE INDEX products_product_owner_id_f189d068 ON products_product USING btree (owner_id);
 
 
 --
--- Name: products_variation_color_id_67e0ff3a; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: products_product_volume_id_9a242362; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX products_variation_color_id_67e0ff3a ON public.products_variation USING btree (color_id);
+CREATE INDEX products_product_volume_id_9a242362 ON products_product USING btree (volume_id);
 
 
 --
--- Name: products_variation_product_id_58e457dc; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: products_productimage_product_id_e747596a; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX products_variation_product_id_58e457dc ON public.products_variation USING btree (product_id);
+CREATE INDEX products_productimage_product_id_e747596a ON products_productimage USING btree (product_id);
 
 
 --
--- Name: products_volumetype_translation_language_code_1d9b9128; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: products_review_product_id_d933ffa7; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX products_volumetype_translation_language_code_1d9b9128 ON public.products_volumetype_translation USING btree (language_code);
+CREATE INDEX products_review_product_id_d933ffa7 ON products_review USING btree (product_id);
 
 
 --
--- Name: products_volumetype_translation_language_code_1d9b9128_like; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: products_variation_color_id_67e0ff3a; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX products_volumetype_translation_language_code_1d9b9128_like ON public.products_volumetype_translation USING btree (language_code varchar_pattern_ops);
+CREATE INDEX products_variation_color_id_67e0ff3a ON products_variation USING btree (color_id);
 
 
 --
--- Name: products_volumetype_translation_master_id_f5e4ae1f; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: products_variation_product_id_58e457dc; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX products_volumetype_translation_master_id_f5e4ae1f ON public.products_volumetype_translation USING btree (master_id);
+CREATE INDEX products_variation_product_id_58e457dc ON products_variation USING btree (product_id);
 
 
 --
--- Name: users_client_delivery_address_id_3ec7728a; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: products_volumetype_translation_language_code_1d9b9128; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX users_client_delivery_address_id_3ec7728a ON public.users_client USING btree (delivery_address_id);
+CREATE INDEX products_volumetype_translation_language_code_1d9b9128 ON products_volumetype_translation USING btree (language_code);
 
 
 --
--- Name: users_deliveryaddress_user_id_33d75da7; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: products_volumetype_translation_language_code_1d9b9128_like; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX users_deliveryaddress_user_id_33d75da7 ON public.users_deliveryaddress USING btree (user_id);
+CREATE INDEX products_volumetype_translation_language_code_1d9b9128_like ON products_volumetype_translation USING btree (language_code varchar_pattern_ops);
 
 
 --
--- Name: users_paymentcards_holder_id_65bb9c5f; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: products_volumetype_translation_master_id_f5e4ae1f; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX users_paymentcards_holder_id_65bb9c5f ON public.users_paymentcards USING btree (holder_id);
+CREATE INDEX products_volumetype_translation_master_id_f5e4ae1f ON products_volumetype_translation USING btree (master_id);
 
 
 --
--- Name: users_user_groups_group_id_9afc8d0e; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: users_client_delivery_address_id_3ec7728a; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX users_user_groups_group_id_9afc8d0e ON public.users_user_groups USING btree (group_id);
+CREATE INDEX users_client_delivery_address_id_3ec7728a ON users_client USING btree (delivery_address_id);
 
 
 --
--- Name: users_user_groups_user_id_5f6f5a90; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: users_deliveryaddress_user_id_33d75da7; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX users_user_groups_user_id_5f6f5a90 ON public.users_user_groups USING btree (user_id);
+CREATE INDEX users_deliveryaddress_user_id_33d75da7 ON users_deliveryaddress USING btree (user_id);
 
 
 --
--- Name: users_user_phone_fe37f55c_like; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: users_paymentcards_holder_id_65bb9c5f; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX users_user_phone_fe37f55c_like ON public.users_user USING btree (phone varchar_pattern_ops);
+CREATE INDEX users_paymentcards_holder_id_65bb9c5f ON users_paymentcards USING btree (holder_id);
 
 
 --
--- Name: users_user_user_permissions_permission_id_0b93982e; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: users_user_groups_group_id_9afc8d0e; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX users_user_user_permissions_permission_id_0b93982e ON public.users_user_user_permissions USING btree (permission_id);
+CREATE INDEX users_user_groups_group_id_9afc8d0e ON users_user_groups USING btree (group_id);
 
 
 --
--- Name: users_user_user_permissions_user_id_20aca447; Type: INDEX; Schema: public; Owner: stroyshop
+-- Name: users_user_groups_user_id_5f6f5a90; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-CREATE INDEX users_user_user_permissions_user_id_20aca447 ON public.users_user_user_permissions USING btree (user_id);
+CREATE INDEX users_user_groups_user_id_5f6f5a90 ON users_user_groups USING btree (user_id);
 
 
 --
--- Name: auth_group_permissions auth_group_permissio_permission_id_84c5c92e_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: users_user_phone_fe37f55c_like; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.auth_group_permissions
-    ADD CONSTRAINT auth_group_permissio_permission_id_84c5c92e_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX users_user_phone_fe37f55c_like ON users_user USING btree (phone varchar_pattern_ops);
 
 
 --
--- Name: auth_group_permissions auth_group_permissions_group_id_b120cbf9_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: users_user_user_permissions_permission_id_0b93982e; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.auth_group_permissions
-    ADD CONSTRAINT auth_group_permissions_group_id_b120cbf9_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX users_user_user_permissions_permission_id_0b93982e ON users_user_user_permissions USING btree (permission_id);
 
 
 --
--- Name: auth_permission auth_permission_content_type_id_2f476e4b_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: users_user_user_permissions_user_id_20aca447; Type: INDEX; Schema: public; Owner: stroyshop; Tablespace: 
 --
 
-ALTER TABLE ONLY public.auth_permission
-    ADD CONSTRAINT auth_permission_content_type_id_2f476e4b_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX users_user_user_permissions_user_id_20aca447 ON users_user_user_permissions USING btree (user_id);
 
 
 --
--- Name: django_admin_log django_admin_log_content_type_id_c4bce8eb_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: auth_group_permissio_permission_id_84c5c92e_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.django_admin_log
-    ADD CONSTRAINT django_admin_log_content_type_id_c4bce8eb_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissio_permission_id_84c5c92e_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: django_admin_log django_admin_log_user_id_c564eba6_fk_users_user_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: auth_group_permissions_group_id_b120cbf9_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.django_admin_log
-    ADD CONSTRAINT django_admin_log_user_id_c564eba6_fk_users_user_id FOREIGN KEY (user_id) REFERENCES public.users_user(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_b120cbf9_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: easy_thumbnails_thumbnail easy_thumbnails_thum_source_id_5b57bc77_fk_easy_thum; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: auth_permission_content_type_id_2f476e4b_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.easy_thumbnails_thumbnail
-    ADD CONSTRAINT easy_thumbnails_thum_source_id_5b57bc77_fk_easy_thum FOREIGN KEY (source_id) REFERENCES public.easy_thumbnails_source(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_2f476e4b_fk_django_co FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: easy_thumbnails_thumbnaildimensions easy_thumbnails_thum_thumbnail_id_c3a0c549_fk_easy_thum; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: django_admin_log_content_type_id_c4bce8eb_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.easy_thumbnails_thumbnaildimensions
-    ADD CONSTRAINT easy_thumbnails_thum_thumbnail_id_c3a0c549_fk_easy_thum FOREIGN KEY (thumbnail_id) REFERENCES public.easy_thumbnails_thumbnail(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_content_type_id_c4bce8eb_fk_django_co FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: filer_clipboard filer_clipboard_user_id_b52ff0bc_fk_users_user_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: django_admin_log_user_id_c564eba6_fk_users_user_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.filer_clipboard
-    ADD CONSTRAINT filer_clipboard_user_id_b52ff0bc_fk_users_user_id FOREIGN KEY (user_id) REFERENCES public.users_user(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_user_id_c564eba6_fk_users_user_id FOREIGN KEY (user_id) REFERENCES users_user(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: filer_clipboarditem filer_clipboarditem_clipboard_id_7a76518b_fk_filer_clipboard_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: easy_thumbnails_thum_source_id_5b57bc77_fk_easy_thum; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.filer_clipboarditem
-    ADD CONSTRAINT filer_clipboarditem_clipboard_id_7a76518b_fk_filer_clipboard_id FOREIGN KEY (clipboard_id) REFERENCES public.filer_clipboard(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY easy_thumbnails_thumbnail
+    ADD CONSTRAINT easy_thumbnails_thum_source_id_5b57bc77_fk_easy_thum FOREIGN KEY (source_id) REFERENCES easy_thumbnails_source(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: filer_clipboarditem filer_clipboarditem_file_id_06196f80_fk_filer_file_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: easy_thumbnails_thum_thumbnail_id_c3a0c549_fk_easy_thum; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.filer_clipboarditem
-    ADD CONSTRAINT filer_clipboarditem_file_id_06196f80_fk_filer_file_id FOREIGN KEY (file_id) REFERENCES public.filer_file(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY easy_thumbnails_thumbnaildimensions
+    ADD CONSTRAINT easy_thumbnails_thum_thumbnail_id_c3a0c549_fk_easy_thum FOREIGN KEY (thumbnail_id) REFERENCES easy_thumbnails_thumbnail(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: filer_file filer_file_folder_id_af803bbb_fk_filer_folder_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: filer_clipboard_user_id_b52ff0bc_fk_users_user_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.filer_file
-    ADD CONSTRAINT filer_file_folder_id_af803bbb_fk_filer_folder_id FOREIGN KEY (folder_id) REFERENCES public.filer_folder(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY filer_clipboard
+    ADD CONSTRAINT filer_clipboard_user_id_b52ff0bc_fk_users_user_id FOREIGN KEY (user_id) REFERENCES users_user(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: filer_file filer_file_owner_id_b9e32671_fk_users_user_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: filer_clipboarditem_clipboard_id_7a76518b_fk_filer_clipboard_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.filer_file
-    ADD CONSTRAINT filer_file_owner_id_b9e32671_fk_users_user_id FOREIGN KEY (owner_id) REFERENCES public.users_user(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY filer_clipboarditem
+    ADD CONSTRAINT filer_clipboarditem_clipboard_id_7a76518b_fk_filer_clipboard_id FOREIGN KEY (clipboard_id) REFERENCES filer_clipboard(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: filer_file filer_file_polymorphic_ctype_id_f44903c1_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: filer_clipboarditem_file_id_06196f80_fk_filer_file_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.filer_file
-    ADD CONSTRAINT filer_file_polymorphic_ctype_id_f44903c1_fk_django_co FOREIGN KEY (polymorphic_ctype_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY filer_clipboarditem
+    ADD CONSTRAINT filer_clipboarditem_file_id_06196f80_fk_filer_file_id FOREIGN KEY (file_id) REFERENCES filer_file(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: filer_folder filer_folder_owner_id_be530fb4_fk_users_user_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: filer_file_folder_id_af803bbb_fk_filer_folder_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.filer_folder
-    ADD CONSTRAINT filer_folder_owner_id_be530fb4_fk_users_user_id FOREIGN KEY (owner_id) REFERENCES public.users_user(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY filer_file
+    ADD CONSTRAINT filer_file_folder_id_af803bbb_fk_filer_folder_id FOREIGN KEY (folder_id) REFERENCES filer_folder(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: filer_folder filer_folder_parent_id_308aecda_fk_filer_folder_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: filer_file_owner_id_b9e32671_fk_users_user_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.filer_folder
-    ADD CONSTRAINT filer_folder_parent_id_308aecda_fk_filer_folder_id FOREIGN KEY (parent_id) REFERENCES public.filer_folder(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY filer_file
+    ADD CONSTRAINT filer_file_owner_id_b9e32671_fk_users_user_id FOREIGN KEY (owner_id) REFERENCES users_user(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: filer_folderpermission filer_folderpermission_folder_id_5d02f1da_fk_filer_folder_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: filer_file_polymorphic_ctype_id_f44903c1_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.filer_folderpermission
-    ADD CONSTRAINT filer_folderpermission_folder_id_5d02f1da_fk_filer_folder_id FOREIGN KEY (folder_id) REFERENCES public.filer_folder(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY filer_file
+    ADD CONSTRAINT filer_file_polymorphic_ctype_id_f44903c1_fk_django_co FOREIGN KEY (polymorphic_ctype_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: filer_folderpermission filer_folderpermission_group_id_8901bafa_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: filer_folder_owner_id_be530fb4_fk_users_user_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.filer_folderpermission
-    ADD CONSTRAINT filer_folderpermission_group_id_8901bafa_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY filer_folder
+    ADD CONSTRAINT filer_folder_owner_id_be530fb4_fk_users_user_id FOREIGN KEY (owner_id) REFERENCES users_user(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: filer_folderpermission filer_folderpermission_user_id_7673d4b6_fk_users_user_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: filer_folder_parent_id_308aecda_fk_filer_folder_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.filer_folderpermission
-    ADD CONSTRAINT filer_folderpermission_user_id_7673d4b6_fk_users_user_id FOREIGN KEY (user_id) REFERENCES public.users_user(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY filer_folder
+    ADD CONSTRAINT filer_folder_parent_id_308aecda_fk_filer_folder_id FOREIGN KEY (parent_id) REFERENCES filer_folder(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: filer_image filer_image_file_ptr_id_3e21d4f0_fk_filer_file_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: filer_folderpermission_folder_id_5d02f1da_fk_filer_folder_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.filer_image
-    ADD CONSTRAINT filer_image_file_ptr_id_3e21d4f0_fk_filer_file_id FOREIGN KEY (file_ptr_id) REFERENCES public.filer_file(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY filer_folderpermission
+    ADD CONSTRAINT filer_folderpermission_folder_id_5d02f1da_fk_filer_folder_id FOREIGN KEY (folder_id) REFERENCES filer_folder(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: main_banner_translation main_banner_translation_master_id_f62e61c4_fk_main_banner_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: filer_folderpermission_group_id_8901bafa_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.main_banner_translation
-    ADD CONSTRAINT main_banner_translation_master_id_f62e61c4_fk_main_banner_id FOREIGN KEY (master_id) REFERENCES public.main_banner(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY filer_folderpermission
+    ADD CONSTRAINT filer_folderpermission_group_id_8901bafa_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: main_customermenu_translation main_customermenu_tr_master_id_094e74e8_fk_main_cust; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: filer_folderpermission_user_id_7673d4b6_fk_users_user_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.main_customermenu_translation
-    ADD CONSTRAINT main_customermenu_tr_master_id_094e74e8_fk_main_cust FOREIGN KEY (master_id) REFERENCES public.main_customermenu(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY filer_folderpermission
+    ADD CONSTRAINT filer_folderpermission_user_id_7673d4b6_fk_users_user_id FOREIGN KEY (user_id) REFERENCES users_user(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: main_customersmenu main_customersmenu_menu_ptr_id_754679f5_fk_main_menu_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: filer_image_file_ptr_id_3e21d4f0_fk_filer_file_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.main_customersmenu
-    ADD CONSTRAINT main_customersmenu_menu_ptr_id_754679f5_fk_main_menu_id FOREIGN KEY (menu_ptr_id) REFERENCES public.main_menu(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY filer_image
+    ADD CONSTRAINT filer_image_file_ptr_id_3e21d4f0_fk_filer_file_id FOREIGN KEY (file_ptr_id) REFERENCES filer_file(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: main_menu_translation main_menu_translation_master_id_6cb98964_fk_main_menu_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: main_banner_translation_master_id_f62e61c4_fk_main_banner_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.main_menu_translation
-    ADD CONSTRAINT main_menu_translation_master_id_6cb98964_fk_main_menu_id FOREIGN KEY (master_id) REFERENCES public.main_menu(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY main_banner_translation
+    ADD CONSTRAINT main_banner_translation_master_id_f62e61c4_fk_main_banner_id FOREIGN KEY (master_id) REFERENCES main_banner(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: main_static_translation main_static_translation_master_id_6c9d2d70_fk_main_static_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: main_customermenu_tr_master_id_094e74e8_fk_main_cust; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.main_static_translation
-    ADD CONSTRAINT main_static_translation_master_id_6c9d2d70_fk_main_static_id FOREIGN KEY (master_id) REFERENCES public.main_static(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY main_customermenu_translation
+    ADD CONSTRAINT main_customermenu_tr_master_id_094e74e8_fk_main_cust FOREIGN KEY (master_id) REFERENCES main_customermenu(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: main_staticfooterpage_translation main_staticfooterpag_master_id_c8687dff_fk_main_stat; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: main_customersmenu_menu_ptr_id_754679f5_fk_main_menu_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.main_staticfooterpage_translation
-    ADD CONSTRAINT main_staticfooterpag_master_id_c8687dff_fk_main_stat FOREIGN KEY (master_id) REFERENCES public.main_staticfooterpage(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY main_customersmenu
+    ADD CONSTRAINT main_customersmenu_menu_ptr_id_754679f5_fk_main_menu_id FOREIGN KEY (menu_ptr_id) REFERENCES main_menu(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: main_usermenu_translation main_usermenu_transl_master_id_ec69a6aa_fk_main_user; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: main_menu_translation_master_id_6cb98964_fk_main_menu_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.main_usermenu_translation
-    ADD CONSTRAINT main_usermenu_transl_master_id_ec69a6aa_fk_main_user FOREIGN KEY (master_id) REFERENCES public.main_usermenu(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY main_menu_translation
+    ADD CONSTRAINT main_menu_translation_master_id_6cb98964_fk_main_menu_id FOREIGN KEY (master_id) REFERENCES main_menu(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: main_usersmenu main_usersmenu_menu_ptr_id_6293e1ef_fk_main_menu_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: main_static_translation_master_id_6c9d2d70_fk_main_static_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.main_usersmenu
-    ADD CONSTRAINT main_usersmenu_menu_ptr_id_6293e1ef_fk_main_menu_id FOREIGN KEY (menu_ptr_id) REFERENCES public.main_menu(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY main_static_translation
+    ADD CONSTRAINT main_static_translation_master_id_6c9d2d70_fk_main_static_id FOREIGN KEY (master_id) REFERENCES main_static(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: orders_cart orders_cart_order_id_8e8f80ce_fk_orders_order_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: main_staticfooterpag_master_id_c8687dff_fk_main_stat; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.orders_cart
-    ADD CONSTRAINT orders_cart_order_id_8e8f80ce_fk_orders_order_id FOREIGN KEY (order_id) REFERENCES public.orders_order(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY main_staticfooterpage_translation
+    ADD CONSTRAINT main_staticfooterpag_master_id_c8687dff_fk_main_stat FOREIGN KEY (master_id) REFERENCES main_staticfooterpage(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: orders_cart orders_cart_variation_id_09aeaf8e_fk_products_variation_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: main_usermenu_transl_master_id_ec69a6aa_fk_main_user; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.orders_cart
-    ADD CONSTRAINT orders_cart_variation_id_09aeaf8e_fk_products_variation_id FOREIGN KEY (variation_id) REFERENCES public.products_variation(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY main_usermenu_translation
+    ADD CONSTRAINT main_usermenu_transl_master_id_ec69a6aa_fk_main_user FOREIGN KEY (master_id) REFERENCES main_usermenu(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: orders_order orders_order_customer_id_0b76f6a4_fk_users_user_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: main_usersmenu_menu_ptr_id_6293e1ef_fk_main_menu_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.orders_order
-    ADD CONSTRAINT orders_order_customer_id_0b76f6a4_fk_users_user_id FOREIGN KEY (customer_id) REFERENCES public.users_user(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY main_usersmenu
+    ADD CONSTRAINT main_usersmenu_menu_ptr_id_6293e1ef_fk_main_menu_id FOREIGN KEY (menu_ptr_id) REFERENCES main_menu(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: payment_paycomtransaction payment_paycomtransaction_order_id_8061c1ba_fk_orders_order_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: orders_cart_order_id_8e8f80ce_fk_orders_order_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.payment_paycomtransaction
-    ADD CONSTRAINT payment_paycomtransaction_order_id_8061c1ba_fk_orders_order_id FOREIGN KEY (order_id) REFERENCES public.orders_order(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY orders_cart
+    ADD CONSTRAINT orders_cart_order_id_8e8f80ce_fk_orders_order_id FOREIGN KEY (order_id) REFERENCES orders_order(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: products_brands products_brands_category_id_90ebd3a5_fk_products_category_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: orders_cart_variation_id_09aeaf8e_fk_products_variation_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.products_brands
-    ADD CONSTRAINT products_brands_category_id_90ebd3a5_fk_products_category_id FOREIGN KEY (category_id) REFERENCES public.products_category(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY orders_cart
+    ADD CONSTRAINT orders_cart_variation_id_09aeaf8e_fk_products_variation_id FOREIGN KEY (variation_id) REFERENCES products_variation(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: products_category products_category_parent_id_3388f6c9_fk_products_category_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: orders_order_customer_id_0b76f6a4_fk_users_user_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.products_category
-    ADD CONSTRAINT products_category_parent_id_3388f6c9_fk_products_category_id FOREIGN KEY (parent_id) REFERENCES public.products_category(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY orders_order
+    ADD CONSTRAINT orders_order_customer_id_0b76f6a4_fk_users_user_id FOREIGN KEY (customer_id) REFERENCES users_user(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: products_category_translation products_category_tr_master_id_f53287e3_fk_products_; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: payment_paycomtransaction_order_id_8061c1ba_fk_orders_order_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.products_category_translation
-    ADD CONSTRAINT products_category_tr_master_id_f53287e3_fk_products_ FOREIGN KEY (master_id) REFERENCES public.products_category(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY payment_paycomtransaction
+    ADD CONSTRAINT payment_paycomtransaction_order_id_8061c1ba_fk_orders_order_id FOREIGN KEY (order_id) REFERENCES orders_order(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: products_color_translation products_color_trans_master_id_3e7ac7bb_fk_products_; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: products_brands_category_id_90ebd3a5_fk_products_category_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.products_color_translation
-    ADD CONSTRAINT products_color_trans_master_id_3e7ac7bb_fk_products_ FOREIGN KEY (master_id) REFERENCES public.products_color(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY products_brands
+    ADD CONSTRAINT products_brands_category_id_90ebd3a5_fk_products_category_id FOREIGN KEY (category_id) REFERENCES products_category(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: products_product products_product_brand_id_3e2e8fd1_fk_products_brands_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: products_category_parent_id_3388f6c9_fk_products_category_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.products_product
-    ADD CONSTRAINT products_product_brand_id_3e2e8fd1_fk_products_brands_id FOREIGN KEY (brand_id) REFERENCES public.products_brands(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY products_category
+    ADD CONSTRAINT products_category_parent_id_3388f6c9_fk_products_category_id FOREIGN KEY (parent_id) REFERENCES products_category(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: products_product products_product_category_id_9b594869_fk_products_category_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: products_category_tr_master_id_f53287e3_fk_products_; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.products_product
-    ADD CONSTRAINT products_product_category_id_9b594869_fk_products_category_id FOREIGN KEY (category_id) REFERENCES public.products_category(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY products_category_translation
+    ADD CONSTRAINT products_category_tr_master_id_f53287e3_fk_products_ FOREIGN KEY (master_id) REFERENCES products_category(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: products_product products_product_owner_id_f189d068_fk_users_user_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: products_color_trans_master_id_3e7ac7bb_fk_products_; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.products_product
-    ADD CONSTRAINT products_product_owner_id_f189d068_fk_users_user_id FOREIGN KEY (owner_id) REFERENCES public.users_user(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY products_color_translation
+    ADD CONSTRAINT products_color_trans_master_id_3e7ac7bb_fk_products_ FOREIGN KEY (master_id) REFERENCES products_color(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: products_product products_product_volume_id_9a242362_fk_products_volumetype_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: products_product_brand_id_3e2e8fd1_fk_products_brands_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.products_product
-    ADD CONSTRAINT products_product_volume_id_9a242362_fk_products_volumetype_id FOREIGN KEY (volume_id) REFERENCES public.products_volumetype(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY products_product
+    ADD CONSTRAINT products_product_brand_id_3e2e8fd1_fk_products_brands_id FOREIGN KEY (brand_id) REFERENCES products_brands(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: products_productimage products_productimag_product_id_e747596a_fk_products_; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: products_product_category_id_9b594869_fk_products_category_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.products_productimage
-    ADD CONSTRAINT products_productimag_product_id_e747596a_fk_products_ FOREIGN KEY (product_id) REFERENCES public.products_product(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY products_product
+    ADD CONSTRAINT products_product_category_id_9b594869_fk_products_category_id FOREIGN KEY (category_id) REFERENCES products_category(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: products_review products_review_product_id_d933ffa7_fk_products_product_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: products_product_image_0_id_58589b97_fk_filer_image_file_ptr_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.products_review
-    ADD CONSTRAINT products_review_product_id_d933ffa7_fk_products_product_id FOREIGN KEY (product_id) REFERENCES public.products_product(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY products_product
+    ADD CONSTRAINT products_product_image_0_id_58589b97_fk_filer_image_file_ptr_id FOREIGN KEY (image_0_id) REFERENCES filer_image(file_ptr_id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: products_variation products_variation_color_id_67e0ff3a_fk_products_color_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: products_product_image_1_id_c82e1930_fk_filer_image_file_ptr_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.products_variation
-    ADD CONSTRAINT products_variation_color_id_67e0ff3a_fk_products_color_id FOREIGN KEY (color_id) REFERENCES public.products_color(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY products_product
+    ADD CONSTRAINT products_product_image_1_id_c82e1930_fk_filer_image_file_ptr_id FOREIGN KEY (image_1_id) REFERENCES filer_image(file_ptr_id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: products_variation products_variation_product_id_58e457dc_fk_products_product_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: products_product_image_2_id_429335ec_fk_filer_image_file_ptr_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.products_variation
-    ADD CONSTRAINT products_variation_product_id_58e457dc_fk_products_product_id FOREIGN KEY (product_id) REFERENCES public.products_product(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY products_product
+    ADD CONSTRAINT products_product_image_2_id_429335ec_fk_filer_image_file_ptr_id FOREIGN KEY (image_2_id) REFERENCES filer_image(file_ptr_id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: products_volumetype_translation products_volumetype__master_id_f5e4ae1f_fk_products_; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: products_product_owner_id_f189d068_fk_users_user_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.products_volumetype_translation
-    ADD CONSTRAINT products_volumetype__master_id_f5e4ae1f_fk_products_ FOREIGN KEY (master_id) REFERENCES public.products_volumetype(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY products_product
+    ADD CONSTRAINT products_product_owner_id_f189d068_fk_users_user_id FOREIGN KEY (owner_id) REFERENCES users_user(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: users_client users_client_delivery_address_id_3ec7728a_fk_users_del; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: products_product_volume_id_9a242362_fk_products_volumetype_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.users_client
-    ADD CONSTRAINT users_client_delivery_address_id_3ec7728a_fk_users_del FOREIGN KEY (delivery_address_id) REFERENCES public.users_deliveryaddress(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY products_product
+    ADD CONSTRAINT products_product_volume_id_9a242362_fk_products_volumetype_id FOREIGN KEY (volume_id) REFERENCES products_volumetype(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: users_client users_client_user_id_06d1c832_fk_users_user_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: products_productimag_product_id_e747596a_fk_products_; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.users_client
-    ADD CONSTRAINT users_client_user_id_06d1c832_fk_users_user_id FOREIGN KEY (user_id) REFERENCES public.users_user(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY products_productimage
+    ADD CONSTRAINT products_productimag_product_id_e747596a_fk_products_ FOREIGN KEY (product_id) REFERENCES products_product(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: users_deliveryaddress users_deliveryaddress_user_id_33d75da7_fk_users_user_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: products_review_product_id_d933ffa7_fk_products_product_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.users_deliveryaddress
-    ADD CONSTRAINT users_deliveryaddress_user_id_33d75da7_fk_users_user_id FOREIGN KEY (user_id) REFERENCES public.users_user(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY products_review
+    ADD CONSTRAINT products_review_product_id_d933ffa7_fk_products_product_id FOREIGN KEY (product_id) REFERENCES products_product(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: users_merchant users_merchant_user_id_30e64459_fk_users_user_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: products_variation_color_id_67e0ff3a_fk_products_color_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.users_merchant
-    ADD CONSTRAINT users_merchant_user_id_30e64459_fk_users_user_id FOREIGN KEY (user_id) REFERENCES public.users_user(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY products_variation
+    ADD CONSTRAINT products_variation_color_id_67e0ff3a_fk_products_color_id FOREIGN KEY (color_id) REFERENCES products_color(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: users_paymentcards users_paymentcards_holder_id_65bb9c5f_fk_users_user_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: products_variation_product_id_58e457dc_fk_products_product_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.users_paymentcards
-    ADD CONSTRAINT users_paymentcards_holder_id_65bb9c5f_fk_users_user_id FOREIGN KEY (holder_id) REFERENCES public.users_user(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY products_variation
+    ADD CONSTRAINT products_variation_product_id_58e457dc_fk_products_product_id FOREIGN KEY (product_id) REFERENCES products_product(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: users_user users_user_avatar_id_2054405b_fk_users_files_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: products_volumetype__master_id_f5e4ae1f_fk_products_; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.users_user
-    ADD CONSTRAINT users_user_avatar_id_2054405b_fk_users_files_id FOREIGN KEY (avatar_id) REFERENCES public.users_files(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY products_volumetype_translation
+    ADD CONSTRAINT products_volumetype__master_id_f5e4ae1f_fk_products_ FOREIGN KEY (master_id) REFERENCES products_volumetype(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: users_user_groups users_user_groups_group_id_9afc8d0e_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: users_client_delivery_address_id_3ec7728a_fk_users_del; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.users_user_groups
-    ADD CONSTRAINT users_user_groups_group_id_9afc8d0e_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY users_client
+    ADD CONSTRAINT users_client_delivery_address_id_3ec7728a_fk_users_del FOREIGN KEY (delivery_address_id) REFERENCES users_deliveryaddress(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: users_user_groups users_user_groups_user_id_5f6f5a90_fk_users_user_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: users_client_user_id_06d1c832_fk_users_user_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.users_user_groups
-    ADD CONSTRAINT users_user_groups_user_id_5f6f5a90_fk_users_user_id FOREIGN KEY (user_id) REFERENCES public.users_user(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY users_client
+    ADD CONSTRAINT users_client_user_id_06d1c832_fk_users_user_id FOREIGN KEY (user_id) REFERENCES users_user(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: users_user_user_permissions users_user_user_perm_permission_id_0b93982e_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: users_deliveryaddress_user_id_33d75da7_fk_users_user_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.users_user_user_permissions
-    ADD CONSTRAINT users_user_user_perm_permission_id_0b93982e_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY users_deliveryaddress
+    ADD CONSTRAINT users_deliveryaddress_user_id_33d75da7_fk_users_user_id FOREIGN KEY (user_id) REFERENCES users_user(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
--- Name: users_user_user_permissions users_user_user_permissions_user_id_20aca447_fk_users_user_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+-- Name: users_merchant_user_id_30e64459_fk_users_user_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
 --
 
-ALTER TABLE ONLY public.users_user_user_permissions
-    ADD CONSTRAINT users_user_user_permissions_user_id_20aca447_fk_users_user_id FOREIGN KEY (user_id) REFERENCES public.users_user(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE ONLY users_merchant
+    ADD CONSTRAINT users_merchant_user_id_30e64459_fk_users_user_id FOREIGN KEY (user_id) REFERENCES users_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: users_paymentcards_holder_id_65bb9c5f_fk_users_user_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+--
+
+ALTER TABLE ONLY users_paymentcards
+    ADD CONSTRAINT users_paymentcards_holder_id_65bb9c5f_fk_users_user_id FOREIGN KEY (holder_id) REFERENCES users_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: users_user_avatar_id_2054405b_fk_users_files_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+--
+
+ALTER TABLE ONLY users_user
+    ADD CONSTRAINT users_user_avatar_id_2054405b_fk_users_files_id FOREIGN KEY (avatar_id) REFERENCES users_files(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: users_user_groups_group_id_9afc8d0e_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+--
+
+ALTER TABLE ONLY users_user_groups
+    ADD CONSTRAINT users_user_groups_group_id_9afc8d0e_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: users_user_groups_user_id_5f6f5a90_fk_users_user_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+--
+
+ALTER TABLE ONLY users_user_groups
+    ADD CONSTRAINT users_user_groups_user_id_5f6f5a90_fk_users_user_id FOREIGN KEY (user_id) REFERENCES users_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: users_user_user_perm_permission_id_0b93982e_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+--
+
+ALTER TABLE ONLY users_user_user_permissions
+    ADD CONSTRAINT users_user_user_perm_permission_id_0b93982e_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: users_user_user_permissions_user_id_20aca447_fk_users_user_id; Type: FK CONSTRAINT; Schema: public; Owner: stroyshop
+--
+
+ALTER TABLE ONLY users_user_user_permissions
+    ADD CONSTRAINT users_user_user_permissions_user_id_20aca447_fk_users_user_id FOREIGN KEY (user_id) REFERENCES users_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --

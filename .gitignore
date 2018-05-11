@@ -106,3 +106,4 @@ venv.bak/
 .idea/
 bower_components/*
 node_modules/*
+assets/

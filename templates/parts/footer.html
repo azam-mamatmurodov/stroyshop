@@ -127,7 +127,7 @@
                     <a href="" class="facebook">Via Facebook</a>
                 </div>
                 <div class="delimeter">
-                    <span>or</span>
+                    <span>{% trans 'or' %}</span>
                 </div>
                 <div class="form">
                     <form id="register_form" action="{% url 'users:register' %}{% if 'next' in request.GET %}?next={{ request.GET.next }}{% endif %}" method="post">
@@ -189,21 +189,21 @@
                             {% endif %}
                         </div>
 
-                        <div class="form-group">
-                            <input
-                                    required
-                                    type="text"
-                                    name="address"
-                                    tabindex="1"
-
-                                    placeholder="Address"
-                                    value="{% if register_form.address.value %}{{ register_form.address.value }}{% endif %}">
-                            {% if register_form.address.errors %}
-                                <div class="help-block">
-                                    {{ register_form.address.errors }}
-                                </div>
-                            {% endif %}
-                        </div>
+{#                        <div class="form-group">#}
+{#                            <input#}
+{#                                    required#}
+{#                                    type="text"#}
+{#                                    name="address"#}
+{#                                    tabindex="1"#}
+{##}
+{#                                    placeholder="Address"#}
+{#                                    value="{% if register_form.address.value %}{{ register_form.address.value }}{% endif %}">#}
+{#                            {% if register_form.address.errors %}#}
+{#                                <div class="help-block">#}
+{#                                    {{ register_form.address.errors }}#}
+{#                                </div>#}
+{#                            {% endif %}#}
+{#                        </div>#}
 
                         <div class="form-group">
                             <input
@@ -234,6 +234,12 @@
                                     {{ register_form.confirm_password.errors }}
                                 </div>
                             {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="register_terms">
+                                <input type="checkbox" required id="register_terms">
+                                <a href="" target="_blank">I agree with terms of Stroyshop</a>
+                            </label>
                         </div>
                         <input type="submit" name="submit" value="Register">
                     </form>

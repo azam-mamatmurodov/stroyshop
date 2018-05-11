@@ -11,7 +11,9 @@ from rest_app.views import (
     ProductDetailView,
     VariationDetailView,
     PaycomView,
+    CartHtmlViews,
 )
+
 urlpatterns = [
     url(r'users/auth/$', UserAuthView.as_view(), name='user_auth'),
     url(r'users/register/$', UserRegisterView.as_view(), name='user_register'),
@@ -21,6 +23,7 @@ urlpatterns = [
     url(r'^cart/(?P<cart_item_id>[\d]+)/$', CartDetailViews.as_view(), name='cart_detail'),
     url(r'^cart/(?P<cart_item_id>[\d]+)/update/$', CartUpdateViews.as_view(), name='cart_update'),
     url(r'^cart/(?P<cart_item_id>[\d]+)/delete/$', CartDeleteViews.as_view(), name='cart_delete'),
+    url(r'^carts/html/$', CartHtmlViews.as_view(), name='cart_html_list'),
 
     url(r'^products/(?P<pk>[\d]+)/$', ProductDetailView.as_view(), name='product_detail'),
     url(r'^products/(?P<pk>[\d]+)/variations/$', VariationDetailView.as_view(), name='product_variation_detail'),

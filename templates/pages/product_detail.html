@@ -30,9 +30,6 @@
                                     <div class="price">
                                         <strong>{{ similar_product.get_price|floatformat|intcomma }} {% trans 'sum' %} </strong>
                                     </div>
-                                    <!--<div class="addtocart">-->
-                                        <!--<button>{% trans 'Add to cart' %}</button>-->
-                                    <!--</div>-->
                                 </div>
                             {% endfor %}
                         </div>
@@ -97,20 +94,20 @@
                             <div class="plus"></div>
                             <div class="minus"></div>
                         </div>
-                        <input type="submit" name="submit" value="&#xf07a; {% trans 'Add to cart' %}">
+                        <input type="submit" name="submit" value="oz{% trans 'Add to cart' %}">
                     </form>
-                </div>
-            </div>
-            <div class="product-char">
-                <h2>{% trans 'Characters' %}</h2>
-                <div>
-                    {{ product.characters|safe }}
                 </div>
             </div>
             <div class="product-desc">
                 <h2>{% trans 'Description' %}</h2>
                 <div>
                     {{ product.description|safe }}
+                </div>
+            </div>
+            <div class="product-char">
+                <h2>{% trans 'Characters' %}</h2>
+                <div>
+                    {{ product.characters|safe }}
                 </div>
             </div>
         </section>

@@ -3,9 +3,11 @@ from django.utils.translation import ugettext as _
 from django.conf.urls import url
 from django.shortcuts import render, redirect
 from django.http import FileResponse
+from django.db.models import Q
 
 from parler.admin import TranslatableAdmin
 from mptt.admin import DraggableMPTTAdmin
+from filer.models import File
 from io import BytesIO
 from pyexcel_xlsx import get_data
 import pyexcel
@@ -111,17 +113,20 @@ class ProductAdmin(admin.ModelAdmin):
                         'available_in_stock': product.get('available_in_stock'),
                     }
                     # Images also
-                    if product.get('image_0'):
-                        image_0 = 'products/' + product.get('image_0')
-                        kwargs.update({'image_0': image_0})
+                    image_0_filename = product.get('image_0')
+                    if image_0_filename:
+                        image_0_file = File.objects.get(Q(original_filename=image_0_filename) | Q(original_filename__startswith=image_0_filename))
+                        kwargs.update({'image_0': image_0_file})
 
-                    if product.get('image_1'):
-                        image_1 = 'products/' + product.get('image_1')
-                        kwargs.update({'image_1': image_1})
+                    image_1_filename = product.get('image_1')
+                    if image_1_filename:
+                        image_1_file = File.objects.get(Q(original_filename=image_1_filename) | Q(original_filename__startswith=image_1_filename))
+                        kwargs.update({'image_1': image_1_file})
 
-                    if product.get('image_2'):
-                        image_2 = 'products/' + product.get('image_2')
-                        kwargs.update({'image_2': image_2})
+                    image_2_filename = product.get('image_2')
+                    if image_2_filename:
+                        image_2_file = File.objects.get(Q(original_filename=image_2_filename) | Q(original_filename__startswith=image_2_filename))
+                        kwargs.update({'image_2': image_2_file})
 
                     product_objects = Product.objects
                     product_instance = product_objects.filter(name__exact=name.strip())
@@ -136,9 +141,12 @@ class ProductAdmin(admin.ModelAdmin):
                         'price': product.get('price'),
                         'quantity': product.get('inventory'),
                         'product_id': product_instance.pk,
-                        'color_id': product.get('color')
                     }
-                    variations = Variation.objects.filter(product_id=product_instance.pk, color_id=product.get('color'))
+                    if product.get('color'):
+                        variation_kwargs.update({
+                            'color_id': product.get('color')
+                        })
+                    variations = Variation.objects.filter(product_id=product_instance.pk, name=product.get('size'))
                     if variations.exists():
                         variations.update(**variation_kwargs)
                     else:
@@ -189,9 +197,9 @@ class ProductAdmin(admin.ModelAdmin):
                     variation.product.description,
                     variation.product.characters,
                     variation.product.owner.merchant.id,
-                    variation.product.image_0.name.replace('products/', ''),
-                    variation.product.image_1.name.replace('products/', ''),
-                    variation.product.image_2.name.replace('products/', ''),
+                    variation.product.image_0.original_filename if variation.product.image_0 else '',
+                    variation.product.image_1.original_filename if variation.product.image_1 else '',
+                    variation.product.image_2.original_filename if variation.product.image_2 else '',
                     variation.product.is_top * 1,
                     variation.product.is_recommended * 1,
                     variation.product.available_in_stock * 1,

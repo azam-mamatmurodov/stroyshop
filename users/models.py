@@ -77,7 +77,7 @@ class Client(models.Model):
     delivery_address = models.ForeignKey('DeliveryAddress', blank=True, null=True)
 
     def __str__(self):
-        return "{}".format(self.user.username)
+        return "{}".format(self.user.get_full_name())
 
 
 class Merchant(models.Model):

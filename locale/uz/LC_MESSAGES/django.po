@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-27 16:58+0500\n"
+"POT-Creation-Date: 2018-05-08 18:51+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -62,15 +62,15 @@ msgstr "Buyurtma"
 msgid "Security"
 msgstr "Xavfsizlik"
 
-#: main/context.py:112 templates/pages/accounts/delivery.html:4
-#: templates/pages/accounts/delivery.html:11 templates/parts/header.html:26
+#: main/context.py:112 templates/pages/accounts/delivery.html:6
+#: templates/pages/accounts/delivery.html:13 templates/parts/header.html:26
 #, fuzzy
 #| msgid "Email address"
 msgid "Delivery address"
 msgstr "Email manzil"
 
-#: main/context.py:118 main/context.py:170 products/models.py:36
-#: products/models.py:122
+#: main/context.py:118 main/context.py:170 products/models.py:34
+#: products/models.py:120
 msgid "Category"
 msgstr "Toifa"
 
@@ -86,25 +86,32 @@ msgstr "Savatcha"
 msgid "Order info"
 msgstr "Buyurtma"
 
-#: main/context.py:195 templates/pages/cart.html:90
-#: templates/parts/header.html:105
+#: main/context.py:195 templates/pages/cart.html:91
+#: templates/parts/header.html:82 templates/rest/cart.html:27
 msgid "Checkout"
 msgstr "Tekshirib ko'rmoq"
 
-#: main/context.py:200 templates/pages/search.html:4
+#: main/context.py:200 templates/admin/filer/folder/directory_listing.html:160
+#: templates/pages/search.html:4
 #, fuzzy
 #| msgid "Search product"
 msgid "Search"
 msgstr "Mahsulotni qidirish"
 
+#: main/context.py:211
+msgid ""
+"Tashkent, Yashnabad district, st. Tinchlik / 1-quarter, 1-house, 1-kvart"
+msgstr ""
+
 #: main/models.py:10 main/models.py:23 main/models.py:36 main/models.py:49
-#: main/models.py:63 main/models.py:81 products/models.py:21
-#: products/models.py:53 templates/pages/accounts/settings.html:18
+#: main/models.py:63 main/models.py:81 products/models.py:19
+#: products/models.py:51 templates/admin/filer/folder/directory_table.html:13
+#: templates/pages/accounts/settings.html:18
 msgid "Name"
 msgstr "Ism"
 
 #: main/models.py:11 main/models.py:24 main/models.py:37 main/models.py:50
-#: main/models.py:64 main/models.py:82 products/models.py:22
+#: main/models.py:64 main/models.py:82 products/models.py:20
 msgid "Slug"
 msgstr "Slug"
 
@@ -112,159 +119,159 @@ msgstr "Slug"
 msgid "Order"
 msgstr "Buyurtma"
 
-#: main/models.py:51 main/models.py:65 main/models.py:87 products/models.py:66
+#: main/models.py:51 main/models.py:65 main/models.py:87 products/models.py:64
 msgid "Image"
 msgstr "Rasm"
 
-#: orders/models.py:12 templates/pages/product_detail.html:66
+#: orders/models.py:13 templates/pages/product_detail.html:66
 #: templates/pages/product_detail.html:259
 #: templates/pages/product_detail.html:287
 msgid "Available"
 msgstr "mavjud"
 
-#: orders/models.py:13
+#: orders/models.py:14
 msgid "Awaiting Payment"
 msgstr "To'lovni kutish"
 
-#: orders/models.py:14
+#: orders/models.py:15
 #, fuzzy
 #| msgid "Payment method"
 msgid "Payment completed"
 msgstr "To'lov uslubi"
 
-#: orders/models.py:15
+#: orders/models.py:16
 msgid "Cancelled"
 msgstr "Bekor qilindi"
 
-#: orders/models.py:16 templates/pages/invoice.html:30
+#: orders/models.py:17 templates/pages/invoice.html:30
 msgid "Delivered"
 msgstr "Yetkazildi"
 
-#: orders/models.py:19 templates/pages/checkout.html:45
+#: orders/models.py:20 templates/pages/checkout.html:24
 #: templates/pages/invoice.html:65 templates/pages/order_detail.html:33
 #, fuzzy
 #| msgid "Client user"
 msgid "Client name"
 msgstr "Mijoz foydalanuvchi"
 
-#: orders/models.py:20
+#: orders/models.py:21
 msgid "Phone number"
 msgstr "Telefon raqami"
 
-#: orders/models.py:21 templates/pages/checkout.html:79
+#: orders/models.py:22 templates/pages/checkout.html:62
 #: templates/pages/invoice.html:52 templates/pages/order_detail.html:37
 #, fuzzy
 #| msgid "Email address"
 msgid "Shipping address"
 msgstr "Email manzil"
 
-#: orders/models.py:25 templates/pages/invoice.html:17
+#: orders/models.py:26 templates/pages/invoice.html:17
 #, fuzzy
 #| msgid "Order"
 msgid "Order Id"
 msgstr "Buyurtma"
 
-#: orders/models.py:59
+#: orders/models.py:60
 msgid "Cart item"
 msgstr "Savatdagi narsa"
 
-#: orders/models.py:60 templates/pages/cart.html:13
+#: orders/models.py:61 templates/pages/cart.html:13
 msgid "Cart items"
 msgstr "Savatdagi narsalar"
 
-#: products/admin.py:40 products/models.py:89
+#: products/admin.py:42 products/models.py:87
 #: templates/pages/product_detail.html:80
 msgid "Color"
 msgstr "Rang"
 
-#: products/models.py:37
+#: products/models.py:35
 msgid "Categories"
 msgstr "Toifalar"
 
-#: products/models.py:54
+#: products/models.py:52
 msgid "Logo"
 msgstr "Emblema"
 
-#: products/models.py:58 products/models.py:123
+#: products/models.py:56 products/models.py:121
 msgid "Brand"
 msgstr "Tovar"
 
-#: products/models.py:59 templates/pages/product_list.html:30
+#: products/models.py:57 templates/pages/product_list.html:30
 msgid "Brands"
 msgstr "Tovarlar"
 
-#: products/models.py:67 products/models.py:106 products/models.py:181
+#: products/models.py:65 products/models.py:104 products/models.py:179
 #: templates/pages/cart.html:18
 msgid "Product"
 msgstr "Mahsulot"
 
-#: products/models.py:90
+#: products/models.py:88
 msgid "Colors"
 msgstr "Ranglar"
 
-#: products/models.py:104 products/models.py:131 templates/pages/cart.html:21
+#: products/models.py:102 products/models.py:129 templates/pages/cart.html:21
 #: templates/pages/invoice.html:39
 msgid "Price"
 msgstr "Narx"
 
-#: products/models.py:105 templates/pages/accounts/orders.html:56
+#: products/models.py:103 templates/pages/accounts/orders.html:56
 #: templates/pages/cart.html:20 templates/pages/invoice.html:40
 msgid "Quantity"
 msgstr "Miqdor"
 
-#: products/models.py:116
+#: products/models.py:114
 msgid "Variation"
 msgstr "O'zgarish"
 
-#: products/models.py:117
+#: products/models.py:115
 msgid "Variations"
 msgstr "O'zgarishlar"
 
-#: products/models.py:121
+#: products/models.py:119
 #, fuzzy
 #| msgid "First name"
 msgid "Product name"
 msgstr "Ism"
 
-#: products/models.py:124 templates/pages/product_detail.html:111
+#: products/models.py:122 templates/pages/product_detail.html:111
 msgid "Description"
 msgstr "Ta'rif"
 
-#: products/models.py:125 templates/pages/product_detail.html:105
+#: products/models.py:123 templates/pages/product_detail.html:105
 msgid "Characters"
 msgstr "Belgilar"
 
-#: products/models.py:126
+#: products/models.py:124
 msgid "Product Owner"
 msgstr "Mahsulot sohibi"
 
-#: products/models.py:127
+#: products/models.py:125
 msgid "Volume type"
 msgstr "Hajm turi"
 
-#: products/models.py:129
+#: products/models.py:127
 msgid "Available in stock"
 msgstr "Omborda mavjud"
 
-#: products/models.py:130
+#: products/models.py:128
 msgid "Is recommended"
 msgstr "Tavsiya etildimi"
 
-#: products/models.py:134
+#: products/models.py:132
 #, fuzzy
 #| msgid "First name"
 msgid "First image"
 msgstr "Birinchi rasm"
 
-#: products/models.py:135
+#: products/models.py:133
 msgid "Second image"
 msgstr "Ikkinchi rasm"
 
-#: products/models.py:136
+#: products/models.py:134
 msgid "Third image"
 msgstr "Uchunchi rasm"
 
-#: products/models.py:182
+#: products/models.py:180
 msgid "Products"
 msgstr "Mahsulotlar"
 
@@ -308,39 +315,688 @@ msgstr "Narx"
 msgid "All"
 msgstr "Hammasi"
 
-#: project/settings.py:211
+#: project/settings.py:222
 msgid "KG"
 msgstr "Kg"
 
-#: project/settings.py:212
+#: project/settings.py:223
 msgid "Litr"
 msgstr "Litr"
 
-#: rest_app/views.py:64
+#: project/settings.py:331
+#, fuzzy
+#| msgid "Registration"
+msgid "Administration"
+msgstr "Ro'yxatdan o'tish"
+
+#: rest_app/views.py:67
 msgid "Cart successfully updated"
 msgstr "Savatcha muvvafaqiyatli yangilandi"
 
-#: rest_app/views.py:67
+#: rest_app/views.py:70
 msgid "Successful added"
 msgstr "Muvvafaqiyatli qo'shildi"
 
-#: rest_app/views.py:103 templates/pages/cart.html:198
+#: rest_app/views.py:106 templates/base.html:260
 msgid "Successful removed"
 msgstr "Muvvafaqiyatli o'chirildi"
 
-#: rest_app/views.py:128
+#: rest_app/views.py:131
 msgid "Successful saved"
 msgstr "Muvvafaqiyatli saqlandi"
+
+#: templates/admin/filer/actions.html:5
+msgid "Run the selected action"
+msgstr ""
+
+#: templates/admin/filer/actions.html:5
+msgid "Go"
+msgstr ""
+
+#: templates/admin/filer/actions.html:14
+#: templates/admin/filer/folder/directory_table.html:218
+msgid "Click here to select the objects across all pages"
+msgstr ""
+
+#: templates/admin/filer/actions.html:14
+#, python-format
+msgid "Select all %(total_count)s files and/or folders"
+msgstr ""
+
+#: templates/admin/filer/actions.html:16
+#: templates/admin/filer/folder/directory_table.html:220
+msgid "Clear selection"
+msgstr ""
+
+#: templates/admin/filer/breadcrumbs.html:4
+#: templates/admin/filer/folder/directory_listing.html:42
+msgid "Go back to admin homepage"
+msgstr ""
+
+#: templates/admin/filer/breadcrumbs.html:4
+#: templates/admin/filer/folder/change_form.html:6
+#: templates/admin/filer/folder/directory_listing.html:43
+#, fuzzy
+#| msgid "Home"
+msgid "Home"
+msgstr "Bosh sahifa"
+
+#: templates/admin/filer/breadcrumbs.html:5
+#: templates/admin/filer/folder/directory_listing.html:46
+msgid "Go back to Filer app"
+msgstr ""
+
+#: templates/admin/filer/breadcrumbs.html:5
+#: templates/admin/filer/folder/change_form.html:7
+#: templates/admin/filer/folder/directory_listing.html:47
+#, fuzzy
+#| msgid "File"
+msgid "Filer"
+msgstr "Fayl"
+
+#: templates/admin/filer/breadcrumbs.html:7
+#: templates/admin/filer/folder/directory_listing.html:51
+msgid "Go back to root folder"
+msgstr ""
+
+#: templates/admin/filer/breadcrumbs.html:7
+#: templates/admin/filer/folder/change_form.html:8
+#: templates/admin/filer/folder/directory_listing.html:51
+#: templates/admin/filer/folder/directory_listing.html:118
+msgid "root"
+msgstr ""
+
+#: templates/admin/filer/breadcrumbs.html:10
+#: templates/admin/filer/breadcrumbs.html:20
+#: templates/admin/filer/folder/change_form.html:10
+#: templates/admin/filer/folder/directory_listing.html:56
+#: templates/admin/filer/folder/directory_listing.html:63
+#, python-format
+msgid "Go back to '%(folder_name)s' folder"
+msgstr ""
+
+#: templates/admin/filer/change_form.html:25
+msgid "Duplicates"
+msgstr ""
+
+#: templates/admin/filer/delete_selected_files_confirmation.html:11
+msgid ""
+"Deleting the selected files and/or folders would result in deleting related "
+"objects, but your account doesn't have permission to delete the following "
+"types of objects:"
+msgstr ""
+
+#: templates/admin/filer/delete_selected_files_confirmation.html:19
+msgid ""
+"Deleting the selected files and/or folders would require deleting the "
+"following protected related objects:"
+msgstr ""
+
+#: templates/admin/filer/delete_selected_files_confirmation.html:27
+msgid ""
+"Are you sure you want to delete the selected files and/or folders? All of "
+"the following objects and their related items will be deleted:"
+msgstr ""
+
+#: templates/admin/filer/delete_selected_files_confirmation.html:46
+#: templates/admin/filer/folder/choose_copy_destination.html:77
+#: templates/admin/filer/folder/choose_move_destination.html:73
+msgid "No, take me back"
+msgstr ""
+
+#: templates/admin/filer/delete_selected_files_confirmation.html:47
+msgid "Yes, I&#39;m sure"
+msgstr ""
+
+#: templates/admin/filer/file/change_form.html:37
+#: templates/admin/filer/folder/change_form.html:21
+#: templates/admin/filer/image/change_form.html:36
+msgid "History"
+msgstr ""
+
+#: templates/admin/filer/file/change_form.html:39
+#: templates/admin/filer/folder/change_form.html:23
+#: templates/admin/filer/image/change_form.html:38
+msgid "View on site"
+msgstr ""
+
+#: templates/admin/filer/folder/change_form.html:6
+#: templates/admin/filer/folder/change_form.html:7
+#: templates/admin/filer/folder/change_form.html:8
+#: templates/admin/filer/folder/directory_listing.html:118
+msgid "Go back to"
+msgstr ""
+
+#: templates/admin/filer/folder/change_form.html:6
+#, fuzzy
+#| msgid "Home"
+msgid "admin homepage"
+msgstr "Bosh sahifa"
+
+#: templates/admin/filer/folder/change_form.html:8
+#: templates/admin/filer/folder/directory_listing.html:118
+#: templates/admin/filer/folder/new_folder_form.html:4
+#: templates/admin/filer/folder/new_folder_form.html:7
+#: templates/admin/filer/tools/clipboard/clipboard.html:27
+msgid "folder"
+msgstr ""
+
+#: templates/admin/filer/folder/change_form.html:37
+#: templates/admin/filer/folder/directory_listing.html:111
+#: templates/admin/filer/folder/directory_listing.html:119
+#: templates/admin/filer/folder/directory_table.html:26
+#: templates/admin/filer/folder/directory_table.html:56
+#: templates/admin/filer/folder/directory_table.html:164
+msgid "Folder Icon"
+msgstr ""
+
+#: templates/admin/filer/folder/choose_copy_destination.html:36
+msgid ""
+"Your account doesn't have permissions to copy all of the selected files and/"
+"or folders."
+msgstr ""
+
+#: templates/admin/filer/folder/choose_copy_destination.html:38
+#: templates/admin/filer/folder/choose_copy_destination.html:44
+#: templates/admin/filer/folder/choose_copy_destination.html:50
+#: templates/admin/filer/folder/choose_move_destination.html:38
+#: templates/admin/filer/folder/choose_move_destination.html:44
+#: templates/admin/filer/folder/choose_move_destination.html:50
+msgid "Take me back"
+msgstr ""
+
+#: templates/admin/filer/folder/choose_copy_destination.html:42
+#: templates/admin/filer/folder/choose_move_destination.html:42
+msgid "There are no destination folders available."
+msgstr ""
+
+#: templates/admin/filer/folder/choose_copy_destination.html:48
+msgid "There are no files and/or folders available to copy."
+msgstr ""
+
+#: templates/admin/filer/folder/choose_copy_destination.html:53
+msgid ""
+"The following files and/or folders will be copied to a destination folder "
+"(retaining their tree structure):"
+msgstr ""
+
+#: templates/admin/filer/folder/choose_copy_destination.html:67
+#: templates/admin/filer/folder/choose_move_destination.html:65
+msgid "Destination folder:"
+msgstr ""
+
+#: templates/admin/filer/folder/choose_copy_destination.html:78
+#: templates/admin/filer/folder/choose_copy_destination.html:81
+#: templates/admin/filer/folder/directory_listing.html:194
+msgid "Copy"
+msgstr ""
+
+#: templates/admin/filer/folder/choose_copy_destination.html:80
+msgid "It is not allowed to copy files into same folder"
+msgstr ""
+
+#: templates/admin/filer/folder/choose_images_resize_options.html:15
+msgid ""
+"Your account doesn't have permissions to resize all of the selected images."
+msgstr ""
+
+#: templates/admin/filer/folder/choose_images_resize_options.html:18
+msgid "There are no images available to resize."
+msgstr ""
+
+#: templates/admin/filer/folder/choose_images_resize_options.html:20
+msgid "The following images will be resized:"
+msgstr ""
+
+#: templates/admin/filer/folder/choose_images_resize_options.html:33
+msgid "Choose an existing thumbnail option or enter resize parameters:"
+msgstr ""
+
+#: templates/admin/filer/folder/choose_images_resize_options.html:35
+msgid "Choose resize parameters:"
+msgstr ""
+
+#: templates/admin/filer/folder/choose_images_resize_options.html:38
+msgid ""
+"Warning: Images will be resized in-place and originals will be lost. Maybe "
+"first make a copy of them to retain the originals."
+msgstr ""
+
+#: templates/admin/filer/folder/choose_images_resize_options.html:41
+msgid "Resize"
+msgstr ""
+
+#: templates/admin/filer/folder/choose_move_destination.html:36
+msgid ""
+"Your account doesn't have permissions to move all of the selected files and/"
+"or folders."
+msgstr ""
+
+#: templates/admin/filer/folder/choose_move_destination.html:48
+msgid "There are no files and/or folders available to move."
+msgstr ""
+
+#: templates/admin/filer/folder/choose_move_destination.html:53
+msgid ""
+"The following files and/or folders will be moved to a destination folder "
+"(retaining their tree structure):"
+msgstr ""
+
+#: templates/admin/filer/folder/choose_move_destination.html:74
+#: templates/admin/filer/folder/choose_move_destination.html:77
+#: templates/admin/filer/folder/directory_listing.html:197
+msgid "Move"
+msgstr ""
+
+#: templates/admin/filer/folder/choose_move_destination.html:76
+msgid "It is not allowed to move files into same folder"
+msgstr ""
+
+#: templates/admin/filer/folder/choose_rename_format.html:15
+msgid ""
+"Your account doesn't have permissions to rename all of the selected files."
+msgstr ""
+
+#: templates/admin/filer/folder/choose_rename_format.html:18
+msgid "There are no files available to rename."
+msgstr ""
+
+#: templates/admin/filer/folder/choose_rename_format.html:20
+msgid ""
+"The following files will be renamed (they will stay in their folders and "
+"keep original filename, only displayed filename will be changed):"
+msgstr ""
+
+#: templates/admin/filer/folder/choose_rename_format.html:59
+msgid "Rename"
+msgstr ""
+
+#: templates/admin/filer/folder/directory_listing.html:110
+msgid "Go back to the parent folder"
+msgstr ""
+
+#: templates/admin/filer/folder/directory_listing.html:147
+msgid "Change current folder details"
+msgstr ""
+
+#: templates/admin/filer/folder/directory_listing.html:147
+msgid "Change"
+msgstr ""
+
+#: templates/admin/filer/folder/directory_listing.html:157
+msgid "Click here to run search for entered phrase"
+msgstr ""
+
+#: templates/admin/filer/folder/directory_listing.html:167
+msgid "Close"
+msgstr ""
+
+#: templates/admin/filer/folder/directory_listing.html:169
+msgid "Limit"
+msgstr ""
+
+#: templates/admin/filer/folder/directory_listing.html:174
+msgid "Check it to limit the search to current folder"
+msgstr ""
+
+#: templates/admin/filer/folder/directory_listing.html:175
+msgid "Limit the search to current folder"
+msgstr ""
+
+#: templates/admin/filer/folder/directory_listing.html:191
+#: templates/admin/filer/tools/detail_info.html:213
+msgid "Delete"
+msgstr "O'chirish"
+
+#: templates/admin/filer/folder/directory_listing.html:214
+msgid "Adds a new Folder"
+msgstr ""
+
+#: templates/admin/filer/folder/directory_listing.html:217
+msgid "New Folder"
+msgstr ""
+
+#: templates/admin/filer/folder/directory_listing.html:222
+#: templates/admin/filer/folder/directory_listing.html:226
+#: templates/admin/filer/folder/directory_listing.html:229
+#: templates/admin/filer/folder/directory_listing.html:233
+#: templates/admin/filer/folder/directory_listing.html:240
+msgid "Upload Files"
+msgstr ""
+
+#: templates/admin/filer/folder/directory_listing.html:238
+msgid "You have to select a folder first"
+msgstr ""
+
+#: templates/admin/filer/folder/directory_table.html:4
+#: templates/admin/filer/folder/directory_table.html:157
+#: templates/admin/filer/tools/clipboard/clipboard.html:27
+msgid "Unsorted Uploads"
+msgstr ""
+
+#: templates/admin/filer/folder/directory_table.html:14
+#: templates/admin/filer/tools/detail_info.html:59
+#: templates/admin/filer/tools/detail_info.html:150
+msgid "Owner"
+msgstr ""
+
+#: templates/admin/filer/folder/directory_table.html:15
+#: templates/admin/filer/tools/detail_info.html:38
+#: templates/admin/filer/tools/detail_info.html:102
+msgid "Size"
+msgstr ""
+
+#: templates/admin/filer/folder/directory_table.html:16
+#, fuzzy
+#| msgid "Active"
+msgid "Action"
+msgstr "Faol"
+
+#: templates/admin/filer/folder/directory_table.html:25
+#: templates/admin/filer/folder/directory_table.html:32
+#: templates/admin/filer/folder/directory_table.html:55
+#: templates/admin/filer/folder/directory_table.html:62
+#, python-format
+msgid "Change '%(item_label)s' folder details"
+msgstr ""
+
+#: templates/admin/filer/folder/directory_table.html:73
+#: templates/admin/filer/tools/search_form.html:5
+#, python-format
+msgid "%(counter)s folder"
+msgid_plural "%(counter)s folders"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/admin/filer/folder/directory_table.html:74
+#: templates/admin/filer/tools/search_form.html:6
+#, python-format
+msgid "%(counter)s file"
+msgid_plural "%(counter)s files"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/admin/filer/folder/directory_table.html:80
+msgid "Change folder details"
+msgstr ""
+
+#: templates/admin/filer/folder/directory_table.html:81
+#, fuzzy
+#| msgid "Remove"
+msgid "Remove folder"
+msgstr "O'chirish"
+
+#: templates/admin/filer/folder/directory_table.html:93
+#: templates/admin/filer/folder/directory_table.html:101
+#: templates/admin/filer/folder/directory_table.html:116
+msgid "Select this file"
+msgstr ""
+
+#: templates/admin/filer/folder/directory_table.html:104
+#: templates/admin/filer/folder/directory_table.html:119
+#: templates/admin/filer/folder/directory_table.html:143
+#, python-format
+msgid "Change '%(item_label)s' details"
+msgstr ""
+
+#: templates/admin/filer/folder/directory_table.html:128 users/admin.py:19
+msgid "Permissions"
+msgstr "Ruxsatlar"
+
+#: templates/admin/filer/folder/directory_table.html:128
+msgid "disabled"
+msgstr ""
+
+#: templates/admin/filer/folder/directory_table.html:128
+msgid "enabled"
+msgstr ""
+
+#: templates/admin/filer/folder/directory_table.html:139
+#, python-format
+msgid "Canonical url '%(item_label)s'"
+msgstr ""
+
+#: templates/admin/filer/folder/directory_table.html:141
+#, python-format
+msgid "Download '%(item_label)s'"
+msgstr ""
+
+#: templates/admin/filer/folder/directory_table.html:144
+#, fuzzy
+#| msgid "Remove"
+msgid "Remove file"
+msgstr "O'chirish"
+
+#: templates/admin/filer/folder/directory_table.html:151
+msgid "Drop files here or use the \"Upload Files\" button"
+msgstr ""
+
+#: templates/admin/filer/folder/directory_table.html:161
+msgid "Drop your file to upload into:"
+msgstr ""
+
+#: templates/admin/filer/folder/directory_table.html:171
+msgid "Upload"
+msgstr ""
+
+#: templates/admin/filer/folder/directory_table.html:183
+#, fuzzy
+#| msgid "Cancelled"
+msgid "cancel"
+msgstr "Bekor qilindi"
+
+#: templates/admin/filer/folder/directory_table.html:187
+msgid "Upload success!"
+msgstr ""
+
+#: templates/admin/filer/folder/directory_table.html:191
+msgid "Upload canceled!"
+msgstr ""
+
+#: templates/admin/filer/folder/directory_table.html:198
+msgid "previous"
+msgstr ""
+
+#: templates/admin/filer/folder/directory_table.html:203
+#, python-format
+msgid "Page %(number)s of %(num_pages)s."
+msgstr ""
+
+#: templates/admin/filer/folder/directory_table.html:208
+msgid "next"
+msgstr ""
+
+#: templates/admin/filer/folder/directory_table.html:218
+#, python-format
+msgid "Select all %(total_count)s"
+msgstr ""
+
+#: templates/admin/filer/folder/new_folder_form.html:4
+#: templates/admin/filer/folder/new_folder_form.html:7
+#, fuzzy
+#| msgid "Add new payment"
+msgid "Add new"
+msgstr "Yangi to'lov qo'shish"
+
+#: templates/admin/filer/folder/new_folder_form.html:4
+msgid "Django site admin"
+msgstr ""
+
+#: templates/admin/filer/folder/new_folder_form.html:15
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/admin/filer/folder/new_folder_form.html:30
+#: templates/pages/accounts/settings.html:20
+#: templates/pages/accounts/settings.html:31
+#: templates/pages/accounts/settings.html:42
+#: templates/pages/accounts/settings.html:54
+#: templates/pages/accounts/settings.html:67
+msgid "Save"
+msgstr "Saqlash"
+
+#: templates/admin/filer/tools/clipboard/clipboard.html:9
+msgid "Clipboard"
+msgstr ""
+
+#: templates/admin/filer/tools/clipboard/clipboard.html:21
+msgid "Paste all items here"
+msgstr ""
+
+#: templates/admin/filer/tools/clipboard/clipboard.html:27
+msgid "Move all clipboard files to"
+msgstr ""
+
+#: templates/admin/filer/tools/clipboard/clipboard.html:27
+msgid "Empty Clipboard"
+msgstr ""
+
+#: templates/admin/filer/tools/clipboard/clipboard.html:50
+msgid "the clipboard is empty"
+msgstr ""
+
+#: templates/admin/filer/tools/clipboard/clipboard_item_rows.html:16
+msgid "upload failed"
+msgstr ""
+
+#: templates/admin/filer/tools/detail_info.html:22
+msgid "Open file"
+msgstr ""
+
+#: templates/admin/filer/tools/detail_info.html:24
+#: templates/admin/filer/tools/detail_info.html:86
+msgid "Full size preview"
+msgstr ""
+
+#: templates/admin/filer/tools/detail_info.html:34
+#: templates/admin/filer/tools/detail_info.html:93
+msgid "Type"
+msgstr ""
+
+#: templates/admin/filer/tools/detail_info.html:42
+#: templates/admin/filer/tools/detail_info.html:111
+#, fuzzy
+#| msgid "Files"
+msgid "File-size"
+msgstr "Fayllar"
+
+#: templates/admin/filer/tools/detail_info.html:46
+#: templates/admin/filer/tools/detail_info.html:120
+msgid "Modified"
+msgstr ""
+
+#: templates/admin/filer/tools/detail_info.html:50
+#: templates/admin/filer/tools/detail_info.html:129
+#, fuzzy
+#| msgid "Created at"
+msgid "Created"
+msgstr "Yaratilgan"
+
+#: templates/admin/filer/tools/detail_info.html:158
+#, fuzzy
+#| msgid "Description"
+msgid "Add Description"
+msgstr "Ta'rif"
+
+#: templates/admin/filer/tools/detail_info.html:166
+msgid "Advanced"
+msgstr ""
+
+#: templates/admin/filer/tools/detail_info.html:176
+msgid "Author"
+msgstr ""
+
+#: templates/admin/filer/tools/detail_info.html:183
+msgid "Add Alt-Text"
+msgstr ""
+
+#: templates/admin/filer/tools/detail_info.html:190
+#, fuzzy
+#| msgid "Add to cart"
+msgid "Add caption"
+msgstr "Savavatchaga qo'shish"
+
+#: templates/admin/filer/tools/detail_info.html:197
+msgid "Add Tags"
+msgstr ""
+
+#: templates/admin/filer/tools/detail_info.html:204
+msgid "Change File"
+msgstr ""
+
+#: templates/admin/filer/tools/search_form.html:5
+#, fuzzy
+#| msgid "Found"
+msgid "found"
+msgstr "Topildi"
+
+#: templates/admin/filer/tools/search_form.html:5
+#, fuzzy
+#| msgid "Brand"
+msgid "and"
+msgstr "Tovar"
+
+#: templates/admin/filer/tools/search_form.html:7
+msgid "cancel search"
+msgstr ""
+
+#: templates/admin/filer/widgets/admin_file.html:8
+#: templates/admin/filer/widgets/admin_file.html:35
+#: templates/admin/filer/widgets/admin_folder.html:18
+msgid "Clear"
+msgstr ""
+
+#: templates/admin/filer/widgets/admin_file.html:17
+msgid "or drop your file here"
+msgstr ""
+
+#: templates/admin/filer/widgets/admin_file.html:26
+#: templates/admin/filer/widgets/admin_file.html:27
+#, fuzzy
+#| msgid "Permissions"
+msgid "file missing"
+msgstr "Ruxsatlar"
+
+#: templates/admin/filer/widgets/admin_file.html:30
+msgid "no file selected"
+msgstr ""
+
+#: templates/admin/filer/widgets/admin_file.html:39
+#: templates/admin/filer/widgets/admin_folder.html:14
+msgid "Lookup"
+msgstr ""
+
+#: templates/admin/filer/widgets/admin_file.html:40
+#, fuzzy
+#| msgid "Choose category"
+msgid "Choose File"
+msgstr "Kategoriya tanlang"
+
+#: templates/admin/filer/widgets/admin_folder.html:7
+#: templates/admin/filer/widgets/admin_folder.html:33
+msgid "Folder"
+msgstr ""
+
+#: templates/admin/filer/widgets/admin_folder.html:11
+#: templates/admin/filer/widgets/admin_folder.html:33
+msgid "none selected"
+msgstr ""
+
+#: templates/admin/filer/widgets/admin_folder.html:15
+msgid "Add Folder"
+msgstr ""
 
 #: templates/admin/products/change_list.html:7
 msgid "File browser"
 msgstr "Fayl brauzer"
 
-#: templates/admin/products/change_list.html:12
+#: templates/admin/products/change_list.html:11
 msgid "Export"
 msgstr "Eksport"
 
-#: templates/admin/products/change_list.html:17
+#: templates/admin/products/change_list.html:15
 msgid "Import"
 msgstr "Import"
 
@@ -351,19 +1007,19 @@ msgstr "Import"
 msgid "Not available"
 msgstr "Mavjud emas"
 
-#: templates/pages/accounts/delivery.html:15
-#: templates/pages/accounts/delivery.html:45
+#: templates/pages/accounts/delivery.html:17
+#: templates/pages/accounts/delivery.html:47
 #, fuzzy
 #| msgid "Email address"
 msgid "Add an address"
 msgstr "Email manzil"
 
-#: templates/pages/accounts/delivery.html:21
-#: templates/pages/accounts/payments.html:15 templates/pages/checkout.html:26
+#: templates/pages/accounts/delivery.html:23
+#: templates/pages/accounts/payments.html:15 templates/pages/checkout.html:82
 msgid "Default"
 msgstr "Standart"
 
-#: templates/pages/accounts/delivery.html:32
+#: templates/pages/accounts/delivery.html:34
 #: templates/pages/accounts/payments.html:15
 #: templates/pages/accounts/payments.html:61
 #: templates/pages/accounts/settings.html:20
@@ -375,17 +1031,17 @@ msgstr "Standart"
 msgid "Edit"
 msgstr "Kiritish"
 
-#: templates/pages/accounts/delivery.html:33
+#: templates/pages/accounts/delivery.html:35
 #: templates/pages/accounts/payments.html:62
 msgid "Remove"
 msgstr "O'chirish"
 
-#: templates/pages/accounts/delivery.html:77
+#: templates/pages/accounts/delivery.html:82
 #: templates/pages/accounts/payments.html:126
 msgid "Is default"
 msgstr "Standartmi?"
 
-#: templates/pages/accounts/delivery.html:81
+#: templates/pages/accounts/delivery.html:86
 #: templates/pages/accounts/payments.html:128
 #: templates/pages/accounts/payments_edit.html:17
 msgid "Submit"
@@ -424,13 +1080,13 @@ msgstr "Jami"
 
 #: templates/pages/accounts/orders.html:22
 #: templates/pages/accounts/orders.html:54 templates/pages/cart.html:73
-#: templates/pages/cart.html:77 templates/pages/cart.html:89
+#: templates/pages/cart.html:78 templates/pages/cart.html:90
 #: templates/pages/checkout.html:13 templates/pages/invoice.html:18
 #: templates/pages/main.html:70 templates/pages/order_detail.html:46
 #: templates/pages/product_detail.html:31
 #: templates/pages/product_detail.html:61 templates/pages/product_list.html:64
 #: templates/pages/product_list.html:130 templates/parts/header.html:73
-#: templates/parts/header.html:89 templates/parts/header.html:94
+#: templates/rest/cart.html:16 templates/rest/cart.html:23
 msgid "sum"
 msgstr "so'm"
 
@@ -441,7 +1097,7 @@ msgid "Deliver to"
 msgstr "Yetkazildi"
 
 #: templates/pages/accounts/orders.html:35
-#: templates/pages/accounts/register.html:46 templates/pages/checkout.html:63
+#: templates/pages/accounts/register.html:46 templates/pages/checkout.html:42
 #: templates/pages/invoice.html:66 templates/pages/order_detail.html:34
 #: templates/parts/footer.html:178
 msgid "Phone"
@@ -548,14 +1204,6 @@ msgstr "Ism"
 msgid "Confirm password"
 msgstr "Parolni tasdiqlash"
 
-#: templates/pages/accounts/settings.html:20
-#: templates/pages/accounts/settings.html:31
-#: templates/pages/accounts/settings.html:42
-#: templates/pages/accounts/settings.html:54
-#: templates/pages/accounts/settings.html:67
-msgid "Save"
-msgstr "Saqlash"
-
 #: templates/pages/accounts/settings.html:29 templates/parts/footer.html:160
 #: users/forms.py:21 users/models.py:56
 msgid "Last name"
@@ -581,13 +1229,13 @@ msgstr "Parol"
 msgid "Title"
 msgstr "Sarlavha"
 
-#: templates/pages/cart.html:22 templates/pages/cart.html:88
+#: templates/pages/cart.html:22 templates/pages/cart.html:89
 #: templates/pages/invoice.html:18 templates/pages/invoice.html:41
 #: templates/pages/invoice.html:67 templates/pages/order_detail.html:35
 msgid "Total price"
 msgstr "Umumiy baho"
 
-#: templates/pages/checkout.html:5 templates/pages/checkout.html:20
+#: templates/pages/checkout.html:5 templates/pages/checkout.html:76
 #, fuzzy
 #| msgid "Email address"
 msgid "My delivery addresses"
@@ -597,7 +1245,7 @@ msgstr "Email manzil"
 msgid "Total amount of order"
 msgstr "Buyurtmaning umumiy miqdori"
 
-#: templates/pages/checkout.html:18
+#: templates/pages/checkout.html:18 templates/parts/footer.html:130
 #, fuzzy
 #| msgid "more"
 msgid "or"
@@ -607,7 +1255,7 @@ msgstr "ko'proq"
 msgid "Continue as guest"
 msgstr "Mehmon sifatida davom eting"
 
-#: templates/pages/checkout.html:88
+#: templates/pages/checkout.html:72
 msgid "Continue"
 msgstr "Davom etish"
 
@@ -637,8 +1285,8 @@ msgid "Payment method"
 msgstr "To'lov uslubi"
 
 #: templates/pages/main.html:5
-msgid "Home"
-msgstr "Bosh sahifa"
+msgid "E-commerce"
+msgstr ""
 
 #: templates/pages/main.html:23
 msgid "Working with us very easy"
@@ -776,7 +1424,7 @@ msgstr "Mahsulotlar"
 msgid "more"
 msgstr "ko'proq"
 
-#: templates/parts/category_list.html:5 templates/parts/header.html:113
+#: templates/parts/category_list.html:5 templates/parts/header.html:90
 #, fuzzy
 #| msgid "Product categories"
 msgid "Product catalog"
@@ -842,13 +1490,19 @@ msgstr "Ortga"
 msgid "Next"
 msgstr "Keyingi"
 
+#: templates/rest/cart.html:22
+#, fuzzy
+#| msgid "Order"
+msgid "Order total"
+msgstr "Buyurtma"
+
+#: templates/rest/cart.html:26
+msgid "View cart"
+msgstr ""
+
 #: users/admin.py:18
 msgid "Personal info"
 msgstr "Shaxsiy ma'lumot"
-
-#: users/admin.py:19
-msgid "Permissions"
-msgstr "Ruxsatlar"
 
 #: users/admin.py:21
 msgid "Important dates"
@@ -940,9 +1594,6 @@ msgstr "Karta ma'lumotlari muvaffaqiyatli qo'shildi"
 
 #~ msgid "Filter"
 #~ msgstr "Filtr"
-
-#~ msgid "Delete"
-#~ msgstr "O'chirish"
 
 #~ msgid "Title z-a"
 #~ msgstr "z-a sarlavhasi"
