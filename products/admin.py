@@ -35,6 +35,10 @@ class ProductImageAdmin(admin.TabularInline):
 
 class ColorAdmin(TranslatableAdmin):
     list_display = ['id', 'name', 'get_color', ]
+    list_per_page = 100
+
+    def get_queryset(self, request):
+        return Color.objects.translated().order_by('translations__name')
 
     def get_color(self, obj):
         return '<div style="background:{}; width: 100px;">{}</div>'.format(obj.color, '&nbsp;')

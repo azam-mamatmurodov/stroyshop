@@ -42,6 +42,9 @@
 
     <div id="add_popup" class="{% if form.errors %}add-address-popup{% endif %}" style="display: {% if form.errors %}block{% else %}none{% endif %}">
         <form id="delivery_address_add" method="post">
+            {% if form.errors %}
+                {{ form.errors }}
+            {% endif %}
             <span class="close">x</span>
             {% csrf_token %}
             <h1>{% trans 'Add an address' %}</h1>
@@ -55,7 +58,11 @@
                 {% endif %}
             </div>
             <div class="form-group">
-                <input type="email" name="{{ form.email.name }}" placeholder="E-mail" value="{% if form.email.value %}{{ form.email.value }}{% endif %}">
+                <input
+                        type="email"
+                        name="{{ form.email.name }}"
+                        placeholder="E-mail"
+                        value="{% if form.email.value %}{{ form.email.value }}{% endif %}">
                 {% if form.email.errors %}
                     {{ form.email.errors }}
                 {% endif %}

@@ -1,20 +1,27 @@
 from django.contrib.humanize.templatetags import humanize
 from rest_framework import serializers
 
-from orders.models import Cart
+from orders.models import Cart, Order
 from products.models import Product, Variation
+from users.models import DeliveryAddress
 
 
 class CartSerializer(serializers.ModelSerializer):
+    total_weight = serializers.SerializerMethodField()
     total_price = serializers.SerializerMethodField()
 
     class Meta:
         model = Cart
         fields = '__all__'
+        extra_fields = ['weight', ]
 
     @staticmethod
     def get_total_price(obj):
         return format(int(obj.total_price), ",").replace(',', ' ')
+
+    @staticmethod
+    def get_total_weight(obj):
+        return obj.get_total_weight()
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -45,3 +52,17 @@ class VariationSerializer(serializers.ModelSerializer):
     @staticmethod
     def get_price(obj):
         return humanize.intcomma(int(obj.price))
+
+
+class OrderSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Order
+        exclude = ['state', 'products', ]
+
+
+class DeliveryAddressSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = DeliveryAddress
+        fields = '__all__'

@@ -80,7 +80,7 @@ class ProfileDeliveryView(generic.ListView, FormMixin):
     form_class = DeliveryAddressForm
 
     def get_queryset(self):
-        return self.model.objects.filter(user=self.request.user)
+        return self.model.objects.filter(user=self.request.user).order_by('-is_default')
 
     def post(self, request, *args, **kwargs):
         self.object_list = self.get_queryset()

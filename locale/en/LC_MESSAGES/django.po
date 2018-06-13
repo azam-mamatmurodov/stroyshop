@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-08 18:51+0500\n"
+"POT-Creation-Date: 2018-06-11 16:52+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,7 +34,7 @@ msgstr ""
 #: templates/pages/accounts/payments_edit.html:4
 #: templates/pages/accounts/payments_edit.html:11
 #: templates/pages/accounts/profile.html:39
-#: templates/pages/accounts/profile.html:41 templates/parts/header.html:31
+#: templates/pages/accounts/profile.html:41 templates/parts/header.html:34
 #: users/models.py:119
 msgid "Payment methods"
 msgstr ""
@@ -51,54 +51,100 @@ msgstr ""
 #: main/context.py:103 templates/pages/accounts/profile.html:25
 #: templates/pages/accounts/profile.html:27
 #: templates/pages/accounts/settings.html:4
-#: templates/pages/accounts/settings.html:11 templates/parts/header.html:21
+#: templates/pages/accounts/settings.html:11 templates/parts/header.html:24
 msgid "Security"
 msgstr ""
 
-#: main/context.py:112 templates/pages/accounts/delivery.html:6
-#: templates/pages/accounts/delivery.html:13 templates/parts/header.html:26
+#: main/context.py:112 orders/models.py:82
+#: templates/pages/accounts/delivery.html:6
+#: templates/pages/accounts/delivery.html:13
+#: templates/pages/accounts/profile.html:34 templates/pages/invoice.html:52
+#: templates/pages/order_detail.html:21 templates/pages/orders/address.html:5
+#: templates/pages/orders/address.html:14 templates/pages/orders/cart.html:14
+#: templates/pages/orders/checkout.html:14
+#: templates/pages/orders/checkout.html:29
+#: templates/pages/orders/order_time.html:15
+#: templates/pages/orders/payment_method.html:16 templates/parts/header.html:29
 msgid "Delivery address"
 msgstr ""
 
-#: main/context.py:118 main/context.py:170 products/models.py:34
-#: products/models.py:120
+#: main/context.py:118 main/context.py:170 payment/products/models.py:34
+#: payment/products/models.py:120 products/models.py:34 products/models.py:120
 msgid "Category"
 msgstr ""
 
 #: main/context.py:149 main/context.py:154 main/context.py:191
-#: templates/pages/cart.html:4 templates/parts/header.html:72
+#: main/context.py:200 main/context.py:213 main/context.py:230
+#: templates/pages/orders/address.html:13 templates/pages/orders/cart.html:4
+#: templates/pages/orders/cart.html:13 templates/pages/orders/checkout.html:13
+#: templates/pages/orders/order_time.html:14
+#: templates/pages/orders/payment_method.html:15 templates/parts/header.html:77
 msgid "Cart"
 msgstr ""
 
 #: main/context.py:158 templates/pages/invoice.html:11
-#: templates/pages/order_detail.html:5 templates/pages/order_detail.html:18
+#: templates/pages/order_detail.html:5
 msgid "Order info"
 msgstr ""
 
-#: main/context.py:195 templates/pages/cart.html:91
-#: templates/parts/header.html:82 templates/rest/cart.html:27
+#: main/context.py:195 main/context.py:204 main/context.py:217
+#: main/context.py:234 templates/pages/accounts/payments.html:20
+#: templates/pages/accounts/settings.html:52
+msgid "Address"
+msgstr ""
+
+#: main/context.py:208 main/context.py:221 main/context.py:238
+#: templates/pages/order_detail.html:32 templates/pages/orders/address.html:15
+#: templates/pages/orders/cart.html:15 templates/pages/orders/checkout.html:15
+#: templates/pages/orders/checkout.html:43
+#: templates/pages/orders/order_time.html:5
+#: templates/pages/orders/order_time.html:16
+#: templates/pages/orders/payment_method.html:17
+msgid "Delivery time"
+msgstr ""
+
+#: main/context.py:225 main/context.py:242 templates/pages/invoice.html:76
+#: templates/pages/main.html:30 templates/pages/order_detail.html:40
+#: templates/pages/orders/address.html:16 templates/pages/orders/cart.html:16
+#: templates/pages/orders/checkout.html:16
+#: templates/pages/orders/checkout.html:54
+#: templates/pages/orders/order_time.html:17
+#: templates/pages/orders/payment_method.html:6
+#: templates/pages/orders/payment_method.html:18 users/models.py:118
+msgid "Payment method"
+msgstr ""
+
+#: main/context.py:246 templates/pages/orders/address.html:17
+#: templates/pages/orders/cart.html:17 templates/pages/orders/cart.html:103
+#: templates/pages/orders/checkout.html:5
+#: templates/pages/orders/checkout.html:17
+#: templates/pages/orders/order_time.html:18
+#: templates/pages/orders/payment_method.html:19 templates/parts/header.html:87
+#: templates/rest/cart.html:27
 msgid "Checkout"
 msgstr ""
 
-#: main/context.py:200 templates/admin/filer/folder/directory_listing.html:160
+#: main/context.py:251 templates/admin/filer/folder/directory_listing.html:160
 #: templates/pages/search.html:4
 msgid "Search"
 msgstr ""
 
-#: main/context.py:211
+#: main/context.py:262
 msgid ""
 "Tashkent, Yashnabad district, st. Tinchlik / 1-quarter, 1-house, 1-kvart"
 msgstr ""
 
 #: main/models.py:10 main/models.py:23 main/models.py:36 main/models.py:49
-#: main/models.py:63 main/models.py:81 products/models.py:19
-#: products/models.py:51 templates/admin/filer/folder/directory_table.html:13
+#: main/models.py:63 main/models.py:81 payment/products/models.py:19
+#: payment/products/models.py:51 products/models.py:19 products/models.py:51
+#: templates/admin/filer/folder/directory_table.html:13
 #: templates/pages/accounts/settings.html:18
 msgid "Name"
 msgstr ""
 
 #: main/models.py:11 main/models.py:24 main/models.py:37 main/models.py:50
-#: main/models.py:64 main/models.py:82 products/models.py:20
+#: main/models.py:64 main/models.py:82 payment/products/models.py:20
+#: products/models.py:20
 msgid "Slug"
 msgstr ""
 
@@ -106,175 +152,190 @@ msgstr ""
 msgid "Order"
 msgstr ""
 
-#: main/models.py:51 main/models.py:65 main/models.py:87 products/models.py:64
+#: main/models.py:51 main/models.py:65 main/models.py:87
+#: payment/products/models.py:64 products/models.py:64
 msgid "Image"
 msgstr ""
 
-#: orders/models.py:13 templates/pages/product_detail.html:66
-#: templates/pages/product_detail.html:259
-#: templates/pages/product_detail.html:287
+#: orders/models.py:50
+msgid "Cash on delivery"
+msgstr ""
+
+#: orders/models.py:72 templates/pages/product_detail.html:63
+#: templates/pages/product_detail.html:256
+#: templates/pages/product_detail.html:284
 msgid "Available"
 msgstr ""
 
-#: orders/models.py:14
+#: orders/models.py:73
 msgid "Awaiting Payment"
 msgstr ""
 
-#: orders/models.py:15
+#: orders/models.py:74
 msgid "Payment completed"
 msgstr ""
 
-#: orders/models.py:16
+#: orders/models.py:75
 msgid "Cancelled"
 msgstr ""
 
-#: orders/models.py:17 templates/pages/invoice.html:30
+#: orders/models.py:76 templates/pages/invoice.html:30
 msgid "Delivered"
 msgstr ""
 
-#: orders/models.py:20 templates/pages/checkout.html:24
-#: templates/pages/invoice.html:65 templates/pages/order_detail.html:33
+#: orders/models.py:77
+msgid "In process"
+msgstr ""
+
+#: orders/models.py:80 templates/pages/invoice.html:65
+#: templates/pages/orders/address.html:62
 msgid "Client name"
 msgstr ""
 
-#: orders/models.py:21
+#: orders/models.py:81
 msgid "Phone number"
 msgstr ""
 
-#: orders/models.py:22 templates/pages/checkout.html:62
-#: templates/pages/invoice.html:52 templates/pages/order_detail.html:37
-msgid "Shipping address"
-msgstr ""
-
-#: orders/models.py:26 templates/pages/invoice.html:17
+#: orders/models.py:84 templates/pages/invoice.html:17
 msgid "Order Id"
 msgstr ""
 
-#: orders/models.py:60
+#: orders/models.py:128
 msgid "Cart item"
 msgstr ""
 
-#: orders/models.py:61 templates/pages/cart.html:13
+#: orders/models.py:129 templates/pages/orders/cart.html:22
 msgid "Cart items"
 msgstr ""
 
+#: payment/products/admin.py:42 payment/products/models.py:87
 #: products/admin.py:42 products/models.py:87
-#: templates/pages/product_detail.html:80
+#: templates/pages/product_detail.html:77
 msgid "Color"
 msgstr ""
 
-#: products/models.py:35
+#: payment/products/models.py:35 products/models.py:35
 msgid "Categories"
 msgstr ""
 
-#: products/models.py:52
+#: payment/products/models.py:52 products/models.py:52
 msgid "Logo"
 msgstr ""
 
+#: payment/products/models.py:56 payment/products/models.py:121
 #: products/models.py:56 products/models.py:121
 msgid "Brand"
 msgstr ""
 
-#: products/models.py:57 templates/pages/product_list.html:30
+#: payment/products/models.py:57 products/models.py:57
+#: templates/pages/product_list.html:30
 msgid "Brands"
 msgstr ""
 
-#: products/models.py:65 products/models.py:104 products/models.py:179
-#: templates/pages/cart.html:18
+#: payment/products/models.py:65 payment/products/models.py:104
+#: payment/products/models.py:179 products/models.py:65 products/models.py:104
+#: products/models.py:179 templates/pages/orders/cart.html:27
 msgid "Product"
 msgstr ""
 
-#: products/models.py:88
+#: payment/products/models.py:88 products/models.py:88
 msgid "Colors"
 msgstr ""
 
-#: products/models.py:102 products/models.py:129 templates/pages/cart.html:21
-#: templates/pages/invoice.html:39
+#: payment/products/models.py:102 payment/products/models.py:129
+#: products/models.py:102 products/models.py:129
+#: templates/pages/invoice.html:39 templates/pages/orders/cart.html:31
 msgid "Price"
 msgstr ""
 
-#: products/models.py:103 templates/pages/accounts/orders.html:56
-#: templates/pages/cart.html:20 templates/pages/invoice.html:40
+#: payment/products/models.py:103 products/models.py:103
+#: templates/pages/accounts/orders.html:56 templates/pages/invoice.html:40
+#: templates/pages/order_detail.html:73 templates/pages/orders/cart.html:29
+#: templates/pages/orders/checkout.html:90
 msgid "Quantity"
 msgstr ""
 
-#: products/models.py:114
+#: payment/products/models.py:114 products/models.py:114
 msgid "Variation"
 msgstr ""
 
-#: products/models.py:115
+#: payment/products/models.py:115 products/models.py:115
 msgid "Variations"
 msgstr ""
 
-#: products/models.py:119
+#: payment/products/models.py:119 products/models.py:119
 msgid "Product name"
 msgstr ""
 
-#: products/models.py:122 templates/pages/product_detail.html:111
+#: payment/products/models.py:122 products/models.py:122
+#: templates/pages/product_detail.html:102
 msgid "Description"
 msgstr ""
 
-#: products/models.py:123 templates/pages/product_detail.html:105
+#: payment/products/models.py:123 products/models.py:123
+#: templates/pages/product_detail.html:108
 msgid "Characters"
 msgstr ""
 
-#: products/models.py:124
+#: payment/products/models.py:124 products/models.py:124
 msgid "Product Owner"
 msgstr ""
 
-#: products/models.py:125
+#: payment/products/models.py:125 products/models.py:125
 msgid "Volume type"
 msgstr ""
 
-#: products/models.py:127
+#: payment/products/models.py:127 products/models.py:127
 msgid "Available in stock"
 msgstr ""
 
-#: products/models.py:128
+#: payment/products/models.py:128 products/models.py:128
 msgid "Is recommended"
 msgstr ""
 
-#: products/models.py:132
+#: payment/products/models.py:132 products/models.py:132
 msgid "First image"
 msgstr ""
 
-#: products/models.py:133
+#: payment/products/models.py:133 products/models.py:133
 msgid "Second image"
 msgstr ""
 
-#: products/models.py:134
+#: payment/products/models.py:134 products/models.py:134
 msgid "Third image"
 msgstr ""
 
-#: products/models.py:180
+#: payment/products/models.py:180 products/models.py:180
+#: templates/pages/order_detail.html:88
+#: templates/pages/orders/checkout.html:113
 msgid "Products"
 msgstr ""
 
-#: products/views.py:11
+#: payment/products/views.py:11 products/views.py:11
 msgid "New first"
 msgstr ""
 
-#: products/views.py:12
+#: payment/products/views.py:12 products/views.py:12
 msgid "Old first"
 msgstr ""
 
-#: products/views.py:13
+#: payment/products/views.py:13 products/views.py:13
 msgid "Title asc"
 msgstr ""
 
-#: products/views.py:14
+#: payment/products/views.py:14 products/views.py:14
 msgid "Title desc"
 msgstr ""
 
-#: products/views.py:15
+#: payment/products/views.py:15 products/views.py:15
 msgid "Price asc"
 msgstr ""
 
-#: products/views.py:16
+#: payment/products/views.py:16 products/views.py:16
 msgid "Price desc"
 msgstr ""
 
-#: products/views.py:66
+#: payment/products/views.py:66 products/views.py:66
 msgid "All"
 msgstr ""
 
@@ -290,20 +351,48 @@ msgstr ""
 msgid "Administration"
 msgstr ""
 
-#: rest_app/views.py:67
+#: rest_app/views.py:79
 msgid "Cart successfully updated"
 msgstr ""
 
-#: rest_app/views.py:70
+#: rest_app/views.py:82
 msgid "Successful added"
 msgstr ""
 
-#: rest_app/views.py:106 templates/base.html:260
+#: rest_app/views.py:118 templates/base.html:313
 msgid "Successful removed"
 msgstr ""
 
-#: rest_app/views.py:131
+#: rest_app/views.py:143
 msgid "Successful saved"
+msgstr ""
+
+#: rest_app/views.py:173
+msgid "Successful authenticated"
+msgstr ""
+
+#: rest_app/views.py:178
+msgid "Invalid credentials"
+msgstr ""
+
+#: rest_app/views.py:237 rest_app/views.py:271
+msgid "Sorry, something went wrong"
+msgstr ""
+
+#: rest_app/views.py:258
+msgid "Sorry, wrong confirm password"
+msgstr ""
+
+#: rest_app/views.py:261
+msgid "Sorry, incorrect old password"
+msgstr ""
+
+#: rest_app/views.py:268
+msgid "Successfully updated"
+msgstr ""
+
+#: rest_app/views.py:340
+msgid "Order successful placed"
 msgstr ""
 
 #: templates/admin/filer/actions.html:5
@@ -929,20 +1018,27 @@ msgstr ""
 msgid "Import"
 msgstr ""
 
-#: templates/base.html:205 templates/base.html:246
-#: templates/pages/product_detail.html:66
-#: templates/pages/product_detail.html:255
-#: templates/pages/product_detail.html:283
+#: templates/base.html:261 templates/base.html:300
+#: templates/pages/product_detail.html:63
+#: templates/pages/product_detail.html:252
+#: templates/pages/product_detail.html:280
 msgid "Not available"
 msgstr ""
 
+#: templates/last/delivery_time_page.html:90 templates/parts/pagination.html:27
+msgid "Next"
+msgstr ""
+
 #: templates/pages/accounts/delivery.html:17
-#: templates/pages/accounts/delivery.html:47
+#: templates/pages/accounts/delivery.html:50
+#: templates/pages/orders/address.html:31
+#: templates/rest/delivery_address_form.html:6
 msgid "Add an address"
 msgstr ""
 
 #: templates/pages/accounts/delivery.html:23
-#: templates/pages/accounts/payments.html:15 templates/pages/checkout.html:82
+#: templates/pages/accounts/payments.html:15
+#: templates/pages/orders/address.html:37
 msgid "Default"
 msgstr ""
 
@@ -963,32 +1059,30 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: templates/pages/accounts/delivery.html:82
+#: templates/pages/accounts/delivery.html:89
 #: templates/pages/accounts/payments.html:126
 msgid "Is default"
 msgstr ""
 
-#: templates/pages/accounts/delivery.html:86
+#: templates/pages/accounts/delivery.html:93
 #: templates/pages/accounts/payments.html:128
 #: templates/pages/accounts/payments_edit.html:17
+#: templates/rest/delivery_address_form.html:50
 msgid "Submit"
 msgstr ""
 
 #: templates/pages/accounts/login.html:5 templates/pages/accounts/login.html:17
-#: templates/pages/checkout.html:17 templates/parts/footer.html:63
-#: templates/parts/footer.html:69 templates/parts/header.html:45
+#: templates/pages/accounts/login.html:59
+#: templates/pages/orders/address.html:24 templates/parts/footer.html:65
+#: templates/parts/footer.html:71 templates/parts/header.html:47
 msgid "Login"
 msgstr ""
 
 #: templates/pages/accounts/login.html:49
 #: templates/pages/accounts/register.html:60
-#: templates/pages/accounts/settings.html:61 templates/parts/footer.html:110
-#: templates/parts/footer.html:216 users/forms.py:23
+#: templates/pages/accounts/settings.html:61 templates/parts/footer.html:112
+#: templates/parts/footer.html:203 users/forms.py:23
 msgid "Password"
-msgstr ""
-
-#: templates/pages/accounts/login.html:59
-msgid "Log In"
 msgstr ""
 
 #: templates/pages/accounts/login.html:67
@@ -1004,13 +1098,19 @@ msgid "Amount"
 msgstr ""
 
 #: templates/pages/accounts/orders.html:22
-#: templates/pages/accounts/orders.html:54 templates/pages/cart.html:73
-#: templates/pages/cart.html:78 templates/pages/cart.html:90
-#: templates/pages/checkout.html:13 templates/pages/invoice.html:18
-#: templates/pages/main.html:70 templates/pages/order_detail.html:46
+#: templates/pages/accounts/orders.html:54 templates/pages/invoice.html:18
+#: templates/pages/main.html:70 templates/pages/order_detail.html:70
+#: templates/pages/order_detail.html:89 templates/pages/order_detail.html:93
+#: templates/pages/order_detail.html:98 templates/pages/order_detail.html:103
+#: templates/pages/orders/cart.html:86 templates/pages/orders/cart.html:91
+#: templates/pages/orders/cart.html:102 templates/pages/orders/checkout.html:87
+#: templates/pages/orders/checkout.html:114
+#: templates/pages/orders/checkout.html:118
+#: templates/pages/orders/checkout.html:123
+#: templates/pages/orders/checkout.html:128
 #: templates/pages/product_detail.html:31
-#: templates/pages/product_detail.html:61 templates/pages/product_list.html:64
-#: templates/pages/product_list.html:130 templates/parts/header.html:73
+#: templates/pages/product_detail.html:58 templates/pages/product_list.html:64
+#: templates/pages/product_list.html:129 templates/parts/header.html:78
 #: templates/rest/cart.html:16 templates/rest/cart.html:23
 msgid "sum"
 msgstr ""
@@ -1020,9 +1120,9 @@ msgid "Deliver to"
 msgstr ""
 
 #: templates/pages/accounts/orders.html:35
-#: templates/pages/accounts/register.html:46 templates/pages/checkout.html:42
-#: templates/pages/invoice.html:66 templates/pages/order_detail.html:34
-#: templates/parts/footer.html:178
+#: templates/pages/accounts/register.html:46 templates/pages/invoice.html:66
+#: templates/pages/order_detail.html:24 templates/pages/orders/address.html:75
+#: templates/pages/orders/checkout.html:35 templates/parts/footer.html:182
 msgid "Phone"
 msgstr ""
 
@@ -1030,7 +1130,7 @@ msgstr ""
 msgid "Detail info"
 msgstr ""
 
-#: templates/pages/accounts/orders.html:41 templates/pages/order_detail.html:20
+#: templates/pages/accounts/orders.html:41
 msgid "Invoice"
 msgstr ""
 
@@ -1040,11 +1140,6 @@ msgstr ""
 
 #: templates/pages/accounts/payments.html:16
 msgid "Add"
-msgstr ""
-
-#: templates/pages/accounts/payments.html:20
-#: templates/pages/accounts/settings.html:52
-msgid "Address"
 msgstr ""
 
 #: templates/pages/accounts/payments.html:24
@@ -1082,18 +1177,17 @@ msgid "Billing address"
 msgstr ""
 
 #: templates/pages/accounts/profile.html:18
-#: templates/pages/accounts/profile.html:20 templates/parts/header.html:16
+#: templates/pages/accounts/profile.html:20 templates/parts/header.html:19
 msgid "My orders"
 msgstr ""
 
 #: templates/pages/accounts/profile.html:32
-#: templates/pages/accounts/profile.html:34
 msgid "Delevery address"
 msgstr ""
 
 #: templates/pages/accounts/register.html:5
-#: templates/pages/accounts/register.html:17 templates/parts/footer.html:64
-#: templates/parts/footer.html:124
+#: templates/pages/accounts/register.html:17 templates/parts/footer.html:66
+#: templates/parts/footer.html:126
 msgid "Registration"
 msgstr ""
 
@@ -1102,17 +1196,18 @@ msgid "Full name"
 msgstr ""
 
 #: templates/pages/accounts/register.html:68
-#: templates/pages/accounts/settings.html:80 templates/parts/footer.html:231
+#: templates/pages/accounts/settings.html:80 templates/parts/footer.html:218
 #: users/forms.py:24
 msgid "Confirm password"
 msgstr ""
 
-#: templates/pages/accounts/settings.html:29 templates/parts/footer.html:160
+#: templates/pages/accounts/settings.html:29 templates/parts/footer.html:164
 #: users/forms.py:21 users/models.py:56
 msgid "Last name"
 msgstr ""
 
 #: templates/pages/accounts/settings.html:40
+#: templates/pages/order_detail.html:26 templates/pages/orders/checkout.html:37
 msgid "Email"
 msgstr ""
 
@@ -1124,42 +1219,18 @@ msgstr ""
 msgid "New password"
 msgstr ""
 
-#: templates/pages/cart.html:19 templates/pages/product_detail.html:157
-msgid "Title"
-msgstr ""
-
-#: templates/pages/cart.html:22 templates/pages/cart.html:89
-#: templates/pages/invoice.html:18 templates/pages/invoice.html:41
-#: templates/pages/invoice.html:67 templates/pages/order_detail.html:35
-msgid "Total price"
-msgstr ""
-
-#: templates/pages/checkout.html:5 templates/pages/checkout.html:76
-msgid "My delivery addresses"
-msgstr ""
-
-#: templates/pages/checkout.html:13
-msgid "Total amount of order"
-msgstr ""
-
-#: templates/pages/checkout.html:18 templates/parts/footer.html:130
-msgid "or"
-msgstr ""
-
-#: templates/pages/checkout.html:18
-msgid "Continue as guest"
-msgstr ""
-
-#: templates/pages/checkout.html:72
-msgid "Continue"
-msgstr ""
-
 #: templates/pages/invoice.html:14
 msgid "Print invoice"
 msgstr ""
 
-#: templates/pages/invoice.html:16 templates/pages/order_detail.html:36
+#: templates/pages/invoice.html:16
 msgid "Created at"
+msgstr ""
+
+#: templates/pages/invoice.html:18 templates/pages/invoice.html:41
+#: templates/pages/invoice.html:67 templates/pages/orders/cart.html:32
+#: templates/pages/orders/cart.html:101
+msgid "Total price"
 msgstr ""
 
 #: templates/pages/invoice.html:38
@@ -1168,11 +1239,6 @@ msgstr ""
 
 #: templates/pages/invoice.html:60
 msgid "Payment information"
-msgstr ""
-
-#: templates/pages/invoice.html:76 templates/pages/main.html:30
-#: users/models.py:118
-msgid "Payment method"
 msgstr ""
 
 #: templates/pages/main.html:5
@@ -1199,9 +1265,8 @@ msgstr ""
 msgid "Top products of Stroyshop"
 msgstr ""
 
-#: templates/pages/main.html:76 templates/pages/product_detail.html:34
-#: templates/pages/product_detail.html:100 templates/pages/product_list.html:70
-#: templates/pages/product_list.html:136
+#: templates/pages/main.html:76 templates/pages/product_detail.html:97
+#: templates/pages/product_list.html:69 templates/pages/product_list.html:134
 msgid "Add to cart"
 msgstr ""
 
@@ -1210,76 +1275,144 @@ msgstr ""
 msgid "More products"
 msgstr ""
 
-#: templates/pages/order_detail.html:31
-msgid "Order id"
+#: templates/pages/order_detail.html:15 templates/pages/orders/checkout.html:23
+msgid "Order preview"
 msgstr ""
 
-#: templates/pages/order_detail.html:32
-msgid "Order status"
+#: templates/pages/order_detail.html:48 templates/pages/orders/checkout.html:65
+msgid "Ordered products"
 msgstr ""
 
-#: templates/pages/order_detail.html:120
-msgid "Pay with"
+#: templates/pages/order_detail.html:86
+#: templates/pages/orders/checkout.html:111
+msgid "Order summary"
+msgstr ""
+
+#: templates/pages/order_detail.html:92
+#: templates/pages/orders/checkout.html:117
+msgid "Delivery"
+msgstr ""
+
+#: templates/pages/order_detail.html:97
+#: templates/pages/orders/checkout.html:122
+msgid "Porter"
+msgstr ""
+
+#: templates/pages/order_detail.html:102
+#: templates/pages/orders/checkout.html:127 templates/rest/cart.html:22
+msgid "Order total"
+msgstr ""
+
+#: templates/pages/orders/address.html:25 templates/parts/footer.html:132
+msgid "or"
+msgstr ""
+
+#: templates/pages/orders/address.html:25
+msgid "Continue as guest"
+msgstr ""
+
+#: templates/pages/orders/address.html:28
+msgid "My delivery addresses"
+msgstr ""
+
+#: templates/pages/orders/address.html:46
+msgid "Tel."
+msgstr ""
+
+#: templates/pages/orders/address.html:108
+#: templates/pages/orders/order_time.html:59
+#: templates/pages/orders/payment_method.html:35
+msgid "Continue"
+msgstr ""
+
+#: templates/pages/orders/cart.html:28 templates/pages/product_detail.html:154
+msgid "Title"
+msgstr ""
+
+#: templates/pages/orders/cart.html:30
+msgid "Wt"
+msgstr ""
+
+#: templates/pages/orders/checkout.html:31
+#: templates/pages/orders/checkout.html:45
+#: templates/pages/orders/checkout.html:56
+msgid "change"
+msgstr ""
+
+#: templates/pages/orders/checkout.html:106
+msgid "Place your order"
+msgstr ""
+
+#: templates/pages/orders/order_time.html:27
+msgid "Today"
+msgstr ""
+
+#: templates/pages/orders/order_time.html:52
+msgid "Yes"
+msgstr ""
+
+#: templates/pages/orders/order_time.html:56
+msgid "No"
 msgstr ""
 
 #: templates/pages/product_detail.html:16
 msgid "Similar products"
 msgstr ""
 
-#: templates/pages/product_detail.html:65
+#: templates/pages/product_detail.html:62
 msgid "In stock"
 msgstr ""
 
-#: templates/pages/product_detail.html:69
+#: templates/pages/product_detail.html:66
 msgid "Packing"
 msgstr ""
 
-#: templates/pages/product_detail.html:91
+#: templates/pages/product_detail.html:88
 msgid "Last updated"
 msgstr ""
 
-#: templates/pages/product_detail.html:119
+#: templates/pages/product_detail.html:116
 msgid "Feedbacks"
 msgstr ""
 
-#: templates/pages/product_detail.html:122 templates/pages/search.html:10
+#: templates/pages/product_detail.html:119 templates/pages/search.html:10
 msgid "Found"
 msgstr ""
 
-#: templates/pages/product_detail.html:122
+#: templates/pages/product_detail.html:119
 msgid "feedbacks"
 msgstr ""
 
-#: templates/pages/product_detail.html:125
-#: templates/pages/product_list.html:103
+#: templates/pages/product_detail.html:122
+#: templates/pages/product_list.html:102
 msgid "Sorting"
 msgstr ""
 
-#: templates/pages/product_detail.html:127
+#: templates/pages/product_detail.html:124
 msgid "Last first"
 msgstr ""
 
-#: templates/pages/product_detail.html:133
+#: templates/pages/product_detail.html:130
 msgid "Leave review"
 msgstr ""
 
-#: templates/pages/product_detail.html:139
+#: templates/pages/product_detail.html:136
 msgid "Your name"
 msgstr ""
 
-#: templates/pages/product_detail.html:148
+#: templates/pages/product_detail.html:145
 msgid "Where are you from"
 msgstr ""
 
-#: templates/pages/product_detail.html:166
+#: templates/pages/product_detail.html:163
 msgid "Your message"
 msgstr ""
 
-#: templates/pages/product_detail.html:184
+#: templates/pages/product_detail.html:181
 msgid "from"
 msgstr ""
 
-#: templates/pages/product_detail.html:193
+#: templates/pages/product_detail.html:190
 msgid "More feedbacks"
 msgstr ""
 
@@ -1291,7 +1424,7 @@ msgstr ""
 msgid "Recommended products"
 msgstr ""
 
-#: templates/pages/product_list.html:100
+#: templates/pages/product_list.html:99
 msgid "products"
 msgstr ""
 
@@ -1299,7 +1432,7 @@ msgstr ""
 msgid "more"
 msgstr ""
 
-#: templates/parts/category_list.html:5 templates/parts/header.html:90
+#: templates/parts/category_list.html:5 templates/parts/header.html:95
 msgid "Product catalog"
 msgstr ""
 
@@ -1323,44 +1456,52 @@ msgstr ""
 msgid "For Users"
 msgstr ""
 
-#: templates/parts/footer.html:38
+#: templates/parts/footer.html:35
 msgid "For customers"
 msgstr ""
 
-#: templates/parts/footer.html:48
+#: templates/parts/footer.html:43
 msgid "Our address"
 msgstr ""
 
-#: templates/parts/footer.html:71
+#: templates/parts/footer.html:51
+msgid "Website developed by"
+msgstr ""
+
+#: templates/parts/footer.html:73
 msgid "Login with Google"
 msgstr ""
 
-#: templates/parts/footer.html:72
+#: templates/parts/footer.html:74
 msgid "Login with Facebook"
 msgstr ""
 
-#: templates/parts/footer.html:143 users/forms.py:20 users/models.py:55
+#: templates/parts/footer.html:147 users/forms.py:20 users/models.py:55
 msgid "First name"
 msgstr ""
 
-#: templates/parts/header.html:36
+#: templates/parts/footer.html:228
+msgid "I agree with terms of Stroyshop"
+msgstr ""
+
+#: templates/parts/header.html:14 templates/parts/header.html:39
 msgid "Logout"
 msgstr ""
 
-#: templates/parts/header.html:59
+#: templates/parts/header.html:60
 msgid "Search product"
+msgstr ""
+
+#: templates/parts/header.html:64
+msgid "Cancel"
+msgstr ""
+
+#: templates/parts/header.html:107
+msgid "View all"
 msgstr ""
 
 #: templates/parts/pagination.html:9
 msgid "Back"
-msgstr ""
-
-#: templates/parts/pagination.html:27
-msgid "Next"
-msgstr ""
-
-#: templates/rest/cart.html:22
-msgid "Order total"
 msgstr ""
 
 #: templates/rest/cart.html:26

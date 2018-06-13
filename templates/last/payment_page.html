@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order details page</title>
+  <link rel="stylesheet" type="text/css" href="../../static/css/custom_style.css">
+  <style type="text/css">
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body{
+    background: #fff;
+    max-width: 1000px;
+    margin: auto;
+  }
+  #payment-section{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    position: relative;
+  }
+  #payment-section .payment-method{
+    display: flex;
+    padding: 10px;
+    position: relative;
+  }
+  #payment-section .payment-method .item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 60px;
+    width: 33.3%;
+    border-right: 1px solid #000;
+    border-left: 1px solid #000;
+    height: 250px;
+  }
+  #payment-section form{
+    display: flex;
+    justify-content: space-around;
+    width: 1000px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: 10px;
+  }
+  #payment-section form input{
+    width: 33%;
+    margin: 0 60px;
+  }
+  #payment-section .payment-method .item .title{
+    padding: 10px;
+  }
+  #payment-section .payment-method .item .logo{
+    padding: 10px;
+    width: 80px;
+    height: 80px;
+  }
+  #payment-section .payment-method .item .description{
+    padding: 10px;
+    height: 70px;
+    text-align: center;
+  }
+  #payment-section form{
+    padding: 10px;
+  }
+</style>
+</head>
+
+<body>
+  <div id="payment-section">
+    <div class="payment-method">
+      <div class="item">
+        <h2 class="title">UzCard</h2>
+        <img src="sum.jpg" alt="" class="logo">
+        <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, ipsum.</p>
+      </div>
+      <div class="item">
+        <h2 class="title">Payme</h2>
+        <img src="sum.jpg" alt="" class="logo">
+        <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum!</p>
+      </div>
+      <div class="item">
+        <h2 class="title">Cash</h2>
+        <img src="sum.jpg" alt="" class="logo">
+        <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+      </div>
+    </div>
+    <form action="">
+      <input type="radio" name="method" value="cash">
+      <input type="radio" name="method" value="payme">
+      <input type="radio" name="method" value="uzcard">
+    </form>
+  </div>
+</body>
+
+</html>

@@ -1,6 +1,15 @@
 from django.contrib import admin
 from parler.admin import TranslatableAdmin
-from main.models import Menu, Banner, Static, UserMenu, CustomerMenu, StaticFooterPage
+from main.models import (
+    Menu,
+    Banner,
+    Static,
+    UserMenu,
+    CustomerMenu,
+    StaticFooterPage,
+)
+
+from orders.models import PaymentMethod
 
 
 class MenuAdmin(TranslatableAdmin):
@@ -31,4 +40,4 @@ admin.site.register(CustomerMenu, TranslatableAdmin)
 admin.site.register(Banner, BannerAdmin)
 admin.site.register(Static, StaticAdmin)
 admin.site.register(StaticFooterPage, StaticFooterPageAdmin)
-
+admin.site.register(PaymentMethod, TranslatableAdmin)

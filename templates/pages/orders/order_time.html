@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load i18n humanize products_extras %}
+
+{% block title %}
+    {% trans 'Delivery time' %}
+{% endblock %}
+
+{% block content %}
+    {{ header }}
+    <div id="main">
+        {{ breadcrumbs }}
+        <div class="order_steps">
+            <ul class="steps">
+                <li class="active"><a href="{% url 'orders:cart' %}">{% trans 'Cart' %}</a></li>
+                <li class="active"><a href="{% url 'orders:address' %}">{% trans 'Delivery address' %}</a></li>
+                <li class="active"><a href="{% url 'orders:time' %}">{% trans 'Delivery time' %}</a></li>
+                <li ><a href="{% url 'orders:payment_method' %}">{% trans 'Payment method' %}</a></li>
+                <li ><a href="{% url 'orders:checkout' %}">{% trans 'Checkout' %}</a></li>
+            </ul>
+        </div>
+        <div id="delivery-time-section">
+            <div class="delivery_time">
+                {% for day in days %}
+                  <div class="item ">
+                    <p class="title">
+                        {% if forloop.counter0 == 0 %}
+                            {% trans 'Today' %}
+                        {% else %}
+                            {{ day.datetime|date:'l' }} {{ day.datetime|date:'d M' }}
+                        {% endif %}
+
+                    </p>
+                    <p
+                            class="time_1 time_checking {% if day.time_1_is_left %}not_avail{% endif %} {% if time and time|floatformat == day.time_1.timestamp|floatformat %}checked_time{% endif %}"
+                            data-time="{{ day.time_1.timestamp|floatformat }}">
+                        {{ day.time_1|date:'H:i' }} - 15:00
+                    </p>
+                    <p
+                            class="time_2 time_checking {% if day.time_2_is_left %}not_avail{% endif %} {% if time and time|floatformat == day.time_2.timestamp|floatformat %}checked_time{% endif %}"
+                            data-time="{{ day.time_2.timestamp|floatformat }}">
+                        {{ day.time_2|date:'H:i' }} - 21:00
+                    </p>
+                  </div>
+                {% endfor %}
+            </div>
+            <div class="loaders">
+              <form action="" method="">
+                  <div class="porter_form_wrapper">
+                      <p>Нужны ли вам грузчики?</p>
+                      <div class="form-group">
+                          <input class="need_porter" type="radio" id="yes_porter" name="loader" value="1" {% ifequal need_porter "1" %}checked{% endifequal %}>
+                          <label for="yes_porter">{% trans 'Yes' %}</label>
+                      </div>
+                      <div class="form-group">
+                          <input class="need_porter" type="radio" id="no_porter" name="loader" value="0" {% ifequal need_porter "0" %}checked{% endifequal %}>
+                          <label for="no_porter">{% trans 'No' %}</label>
+                      </div>
+                  </div>
+                  <button type="button" id="order_time_button" class="button btn-grey">{% trans 'Continue' %}</button>
+              </form>
+              <div class="" style="display: {% if need_porter %}block{% else %}none{% endif %};" id="info_of_porter">
+                Плата за работу грузчика для ваших покупок стоит {{ porter_work_price|floatformat|intcomma }} сумов
+              </div>
+            </div>
+          </div>
+    </div>
+    {{ footer }}
+{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css">
+    <style>
+        .time_checking.not_avail
+        {
+            cursor: not-allowed;
+        }
+        .time_checking
+        {
+            cursor: pointer;
+        }
+        .checked_time
+        {
+            background: #b3be00;
+            color: #fff;
+        }
+    </style>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(document).ready(function () {
+            $('.time_checking').click(function () {
+                if ($(this).hasClass('not_avail'))
+                {
+                    $.notify("Pease, choose available time");
+                    return false;
+                }
+                $('.time_checking').removeClass('checked_time');
+                $(this).addClass('checked_time');
+            });
+
+
+
+            $('#order_time_button').click(function () {
+                if (!$('.time_checking').hasClass('checked_time'))
+                {
+                    $.notify("Pease, choose available time");
+                    return false;
+                }
+                var need_porter = $('.need_porter:checked').val();
+
+                var time = $('.time_checking.checked_time').data('time');
+                var need_porter_val = (need_porter)? need_porter : 0;
+                window.set_data_to_cookie(null, null, null, null, time, need_porter_val);
+
+                window.location.href = "{% url 'orders:payment_method' %}";
+            });
+        });
+    </script>
+{% endblock %}

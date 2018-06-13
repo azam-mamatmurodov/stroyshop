@@ -3,22 +3,22 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-08 18:51+0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2018-06-11 16:52+0500\n"
+"PO-Revision-Date: 2018-06-11 15:39+0500\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
+"X-Generator: Poedit 2.0.7\n"
 
 #: main/context.py:57
 msgid "Shop"
@@ -31,16 +31,17 @@ msgstr "Магазин"
 msgid "Account Settings"
 msgstr "Настройки аккаунта"
 
+# Remove it, there is singular form.
 #: main/context.py:72 main/context.py:81
 #: templates/pages/accounts/payments.html:4
 #: templates/pages/accounts/payments.html:11
 #: templates/pages/accounts/payments_edit.html:4
 #: templates/pages/accounts/payments_edit.html:11
 #: templates/pages/accounts/profile.html:39
-#: templates/pages/accounts/profile.html:41 templates/parts/header.html:31
+#: templates/pages/accounts/profile.html:41 templates/parts/header.html:34
 #: users/models.py:119
 msgid "Payment methods"
-msgstr "Способ оплаты"
+msgstr "Способы оплаты"
 
 #: main/context.py:85
 msgid "Payment"
@@ -48,64 +49,106 @@ msgstr "Оплата"
 
 #: main/context.py:94 templates/pages/accounts/orders.html:4
 #: templates/pages/accounts/orders.html:11
-#, fuzzy
-#| msgid "Order info"
 msgid "Orders history"
-msgstr "Информация о заказе"
+msgstr "История заказов"
 
 #: main/context.py:103 templates/pages/accounts/profile.html:25
 #: templates/pages/accounts/profile.html:27
 #: templates/pages/accounts/settings.html:4
-#: templates/pages/accounts/settings.html:11 templates/parts/header.html:21
+#: templates/pages/accounts/settings.html:11 templates/parts/header.html:24
 msgid "Security"
 msgstr "Безопасность"
 
-#: main/context.py:112 templates/pages/accounts/delivery.html:6
-#: templates/pages/accounts/delivery.html:13 templates/parts/header.html:26
+#: main/context.py:112 orders/models.py:82
+#: templates/pages/accounts/delivery.html:6
+#: templates/pages/accounts/delivery.html:13
+#: templates/pages/accounts/profile.html:34 templates/pages/invoice.html:52
+#: templates/pages/order_detail.html:21 templates/pages/orders/address.html:5
+#: templates/pages/orders/address.html:14 templates/pages/orders/cart.html:14
+#: templates/pages/orders/checkout.html:14
+#: templates/pages/orders/checkout.html:29
+#: templates/pages/orders/order_time.html:15
+#: templates/pages/orders/payment_method.html:16 templates/parts/header.html:29
 msgid "Delivery address"
 msgstr "Адрес доставки"
 
-#: main/context.py:118 main/context.py:170 products/models.py:34
-#: products/models.py:120
+#: main/context.py:118 main/context.py:170 payment/products/models.py:34
+#: payment/products/models.py:120 products/models.py:34 products/models.py:120
 msgid "Category"
 msgstr "Категория"
 
 #: main/context.py:149 main/context.py:154 main/context.py:191
-#: templates/pages/cart.html:4 templates/parts/header.html:72
+#: main/context.py:200 main/context.py:213 main/context.py:230
+#: templates/pages/orders/address.html:13 templates/pages/orders/cart.html:4
+#: templates/pages/orders/cart.html:13 templates/pages/orders/checkout.html:13
+#: templates/pages/orders/order_time.html:14
+#: templates/pages/orders/payment_method.html:15 templates/parts/header.html:77
 msgid "Cart"
 msgstr "Корзина"
 
 #: main/context.py:158 templates/pages/invoice.html:11
-#: templates/pages/order_detail.html:5 templates/pages/order_detail.html:18
+#: templates/pages/order_detail.html:5
 msgid "Order info"
 msgstr "Информация о заказе"
 
-#: main/context.py:195 templates/pages/cart.html:91
-#: templates/parts/header.html:82 templates/rest/cart.html:27
+#: main/context.py:195 main/context.py:204 main/context.py:217
+#: main/context.py:234 templates/pages/accounts/payments.html:20
+#: templates/pages/accounts/settings.html:52
+msgid "Address"
+msgstr "Адрес"
+
+#: main/context.py:208 main/context.py:221 main/context.py:238
+#: templates/pages/order_detail.html:32 templates/pages/orders/address.html:15
+#: templates/pages/orders/cart.html:15 templates/pages/orders/checkout.html:15
+#: templates/pages/orders/checkout.html:43
+#: templates/pages/orders/order_time.html:5
+#: templates/pages/orders/order_time.html:16
+#: templates/pages/orders/payment_method.html:17
+msgid "Delivery time"
+msgstr "Время доставки"
+
+#: main/context.py:225 main/context.py:242 templates/pages/invoice.html:76
+#: templates/pages/main.html:30 templates/pages/order_detail.html:40
+#: templates/pages/orders/address.html:16 templates/pages/orders/cart.html:16
+#: templates/pages/orders/checkout.html:16
+#: templates/pages/orders/checkout.html:54
+#: templates/pages/orders/order_time.html:17
+#: templates/pages/orders/payment_method.html:6
+#: templates/pages/orders/payment_method.html:18 users/models.py:118
+msgid "Payment method"
+msgstr "Способ оплаты"
+
+#: main/context.py:246 templates/pages/orders/address.html:17
+#: templates/pages/orders/cart.html:17 templates/pages/orders/cart.html:103
+#: templates/pages/orders/checkout.html:5
+#: templates/pages/orders/checkout.html:17
+#: templates/pages/orders/order_time.html:18
+#: templates/pages/orders/payment_method.html:19 templates/parts/header.html:87
+#: templates/rest/cart.html:27
 msgid "Checkout"
 msgstr "Оформление заказа"
 
-#: main/context.py:200 templates/admin/filer/folder/directory_listing.html:160
+#: main/context.py:251 templates/admin/filer/folder/directory_listing.html:160
 #: templates/pages/search.html:4
-#, fuzzy
-#| msgid "Search product"
 msgid "Search"
-msgstr "Найти продукт"
+msgstr "Найти товар"
 
-#: main/context.py:211
+#: main/context.py:262
 msgid ""
 "Tashkent, Yashnabad district, st. Tinchlik / 1-quarter, 1-house, 1-kvart"
 msgstr "г. Ташкент, Яшнабадский р-н, ул. Тинчлик/1-квартал, 1-дом, 1-кв"
 
 #: main/models.py:10 main/models.py:23 main/models.py:36 main/models.py:49
-#: main/models.py:63 main/models.py:81 products/models.py:19
-#: products/models.py:51 templates/admin/filer/folder/directory_table.html:13
+#: main/models.py:63 main/models.py:81 payment/products/models.py:19
+#: payment/products/models.py:51 products/models.py:19 products/models.py:51
+#: templates/admin/filer/folder/directory_table.html:13
 #: templates/pages/accounts/settings.html:18
 msgid "Name"
 msgstr "Имя"
 
 #: main/models.py:11 main/models.py:24 main/models.py:37 main/models.py:50
-#: main/models.py:64 main/models.py:82 products/models.py:20
+#: main/models.py:64 main/models.py:82 payment/products/models.py:20
+#: products/models.py:20
 msgid "Slug"
 msgstr "Строка"
 
@@ -113,280 +156,307 @@ msgstr "Строка"
 msgid "Order"
 msgstr "Заказ"
 
-#: main/models.py:51 main/models.py:65 main/models.py:87 products/models.py:64
+#: main/models.py:51 main/models.py:65 main/models.py:87
+#: payment/products/models.py:64 products/models.py:64
 msgid "Image"
 msgstr "Изображение"
 
-#: orders/models.py:13 templates/pages/product_detail.html:66
-#: templates/pages/product_detail.html:259
-#: templates/pages/product_detail.html:287
+#: orders/models.py:50
+msgid "Cash on delivery"
+msgstr "Оплата при доставке"
+
+#: orders/models.py:72 templates/pages/product_detail.html:63
+#: templates/pages/product_detail.html:256
+#: templates/pages/product_detail.html:284
 msgid "Available"
 msgstr "Доступно"
 
-#: orders/models.py:14
+#: orders/models.py:73
 msgid "Awaiting Payment"
 msgstr "Ожидание оплаты"
 
-#: orders/models.py:15
+#: orders/models.py:74
 msgid "Payment completed"
 msgstr "Оплата завершена"
 
-#: orders/models.py:16
+#: orders/models.py:75
 msgid "Cancelled"
 msgstr "Отменен"
 
-#: orders/models.py:17 templates/pages/invoice.html:30
+#: orders/models.py:76 templates/pages/invoice.html:30
 msgid "Delivered"
 msgstr "Доставлен"
 
-#: orders/models.py:20 templates/pages/checkout.html:24
-#: templates/pages/invoice.html:65 templates/pages/order_detail.html:33
+#: orders/models.py:77
+msgid "In process"
+msgstr "В процессе"
+
+#: orders/models.py:80 templates/pages/invoice.html:65
+#: templates/pages/orders/address.html:62
 msgid "Client name"
 msgstr "Имя клиента"
 
-#: orders/models.py:21
+#: orders/models.py:81
 msgid "Phone number"
 msgstr "Номер телефона"
 
-#: orders/models.py:22 templates/pages/checkout.html:62
-#: templates/pages/invoice.html:52 templates/pages/order_detail.html:37
-msgid "Shipping address"
-msgstr "Адрес доставки"
-
-#: orders/models.py:26 templates/pages/invoice.html:17
+#: orders/models.py:84 templates/pages/invoice.html:17
 msgid "Order Id"
 msgstr "Номер заказа"
 
-#: orders/models.py:60
+# Change it to "Cart Items"
+#: orders/models.py:128
 msgid "Cart item"
-msgstr "Корзина товара"
+msgstr "Товары в корзине"
 
-#: orders/models.py:61 templates/pages/cart.html:13
+#: orders/models.py:129 templates/pages/orders/cart.html:22
 msgid "Cart items"
-msgstr "Корзина товара"
+msgstr "Товары в корзине"
 
+#: payment/products/admin.py:42 payment/products/models.py:87
 #: products/admin.py:42 products/models.py:87
-#: templates/pages/product_detail.html:80
+#: templates/pages/product_detail.html:77
 msgid "Color"
 msgstr "Цвет"
 
-#: products/models.py:35
+#: payment/products/models.py:35 products/models.py:35
 msgid "Categories"
 msgstr "Категории"
 
-#: products/models.py:52
+#: payment/products/models.py:52 products/models.py:52
 msgid "Logo"
 msgstr "Логотип"
 
+#: payment/products/models.py:56 payment/products/models.py:121
 #: products/models.py:56 products/models.py:121
 msgid "Brand"
 msgstr "Бренд"
 
-#: products/models.py:57 templates/pages/product_list.html:30
+#: payment/products/models.py:57 products/models.py:57
+#: templates/pages/product_list.html:30
 msgid "Brands"
 msgstr "Бренды"
 
-#: products/models.py:65 products/models.py:104 products/models.py:179
-#: templates/pages/cart.html:18
+#: payment/products/models.py:65 payment/products/models.py:104
+#: payment/products/models.py:179 products/models.py:65 products/models.py:104
+#: products/models.py:179 templates/pages/orders/cart.html:27
 msgid "Product"
-msgstr "Продукт"
+msgstr "Товар"
 
-#: products/models.py:88
+#: payment/products/models.py:88 products/models.py:88
 msgid "Colors"
 msgstr "Цвета"
 
-#: products/models.py:102 products/models.py:129 templates/pages/cart.html:21
-#: templates/pages/invoice.html:39
+#: payment/products/models.py:102 payment/products/models.py:129
+#: products/models.py:102 products/models.py:129
+#: templates/pages/invoice.html:39 templates/pages/orders/cart.html:31
 msgid "Price"
 msgstr "Цена"
 
-#: products/models.py:103 templates/pages/accounts/orders.html:56
-#: templates/pages/cart.html:20 templates/pages/invoice.html:40
+#: payment/products/models.py:103 products/models.py:103
+#: templates/pages/accounts/orders.html:56 templates/pages/invoice.html:40
+#: templates/pages/order_detail.html:73 templates/pages/orders/cart.html:29
+#: templates/pages/orders/checkout.html:90
 msgid "Quantity"
 msgstr "Кол-во"
 
-#: products/models.py:114
+#: payment/products/models.py:114 products/models.py:114
 msgid "Variation"
 msgstr "Вариация"
 
-#: products/models.py:115
+#: payment/products/models.py:115 products/models.py:115
 msgid "Variations"
 msgstr "Вариации"
 
-#: products/models.py:119
+#: payment/products/models.py:119 products/models.py:119
 msgid "Product name"
-msgstr "Название продукта"
+msgstr "Название товара"
 
-#: products/models.py:122 templates/pages/product_detail.html:111
+#: payment/products/models.py:122 products/models.py:122
+#: templates/pages/product_detail.html:102
 msgid "Description"
 msgstr "Описание"
 
-#: products/models.py:123 templates/pages/product_detail.html:105
+#: payment/products/models.py:123 products/models.py:123
+#: templates/pages/product_detail.html:108
 msgid "Characters"
-msgstr "Параметры"
+msgstr "Спецификации"
 
-#: products/models.py:124
+# What is "Product owner"
+#: payment/products/models.py:124 products/models.py:124
 msgid "Product Owner"
-msgstr "Владелец продукта"
+msgstr "Поставщик"
 
-#: products/models.py:125
+#: payment/products/models.py:125 products/models.py:125
 msgid "Volume type"
 msgstr "Тип тома"
 
-#: products/models.py:127
+#: payment/products/models.py:127 products/models.py:127
 msgid "Available in stock"
 msgstr "Есть в наличии"
 
-#: products/models.py:128
+#: payment/products/models.py:128 products/models.py:128
 msgid "Is recommended"
 msgstr "Рекомендовано"
 
-#: products/models.py:132
-#, fuzzy
-#| msgid "First name"
+#: payment/products/models.py:132 products/models.py:132
 msgid "First image"
-msgstr "Имя"
+msgstr "Первое изображение"
 
-#: products/models.py:133
+#: payment/products/models.py:133 products/models.py:133
 msgid "Second image"
 msgstr "Второе изображение"
 
-#: products/models.py:134
+#: payment/products/models.py:134 products/models.py:134
 msgid "Third image"
 msgstr "Третый изображение"
 
-#: products/models.py:180
+#: payment/products/models.py:180 products/models.py:180
+#: templates/pages/order_detail.html:88
+#: templates/pages/orders/checkout.html:113
 msgid "Products"
-msgstr "Продукты"
+msgstr "Товары"
 
-#: products/views.py:11
-#, fuzzy
-#| msgid "New products first"
+#: payment/products/views.py:11 products/views.py:11
 msgid "New first"
-msgstr "Новые продукты"
+msgstr "Новые товары"
 
-#: products/views.py:12
+#: payment/products/views.py:12 products/views.py:12
 msgid "Old first"
-msgstr "Старые продукты"
+msgstr "Старые товары"
 
-#: products/views.py:13
-#, fuzzy
-#| msgid "Title a-z"
+#: payment/products/views.py:13 products/views.py:13
 msgid "Title asc"
-msgstr "Заглавие a-z"
+msgstr "Наименованию (А->Я)"
 
-#: products/views.py:14
-#, fuzzy
-#| msgid "Title"
+#: payment/products/views.py:14 products/views.py:14
 msgid "Title desc"
-msgstr "Название"
+msgstr "Наименованию (Я->А)"
 
-#: products/views.py:15
-#, fuzzy
-#| msgid "Price"
+#: payment/products/views.py:15 products/views.py:15
 msgid "Price asc"
-msgstr "Цена"
+msgstr "Цене по возрастанию"
 
-#: products/views.py:16
-#, fuzzy
-#| msgid "Price decreasing"
+#: payment/products/views.py:16 products/views.py:16
 msgid "Price desc"
-msgstr "Снижение цены"
+msgstr "Цене по убыванию"
 
-#: products/views.py:66
+#: payment/products/views.py:66 products/views.py:66
 msgid "All"
 msgstr "Все"
 
 #: project/settings.py:222
 msgid "KG"
-msgstr "КГ"
+msgstr "кг"
 
 #: project/settings.py:223
 msgid "Litr"
-msgstr "Литр"
+msgstr "л"
 
 #: project/settings.py:331
-#, fuzzy
-#| msgid "Registration"
 msgid "Administration"
-msgstr "Регистрация"
+msgstr "Администрация"
 
-#: rest_app/views.py:67
+#: rest_app/views.py:79
 msgid "Cart successfully updated"
 msgstr "Корзина успешно обновлена"
 
-#: rest_app/views.py:70
+#: rest_app/views.py:82
 msgid "Successful added"
 msgstr "Успешно добавлено"
 
-#: rest_app/views.py:106 templates/base.html:260
+#: rest_app/views.py:118 templates/base.html:313
 msgid "Successful removed"
 msgstr "Удалено"
 
-#: rest_app/views.py:131
+#: rest_app/views.py:143
 msgid "Successful saved"
-msgstr "Успешное сохранение"
+msgstr "Успешно сохранен"
+
+#: rest_app/views.py:173
+msgid "Successful authenticated"
+msgstr "Успешная аутентификация"
+
+#: rest_app/views.py:178
+msgid "Invalid credentials"
+msgstr "Неверные учетные данные"
+
+#: rest_app/views.py:237 rest_app/views.py:271
+msgid "Sorry, something went wrong"
+msgstr "Извините, что-то пошло не так"
+
+#: rest_app/views.py:258
+msgid "Sorry, wrong confirm password"
+msgstr "Извините, пароли не совпадают"
+
+#: rest_app/views.py:261
+msgid "Sorry, incorrect old password"
+msgstr "Извините, неверный старый пароль"
+
+#: rest_app/views.py:268
+msgid "Successfully updated"
+msgstr "Успешно обновлена"
+
+#: rest_app/views.py:340
+msgid "Order successful placed"
+msgstr "Ваш заказ успешно размещен"
 
 #: templates/admin/filer/actions.html:5
 msgid "Run the selected action"
-msgstr ""
+msgstr "Выполнить выбранное действие"
 
 #: templates/admin/filer/actions.html:5
 msgid "Go"
-msgstr ""
+msgstr "Идти"
 
 #: templates/admin/filer/actions.html:14
 #: templates/admin/filer/folder/directory_table.html:218
 msgid "Click here to select the objects across all pages"
-msgstr ""
+msgstr "Нажмите здесь, чтобы выбрать объекты на всех страницах"
 
 #: templates/admin/filer/actions.html:14
 #, python-format
 msgid "Select all %(total_count)s files and/or folders"
-msgstr ""
+msgstr "Выберите все %(total_count)s файлы и/или папки"
 
 #: templates/admin/filer/actions.html:16
 #: templates/admin/filer/folder/directory_table.html:220
 msgid "Clear selection"
-msgstr ""
+msgstr "Очистить выбор"
 
 #: templates/admin/filer/breadcrumbs.html:4
 #: templates/admin/filer/folder/directory_listing.html:42
 msgid "Go back to admin homepage"
-msgstr ""
+msgstr "Вернуться на главную страницу администратора"
 
 #: templates/admin/filer/breadcrumbs.html:4
 #: templates/admin/filer/folder/change_form.html:6
 #: templates/admin/filer/folder/directory_listing.html:43
-#, fuzzy
-#| msgid "Homepage"
 msgid "Home"
 msgstr "Главная"
 
 #: templates/admin/filer/breadcrumbs.html:5
 #: templates/admin/filer/folder/directory_listing.html:46
 msgid "Go back to Filer app"
-msgstr ""
+msgstr "Вернуться в Файл-менеджер"
 
 #: templates/admin/filer/breadcrumbs.html:5
 #: templates/admin/filer/folder/change_form.html:7
 #: templates/admin/filer/folder/directory_listing.html:47
-#, fuzzy
-#| msgid "File"
 msgid "Filer"
-msgstr "Файл"
+msgstr "Файл-менеджер"
 
 #: templates/admin/filer/breadcrumbs.html:7
 #: templates/admin/filer/folder/directory_listing.html:51
 msgid "Go back to root folder"
-msgstr ""
+msgstr "Вернуться в корневую папку"
 
 #: templates/admin/filer/breadcrumbs.html:7
 #: templates/admin/filer/folder/change_form.html:8
 #: templates/admin/filer/folder/directory_listing.html:51
 #: templates/admin/filer/folder/directory_listing.html:118
 msgid "root"
-msgstr ""
+msgstr "корень"
 
 #: templates/admin/filer/breadcrumbs.html:10
 #: templates/admin/filer/breadcrumbs.html:20
@@ -395,11 +465,11 @@ msgstr ""
 #: templates/admin/filer/folder/directory_listing.html:63
 #, python-format
 msgid "Go back to '%(folder_name)s' folder"
-msgstr ""
+msgstr "Вернуться в папку '%(folder_name)s'"
 
 #: templates/admin/filer/change_form.html:25
 msgid "Duplicates"
-msgstr ""
+msgstr "Дубликаты"
 
 #: templates/admin/filer/delete_selected_files_confirmation.html:11
 msgid ""
@@ -407,53 +477,58 @@ msgid ""
 "objects, but your account doesn't have permission to delete the following "
 "types of objects:"
 msgstr ""
+"Удаление выбранных файлов и/или папок приведёт к удалению связанных "
+"объектов, но ваша учётная запись не имеет разрешения на удаление следующих "
+"типов объектов:"
 
 #: templates/admin/filer/delete_selected_files_confirmation.html:19
 msgid ""
 "Deleting the selected files and/or folders would require deleting the "
 "following protected related objects:"
 msgstr ""
+"Для удаления выбранных файлов и/или папок потребуется удалить следующие "
+"защищённые связанные объекты:"
 
 #: templates/admin/filer/delete_selected_files_confirmation.html:27
 msgid ""
 "Are you sure you want to delete the selected files and/or folders? All of "
 "the following objects and their related items will be deleted:"
 msgstr ""
+"Вы действительно хотите удалить выбранные файлы и/или папки? Все следующие "
+"объекты и связанные с ними элементы будут удалены:"
 
 #: templates/admin/filer/delete_selected_files_confirmation.html:46
 #: templates/admin/filer/folder/choose_copy_destination.html:77
 #: templates/admin/filer/folder/choose_move_destination.html:73
 msgid "No, take me back"
-msgstr ""
+msgstr "Нет, отвезите меня обратно"
 
 #: templates/admin/filer/delete_selected_files_confirmation.html:47
 msgid "Yes, I&#39;m sure"
-msgstr ""
+msgstr "Да, я уверен"
 
 #: templates/admin/filer/file/change_form.html:37
 #: templates/admin/filer/folder/change_form.html:21
 #: templates/admin/filer/image/change_form.html:36
 msgid "History"
-msgstr ""
+msgstr "История"
 
 #: templates/admin/filer/file/change_form.html:39
 #: templates/admin/filer/folder/change_form.html:23
 #: templates/admin/filer/image/change_form.html:38
 msgid "View on site"
-msgstr ""
+msgstr "Посмотреть на сайте"
 
 #: templates/admin/filer/folder/change_form.html:6
 #: templates/admin/filer/folder/change_form.html:7
 #: templates/admin/filer/folder/change_form.html:8
 #: templates/admin/filer/folder/directory_listing.html:118
 msgid "Go back to"
-msgstr ""
+msgstr "Вернуться к"
 
 #: templates/admin/filer/folder/change_form.html:6
-#, fuzzy
-#| msgid "Homepage"
 msgid "admin homepage"
-msgstr "Главная"
+msgstr "Главная страница администратора"
 
 #: templates/admin/filer/folder/change_form.html:8
 #: templates/admin/filer/folder/directory_listing.html:118
@@ -461,7 +536,7 @@ msgstr "Главная"
 #: templates/admin/filer/folder/new_folder_form.html:7
 #: templates/admin/filer/tools/clipboard/clipboard.html:27
 msgid "folder"
-msgstr ""
+msgstr "папка"
 
 #: templates/admin/filer/folder/change_form.html:37
 #: templates/admin/filer/folder/directory_listing.html:111
@@ -470,13 +545,15 @@ msgstr ""
 #: templates/admin/filer/folder/directory_table.html:56
 #: templates/admin/filer/folder/directory_table.html:164
 msgid "Folder Icon"
-msgstr ""
+msgstr "Значок папки"
 
 #: templates/admin/filer/folder/choose_copy_destination.html:36
 msgid ""
 "Your account doesn't have permissions to copy all of the selected files and/"
 "or folders."
 msgstr ""
+"У вашей учётной записи нет разрешений для копирования всех выбранных файлов "
+"и/или папок."
 
 #: templates/admin/filer/folder/choose_copy_destination.html:38
 #: templates/admin/filer/folder/choose_copy_destination.html:44
@@ -485,145 +562,161 @@ msgstr ""
 #: templates/admin/filer/folder/choose_move_destination.html:44
 #: templates/admin/filer/folder/choose_move_destination.html:50
 msgid "Take me back"
-msgstr ""
+msgstr "Отвезите меня обратно"
 
 #: templates/admin/filer/folder/choose_copy_destination.html:42
 #: templates/admin/filer/folder/choose_move_destination.html:42
 msgid "There are no destination folders available."
-msgstr ""
+msgstr "Нет доступных папок назначения."
 
 #: templates/admin/filer/folder/choose_copy_destination.html:48
 msgid "There are no files and/or folders available to copy."
-msgstr ""
+msgstr "Нет файлов и/или папок для копирования."
 
 #: templates/admin/filer/folder/choose_copy_destination.html:53
 msgid ""
 "The following files and/or folders will be copied to a destination folder "
 "(retaining their tree structure):"
 msgstr ""
+"Следующие файлы и/или папки будут скопированы в папку назначения (сохраняя "
+"их древовидную структуру):"
 
 #: templates/admin/filer/folder/choose_copy_destination.html:67
 #: templates/admin/filer/folder/choose_move_destination.html:65
 msgid "Destination folder:"
-msgstr ""
+msgstr "Папка назначения:"
 
 #: templates/admin/filer/folder/choose_copy_destination.html:78
 #: templates/admin/filer/folder/choose_copy_destination.html:81
 #: templates/admin/filer/folder/directory_listing.html:194
 msgid "Copy"
-msgstr ""
+msgstr "Kопировать"
 
 #: templates/admin/filer/folder/choose_copy_destination.html:80
 msgid "It is not allowed to copy files into same folder"
-msgstr ""
+msgstr "Нельзя копировать файлы в одну папку"
 
 #: templates/admin/filer/folder/choose_images_resize_options.html:15
 msgid ""
 "Your account doesn't have permissions to resize all of the selected images."
 msgstr ""
+"У вашей учётной записи нет разрешений для изменения размера всех выбранных "
+"изображений."
 
 #: templates/admin/filer/folder/choose_images_resize_options.html:18
 msgid "There are no images available to resize."
-msgstr ""
+msgstr "Нет изображений для изменения размера."
 
 #: templates/admin/filer/folder/choose_images_resize_options.html:20
 msgid "The following images will be resized:"
-msgstr ""
+msgstr "Размер следующих изображении будут изменены:"
 
 #: templates/admin/filer/folder/choose_images_resize_options.html:33
 msgid "Choose an existing thumbnail option or enter resize parameters:"
 msgstr ""
+"Выберите существующий вариант миниатюр или введите параметры изменения "
+"размера:"
 
 #: templates/admin/filer/folder/choose_images_resize_options.html:35
 msgid "Choose resize parameters:"
-msgstr ""
+msgstr "Выберите параметры изменения размера:"
 
 #: templates/admin/filer/folder/choose_images_resize_options.html:38
 msgid ""
 "Warning: Images will be resized in-place and originals will be lost. Maybe "
 "first make a copy of them to retain the originals."
 msgstr ""
+"Внимание: изображения будут изменены на месте, а оригиналы будут потеряны. "
+"Возможно, сначала сделайте копию их, чтобы сохранить оригиналы?"
 
 #: templates/admin/filer/folder/choose_images_resize_options.html:41
 msgid "Resize"
-msgstr ""
+msgstr "Изменение размера"
 
 #: templates/admin/filer/folder/choose_move_destination.html:36
 msgid ""
 "Your account doesn't have permissions to move all of the selected files and/"
 "or folders."
 msgstr ""
+"У вашей учётной записи нет разрешений на перемещение всех выбранных файлов и/"
+"или папок."
 
 #: templates/admin/filer/folder/choose_move_destination.html:48
 msgid "There are no files and/or folders available to move."
-msgstr ""
+msgstr "Нет файлов и/или папок для перемещения."
 
 #: templates/admin/filer/folder/choose_move_destination.html:53
 msgid ""
 "The following files and/or folders will be moved to a destination folder "
 "(retaining their tree structure):"
 msgstr ""
+"Следующие файлы и/или папки будут перемещены в папку назначения (сохраняя их "
+"древовидную структуру):"
 
 #: templates/admin/filer/folder/choose_move_destination.html:74
 #: templates/admin/filer/folder/choose_move_destination.html:77
 #: templates/admin/filer/folder/directory_listing.html:197
 msgid "Move"
-msgstr ""
+msgstr "Переместить"
 
 #: templates/admin/filer/folder/choose_move_destination.html:76
 msgid "It is not allowed to move files into same folder"
-msgstr ""
+msgstr "Нельзя перемещать файлы в одну папку"
 
 #: templates/admin/filer/folder/choose_rename_format.html:15
 msgid ""
 "Your account doesn't have permissions to rename all of the selected files."
 msgstr ""
+"У вашей учётной записи нет разрешений на переименование всех выбранных "
+"файлов."
 
 #: templates/admin/filer/folder/choose_rename_format.html:18
 msgid "There are no files available to rename."
-msgstr ""
+msgstr "Нет файлов для переименования."
 
 #: templates/admin/filer/folder/choose_rename_format.html:20
 msgid ""
 "The following files will be renamed (they will stay in their folders and "
 "keep original filename, only displayed filename will be changed):"
 msgstr ""
+"Следующие файлы будут переименованы (они останутся в папках и сохранят "
+"исходное имя файла, только отображаемое имя файла будет изменено):"
 
 #: templates/admin/filer/folder/choose_rename_format.html:59
 msgid "Rename"
-msgstr ""
+msgstr "Переименовать"
 
 #: templates/admin/filer/folder/directory_listing.html:110
 msgid "Go back to the parent folder"
-msgstr ""
+msgstr "Вернуться в корневую папку"
 
 #: templates/admin/filer/folder/directory_listing.html:147
 msgid "Change current folder details"
-msgstr ""
+msgstr "Изменить информации о текущей папке"
 
 #: templates/admin/filer/folder/directory_listing.html:147
 msgid "Change"
-msgstr ""
+msgstr "Изменить"
 
 #: templates/admin/filer/folder/directory_listing.html:157
 msgid "Click here to run search for entered phrase"
-msgstr ""
+msgstr "Нажмите здесь, чтобы запустить поиск введённой фразы"
 
 #: templates/admin/filer/folder/directory_listing.html:167
 msgid "Close"
-msgstr ""
+msgstr "Закрыть"
 
 #: templates/admin/filer/folder/directory_listing.html:169
 msgid "Limit"
-msgstr ""
+msgstr "Ограничивать"
 
 #: templates/admin/filer/folder/directory_listing.html:174
 msgid "Check it to limit the search to current folder"
-msgstr ""
+msgstr "Отметьте его, чтобы ограничить поиск текущей папкой"
 
 #: templates/admin/filer/folder/directory_listing.html:175
 msgid "Limit the search to current folder"
-msgstr ""
+msgstr "Ограничить поиск текущей папкой"
 
 #: templates/admin/filer/folder/directory_listing.html:191
 #: templates/admin/filer/tools/detail_info.html:213
@@ -632,11 +725,11 @@ msgstr "Удалить"
 
 #: templates/admin/filer/folder/directory_listing.html:214
 msgid "Adds a new Folder"
-msgstr ""
+msgstr "Добавить новую папку"
 
 #: templates/admin/filer/folder/directory_listing.html:217
 msgid "New Folder"
-msgstr ""
+msgstr "Новая папка"
 
 #: templates/admin/filer/folder/directory_listing.html:222
 #: templates/admin/filer/folder/directory_listing.html:226
@@ -644,35 +737,33 @@ msgstr ""
 #: templates/admin/filer/folder/directory_listing.html:233
 #: templates/admin/filer/folder/directory_listing.html:240
 msgid "Upload Files"
-msgstr ""
+msgstr "Аплод файлы"
 
 #: templates/admin/filer/folder/directory_listing.html:238
 msgid "You have to select a folder first"
-msgstr ""
+msgstr "Сначала нужно выбрать папку"
 
 #: templates/admin/filer/folder/directory_table.html:4
 #: templates/admin/filer/folder/directory_table.html:157
 #: templates/admin/filer/tools/clipboard/clipboard.html:27
 msgid "Unsorted Uploads"
-msgstr ""
+msgstr "Несортированный аплоды"
 
 #: templates/admin/filer/folder/directory_table.html:14
 #: templates/admin/filer/tools/detail_info.html:59
 #: templates/admin/filer/tools/detail_info.html:150
 msgid "Owner"
-msgstr ""
+msgstr "Владелец"
 
 #: templates/admin/filer/folder/directory_table.html:15
 #: templates/admin/filer/tools/detail_info.html:38
 #: templates/admin/filer/tools/detail_info.html:102
 msgid "Size"
-msgstr ""
+msgstr "Размер"
 
 #: templates/admin/filer/folder/directory_table.html:16
-#, fuzzy
-#| msgid "Active"
 msgid "Action"
-msgstr "Активный"
+msgstr "Действие"
 
 #: templates/admin/filer/folder/directory_table.html:25
 #: templates/admin/filer/folder/directory_table.html:32
@@ -680,50 +771,48 @@ msgstr "Активный"
 #: templates/admin/filer/folder/directory_table.html:62
 #, python-format
 msgid "Change '%(item_label)s' folder details"
-msgstr ""
+msgstr "Изменить информацию о папке '%(item_label)s'"
 
 #: templates/admin/filer/folder/directory_table.html:73
 #: templates/admin/filer/tools/search_form.html:5
 #, python-format
 msgid "%(counter)s folder"
 msgid_plural "%(counter)s folders"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%(counter)s папкa"
+msgstr[1] "%(counter)s папки"
+msgstr[2] "%(counter)s папок"
+msgstr[3] "%(counter)s папки"
 
 #: templates/admin/filer/folder/directory_table.html:74
 #: templates/admin/filer/tools/search_form.html:6
 #, python-format
 msgid "%(counter)s file"
 msgid_plural "%(counter)s files"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%(counter)s файл"
+msgstr[1] "%(counter)s файла"
+msgstr[2] "%(counter)s файлов"
+msgstr[3] "%(counter)s файли"
 
 #: templates/admin/filer/folder/directory_table.html:80
 msgid "Change folder details"
-msgstr ""
+msgstr "Изменить информацию о папке"
 
 #: templates/admin/filer/folder/directory_table.html:81
-#, fuzzy
-#| msgid "Remove"
 msgid "Remove folder"
-msgstr "Удалить"
+msgstr "Удалить папки"
 
 #: templates/admin/filer/folder/directory_table.html:93
 #: templates/admin/filer/folder/directory_table.html:101
 #: templates/admin/filer/folder/directory_table.html:116
 msgid "Select this file"
-msgstr ""
+msgstr "Выбирать этот файл"
 
 #: templates/admin/filer/folder/directory_table.html:104
 #: templates/admin/filer/folder/directory_table.html:119
 #: templates/admin/filer/folder/directory_table.html:143
 #, python-format
 msgid "Change '%(item_label)s' details"
-msgstr ""
+msgstr "Изменить детали '%(item_label)s'"
 
 #: templates/admin/filer/folder/directory_table.html:128 users/admin.py:19
 msgid "Permissions"
@@ -731,11 +820,11 @@ msgstr "Права доступа"
 
 #: templates/admin/filer/folder/directory_table.html:128
 msgid "disabled"
-msgstr ""
+msgstr "отключен"
 
 #: templates/admin/filer/folder/directory_table.html:128
 msgid "enabled"
-msgstr ""
+msgstr "включен"
 
 #: templates/admin/filer/folder/directory_table.html:139
 #, python-format
@@ -745,76 +834,70 @@ msgstr ""
 #: templates/admin/filer/folder/directory_table.html:141
 #, python-format
 msgid "Download '%(item_label)s'"
-msgstr ""
+msgstr "Скачать '%(item_label)s'"
 
 #: templates/admin/filer/folder/directory_table.html:144
-#, fuzzy
-#| msgid "Remove"
 msgid "Remove file"
-msgstr "Удалить"
+msgstr "Удалить файл"
 
 #: templates/admin/filer/folder/directory_table.html:151
 msgid "Drop files here or use the \"Upload Files\" button"
-msgstr ""
+msgstr "Отбросьте файлы здесь или используйте кнопку «Аплод файлы»"
 
 #: templates/admin/filer/folder/directory_table.html:161
 msgid "Drop your file to upload into:"
-msgstr ""
+msgstr "или отбросьте файлы здесь, чтобы аплод файлы"
 
 #: templates/admin/filer/folder/directory_table.html:171
 msgid "Upload"
-msgstr ""
+msgstr "Аплод"
 
 #: templates/admin/filer/folder/directory_table.html:183
-#, fuzzy
-#| msgid "Cancelled"
 msgid "cancel"
-msgstr "Отменен"
+msgstr "отменить"
 
 #: templates/admin/filer/folder/directory_table.html:187
 msgid "Upload success!"
-msgstr ""
+msgstr "Успешный аплод!"
 
 #: templates/admin/filer/folder/directory_table.html:191
 msgid "Upload canceled!"
-msgstr ""
+msgstr "Аплод отменен!"
 
 #: templates/admin/filer/folder/directory_table.html:198
 msgid "previous"
-msgstr ""
+msgstr "предыдущий"
 
 #: templates/admin/filer/folder/directory_table.html:203
 #, python-format
 msgid "Page %(number)s of %(num_pages)s."
-msgstr ""
+msgstr "Страница %(number)s из %(num_pages)s."
 
 #: templates/admin/filer/folder/directory_table.html:208
 msgid "next"
-msgstr ""
+msgstr "следущий"
 
 #: templates/admin/filer/folder/directory_table.html:218
 #, python-format
 msgid "Select all %(total_count)s"
-msgstr ""
+msgstr "Выберите все %(total_count)s"
 
 #: templates/admin/filer/folder/new_folder_form.html:4
 #: templates/admin/filer/folder/new_folder_form.html:7
-#, fuzzy
-#| msgid "Add new payment"
 msgid "Add new"
-msgstr "Добавить новый платеж"
+msgstr "Добавить новый"
 
 #: templates/admin/filer/folder/new_folder_form.html:4
 msgid "Django site admin"
-msgstr ""
+msgstr "Главная страница администратора"
 
 #: templates/admin/filer/folder/new_folder_form.html:15
 msgid "Please correct the error below."
 msgid_plural "Please correct the errors below."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Пожалуйста, исправьте ошибки ниже."
+msgstr[1] "Пожалуйста, исправьте ошибки ниже."
+msgstr[2] "Пожалуйста, исправьте ошибки ниже."
+msgstr[3] "Пожалуйста, исправьте ошибки ниже."
 
 #: templates/admin/filer/folder/new_folder_form.html:30
 #: templates/pages/accounts/settings.html:20
@@ -827,154 +910,138 @@ msgstr "Сохранить"
 
 #: templates/admin/filer/tools/clipboard/clipboard.html:9
 msgid "Clipboard"
-msgstr ""
+msgstr "Буфер обмена"
 
 #: templates/admin/filer/tools/clipboard/clipboard.html:21
 msgid "Paste all items here"
-msgstr ""
+msgstr "Вставить все элементы здесь"
 
 #: templates/admin/filer/tools/clipboard/clipboard.html:27
 msgid "Move all clipboard files to"
-msgstr ""
+msgstr "Переместите все файлы буфера обмена в"
 
 #: templates/admin/filer/tools/clipboard/clipboard.html:27
 msgid "Empty Clipboard"
-msgstr ""
+msgstr "Пустой буфер обмена"
 
 #: templates/admin/filer/tools/clipboard/clipboard.html:50
 msgid "the clipboard is empty"
-msgstr ""
+msgstr "буфер обмена пуст"
 
 #: templates/admin/filer/tools/clipboard/clipboard_item_rows.html:16
 msgid "upload failed"
-msgstr ""
+msgstr "аплод не удался"
 
 #: templates/admin/filer/tools/detail_info.html:22
 msgid "Open file"
-msgstr ""
+msgstr "Открыть файл"
 
 #: templates/admin/filer/tools/detail_info.html:24
 #: templates/admin/filer/tools/detail_info.html:86
 msgid "Full size preview"
-msgstr ""
+msgstr "Полный просмотр"
 
 #: templates/admin/filer/tools/detail_info.html:34
 #: templates/admin/filer/tools/detail_info.html:93
 msgid "Type"
-msgstr ""
+msgstr "Тип"
 
 #: templates/admin/filer/tools/detail_info.html:42
 #: templates/admin/filer/tools/detail_info.html:111
-#, fuzzy
-#| msgid "Files"
 msgid "File-size"
-msgstr "Файлы"
+msgstr "Размер файла"
 
 #: templates/admin/filer/tools/detail_info.html:46
 #: templates/admin/filer/tools/detail_info.html:120
 msgid "Modified"
-msgstr ""
+msgstr "Модифицированный"
 
 #: templates/admin/filer/tools/detail_info.html:50
 #: templates/admin/filer/tools/detail_info.html:129
-#, fuzzy
-#| msgid "Created at"
 msgid "Created"
 msgstr "Создан в"
 
 #: templates/admin/filer/tools/detail_info.html:158
-#, fuzzy
-#| msgid "Description"
 msgid "Add Description"
-msgstr "Описание"
+msgstr "Добавить описание"
 
 #: templates/admin/filer/tools/detail_info.html:166
 msgid "Advanced"
-msgstr ""
+msgstr "Дополнительный"
 
 #: templates/admin/filer/tools/detail_info.html:176
 msgid "Author"
-msgstr ""
+msgstr "Автор"
 
 #: templates/admin/filer/tools/detail_info.html:183
 msgid "Add Alt-Text"
-msgstr ""
+msgstr "Добавить Alt-Текст"
 
 #: templates/admin/filer/tools/detail_info.html:190
-#, fuzzy
-#| msgid "Add to cart"
 msgid "Add caption"
-msgstr "в Корзину"
+msgstr "Добавить подпись"
 
 #: templates/admin/filer/tools/detail_info.html:197
 msgid "Add Tags"
-msgstr ""
+msgstr "Добавить теги"
 
 #: templates/admin/filer/tools/detail_info.html:204
 msgid "Change File"
-msgstr ""
+msgstr "Изменить файл"
 
 #: templates/admin/filer/tools/search_form.html:5
-#, fuzzy
-#| msgid "Found"
 msgid "found"
-msgstr "Найдено"
+msgstr "найдено"
 
 #: templates/admin/filer/tools/search_form.html:5
-#, fuzzy
-#| msgid "Brand"
 msgid "and"
-msgstr "Бренд"
+msgstr "и"
 
 #: templates/admin/filer/tools/search_form.html:7
 msgid "cancel search"
-msgstr ""
+msgstr "отменить поиск"
 
 #: templates/admin/filer/widgets/admin_file.html:8
 #: templates/admin/filer/widgets/admin_file.html:35
 #: templates/admin/filer/widgets/admin_folder.html:18
 msgid "Clear"
-msgstr ""
+msgstr "Очистить"
 
 #: templates/admin/filer/widgets/admin_file.html:17
 msgid "or drop your file here"
-msgstr ""
+msgstr "или отбросьте файлы здесь"
 
 #: templates/admin/filer/widgets/admin_file.html:26
 #: templates/admin/filer/widgets/admin_file.html:27
-#, fuzzy
-#| msgid "Permissions"
 msgid "file missing"
-msgstr "Права доступа"
+msgstr "файл отсутствует"
 
 #: templates/admin/filer/widgets/admin_file.html:30
 msgid "no file selected"
-msgstr ""
+msgstr "файл не выбран"
 
 #: templates/admin/filer/widgets/admin_file.html:39
 #: templates/admin/filer/widgets/admin_folder.html:14
 msgid "Lookup"
-msgstr ""
+msgstr "Искать"
 
 #: templates/admin/filer/widgets/admin_file.html:40
-#, fuzzy
-#| msgid "Choose category"
 msgid "Choose File"
-msgstr "Выберите категорию"
+msgstr "Выберите файл"
 
 #: templates/admin/filer/widgets/admin_folder.html:7
 #: templates/admin/filer/widgets/admin_folder.html:33
 msgid "Folder"
-msgstr ""
+msgstr "Папка"
 
 #: templates/admin/filer/widgets/admin_folder.html:11
 #: templates/admin/filer/widgets/admin_folder.html:33
 msgid "none selected"
-msgstr ""
+msgstr "не выбрано, ничего не выбрано"
 
 #: templates/admin/filer/widgets/admin_folder.html:15
 msgid "Add Folder"
-msgstr ""
+msgstr "Добавить папку"
 
 #: templates/admin/products/change_list.html:7
 msgid "File browser"
@@ -988,22 +1055,27 @@ msgstr "Экспорт"
 msgid "Import"
 msgstr "Импорт"
 
-#: templates/base.html:205 templates/base.html:246
-#: templates/pages/product_detail.html:66
-#: templates/pages/product_detail.html:255
-#: templates/pages/product_detail.html:283
+#: templates/base.html:261 templates/base.html:300
+#: templates/pages/product_detail.html:63
+#: templates/pages/product_detail.html:252
+#: templates/pages/product_detail.html:280
 msgid "Not available"
 msgstr "Не доступно"
 
+#: templates/last/delivery_time_page.html:90 templates/parts/pagination.html:27
+msgid "Next"
+msgstr "Следующий"
+
 #: templates/pages/accounts/delivery.html:17
-#: templates/pages/accounts/delivery.html:47
-#, fuzzy
-#| msgid "Client address"
+#: templates/pages/accounts/delivery.html:50
+#: templates/pages/orders/address.html:31
+#: templates/rest/delivery_address_form.html:6
 msgid "Add an address"
-msgstr "Адрес клиента"
+msgstr "Добавить адрес"
 
 #: templates/pages/accounts/delivery.html:23
-#: templates/pages/accounts/payments.html:15 templates/pages/checkout.html:82
+#: templates/pages/accounts/payments.html:15
+#: templates/pages/orders/address.html:37
 msgid "Default"
 msgstr "По умолчанию"
 
@@ -1024,99 +1096,89 @@ msgstr "Редактировать"
 msgid "Remove"
 msgstr "Удалить"
 
-#: templates/pages/accounts/delivery.html:82
+#: templates/pages/accounts/delivery.html:89
 #: templates/pages/accounts/payments.html:126
 msgid "Is default"
-msgstr "По умолчанию?"
+msgstr "По умолчанию"
 
-#: templates/pages/accounts/delivery.html:86
+#: templates/pages/accounts/delivery.html:93
 #: templates/pages/accounts/payments.html:128
 #: templates/pages/accounts/payments_edit.html:17
+#: templates/rest/delivery_address_form.html:50
 msgid "Submit"
 msgstr "Отправить"
 
+# Change it to "Login"
 #: templates/pages/accounts/login.html:5 templates/pages/accounts/login.html:17
-#: templates/pages/checkout.html:17 templates/parts/footer.html:63
-#: templates/parts/footer.html:69 templates/parts/header.html:45
+#: templates/pages/accounts/login.html:59
+#: templates/pages/orders/address.html:24 templates/parts/footer.html:65
+#: templates/parts/footer.html:71 templates/parts/header.html:47
 msgid "Login"
 msgstr "Войти"
 
 #: templates/pages/accounts/login.html:49
 #: templates/pages/accounts/register.html:60
-#: templates/pages/accounts/settings.html:61 templates/parts/footer.html:110
-#: templates/parts/footer.html:216 users/forms.py:23
+#: templates/pages/accounts/settings.html:61 templates/parts/footer.html:112
+#: templates/parts/footer.html:203 users/forms.py:23
 msgid "Password"
 msgstr "Пароль"
-
-#: templates/pages/accounts/login.html:59
-msgid "Log In"
-msgstr "Войти"
 
 #: templates/pages/accounts/login.html:67
 msgid "Forgot Password"
 msgstr "Забыли пароль"
 
 #: templates/pages/accounts/orders.html:17
-#, fuzzy
-#| msgid "Order"
 msgid "Order date"
-msgstr "Заказ"
+msgstr "Дата заказа"
 
 #: templates/pages/accounts/orders.html:21
 msgid "Amount"
 msgstr "Количество"
 
 #: templates/pages/accounts/orders.html:22
-#: templates/pages/accounts/orders.html:54 templates/pages/cart.html:73
-#: templates/pages/cart.html:78 templates/pages/cart.html:90
-#: templates/pages/checkout.html:13 templates/pages/invoice.html:18
-#: templates/pages/main.html:70 templates/pages/order_detail.html:46
+#: templates/pages/accounts/orders.html:54 templates/pages/invoice.html:18
+#: templates/pages/main.html:70 templates/pages/order_detail.html:70
+#: templates/pages/order_detail.html:89 templates/pages/order_detail.html:93
+#: templates/pages/order_detail.html:98 templates/pages/order_detail.html:103
+#: templates/pages/orders/cart.html:86 templates/pages/orders/cart.html:91
+#: templates/pages/orders/cart.html:102 templates/pages/orders/checkout.html:87
+#: templates/pages/orders/checkout.html:114
+#: templates/pages/orders/checkout.html:118
+#: templates/pages/orders/checkout.html:123
+#: templates/pages/orders/checkout.html:128
 #: templates/pages/product_detail.html:31
-#: templates/pages/product_detail.html:61 templates/pages/product_list.html:64
-#: templates/pages/product_list.html:130 templates/parts/header.html:73
+#: templates/pages/product_detail.html:58 templates/pages/product_list.html:64
+#: templates/pages/product_list.html:129 templates/parts/header.html:78
 #: templates/rest/cart.html:16 templates/rest/cart.html:23
 msgid "sum"
 msgstr "сум"
 
 #: templates/pages/accounts/orders.html:25
-#, fuzzy
-#| msgid "Delivered"
 msgid "Deliver to"
-msgstr "Доставлен"
+msgstr "Доставить в"
 
 #: templates/pages/accounts/orders.html:35
-#: templates/pages/accounts/register.html:46 templates/pages/checkout.html:42
-#: templates/pages/invoice.html:66 templates/pages/order_detail.html:34
-#: templates/parts/footer.html:178
+#: templates/pages/accounts/register.html:46 templates/pages/invoice.html:66
+#: templates/pages/order_detail.html:24 templates/pages/orders/address.html:75
+#: templates/pages/orders/checkout.html:35 templates/parts/footer.html:182
 msgid "Phone"
 msgstr "Телефон"
 
 #: templates/pages/accounts/orders.html:40
-#, fuzzy
-#| msgid "Personal info"
 msgid "Detail info"
-msgstr "Личная информация"
+msgstr "Подробная информация"
 
-#: templates/pages/accounts/orders.html:41 templates/pages/order_detail.html:20
+#: templates/pages/accounts/orders.html:41
 msgid "Invoice"
-msgstr "Выставленный счет"
+msgstr "Инвойс"
 
 #: templates/pages/accounts/orders.html:45
-#, fuzzy
-#| msgid "Delivered"
 msgid "Delivered on"
 msgstr "Доставлен"
 
 #: templates/pages/accounts/payments.html:16
-#, fuzzy
-#| msgid "Address"
 msgid "Add"
-msgstr "Адрес"
-
-#: templates/pages/accounts/payments.html:20
-#: templates/pages/accounts/settings.html:52
-msgid "Address"
-msgstr "Адрес"
+msgstr "Добавить"
 
 #: templates/pages/accounts/payments.html:24
 msgid "Nicknames"
@@ -1124,14 +1186,12 @@ msgstr "Имя"
 
 #: templates/pages/accounts/payments.html:37
 msgid "Your plastic cards"
-msgstr "Ваши пластиковые карты"
+msgstr "Ваши платежные карты"
 
 #: templates/pages/accounts/payments.html:37
 #: templates/pages/accounts/payments.html:108
-#, fuzzy
-#| msgid "Important dates"
 msgid "Expiration date"
-msgstr "Важные дни"
+msgstr "Срок действия"
 
 #: templates/pages/accounts/payments.html:51
 #: templates/pages/accounts/payments.html:82 users/models.py:108
@@ -1139,42 +1199,29 @@ msgid "Name on card"
 msgstr "Имя на карте"
 
 #: templates/pages/accounts/payments.html:55
-#, fuzzy
-#| msgid "Client address"
 msgid "Payment address"
-msgstr "Адрес клиента"
+msgstr "Платежный адрес"
 
 #: templates/pages/accounts/payments.html:77
 msgid "Add new payment"
-msgstr "Добавить новый платеж"
+msgstr "Добавить новую карту"
 
 #: templates/pages/accounts/payments.html:93 users/models.py:109
-#, fuzzy
-#| msgid "Phone number"
 msgid "Card number"
-msgstr "Номер телефона"
+msgstr "Номер карты"
 
 #: templates/pages/accounts/payments.html:118
-#, fuzzy
-#| msgid "Shipping address"
 msgid "Billing address"
-msgstr "Адрес доставки"
+msgstr "Платежный адрес"
 
 #: templates/pages/accounts/profile.html:18
-#: templates/pages/accounts/profile.html:20 templates/parts/header.html:16
+#: templates/pages/accounts/profile.html:20 templates/parts/header.html:19
 msgid "My orders"
 msgstr "Мои заказы"
 
-#: templates/pages/accounts/profile.html:32
-#: templates/pages/accounts/profile.html:34
-#, fuzzy
-#| msgid "Client address"
-msgid "Delevery address"
-msgstr "Адрес клиента"
-
 #: templates/pages/accounts/register.html:5
-#: templates/pages/accounts/register.html:17 templates/parts/footer.html:64
-#: templates/parts/footer.html:124
+#: templates/pages/accounts/register.html:17 templates/parts/footer.html:66
+#: templates/parts/footer.html:126
 msgid "Registration"
 msgstr "Регистрация"
 
@@ -1183,84 +1230,50 @@ msgid "Full name"
 msgstr "Полное имя"
 
 #: templates/pages/accounts/register.html:68
-#: templates/pages/accounts/settings.html:80 templates/parts/footer.html:231
+#: templates/pages/accounts/settings.html:80 templates/parts/footer.html:218
 #: users/forms.py:24
 msgid "Confirm password"
 msgstr "Подтвердите пароль"
 
-#: templates/pages/accounts/settings.html:29 templates/parts/footer.html:160
+#: templates/pages/accounts/settings.html:29 templates/parts/footer.html:164
 #: users/forms.py:21 users/models.py:56
 msgid "Last name"
 msgstr "Фамилия"
 
 #: templates/pages/accounts/settings.html:40
+#: templates/pages/order_detail.html:26 templates/pages/orders/checkout.html:37
 msgid "Email"
-msgstr "Эл. адрес"
+msgstr "Эл. почта"
 
 #: templates/pages/accounts/settings.html:72
-#, fuzzy
-#| msgid "Password"
 msgid "Old password"
-msgstr "Пароль"
+msgstr "Старый пароль"
 
 #: templates/pages/accounts/settings.html:76
-#, fuzzy
-#| msgid "Password"
 msgid "New password"
-msgstr "Пароль"
-
-#: templates/pages/cart.html:19 templates/pages/product_detail.html:157
-msgid "Title"
-msgstr "Название"
-
-#: templates/pages/cart.html:22 templates/pages/cart.html:89
-#: templates/pages/invoice.html:18 templates/pages/invoice.html:41
-#: templates/pages/invoice.html:67 templates/pages/order_detail.html:35
-msgid "Total price"
-msgstr "Итоговая цена"
-
-#: templates/pages/checkout.html:5 templates/pages/checkout.html:76
-#, fuzzy
-#| msgid "Client address"
-msgid "My delivery addresses"
-msgstr "Адрес клиента"
-
-#: templates/pages/checkout.html:13
-msgid "Total amount of order"
-msgstr "Общий объем заказа"
-
-#: templates/pages/checkout.html:18 templates/parts/footer.html:130
-msgid "or"
-msgstr "или"
-
-#: templates/pages/checkout.html:18
-msgid "Continue as guest"
-msgstr "продолжить в качестве гостя"
-
-#: templates/pages/checkout.html:72
-msgid "Continue"
-msgstr "Продолжить"
+msgstr "Новый пароль"
 
 #: templates/pages/invoice.html:14
 msgid "Print invoice"
-msgstr "Печать счета-фактуры"
+msgstr "Распечатать инвойс"
 
-#: templates/pages/invoice.html:16 templates/pages/order_detail.html:36
+#: templates/pages/invoice.html:16
 msgid "Created at"
 msgstr "Создан в"
 
+#: templates/pages/invoice.html:18 templates/pages/invoice.html:41
+#: templates/pages/invoice.html:67 templates/pages/orders/cart.html:32
+#: templates/pages/orders/cart.html:101
+msgid "Total price"
+msgstr "Итоговая цена"
+
 #: templates/pages/invoice.html:38
 msgid "Items ordered"
-msgstr ""
+msgstr "Заказанные товары"
 
 #: templates/pages/invoice.html:60
 msgid "Payment information"
 msgstr "Платежная информация"
-
-#: templates/pages/invoice.html:76 templates/pages/main.html:30
-#: users/models.py:118
-msgid "Payment method"
-msgstr "Способ оплаты"
 
 #: templates/pages/main.html:5
 msgid "E-commerce"
@@ -1272,7 +1285,7 @@ msgstr "Работать с нами легко"
 
 #: templates/pages/main.html:27
 msgid "Choose a product"
-msgstr "Выбрать продукт"
+msgstr "Выбирать товар"
 
 #: templates/pages/main.html:33
 msgid "And we'll deliver your order"
@@ -1284,95 +1297,156 @@ msgstr "Быстрый доступ"
 
 #: templates/pages/main.html:52
 msgid "Top products of Stroyshop"
-msgstr "Лучшие продукты Stroyshop"
+msgstr "Лучшие товары Stroyshop"
 
-#: templates/pages/main.html:76 templates/pages/product_detail.html:34
-#: templates/pages/product_detail.html:100 templates/pages/product_list.html:70
-#: templates/pages/product_list.html:136
+#: templates/pages/main.html:76 templates/pages/product_detail.html:97
+#: templates/pages/product_list.html:69 templates/pages/product_list.html:134
 msgid "Add to cart"
 msgstr "в Корзину"
 
 #: templates/pages/main.html:106 templates/pages/main.html:125
 #: templates/pages/main.html:142 templates/pages/main.html:159
-#, fuzzy
-#| msgid "Found products"
 msgid "More products"
-msgstr "Найденные товары"
+msgstr "Больше товаров"
 
-#: templates/pages/order_detail.html:31
-#, fuzzy
-#| msgid "Order"
-msgid "Order id"
-msgstr "Заказ"
+#: templates/pages/order_detail.html:15 templates/pages/orders/checkout.html:23
+msgid "Order preview"
+msgstr "Предварительный просмотр заказа"
 
-#: templates/pages/order_detail.html:32
-#, fuzzy
-#| msgid "Order"
-msgid "Order status"
-msgstr "Заказ"
+#: templates/pages/order_detail.html:48 templates/pages/orders/checkout.html:65
+msgid "Ordered products"
+msgstr "Заказанные товары"
 
-#: templates/pages/order_detail.html:120
-msgid "Pay with"
-msgstr "Оплатить с"
+#: templates/pages/order_detail.html:86
+#: templates/pages/orders/checkout.html:111
+msgid "Order summary"
+msgstr "Сводка заказа"
+
+#: templates/pages/order_detail.html:92
+#: templates/pages/orders/checkout.html:117
+msgid "Delivery"
+msgstr "Поставка"
+
+#: templates/pages/order_detail.html:97
+#: templates/pages/orders/checkout.html:122
+msgid "Porter"
+msgstr "Грузчик"
+
+#: templates/pages/order_detail.html:102
+#: templates/pages/orders/checkout.html:127 templates/rest/cart.html:22
+msgid "Order total"
+msgstr "Итог заказа"
+
+#: templates/pages/orders/address.html:25 templates/parts/footer.html:132
+msgid "or"
+msgstr "или"
+
+#: templates/pages/orders/address.html:25
+msgid "Continue as guest"
+msgstr "Продолжить в качестве гостя"
+
+#: templates/pages/orders/address.html:28
+msgid "My delivery addresses"
+msgstr "Мои адреса доставки"
+
+#: templates/pages/orders/address.html:46
+msgid "Tel."
+msgstr "Тел."
+
+#: templates/pages/orders/address.html:108
+#: templates/pages/orders/order_time.html:59
+#: templates/pages/orders/payment_method.html:35
+msgid "Continue"
+msgstr "Продолжить"
+
+#: templates/pages/orders/cart.html:28 templates/pages/product_detail.html:154
+msgid "Title"
+msgstr "Название"
+
+#: templates/pages/orders/cart.html:30
+msgid "Wt"
+msgstr "Вес"
+
+#: templates/pages/orders/checkout.html:31
+#: templates/pages/orders/checkout.html:45
+#: templates/pages/orders/checkout.html:56
+msgid "change"
+msgstr "изменить"
+
+#: templates/pages/orders/checkout.html:106
+msgid "Place your order"
+msgstr "Оформить заказ"
+
+#: templates/pages/orders/order_time.html:27
+msgid "Today"
+msgstr "Cегодня"
+
+#: templates/pages/orders/order_time.html:52
+msgid "Yes"
+msgstr "Да"
+
+#: templates/pages/orders/order_time.html:56
+msgid "No"
+msgstr "Нет"
 
 #: templates/pages/product_detail.html:16
 msgid "Similar products"
-msgstr "Похожие продукты"
+msgstr "Похожие товары"
 
-#: templates/pages/product_detail.html:65
+#: templates/pages/product_detail.html:62
 msgid "In stock"
 msgstr "В наличии"
 
-#: templates/pages/product_detail.html:69
+#: templates/pages/product_detail.html:66
 msgid "Packing"
 msgstr "Упаковка"
 
-#: templates/pages/product_detail.html:91
+#: templates/pages/product_detail.html:88
 msgid "Last updated"
 msgstr "Последнее обновление"
 
-#: templates/pages/product_detail.html:119
+#: templates/pages/product_detail.html:116
 msgid "Feedbacks"
 msgstr "Отзывы"
 
-#: templates/pages/product_detail.html:122 templates/pages/search.html:10
+#: templates/pages/product_detail.html:119 templates/pages/search.html:10
 msgid "Found"
 msgstr "Найдено"
 
-#: templates/pages/product_detail.html:122
+#: templates/pages/product_detail.html:119
 msgid "feedbacks"
 msgstr "Отзывы"
 
-#: templates/pages/product_detail.html:125
-#: templates/pages/product_list.html:103
+#: templates/pages/product_detail.html:122
+#: templates/pages/product_list.html:102
 msgid "Sorting"
 msgstr "Сортировка"
 
-#: templates/pages/product_detail.html:127
+#: templates/pages/product_detail.html:124
 msgid "Last first"
-msgstr "Последние"
+msgstr "Последные"
 
-#: templates/pages/product_detail.html:133
+#: templates/pages/product_detail.html:130
 msgid "Leave review"
 msgstr "Оставить отзыв"
 
-#: templates/pages/product_detail.html:139
+#: templates/pages/product_detail.html:136
 msgid "Your name"
 msgstr "Ваше имя"
 
-#: templates/pages/product_detail.html:148
+#: templates/pages/product_detail.html:145
 msgid "Where are you from"
 msgstr "Откуда вы"
 
-#: templates/pages/product_detail.html:166
+#: templates/pages/product_detail.html:163
 msgid "Your message"
 msgstr "Ваше сообщение"
 
-#: templates/pages/product_detail.html:184
+#: templates/pages/product_detail.html:181
 msgid "from"
 msgstr "из"
 
-#: templates/pages/product_detail.html:193
+#: templates/pages/product_detail.html:190
 msgid "More feedbacks"
 msgstr "Больше отзывов"
 
@@ -1382,19 +1456,19 @@ msgstr "Выберите категорию"
 
 #: templates/pages/product_list.html:49
 msgid "Recommended products"
-msgstr "Рекомендуемые продукты"
+msgstr "Рекомендуемые товары"
 
-#: templates/pages/product_list.html:100
+#: templates/pages/product_list.html:99
 msgid "products"
-msgstr "продуктов"
+msgstr "товаров"
 
 #: templates/parts/banner.html:10
 msgid "more"
 msgstr "больше"
 
-#: templates/parts/category_list.html:5 templates/parts/header.html:90
+#: templates/parts/category_list.html:5 templates/parts/header.html:95
 msgid "Product catalog"
-msgstr "Каталог продуктов"
+msgstr "Каталог товаров"
 
 #: templates/parts/footer.html:5
 msgid "Go top"
@@ -1402,7 +1476,7 @@ msgstr "Перейти наверх"
 
 #: templates/parts/footer.html:12
 msgid "N1 online shop"
-msgstr "N1 интернет-магазин"
+msgstr "#1 интернет-магазин"
 
 #: templates/parts/footer.html:22
 msgid "All rights reserved"
@@ -1413,58 +1487,60 @@ msgid "The site is located in the zone TAS-IX"
 msgstr "Сайт расположен в зоне TAS-IX"
 
 #: templates/parts/footer.html:26
-#, fuzzy
-#| msgid "Users"
 msgid "For Users"
-msgstr "Пользователи"
+msgstr "Для пользователей"
 
-#: templates/parts/footer.html:38
+#: templates/parts/footer.html:35
 msgid "For customers"
 msgstr "Для клиентов"
 
-#: templates/parts/footer.html:48
-#, fuzzy
-#| msgid "Client address"
+#: templates/parts/footer.html:43
 msgid "Our address"
-msgstr "Адрес клиента"
+msgstr "Наш адрес"
 
-#: templates/parts/footer.html:71
+#: templates/parts/footer.html:51
+msgid "Website developed by"
+msgstr "Веб-сайт разработан"
+
+#: templates/parts/footer.html:73
 msgid "Login with Google"
 msgstr "Войти через Google"
 
-#: templates/parts/footer.html:72
+#: templates/parts/footer.html:74
 msgid "Login with Facebook"
 msgstr "Войти через Facebook"
 
-#: templates/parts/footer.html:143 users/forms.py:20 users/models.py:55
+#: templates/parts/footer.html:147 users/forms.py:20 users/models.py:55
 msgid "First name"
 msgstr "Имя"
 
-#: templates/parts/header.html:36
+#: templates/parts/footer.html:228
+msgid "I agree with terms of Stroyshop"
+msgstr "Я согласен с правилами Stroyshop"
+
+#: templates/parts/header.html:14 templates/parts/header.html:39
 msgid "Logout"
 msgstr "Выйти"
 
-#: templates/parts/header.html:59
+#: templates/parts/header.html:60
 msgid "Search product"
-msgstr "Найти продукт"
+msgstr "Найти товар"
+
+#: templates/parts/header.html:64
+msgid "Cancel"
+msgstr "отменить"
+
+#: templates/parts/header.html:107
+msgid "View all"
+msgstr "Посмотреть все"
 
 #: templates/parts/pagination.html:9
 msgid "Back"
 msgstr "Назад"
 
-#: templates/parts/pagination.html:27
-msgid "Next"
-msgstr "Следущий"
-
-#: templates/rest/cart.html:22
-#, fuzzy
-#| msgid "Order"
-msgid "Order total"
-msgstr "Заказ"
-
 #: templates/rest/cart.html:26
 msgid "View cart"
-msgstr ""
+msgstr "Посмотреть корзину"
 
 #: users/admin.py:18
 msgid "Personal info"
@@ -1472,11 +1548,11 @@ msgstr "Личная информация"
 
 #: users/admin.py:21
 msgid "Important dates"
-msgstr "Важные дни"
+msgstr "Важные даты"
 
 #: users/forms.py:36
 msgid "Passwords not match"
-msgstr "Пароль не указан"
+msgstr "Пароли не совпадают"
 
 #: users/models.py:48
 msgid "File"
@@ -1492,7 +1568,7 @@ msgstr "Номер телефона или Имя пользователя"
 
 #: users/models.py:57
 msgid "Date joined"
-msgstr "Дата вступления"
+msgstr "Дата регистрации"
 
 #: users/models.py:58
 msgid "Active"
@@ -1512,7 +1588,7 @@ msgstr "Пользователи"
 
 #: users/models.py:75
 msgid "Client user"
-msgstr "Клиент пользователя"
+msgstr "Клиент-пользователь"
 
 #: users/models.py:76
 msgid "Client address"
@@ -1524,7 +1600,7 @@ msgstr "Производитель"
 
 #: users/models.py:88
 msgid "Supplier"
-msgstr "Поставшик"
+msgstr "Поставщик"
 
 #: users/models.py:90
 msgid "Merchant user"
@@ -1532,52 +1608,44 @@ msgstr "Продавец"
 
 #: users/models.py:91
 msgid "Merchant type"
-msgstr "Топ торговца"
+msgstr "Тип торговца"
 
 #: users/views.py:110
-#, fuzzy
-#| msgid "Successful added"
 msgid "Address successfully added"
-msgstr "Успешно добавлено"
+msgstr "Адрес успешно добавлен"
 
 #: users/views.py:112
-#, fuzzy
-#| msgid "Cart successfully updated"
 msgid "Address successfully updated"
-msgstr "Корзина успешно обновлена"
+msgstr "Адрес успешно обновлен"
 
 #: users/views.py:122
-#, fuzzy
-#| msgid "Cart successfully updated"
 msgid "Address successfully deleted"
-msgstr "Корзина успешно обновлена"
+msgstr "Адрес успешно удален"
 
 #: users/views.py:156
-#, fuzzy
-#| msgid "Cart successfully updated"
 msgid "Card data successfully added"
-msgstr "Корзина успешно обновлена"
+msgstr "Данные карты успешно добавлены"
 
-#~ msgid "OR"
-#~ msgstr "ИЛИ"
+#~ msgid "Order status"
+#~ msgstr "Статус заказа"
 
-#~ msgid "Found products"
-#~ msgstr "Найденные товары"
+#~ msgid "Pay with"
+#~ msgstr "Оплатить с"
 
-#~ msgid "Filter"
-#~ msgstr "Фильтр"
+#~ msgid "Total quantity"
+#~ msgstr "Общее кол-во"
 
-#~ msgid "Shipped at"
-#~ msgstr "Поставляется в"
+#~ msgid "pcs"
+#~ msgstr "штук"
 
-#~ msgid "Title z-a"
-#~ msgstr "Заглавие z-a"
+#~ msgid "Delivery cost"
+#~ msgstr "Стоимость доставки"
 
-#~ msgid "Price increasing"
-#~ msgstr "Повышение цен"
+#~ msgid "Cost of products"
+#~ msgstr "Стоимость товаров"
 
-#~ msgid "Fullname"
-#~ msgstr "Полноеимя"
+#~ msgid "Something went wrong"
+#~ msgstr "Что-то пошло не так"
 
-#~ msgid "Login OR continue without authorization"
-#~ msgstr "Войти или продолжить без авторизации"
+#~ msgid "Time"
+#~ msgstr "Время"

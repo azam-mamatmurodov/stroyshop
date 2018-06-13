@@ -56,6 +56,13 @@ class DeliveryAddressForm(forms.ModelForm):
         exclude = ['user', ]
 
 
+class DeliveryAddressRestForm(forms.ModelForm):
+
+    class Meta:
+        model = DeliveryAddress
+        exclude = ['user', ]
+
+
 class PaymentMethodForm(forms.ModelForm):
 
     class Meta:

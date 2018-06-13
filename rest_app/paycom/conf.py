@@ -1,6 +1,8 @@
+from django.conf import settings
+
 config = {
-    'merchantId': '5a2e656bde89097555cc9041',
+    'merchantId': settings.PAYME_MERCHANT_ID,
     'login': 'Paycom',
-    'key': 'q558FoDmzO3qVS29sB0OD7I8brdhgEcMy5y&'
+    'key': settings.PAYME_KEY
 }
 account_params = {'order_id', 'customer_id'}

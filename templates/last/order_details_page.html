@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order details page</title>
+  <link rel="stylesheet" type="text/css" href="../../static/css/custom_style.css">
+  <style type="text/css">
+  *{
+    margin: 0;
+    padding: 0;
+  }
+  body{
+    background: #fff;
+    max-width: 1000px;
+    margin: auto;
+  }
+  #order-details-section{
+    margin-top: 20px;
+  }
+  #order-details-section .top .order_date{
+    border-right: 1px solid #000;
+    padding-right: 10px;
+  }
+  #order-details-section .top .title{
+    display: block;
+  }
+  #order-details-section .top .order_date, .order_id{
+    display: inline-block;
+  }
+  #order-details-section .information{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin: 10px 0;
+  }
+  #order-details-section .information .payment_method{
+    margin: 0 100px;
+    width: 35%;
+  }
+  #order-details-section .products{
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+  #order-details-section .products .item_buttons{
+    display: flex;
+    flex-direction: column;
+  }
+  #order-details-section .products .button{
+    padding: 10px;
+    background: #ddd;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 5px;
+  }
+  #order-details-section .products .item{
+    display: flex;
+  }
+  #order-details-section .products .item_logo{
+    margin-right: 10px;
+    width: 50px;
+  }
+</style>
+</head>
+
+<body>
+  <div id="order-details-section">
+    <div class="top">
+      <h2 class="title">Order details</h2>
+      <p class="order_date">Ordered on: <span>May 25, 2018</span></p>
+      <p class="order_id">Order id: <span>123456789asd</span></p>
+    </div>
+    <div class="information">
+      <div class="address">
+        <strong>Shipping address</strong>
+        <p>tashkent, mukimi, 10a</p>
+      </div>
+      <div class="payment_method">
+        <strong>Payment method</strong>
+        <p>visa uzcard</p>
+      </div>
+      <div class="order">
+        <strong class="total">Order summary</strong>
+        <p class="total_quantity">total quantity: 1</p>
+        <p class="total_sum">order total: 200$</p>
+      </div>
+    </div>
+    <div class="products">
+      <div class="item">
+        <div class="item_logo">logo</div>
+        <div class="item_information">
+          <p class="name">item name</p>
+          <p class="price">item price</p>
+          <p class="quantity">item quantity</p>
+        </div>
+      </div>
+      <div class="item_buttons">
+        <a href="#" class="button">Buy it again</a>
+        <a href="#" class="button">Write a product review</a>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,131 +1,123 @@
 {% extends 'base.html' %}
-{% load static %}
-{% load i18n %}
-{% block title %}
-    {% trans 'Order info' %}
-{% endblock %}
+
+{% load static i18n humanize products_extras %}
+
+{% block title %}{% trans 'Order info' %}{% endblock %}
+
 {% block content %}
     {{ header }}
-    <div class="container">
-        <div class="row">
-            {{ breadcrumbs }}
-            <div class="col-md-6 col-md-offset-3">
-				<div class="panel panel-login">
-					<div class="panel-heading">
-						<div class="row">
-							<div class="col-xs-6">
-								<h2 class="page_title">
-                                    {% trans 'Order info' %}
-                                </h2>
-                                <a href="{% url 'orders:order_invoice_detail' phone=order.phone order_unique_id=order.order_unique_id %}" style="text-align: right">{% trans 'Invoice' %}</a>
-							</div>
-						</div>
-						<hr>
-					</div>
-					<div class="panel-body">
-						<div class="row">
-							<div class="col-lg-12">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>{% trans 'Order id' %}</th>
-                                            <th>{% trans 'Order status' %}</th>
-                                            <th>{% trans 'Client name' %}</th>
-                                            <th>{% trans 'Phone' %}</th>
-                                            <th>{% trans 'Total price' %}</th>
-                                            <th>{% trans 'Created at' %}</th>
-                                            <th>{% trans 'Shipping address' %}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>{{ order.order_unique_id }}</td>
-                                            <td>{{ order.get_status }}</td>
-                                            <td>{{ order.client_name }}</td>
-                                            <td>+998 {{ order.phone }}</td>
-                                            <td>{{ order.total_price }} {% trans 'sum' %}</td>
-                                            <td>{{ order.created|date:'d/m/Y' }}</td>
-                                            <td>{{ order.shipping_address }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+    <div id="main">
+        {{ breadcrumbs }}
+
+        <div id="checkout-last-section">
+            <div class="wrapper_checkout_left">
+                <div class="top">
+                  <h2 class="title">{% trans 'Order preview' %}</h2>
+                  <h2 class="user_name">{{ client_data.address.client_name }}</h2>
+                </div>
+                <div class="left">
+                  <div class="information">
+                    <div class="address">
+                      <strong>{% trans 'Delivery address' %}:</strong>
+                        <div class="address_info">{{ client_data.address.shipping_address }}</div>
+                        <ul>
+                            <li><strong>{% trans 'Phone' %}:</strong>+998 {{ client_data.address.phone|phone_number }}</li>
+                            {% if client_data.address.email %}
+                                <li><strong>{% trans 'Email' %}:</strong> {{ client_data.address.email }}</li>
+                            {% endif %}
+                          </ul>
+                    </div>
+                    <div class="payment_and_time">
+                        <div class="delivery_time">
+                            <strong>{% trans 'Delivery time' %}:</strong>
+                            <div class="delivery_time_inner">
+                                {% print_timestamp client_data.time as timer %}
+                                {{ timer.0 }} - {{ timer.1 }}
                             </div>
-                            <div class="payment">
-                                <div class="payme">
-                                    <form method="POST" action="https://test.paycom.uz">
-
-                                        <!-- Идентификатор WEB Кассы -->
-                                        <input type="hidden" name="merchant" value="5ae1c9fae58cd1493d8a471d"/>
-
-                                        <!-- Сумма платежа в тиинах -->
-                                        <input type="hidden" name="amount" value="{{ order.get_total_price }}"/>
-
-                                        <!-- Поля Объекта Account -->
-                                        <input type="hidden" name="account[customer_id]" value="{{ order.phone }}"/>
-                                        <input type="hidden" name="account[order_id]" value="{{ order.id }}"/>
-
-                                        <!-- ==================== НЕ ОБЯЗАТЕЛЬНЫЕ ПОЛЯ ====================== -->
-                                        <!-- Язык. Доступные значения: ru|uz|en
-                                             Другие значения игнорируются
-                                             Значение по умолчанию ru -->
-                                        <input type="hidden" name="lang" value="ru"/>
-
-                                        <!-- Валюта. Доступные значения: 643|840|860|978
-                                             Другие значения игнорируются
-                                             Значение по умолчанию 860
-                                             Коды валют в ISO формате
-                                             643 - RUB
-                                             840 - USD
-                                             860 - UZS
-                                             978 - EUR -->
-                                        <input type="hidden" name="currency" value="860"/>
-
-                                        <!-- URL возврата после оплаты или отмены платежа.
-                                             Если URL возврата не указан, он берется из заголовка запроса Referer.
-                                             URL возврата может содержать параметры, которые заменяются Paycom при запросе.
-                                             Доступные параметры для callback:
-                                             :transaction - id транзакции или "null" если транзакцию не удалось создадь
-                                             :account.{field} - поля объекта Account
-                                             Пример: https://your-service.uz/paycom/:transaction -->
-                                        <input type="hidden" name="callback" value="http://stroy.dst.uz/api/v1/payment/paycom/"/>
-
-                                        <!-- Таймаут после успешного платежа в милисекундах.
-                                             Значение по умолчанию 15
-                                             После успешной оплаты, по истечении времени callback_timeout
-                                             производится перенаправление пользователя по url возврата после платежа -->
-                                        <input type="hidden" name="callback_timeout" value="15"/>
-
-                                        <!-- Выбор платежного инструмента Paycom.
-                                             В Paycom доступна регистрация несколько платежных
-                                             инструментов. Если платёжный инструмент не указан,
-                                             пользователю предоставляется выбор инструмента оплаты.
-                                             Если указать id определённого платежного инструмента -
-                                             пользователь перенаправляется на указанный платежный инструмент. -->
-{#                                        <input type="hidden" name="payment" value="{payment_id}"/>#}
-
-                                        <!-- Описание платежа
-                                             Для описания платежа доступны 3 языка: узбекский, русский, английский.
-                                             Для описания платежа на нескольких языках следует использовать
-                                             несколько полей с атрибутом  name="description[{lang}]"
-                                             lang может принимать значения ru|en|uz -->
-                                        <input type="hidden" name="description" value="uz"/>
-
-                                        <!-- Объект детализации платежа
-                                             Поле для детального описания платежа, например, перечисления
-                                             купленных товаров, стоимости доставки, скидки.
-                                             Значение поля (value) — JSON-строка закодированная в BASE64 -->
-{#                                        <input type="hidden" name="detail" value="{JSON объект детализации в BASE64}"/>#}
-                                        <!-- ================================================================== -->
-
-                                        <button type="submit" class="payme_submit" style="background-image: url('https://help.paycom.uz/images/payme_01_small.png')">{% trans 'Pay with' %}<b>PAYCOM</b></button>
-                                    </form>
-                                </div>
+                        </div>
+                        <div class="payment-method">
+                            <div>
+                                <strong>{% trans 'Payment method' %}:</strong>
                             </div>
-						</div>
-					</div>
-				</div>
-			</div>
-        </div>
+                            {% get_payment client_data.payment_method as payment %}
+                            <p class="payment_method">{{ payment.title }}</p>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="products">
+                    <h2 class="title">{% trans 'Ordered products' %}</h2>
+                    {% for cart_item in cart_items %}
+                        <div class="item">
+                          <div class="item_logo">
+                              <img src="{{ cart_item.variation.product.image_0.url }}" alt="">
+                          </div>
+                          <div class="item_information">
+                            <p class="name">
+                                <a href="{{ cart_item.variation.product.get_absolute_url }}">
+                                  {{ cart_item.variation.product.name }}
+                                <br> {{ cart_item.variation.name }} {{ cart_item.variation.product.volume }}
+                                </a>
+                            </p>
+                            {% if cart_item.variation.color %}
+                                <div style="" class="cart_item_color">{{ cart_item.variation.color.name }}</div>
+                            {% endif %}
+                            <p class="price">
+                                <strong>
+                                    <em class="red_color">
+                                        {{ cart_item.variation.price|floatformat|intcomma }}
+                                    </em>
+                                </strong>
+                                {% trans 'sum' %}
+                            </p>
+                            <p class="quantity">
+                                {% trans 'Quantity' %}:
+                                <em class="blue_color">
+                                    {{ cart_item.count }}
+                                </em>
+                            </p>
+                          </div>
+                        </div>
+                    {% endfor %}
+                  </div>
+                </div>
+            </div>
+            <div class="right">
+                <div class="order">
+                    <strong class="total">{% trans 'Order summary' %}</strong>
+                    <p class="delivery_cost">
+                        <span>{% trans 'Products' %} ({{ total_quantity }}):</span>
+                        <em class="">{{ products_price|floatformat|intcomma }} {% trans 'sum' %}</em>
+                    </p>
+                    <p class="delivery_cost">
+                        <span>{% trans 'Delivery' %}:*</span>
+                        <em class="">{{ delivery_price|floatformat|intcomma }} {% trans 'sum' %}</em>
+                    </p>
+                    {% if client_data.need_porter == '1' %}
+                        <p class="porter">
+                            <span>{% trans 'Porter' %}:*</span>
+                            <em class="">{{ delivery_price|floatformat|intcomma }} {% trans 'sum' %}</em>
+                        </p>
+                    {% endif %}
+                    <p class="total_sum">
+                        <span class="order_total_label">{% trans 'Order total' %}:</span>
+                        <strong>{{ total_amount|floatformat|intcomma }}</strong> {% trans 'sum' %}
+                    </p>
+                </div>
+            </div>
+          </div>
     </div>
     {{ footer }}
+{% endblock %}
+
+{% block css %}
+    <style>
+        #checkout-last-section .right
+        {
+            height: 220px !important;
+        }
+        .red_color
+        {
+            color: red;
+        }
+    </style>
 {% endblock %}

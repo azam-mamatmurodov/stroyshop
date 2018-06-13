@@ -12,6 +12,9 @@ from rest_app.views import (
     VariationDetailView,
     PaycomView,
     CartHtmlViews,
+    OrderCreateView,
+    DeliveryAddressCreateView,
+    PaycomUzcardView
 )
 
 urlpatterns = [
@@ -27,6 +30,10 @@ urlpatterns = [
 
     url(r'^products/(?P<pk>[\d]+)/$', ProductDetailView.as_view(), name='product_detail'),
     url(r'^products/(?P<pk>[\d]+)/variations/$', VariationDetailView.as_view(), name='product_variation_detail'),
+
+    # url(r'^orders/$', OrderCreateView.as_view(), name='order_create'),
+    url(r'^users/delivery-address/create/$', DeliveryAddressCreateView.as_view(), name='delivery_address_create'),
     url(r'^payment/paycom/$', PaycomView.as_view(), name='paycom'),
+    url(r'^payment/paycom/uzcard/$', PaycomUzcardView.as_view(), name='paycom_uzcard'),
 ]
 

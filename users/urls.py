@@ -1,4 +1,7 @@
 from django.conf.urls import url
+from django.contrib.auth.views import LogoutView
+from django.contrib.auth.decorators import login_required
+
 from users.views import (
     LoginView,
     RegisterView,
@@ -9,17 +12,16 @@ from users.views import (
     ProfilePaymentView,
     ProfilePaymentEdit,
 )
-from django.contrib.auth.views import LogoutView
-from django.contrib.auth.decorators import login_required
+
 
 urlpatterns = [
-    url(r'accounts/login/$', LoginView.as_view(), name='login', ),
-    url(r'accounts/logout/$', login_required(LogoutView.as_view(next_page='/')), name='logout', ),
-    url(r'accounts/register/$', RegisterView.as_view(), name='register', ),
-    url(r'accounts/$', login_required(ProfileView.as_view()), name='profile', ),
-    url(r'accounts/security/$', login_required(ProfileSettingsView.as_view()), name='profile_security', ),
-    url(r'accounts/orders/$', login_required(ProfileOrdersView.as_view()), name='profile_orders', ),
-    url(r'accounts/delivery/$', login_required(ProfileDeliveryView.as_view()), name='profile_delivery', ),
-    url(r'accounts/payment/$', login_required(ProfilePaymentView.as_view()), name='profile_payment', ),
-    url(r'accounts/payment/(?P<pk>\d+)/edit/$', login_required(ProfilePaymentEdit.as_view()), name='profile_payment_edit', ),
+    url(r'^login/$', LoginView.as_view(), name='login', ),
+    url(r'^logout/$', login_required(LogoutView.as_view(next_page='/')), name='logout', ),
+    url(r'^register/$', RegisterView.as_view(), name='register', ),
+    url(r'^$', login_required(ProfileView.as_view()), name='profile', ),
+    url(r'^security/$', login_required(ProfileSettingsView.as_view()), name='profile_security', ),
+    url(r'^orders/$', login_required(ProfileOrdersView.as_view()), name='profile_orders', ),
+    url(r'^delivery/$', login_required(ProfileDeliveryView.as_view()), name='profile_delivery', ),
+    url(r'^payment/$', login_required(ProfilePaymentView.as_view()), name='profile_payment', ),
+    url(r'^payment/(?P<pk>\d+)/edit/$', login_required(ProfilePaymentEdit.as_view()), name='profile_payment_edit', ),
 ]

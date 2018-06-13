@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-08 18:51+0500\n"
+"POT-Creation-Date: 2018-06-11 16:52+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,7 +35,7 @@ msgstr "Profil sozlamalari"
 #: templates/pages/accounts/payments_edit.html:4
 #: templates/pages/accounts/payments_edit.html:11
 #: templates/pages/accounts/profile.html:39
-#: templates/pages/accounts/profile.html:41 templates/parts/header.html:31
+#: templates/pages/accounts/profile.html:41 templates/parts/header.html:34
 #: users/models.py:119
 #, fuzzy
 #| msgid "Payment method"
@@ -58,60 +58,110 @@ msgstr "Buyurtma"
 #: main/context.py:103 templates/pages/accounts/profile.html:25
 #: templates/pages/accounts/profile.html:27
 #: templates/pages/accounts/settings.html:4
-#: templates/pages/accounts/settings.html:11 templates/parts/header.html:21
+#: templates/pages/accounts/settings.html:11 templates/parts/header.html:24
 msgid "Security"
 msgstr "Xavfsizlik"
 
-#: main/context.py:112 templates/pages/accounts/delivery.html:6
-#: templates/pages/accounts/delivery.html:13 templates/parts/header.html:26
+#: main/context.py:112 orders/models.py:82
+#: templates/pages/accounts/delivery.html:6
+#: templates/pages/accounts/delivery.html:13
+#: templates/pages/accounts/profile.html:34 templates/pages/invoice.html:52
+#: templates/pages/order_detail.html:21 templates/pages/orders/address.html:5
+#: templates/pages/orders/address.html:14 templates/pages/orders/cart.html:14
+#: templates/pages/orders/checkout.html:14
+#: templates/pages/orders/checkout.html:29
+#: templates/pages/orders/order_time.html:15
+#: templates/pages/orders/payment_method.html:16 templates/parts/header.html:29
 #, fuzzy
 #| msgid "Email address"
 msgid "Delivery address"
 msgstr "Email manzil"
 
-#: main/context.py:118 main/context.py:170 products/models.py:34
-#: products/models.py:120
+#: main/context.py:118 main/context.py:170 payment/products/models.py:34
+#: payment/products/models.py:120 products/models.py:34 products/models.py:120
 msgid "Category"
 msgstr "Toifa"
 
 #: main/context.py:149 main/context.py:154 main/context.py:191
-#: templates/pages/cart.html:4 templates/parts/header.html:72
+#: main/context.py:200 main/context.py:213 main/context.py:230
+#: templates/pages/orders/address.html:13 templates/pages/orders/cart.html:4
+#: templates/pages/orders/cart.html:13 templates/pages/orders/checkout.html:13
+#: templates/pages/orders/order_time.html:14
+#: templates/pages/orders/payment_method.html:15 templates/parts/header.html:77
 msgid "Cart"
 msgstr "Savatcha"
 
 #: main/context.py:158 templates/pages/invoice.html:11
-#: templates/pages/order_detail.html:5 templates/pages/order_detail.html:18
+#: templates/pages/order_detail.html:5
 #, fuzzy
 #| msgid "Order"
 msgid "Order info"
 msgstr "Buyurtma"
 
-#: main/context.py:195 templates/pages/cart.html:91
-#: templates/parts/header.html:82 templates/rest/cart.html:27
+#: main/context.py:195 main/context.py:204 main/context.py:217
+#: main/context.py:234 templates/pages/accounts/payments.html:20
+#: templates/pages/accounts/settings.html:52
+#, fuzzy
+#| msgid "Email address"
+msgid "Address"
+msgstr "Email manzil"
+
+#: main/context.py:208 main/context.py:221 main/context.py:238
+#: templates/pages/order_detail.html:32 templates/pages/orders/address.html:15
+#: templates/pages/orders/cart.html:15 templates/pages/orders/checkout.html:15
+#: templates/pages/orders/checkout.html:43
+#: templates/pages/orders/order_time.html:5
+#: templates/pages/orders/order_time.html:16
+#: templates/pages/orders/payment_method.html:17
+#, fuzzy
+#| msgid "Delivered"
+msgid "Delivery time"
+msgstr "Yetkazildi"
+
+#: main/context.py:225 main/context.py:242 templates/pages/invoice.html:76
+#: templates/pages/main.html:30 templates/pages/order_detail.html:40
+#: templates/pages/orders/address.html:16 templates/pages/orders/cart.html:16
+#: templates/pages/orders/checkout.html:16
+#: templates/pages/orders/checkout.html:54
+#: templates/pages/orders/order_time.html:17
+#: templates/pages/orders/payment_method.html:6
+#: templates/pages/orders/payment_method.html:18 users/models.py:118
+msgid "Payment method"
+msgstr "To'lov uslubi"
+
+#: main/context.py:246 templates/pages/orders/address.html:17
+#: templates/pages/orders/cart.html:17 templates/pages/orders/cart.html:103
+#: templates/pages/orders/checkout.html:5
+#: templates/pages/orders/checkout.html:17
+#: templates/pages/orders/order_time.html:18
+#: templates/pages/orders/payment_method.html:19 templates/parts/header.html:87
+#: templates/rest/cart.html:27
 msgid "Checkout"
 msgstr "Tekshirib ko'rmoq"
 
-#: main/context.py:200 templates/admin/filer/folder/directory_listing.html:160
+#: main/context.py:251 templates/admin/filer/folder/directory_listing.html:160
 #: templates/pages/search.html:4
 #, fuzzy
 #| msgid "Search product"
 msgid "Search"
 msgstr "Mahsulotni qidirish"
 
-#: main/context.py:211
+#: main/context.py:262
 msgid ""
 "Tashkent, Yashnabad district, st. Tinchlik / 1-quarter, 1-house, 1-kvart"
 msgstr ""
 
 #: main/models.py:10 main/models.py:23 main/models.py:36 main/models.py:49
-#: main/models.py:63 main/models.py:81 products/models.py:19
-#: products/models.py:51 templates/admin/filer/folder/directory_table.html:13
+#: main/models.py:63 main/models.py:81 payment/products/models.py:19
+#: payment/products/models.py:51 products/models.py:19 products/models.py:51
+#: templates/admin/filer/folder/directory_table.html:13
 #: templates/pages/accounts/settings.html:18
 msgid "Name"
 msgstr "Ism"
 
 #: main/models.py:11 main/models.py:24 main/models.py:37 main/models.py:50
-#: main/models.py:64 main/models.py:82 products/models.py:20
+#: main/models.py:64 main/models.py:82 payment/products/models.py:20
+#: products/models.py:20
 msgid "Slug"
 msgstr "Slug"
 
@@ -119,199 +169,212 @@ msgstr "Slug"
 msgid "Order"
 msgstr "Buyurtma"
 
-#: main/models.py:51 main/models.py:65 main/models.py:87 products/models.py:64
+#: main/models.py:51 main/models.py:65 main/models.py:87
+#: payment/products/models.py:64 products/models.py:64
 msgid "Image"
 msgstr "Rasm"
 
-#: orders/models.py:13 templates/pages/product_detail.html:66
-#: templates/pages/product_detail.html:259
-#: templates/pages/product_detail.html:287
+#: orders/models.py:50
+msgid "Cash on delivery"
+msgstr ""
+
+#: orders/models.py:72 templates/pages/product_detail.html:63
+#: templates/pages/product_detail.html:256
+#: templates/pages/product_detail.html:284
 msgid "Available"
 msgstr "mavjud"
 
-#: orders/models.py:14
+#: orders/models.py:73
 msgid "Awaiting Payment"
 msgstr "To'lovni kutish"
 
-#: orders/models.py:15
+#: orders/models.py:74
 #, fuzzy
 #| msgid "Payment method"
 msgid "Payment completed"
 msgstr "To'lov uslubi"
 
-#: orders/models.py:16
+#: orders/models.py:75
 msgid "Cancelled"
 msgstr "Bekor qilindi"
 
-#: orders/models.py:17 templates/pages/invoice.html:30
+#: orders/models.py:76 templates/pages/invoice.html:30
 msgid "Delivered"
 msgstr "Yetkazildi"
 
-#: orders/models.py:20 templates/pages/checkout.html:24
-#: templates/pages/invoice.html:65 templates/pages/order_detail.html:33
+#: orders/models.py:77
+msgid "In process"
+msgstr ""
+
+#: orders/models.py:80 templates/pages/invoice.html:65
+#: templates/pages/orders/address.html:62
 #, fuzzy
 #| msgid "Client user"
 msgid "Client name"
 msgstr "Mijoz foydalanuvchi"
 
-#: orders/models.py:21
+#: orders/models.py:81
 msgid "Phone number"
 msgstr "Telefon raqami"
 
-#: orders/models.py:22 templates/pages/checkout.html:62
-#: templates/pages/invoice.html:52 templates/pages/order_detail.html:37
-#, fuzzy
-#| msgid "Email address"
-msgid "Shipping address"
-msgstr "Email manzil"
-
-#: orders/models.py:26 templates/pages/invoice.html:17
+#: orders/models.py:84 templates/pages/invoice.html:17
 #, fuzzy
 #| msgid "Order"
 msgid "Order Id"
 msgstr "Buyurtma"
 
-#: orders/models.py:60
+#: orders/models.py:128
 msgid "Cart item"
 msgstr "Savatdagi narsa"
 
-#: orders/models.py:61 templates/pages/cart.html:13
+#: orders/models.py:129 templates/pages/orders/cart.html:22
 msgid "Cart items"
 msgstr "Savatdagi narsalar"
 
+#: payment/products/admin.py:42 payment/products/models.py:87
 #: products/admin.py:42 products/models.py:87
-#: templates/pages/product_detail.html:80
+#: templates/pages/product_detail.html:77
 msgid "Color"
 msgstr "Rang"
 
-#: products/models.py:35
+#: payment/products/models.py:35 products/models.py:35
 msgid "Categories"
 msgstr "Toifalar"
 
-#: products/models.py:52
+#: payment/products/models.py:52 products/models.py:52
 msgid "Logo"
 msgstr "Emblema"
 
+#: payment/products/models.py:56 payment/products/models.py:121
 #: products/models.py:56 products/models.py:121
 msgid "Brand"
 msgstr "Tovar"
 
-#: products/models.py:57 templates/pages/product_list.html:30
+#: payment/products/models.py:57 products/models.py:57
+#: templates/pages/product_list.html:30
 msgid "Brands"
 msgstr "Tovarlar"
 
-#: products/models.py:65 products/models.py:104 products/models.py:179
-#: templates/pages/cart.html:18
+#: payment/products/models.py:65 payment/products/models.py:104
+#: payment/products/models.py:179 products/models.py:65 products/models.py:104
+#: products/models.py:179 templates/pages/orders/cart.html:27
 msgid "Product"
 msgstr "Mahsulot"
 
-#: products/models.py:88
+#: payment/products/models.py:88 products/models.py:88
 msgid "Colors"
 msgstr "Ranglar"
 
-#: products/models.py:102 products/models.py:129 templates/pages/cart.html:21
-#: templates/pages/invoice.html:39
+#: payment/products/models.py:102 payment/products/models.py:129
+#: products/models.py:102 products/models.py:129
+#: templates/pages/invoice.html:39 templates/pages/orders/cart.html:31
 msgid "Price"
 msgstr "Narx"
 
-#: products/models.py:103 templates/pages/accounts/orders.html:56
-#: templates/pages/cart.html:20 templates/pages/invoice.html:40
+#: payment/products/models.py:103 products/models.py:103
+#: templates/pages/accounts/orders.html:56 templates/pages/invoice.html:40
+#: templates/pages/order_detail.html:73 templates/pages/orders/cart.html:29
+#: templates/pages/orders/checkout.html:90
 msgid "Quantity"
 msgstr "Miqdor"
 
-#: products/models.py:114
+#: payment/products/models.py:114 products/models.py:114
 msgid "Variation"
 msgstr "O'zgarish"
 
-#: products/models.py:115
+#: payment/products/models.py:115 products/models.py:115
 msgid "Variations"
 msgstr "O'zgarishlar"
 
-#: products/models.py:119
+#: payment/products/models.py:119 products/models.py:119
 #, fuzzy
 #| msgid "First name"
 msgid "Product name"
 msgstr "Ism"
 
-#: products/models.py:122 templates/pages/product_detail.html:111
+#: payment/products/models.py:122 products/models.py:122
+#: templates/pages/product_detail.html:102
 msgid "Description"
 msgstr "Ta'rif"
 
-#: products/models.py:123 templates/pages/product_detail.html:105
+#: payment/products/models.py:123 products/models.py:123
+#: templates/pages/product_detail.html:108
 msgid "Characters"
 msgstr "Belgilar"
 
-#: products/models.py:124
+#: payment/products/models.py:124 products/models.py:124
 msgid "Product Owner"
 msgstr "Mahsulot sohibi"
 
-#: products/models.py:125
+#: payment/products/models.py:125 products/models.py:125
 msgid "Volume type"
 msgstr "Hajm turi"
 
-#: products/models.py:127
+#: payment/products/models.py:127 products/models.py:127
 msgid "Available in stock"
 msgstr "Omborda mavjud"
 
-#: products/models.py:128
+#: payment/products/models.py:128 products/models.py:128
 msgid "Is recommended"
 msgstr "Tavsiya etildimi"
 
-#: products/models.py:132
+#: payment/products/models.py:132 products/models.py:132
 #, fuzzy
 #| msgid "First name"
 msgid "First image"
 msgstr "Birinchi rasm"
 
-#: products/models.py:133
+#: payment/products/models.py:133 products/models.py:133
 msgid "Second image"
 msgstr "Ikkinchi rasm"
 
-#: products/models.py:134
+#: payment/products/models.py:134 products/models.py:134
 msgid "Third image"
 msgstr "Uchunchi rasm"
 
-#: products/models.py:180
+#: payment/products/models.py:180 products/models.py:180
+#: templates/pages/order_detail.html:88
+#: templates/pages/orders/checkout.html:113
 msgid "Products"
 msgstr "Mahsulotlar"
 
-#: products/views.py:11
+#: payment/products/views.py:11 products/views.py:11
 #, fuzzy
 #| msgid "New products first"
 msgid "New first"
 msgstr "Avval yangi mahsulotlar"
 
-#: products/views.py:12
+#: payment/products/views.py:12 products/views.py:12
 #, fuzzy
 #| msgid "Old products first"
 msgid "Old first"
 msgstr "Avval eski mahsulotlar"
 
-#: products/views.py:13
+#: payment/products/views.py:13 products/views.py:13
 #, fuzzy
 #| msgid "Title a-z"
 msgid "Title asc"
 msgstr "a-z sarlavhasi"
 
-#: products/views.py:14
+#: payment/products/views.py:14 products/views.py:14
 #, fuzzy
 #| msgid "Title"
 msgid "Title desc"
 msgstr "Sarlavha"
 
-#: products/views.py:15
+#: payment/products/views.py:15 products/views.py:15
 #, fuzzy
 #| msgid "Price"
 msgid "Price asc"
 msgstr "Narx"
 
-#: products/views.py:16
+#: payment/products/views.py:16 products/views.py:16
 #, fuzzy
 #| msgid "Price"
 msgid "Price desc"
 msgstr "Narx"
 
-#: products/views.py:66
+#: payment/products/views.py:66 products/views.py:66
 msgid "All"
 msgstr "Hammasi"
 
@@ -329,21 +392,57 @@ msgstr "Litr"
 msgid "Administration"
 msgstr "Ro'yxatdan o'tish"
 
-#: rest_app/views.py:67
+#: rest_app/views.py:79
 msgid "Cart successfully updated"
 msgstr "Savatcha muvvafaqiyatli yangilandi"
 
-#: rest_app/views.py:70
+#: rest_app/views.py:82
 msgid "Successful added"
 msgstr "Muvvafaqiyatli qo'shildi"
 
-#: rest_app/views.py:106 templates/base.html:260
+#: rest_app/views.py:118 templates/base.html:313
 msgid "Successful removed"
 msgstr "Muvvafaqiyatli o'chirildi"
 
-#: rest_app/views.py:131
+#: rest_app/views.py:143
 msgid "Successful saved"
 msgstr "Muvvafaqiyatli saqlandi"
+
+#: rest_app/views.py:173
+#, fuzzy
+#| msgid "Cart successfully updated"
+msgid "Successful authenticated"
+msgstr "Savatcha muvvafaqiyatli yangilandi"
+
+#: rest_app/views.py:178
+msgid "Invalid credentials"
+msgstr ""
+
+#: rest_app/views.py:237 rest_app/views.py:271
+msgid "Sorry, something went wrong"
+msgstr ""
+
+#: rest_app/views.py:258
+#, fuzzy
+#| msgid "Confirm password"
+msgid "Sorry, wrong confirm password"
+msgstr "Parolni tasdiqlash"
+
+#: rest_app/views.py:261
+msgid "Sorry, incorrect old password"
+msgstr ""
+
+#: rest_app/views.py:268
+#, fuzzy
+#| msgid "Cart successfully updated"
+msgid "Successfully updated"
+msgstr "Savatcha muvvafaqiyatli yangilandi"
+
+#: rest_app/views.py:340
+#, fuzzy
+#| msgid "Cart successfully updated"
+msgid "Order successful placed"
+msgstr "Savatcha muvvafaqiyatli yangilandi"
 
 #: templates/admin/filer/actions.html:5
 msgid "Run the selected action"
@@ -1000,22 +1099,29 @@ msgstr "Eksport"
 msgid "Import"
 msgstr "Import"
 
-#: templates/base.html:205 templates/base.html:246
-#: templates/pages/product_detail.html:66
-#: templates/pages/product_detail.html:255
-#: templates/pages/product_detail.html:283
+#: templates/base.html:261 templates/base.html:300
+#: templates/pages/product_detail.html:63
+#: templates/pages/product_detail.html:252
+#: templates/pages/product_detail.html:280
 msgid "Not available"
 msgstr "Mavjud emas"
 
+#: templates/last/delivery_time_page.html:90 templates/parts/pagination.html:27
+msgid "Next"
+msgstr "Keyingi"
+
 #: templates/pages/accounts/delivery.html:17
-#: templates/pages/accounts/delivery.html:47
+#: templates/pages/accounts/delivery.html:50
+#: templates/pages/orders/address.html:31
+#: templates/rest/delivery_address_form.html:6
 #, fuzzy
 #| msgid "Email address"
 msgid "Add an address"
 msgstr "Email manzil"
 
 #: templates/pages/accounts/delivery.html:23
-#: templates/pages/accounts/payments.html:15 templates/pages/checkout.html:82
+#: templates/pages/accounts/payments.html:15
+#: templates/pages/orders/address.html:37
 msgid "Default"
 msgstr "Standart"
 
@@ -1036,33 +1142,31 @@ msgstr "Kiritish"
 msgid "Remove"
 msgstr "O'chirish"
 
-#: templates/pages/accounts/delivery.html:82
+#: templates/pages/accounts/delivery.html:89
 #: templates/pages/accounts/payments.html:126
 msgid "Is default"
 msgstr "Standartmi?"
 
-#: templates/pages/accounts/delivery.html:86
+#: templates/pages/accounts/delivery.html:93
 #: templates/pages/accounts/payments.html:128
 #: templates/pages/accounts/payments_edit.html:17
+#: templates/rest/delivery_address_form.html:50
 msgid "Submit"
 msgstr "Jo'natish"
 
 #: templates/pages/accounts/login.html:5 templates/pages/accounts/login.html:17
-#: templates/pages/checkout.html:17 templates/parts/footer.html:63
-#: templates/parts/footer.html:69 templates/parts/header.html:45
+#: templates/pages/accounts/login.html:59
+#: templates/pages/orders/address.html:24 templates/parts/footer.html:65
+#: templates/parts/footer.html:71 templates/parts/header.html:47
 msgid "Login"
 msgstr "Kirish"
 
 #: templates/pages/accounts/login.html:49
 #: templates/pages/accounts/register.html:60
-#: templates/pages/accounts/settings.html:61 templates/parts/footer.html:110
-#: templates/parts/footer.html:216 users/forms.py:23
+#: templates/pages/accounts/settings.html:61 templates/parts/footer.html:112
+#: templates/parts/footer.html:203 users/forms.py:23
 msgid "Password"
 msgstr "Parol"
-
-#: templates/pages/accounts/login.html:59
-msgid "Log In"
-msgstr "Kirish"
 
 #: templates/pages/accounts/login.html:67
 msgid "Forgot Password"
@@ -1079,13 +1183,19 @@ msgid "Amount"
 msgstr "Jami"
 
 #: templates/pages/accounts/orders.html:22
-#: templates/pages/accounts/orders.html:54 templates/pages/cart.html:73
-#: templates/pages/cart.html:78 templates/pages/cart.html:90
-#: templates/pages/checkout.html:13 templates/pages/invoice.html:18
-#: templates/pages/main.html:70 templates/pages/order_detail.html:46
+#: templates/pages/accounts/orders.html:54 templates/pages/invoice.html:18
+#: templates/pages/main.html:70 templates/pages/order_detail.html:70
+#: templates/pages/order_detail.html:89 templates/pages/order_detail.html:93
+#: templates/pages/order_detail.html:98 templates/pages/order_detail.html:103
+#: templates/pages/orders/cart.html:86 templates/pages/orders/cart.html:91
+#: templates/pages/orders/cart.html:102 templates/pages/orders/checkout.html:87
+#: templates/pages/orders/checkout.html:114
+#: templates/pages/orders/checkout.html:118
+#: templates/pages/orders/checkout.html:123
+#: templates/pages/orders/checkout.html:128
 #: templates/pages/product_detail.html:31
-#: templates/pages/product_detail.html:61 templates/pages/product_list.html:64
-#: templates/pages/product_list.html:130 templates/parts/header.html:73
+#: templates/pages/product_detail.html:58 templates/pages/product_list.html:64
+#: templates/pages/product_list.html:129 templates/parts/header.html:78
 #: templates/rest/cart.html:16 templates/rest/cart.html:23
 msgid "sum"
 msgstr "so'm"
@@ -1097,9 +1207,9 @@ msgid "Deliver to"
 msgstr "Yetkazildi"
 
 #: templates/pages/accounts/orders.html:35
-#: templates/pages/accounts/register.html:46 templates/pages/checkout.html:42
-#: templates/pages/invoice.html:66 templates/pages/order_detail.html:34
-#: templates/parts/footer.html:178
+#: templates/pages/accounts/register.html:46 templates/pages/invoice.html:66
+#: templates/pages/order_detail.html:24 templates/pages/orders/address.html:75
+#: templates/pages/orders/checkout.html:35 templates/parts/footer.html:182
 msgid "Phone"
 msgstr "Telefon"
 
@@ -1109,7 +1219,7 @@ msgstr "Telefon"
 msgid "Detail info"
 msgstr "Shaxsiy ma'lumot"
 
-#: templates/pages/accounts/orders.html:41 templates/pages/order_detail.html:20
+#: templates/pages/accounts/orders.html:41
 msgid "Invoice"
 msgstr "Hisob-faktura"
 
@@ -1123,13 +1233,6 @@ msgstr "Yetkazildi"
 #, fuzzy
 #| msgid "Email address"
 msgid "Add"
-msgstr "Email manzil"
-
-#: templates/pages/accounts/payments.html:20
-#: templates/pages/accounts/settings.html:52
-#, fuzzy
-#| msgid "Email address"
-msgid "Address"
 msgstr "Email manzil"
 
 #: templates/pages/accounts/payments.html:24
@@ -1175,20 +1278,19 @@ msgid "Billing address"
 msgstr "Email manzil"
 
 #: templates/pages/accounts/profile.html:18
-#: templates/pages/accounts/profile.html:20 templates/parts/header.html:16
+#: templates/pages/accounts/profile.html:20 templates/parts/header.html:19
 msgid "My orders"
 msgstr "Mening buyurtmalarim"
 
 #: templates/pages/accounts/profile.html:32
-#: templates/pages/accounts/profile.html:34
 #, fuzzy
 #| msgid "Email address"
 msgid "Delevery address"
 msgstr "Email manzil"
 
 #: templates/pages/accounts/register.html:5
-#: templates/pages/accounts/register.html:17 templates/parts/footer.html:64
-#: templates/parts/footer.html:124
+#: templates/pages/accounts/register.html:17 templates/parts/footer.html:66
+#: templates/parts/footer.html:126
 msgid "Registration"
 msgstr "Ro'yxatdan o'tish"
 
@@ -1199,17 +1301,18 @@ msgid "Full name"
 msgstr "Ism"
 
 #: templates/pages/accounts/register.html:68
-#: templates/pages/accounts/settings.html:80 templates/parts/footer.html:231
+#: templates/pages/accounts/settings.html:80 templates/parts/footer.html:218
 #: users/forms.py:24
 msgid "Confirm password"
 msgstr "Parolni tasdiqlash"
 
-#: templates/pages/accounts/settings.html:29 templates/parts/footer.html:160
+#: templates/pages/accounts/settings.html:29 templates/parts/footer.html:164
 #: users/forms.py:21 users/models.py:56
 msgid "Last name"
 msgstr "Familiya"
 
 #: templates/pages/accounts/settings.html:40
+#: templates/pages/order_detail.html:26 templates/pages/orders/checkout.html:37
 msgid "Email"
 msgstr "Email"
 
@@ -1225,49 +1328,21 @@ msgstr "Parol"
 msgid "New password"
 msgstr "Parol"
 
-#: templates/pages/cart.html:19 templates/pages/product_detail.html:157
-msgid "Title"
-msgstr "Sarlavha"
-
-#: templates/pages/cart.html:22 templates/pages/cart.html:89
-#: templates/pages/invoice.html:18 templates/pages/invoice.html:41
-#: templates/pages/invoice.html:67 templates/pages/order_detail.html:35
-msgid "Total price"
-msgstr "Umumiy baho"
-
-#: templates/pages/checkout.html:5 templates/pages/checkout.html:76
-#, fuzzy
-#| msgid "Email address"
-msgid "My delivery addresses"
-msgstr "Email manzil"
-
-#: templates/pages/checkout.html:13
-msgid "Total amount of order"
-msgstr "Buyurtmaning umumiy miqdori"
-
-#: templates/pages/checkout.html:18 templates/parts/footer.html:130
-#, fuzzy
-#| msgid "more"
-msgid "or"
-msgstr "ko'proq"
-
-#: templates/pages/checkout.html:18
-msgid "Continue as guest"
-msgstr "Mehmon sifatida davom eting"
-
-#: templates/pages/checkout.html:72
-msgid "Continue"
-msgstr "Davom etish"
-
 #: templates/pages/invoice.html:14
 #, fuzzy
 #| msgid "Invoice"
 msgid "Print invoice"
 msgstr "Hisob-faktura"
 
-#: templates/pages/invoice.html:16 templates/pages/order_detail.html:36
+#: templates/pages/invoice.html:16
 msgid "Created at"
 msgstr "Yaratilgan"
+
+#: templates/pages/invoice.html:18 templates/pages/invoice.html:41
+#: templates/pages/invoice.html:67 templates/pages/orders/cart.html:32
+#: templates/pages/orders/cart.html:101
+msgid "Total price"
+msgstr "Umumiy baho"
 
 #: templates/pages/invoice.html:38
 msgid "Items ordered"
@@ -1277,11 +1352,6 @@ msgstr ""
 #, fuzzy
 #| msgid "Payment method"
 msgid "Payment information"
-msgstr "To'lov uslubi"
-
-#: templates/pages/invoice.html:76 templates/pages/main.html:30
-#: users/models.py:118
-msgid "Payment method"
 msgstr "To'lov uslubi"
 
 #: templates/pages/main.html:5
@@ -1308,9 +1378,8 @@ msgstr "Tez kirish"
 msgid "Top products of Stroyshop"
 msgstr "Stroyshopning eng yaxshi mahsulotlari"
 
-#: templates/pages/main.html:76 templates/pages/product_detail.html:34
-#: templates/pages/product_detail.html:100 templates/pages/product_list.html:70
-#: templates/pages/product_list.html:136
+#: templates/pages/main.html:76 templates/pages/product_detail.html:97
+#: templates/pages/product_list.html:69 templates/pages/product_list.html:134
 msgid "Add to cart"
 msgstr "Savavatchaga qo'shish"
 
@@ -1321,84 +1390,162 @@ msgstr "Savavatchaga qo'shish"
 msgid "More products"
 msgstr "Mahsulotlar topildi"
 
-#: templates/pages/order_detail.html:31
+#: templates/pages/order_detail.html:15 templates/pages/orders/checkout.html:23
 #, fuzzy
 #| msgid "Order"
-msgid "Order id"
+msgid "Order preview"
 msgstr "Buyurtma"
 
-#: templates/pages/order_detail.html:32
+#: templates/pages/order_detail.html:48 templates/pages/orders/checkout.html:65
+#, fuzzy
+#| msgid "Found products"
+msgid "Ordered products"
+msgstr "Mahsulotlar topildi"
+
+#: templates/pages/order_detail.html:86
+#: templates/pages/orders/checkout.html:111
 #, fuzzy
 #| msgid "Order"
-msgid "Order status"
+msgid "Order summary"
 msgstr "Buyurtma"
 
-#: templates/pages/order_detail.html:120
-msgid "Pay with"
+#: templates/pages/order_detail.html:92
+#: templates/pages/orders/checkout.html:117
+#, fuzzy
+#| msgid "Delivered"
+msgid "Delivery"
+msgstr "Yetkazildi"
+
+#: templates/pages/order_detail.html:97
+#: templates/pages/orders/checkout.html:122
+msgid "Porter"
+msgstr ""
+
+#: templates/pages/order_detail.html:102
+#: templates/pages/orders/checkout.html:127 templates/rest/cart.html:22
+#, fuzzy
+#| msgid "Order"
+msgid "Order total"
+msgstr "Buyurtma"
+
+#: templates/pages/orders/address.html:25 templates/parts/footer.html:132
+#, fuzzy
+#| msgid "more"
+msgid "or"
+msgstr "ko'proq"
+
+#: templates/pages/orders/address.html:25
+msgid "Continue as guest"
+msgstr "Mehmon sifatida davom eting"
+
+#: templates/pages/orders/address.html:28
+#, fuzzy
+#| msgid "Email address"
+msgid "My delivery addresses"
+msgstr "Email manzil"
+
+#: templates/pages/orders/address.html:46
+msgid "Tel."
+msgstr ""
+
+#: templates/pages/orders/address.html:108
+#: templates/pages/orders/order_time.html:59
+#: templates/pages/orders/payment_method.html:35
+msgid "Continue"
+msgstr "Davom etish"
+
+#: templates/pages/orders/cart.html:28 templates/pages/product_detail.html:154
+msgid "Title"
+msgstr "Sarlavha"
+
+#: templates/pages/orders/cart.html:30
+msgid "Wt"
+msgstr ""
+
+#: templates/pages/orders/checkout.html:31
+#: templates/pages/orders/checkout.html:45
+#: templates/pages/orders/checkout.html:56
+msgid "change"
+msgstr ""
+
+#: templates/pages/orders/checkout.html:106
+msgid "Place your order"
+msgstr ""
+
+#: templates/pages/orders/order_time.html:27
+msgid "Today"
+msgstr ""
+
+#: templates/pages/orders/order_time.html:52
+msgid "Yes"
+msgstr ""
+
+#: templates/pages/orders/order_time.html:56
+msgid "No"
 msgstr ""
 
 #: templates/pages/product_detail.html:16
 msgid "Similar products"
 msgstr "Shu kabi mahsulotlar"
 
-#: templates/pages/product_detail.html:65
+#: templates/pages/product_detail.html:62
 msgid "In stock"
 msgstr "Sotuvda mavjud"
 
-#: templates/pages/product_detail.html:69
+#: templates/pages/product_detail.html:66
 msgid "Packing"
 msgstr "Qadoqlash"
 
-#: templates/pages/product_detail.html:91
+#: templates/pages/product_detail.html:88
 #, fuzzy
 #| msgid "Last name"
 msgid "Last updated"
 msgstr "Familiya"
 
-#: templates/pages/product_detail.html:119
+#: templates/pages/product_detail.html:116
 msgid "Feedbacks"
 msgstr "Fikrlar"
 
-#: templates/pages/product_detail.html:122 templates/pages/search.html:10
+#: templates/pages/product_detail.html:119 templates/pages/search.html:10
 msgid "Found"
 msgstr "Topildi"
 
-#: templates/pages/product_detail.html:122
+#: templates/pages/product_detail.html:119
 msgid "feedbacks"
 msgstr "fikrlar"
 
-#: templates/pages/product_detail.html:125
-#: templates/pages/product_list.html:103
+#: templates/pages/product_detail.html:122
+#: templates/pages/product_list.html:102
 msgid "Sorting"
 msgstr "Tartiblash"
 
-#: templates/pages/product_detail.html:127
+#: templates/pages/product_detail.html:124
 msgid "Last first"
 msgstr "Oxirgi marta"
 
-#: templates/pages/product_detail.html:133
+#: templates/pages/product_detail.html:130
 msgid "Leave review"
 msgstr "Sharhni qoldirish"
 
-#: templates/pages/product_detail.html:139
+#: templates/pages/product_detail.html:136
 #, fuzzy
 #| msgid "First name"
 msgid "Your name"
 msgstr "Ism"
 
-#: templates/pages/product_detail.html:148
+#: templates/pages/product_detail.html:145
 msgid "Where are you from"
 msgstr "Qayerdansiz"
 
-#: templates/pages/product_detail.html:166
+#: templates/pages/product_detail.html:163
 msgid "Your message"
 msgstr "Sizning xatingiz"
 
-#: templates/pages/product_detail.html:184
+#: templates/pages/product_detail.html:181
 msgid "from"
 msgstr ""
 
-#: templates/pages/product_detail.html:193
+#: templates/pages/product_detail.html:190
 #, fuzzy
 #| msgid "feedbacks"
 msgid "More feedbacks"
@@ -1414,7 +1561,7 @@ msgstr "Kategoriya tanlang"
 msgid "Recommended products"
 msgstr "Mahsulotlar topildi"
 
-#: templates/pages/product_list.html:100
+#: templates/pages/product_list.html:99
 #, fuzzy
 #| msgid "Products"
 msgid "products"
@@ -1424,7 +1571,7 @@ msgstr "Mahsulotlar"
 msgid "more"
 msgstr "ko'proq"
 
-#: templates/parts/category_list.html:5 templates/parts/header.html:90
+#: templates/parts/category_list.html:5 templates/parts/header.html:95
 #, fuzzy
 #| msgid "Product categories"
 msgid "Product catalog"
@@ -1452,49 +1599,59 @@ msgstr "Sayt TAS-IX da joylashgan"
 msgid "For Users"
 msgstr "Foydalanuvchilar"
 
-#: templates/parts/footer.html:38
+#: templates/parts/footer.html:35
 msgid "For customers"
 msgstr ""
 
-#: templates/parts/footer.html:48
+#: templates/parts/footer.html:43
 #, fuzzy
 #| msgid "Email address"
 msgid "Our address"
 msgstr "Email manzil"
 
-#: templates/parts/footer.html:71
+#: templates/parts/footer.html:51
+msgid "Website developed by"
+msgstr ""
+
+#: templates/parts/footer.html:73
 msgid "Login with Google"
 msgstr ""
 
-#: templates/parts/footer.html:72
+#: templates/parts/footer.html:74
 msgid "Login with Facebook"
 msgstr ""
 
-#: templates/parts/footer.html:143 users/forms.py:20 users/models.py:55
+#: templates/parts/footer.html:147 users/forms.py:20 users/models.py:55
 msgid "First name"
 msgstr "Ism"
 
-#: templates/parts/header.html:36
+#: templates/parts/footer.html:228
+#, fuzzy
+#| msgid "Top products of Stroyshop"
+msgid "I agree with terms of Stroyshop"
+msgstr "Stroyshopning eng yaxshi mahsulotlari"
+
+#: templates/parts/header.html:14 templates/parts/header.html:39
 msgid "Logout"
 msgstr "Chiqish"
 
-#: templates/parts/header.html:59
+#: templates/parts/header.html:60
 msgid "Search product"
 msgstr "Mahsulotni qidirish"
+
+#: templates/parts/header.html:64
+#, fuzzy
+#| msgid "Cancelled"
+msgid "Cancel"
+msgstr "Bekor qilindi"
+
+#: templates/parts/header.html:107
+msgid "View all"
+msgstr ""
 
 #: templates/parts/pagination.html:9
 msgid "Back"
 msgstr "Ortga"
-
-#: templates/parts/pagination.html:27
-msgid "Next"
-msgstr "Keyingi"
-
-#: templates/rest/cart.html:22
-#, fuzzy
-#| msgid "Order"
-msgid "Order total"
-msgstr "Buyurtma"
 
 #: templates/rest/cart.html:26
 msgid "View cart"
@@ -1585,6 +1742,39 @@ msgstr "Manzil muvaffaqiyatli o'chirildi"
 #: users/views.py:156
 msgid "Card data successfully added"
 msgstr "Karta ma'lumotlari muvaffaqiyatli qo'shildi"
+
+#, fuzzy
+#~| msgid "Email address"
+#~ msgid "Shipping address"
+#~ msgstr "Email manzil"
+
+#~ msgid "Log In"
+#~ msgstr "Kirish"
+
+#, fuzzy
+#~| msgid "Order"
+#~ msgid "Order id"
+#~ msgstr "Buyurtma"
+
+#, fuzzy
+#~| msgid "Order"
+#~ msgid "Order status"
+#~ msgstr "Buyurtma"
+
+#, fuzzy
+#~| msgid "Quantity"
+#~ msgid "Total quantity"
+#~ msgstr "Miqdor"
+
+#, fuzzy
+#~| msgid "Delivered"
+#~ msgid "Delivery cost"
+#~ msgstr "Yetkazildi"
+
+#, fuzzy
+#~| msgid "Total amount of order"
+#~ msgid "Cost of products"
+#~ msgstr "Buyurtmaning umumiy miqdori"
 
 #~ msgid "OR"
 #~ msgstr "Yoki"

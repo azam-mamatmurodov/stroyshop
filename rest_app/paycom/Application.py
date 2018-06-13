@@ -11,7 +11,6 @@ from .Format import Format
 from .conf import config
 from django.utils import timezone
 
-import os
 import json
 
 

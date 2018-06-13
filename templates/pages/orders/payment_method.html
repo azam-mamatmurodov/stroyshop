@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% load i18n static %}
+
+{% block title %}
+    {% trans 'Payment method' %}
+{% endblock %}
+
+{% block content %}
+    {{ header }}
+    <div id="main">
+        {{ breadcrumbs }}
+        <div class="order_steps">
+            <ul class="steps">
+                <li class="active"><a href="{% url 'orders:cart' %}">{% trans 'Cart' %}</a></li>
+                <li class="active"><a href="{% url 'orders:address' %}">{% trans 'Delivery address' %}</a></li>
+                <li class="active"><a href="{% url 'orders:time' %}">{% trans 'Delivery time' %}</a></li>
+                <li class="active"><a href="{% url 'orders:payment_method' %}">{% trans 'Payment method' %}</a></li>
+                <li><a href="{% url 'orders:checkout' %}">{% trans 'Checkout' %}</a></li>
+            </ul>
+        </div>
+        <div id="payment-section">
+            <div class="payment-method">
+                {% for object in object_list %}
+                  <div class="item {% if payment_method and payment_method == object.method %}selected{% endif %}" data-method="{{ object.method }}">
+                    <h2 class="title">{{ object.title }}</h2>
+                    <img src="{{ object.logo.url }}" alt="{{ object.title }}" class="logo">
+                    <p class="description">
+                        {{ object.description }}
+                    </p>
+                  </div>
+                {% endfor %}
+            </div>
+            <form action="">
+              <a  id="order_payment_button" class="button btn-grey">{% trans 'Continue' %}</a>
+            </form>
+          </div>
+    </div>
+    {{ footer }}
+{% endblock %}
+
+{% block css %}
+    <style>
+        #payment-section .payment-method .item:hover
+        {
+            cursor: pointer;
+        }
+
+        #payment-section .payment-method .item
+        {
+            border: 1px solid #cfcfcf;
+        }
+        #payment-section .payment-method .item.selected
+        {
+            border: 1px solid #b9bf01;
+        }
+
+    </style>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(document).ready(function () {
+            $('.item').click(function () {
+                $('.item').removeClass('selected');
+                $(this).addClass('selected');
+            });
+            $('#order_payment_button').click(function (e) {
+                e.preventDefault();
+                var items = $('.item');
+                if (!items.hasClass('selected'))
+                {
+                    $.notify('Please, choose payment method');
+                    return false;
+                }
+                else
+                {
+                    var payment_method = $('.item.selected').data('method');
+                    window.set_data_to_cookie(null, null, null, null, null, null, payment_method);
+                    window.location.href = "{% url 'orders:checkout' %}";
+                }
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delivery time page</title>
+  <link rel="stylesheet" type="text/css" href="../../static/css/custom_style.css">
+  <script src="beston.com/plugins/zoom/jquery-1.8.3.min.js"></script>
+  <script src="beston.com/plugins/zoom/jquery.elevatezoom.js"></script>
+  <style type="text/css">
+  *{
+    margin: 0;
+    padding: 0;
+  }
+  body{
+    background: #fff;
+    max-width: 1000px;
+    margin: auto;
+  }
+  #delivery-time-section{
+    margin-top: 20px;
+  }
+  #delivery-time-section .delivery_time{
+    display: flex;
+    justify-content: space-around;
+  }
+  #delivery-time-section .delivery_time .main_item{
+    border: 1px solid #ccc;
+    width: 100%;
+  }
+  #delivery-time-section .delivery_time .main_item .title, .item .title, .time_1, .time_2{
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  #delivery-time-section .delivery_time .time_1.not_avail{
+    background: #ddd;
+    color: #fff;
+  }
+  #delivery-time-section .delivery_time .main_item .time_1, .item .time_1{
+    border-top: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+  }
+  #delivery-time-section .delivery_time .item{
+    border: 1px solid #ccc;
+    width: 100%;
+  }
+  #delivery-time-section .loaders form{
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+  }
+  #delivery-time-section .loaders form p{
+    margin-right: 10px;
+  }
+</style>
+</head>
+
+<body>
+  <div id="delivery-time-section">
+    <div class="delivery_time">
+      <div class="main_item">
+        <p class="title">Time</p>
+        <p class="time_1">9:00 - 15:00</p>
+        <p class="time_2">15:00 - 21:00</p>
+      </div>
+      <div class="item">
+        <p class="title">Today (21.05.2018)</p>
+        <p class="time_1 not_avail">Not available</p>
+        <p class="time_2">Available</p>
+      </div>
+      <div class="item">
+        <p class="title">22.05.2018</p>
+        <p class="time_1">Available</p>
+        <p class="time_2">Available</p>
+      </div>
+      <div class="item">
+        <p class="title">23.05.2018</p>
+        <p class="time_1">Available</p>
+        <p class="time_2">Available</p>
+      </div>
+    </div>
+    <div class="loaders">
+      <form action="" method="">
+        <p>Нужны ли вам грузчики?</p><input type="checkbox" name="" value="">
+          <button type="submit" id="order_time_button" class="button">{% trans 'Next' %}</button>
+      </form>
+    </div>
+  </div>
+
+</body>
+
+</html>

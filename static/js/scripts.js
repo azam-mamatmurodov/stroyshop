@@ -6437,7 +6437,8 @@ function(t) { "function" == typeof define && define.amd ? define(["jquery"], t) 
                 }), t("#main>ul .expanded").on("click", function() {
                  t("#main>ul").find("a").hide(), 
                  t(this).children("ul").show(), 
-                 t(this).children("ul").find("a").show() }), 
+                 t(this).children("ul").find("a").show()
+                }),
                 t("#menu-block").find("li.expanded").children("a").attr("href", "#"), 
                 t("#menu-block>ul>li.expanded>a").on("click", function() { 
                     t(this).parent().children("ul").slideToggle() }), 

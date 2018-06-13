@@ -1,182 +1,157 @@
 {% extends 'base.html' %}
-{% load static %}
-{% load i18n humanize %}
-{% block title %}
-    {% trans 'My delivery addresses' %}
-{% endblock %}
+
+{% load static i18n humanize products_extras %}
+
+{% block title %}{% trans 'Checkout' %}{% endblock %}
+
 {% block content %}
     {{ header }}
     <div id="main">
         {{ breadcrumbs }}
-        <section id="address" style="font-size: 14px">
-            <div class="col-md-4">
-                <span>{% trans 'Total amount of order' %}: {{ total_amount|floatformat|intcomma }} {% trans 'sum' %}</span>
-            </div>
-
-                <h4>{% trans 'My delivery addresses' %}</h4>
-
-                <div class="col-md-8">
-                    <form id="checkout-form" action="" method="post" role="form" style="display: block;">
-                        {% csrf_token %}
-                        <input type="hidden" name="is_submitted">
-                        <div class="form-group">
-                            <input type="text" name="client_name" maxlength="60"
-                                   required="" id="id_client_name"
-                                   placeholder="{% trans 'Client name' %}"
-                                   value="{% if form.client_name.value %}{{ form.client_name.value }}{% elif request.user.is_authenticated %}{{ user.first_name }} {{ user.last_name }}{% endif %}"
-                            >
-                            {% if form.client_name.errors %}
-                                <div class="help-block">
-                                    {{ form.client_name.errors }}
-                                </div>
-                            {% endif %}
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group prefix">
-                                <span class="input-group-addon">+998</span>
-                                <input
-                                        required
-                                        type="text"
-                                        name="phone"
-                                        id="id_phone"
-                                        class="form-control checkou-phone"
-                                        placeholder="{% trans 'Phone' %}"
-                                        value="{% if form.phone.value %}{{ form.phone.value }}{% endif %}"
-                                        pattern="[0-9]{9}"
-                                        size="9"
-                                        maxlength="9"
-                                >
-                            </div>
-                            {% if form.phone.errors %}
-                                <div class="help-block">
-                                    {{ form.phone.errors }}
-                                </div>
-                            {% endif %}
-                        </div>
-                        <div class="form-group">
-                            <textarea
-                                    name="shipping_address"
-                                    cols="40"
-                                    rows="5"
-                                    required=""
-                                    id="id_shipping_address"
-                                    placeholder="{{ address_example }}"
-                            >{% if form.shipping_address.value %}{{ form.shipping_address.value }}{% endif %}</textarea>
-                            {% if form.shipping_address.errors %}
-                                <div class="help-block">
-                                    {{ form.shipping_address.errors }}
-                                </div>
-                            {% endif %}
-                        </div>
-                        <div class="form-actions">
-                            <input
-                                    type="submit"
-                                    name="login-submit"
-                                    id="login-submit"
-                                    tabindex="4"
-                                    class="form-control btn btn-login"
-                                    value="{% trans 'Continue' %}"
-                            >
-                        </div>
-                    </form>
+        <div class="order_steps">
+            <ul class="steps">
+                <li class="active"><a href="{% url 'orders:cart' %}">{% trans 'Cart' %}</a></li>
+                <li class="active"><a href="{% url 'orders:address' %}">{% trans 'Delivery address' %}</a></li>
+                <li class="active"><a href="{% url 'orders:time' %}">{% trans 'Delivery time' %}</a></li>
+                <li class="active"><a href="{% url 'orders:payment_method' %}">{% trans 'Payment method' %}</a></li>
+                <li class="active"><a href="{% url 'orders:checkout' %}">{% trans 'Checkout' %}</a></li>
+            </ul>
+        </div>
+        <div id="checkout-last-section">
+            <div class="wrapper_checkout_left">
+                <div class="top">
+                  <h2 class="title">{% trans 'Order preview' %}</h2>
+                  <h2 class="user_name">{{ client_data.address.client_name }}</h2>
                 </div>
-        </section>
-    </div>
-<div id="add_popup" class="{% if form.errors %}add-address-popup{% endif %}" style="display: {% if form.errors %}block{% else %}none{% endif %}">
-    <form id="delivery_address_add" method="post">
-        <span class="close">x</span>
-        {% csrf_token %}
-        <h1>{% trans 'Add an address' %}</h1>
-        <div class="form-group">
-            <textarea
-                    placeholder="{{ address_example }}"
-                    name="{{ form_address.address.name }}"
-            >{% if form_address.address.value %}{{ form_address.address.value }}{% endif %}</textarea>
-            {% if form_address.address.errors %}
-                {{ form_address.address.errors }}
-            {% endif %}
-        </div>
-        <div class="form-group">
-            <input
-                    type="email"
-                    name="{{ form_address.email.name }}"
-                    placeholder="E-mail"
-                    value="{% if form_address.email.value %}{{ form_address.email.value }}{% endif %}">
-            {% if form.email.errors %}
-                {{ form.email.errors }}
-            {% endif %}
-        </div>
-        <div class="form-group">
-            <div class="input-group prefix">
-                <span class="input-group-addon">+998</span>
-                <input
-                        id="delivery_phone_number"
-                        pattern="[0-9]{9}"
-                        type="text"
-                        name="{{ form_address.phone.name }}"
-                        size="9"
-                        maxlength="9"
-                        placeholder="Phone number"
-                        value="{% if form_address.phone.value %}{{ form_address.phone.value }}{% endif %}"
-                >
+                <div class="left">
+                  <div class="information">
+                    <div class="address">
+                      <strong>{% trans 'Delivery address' %}:</strong>
+                      <a href="{% url 'orders:address' %}">
+                          {% trans 'change' %}
+                      </a>
+                        <div class="address_info">{{ client_data.address.shipping_address }}</div>
+                        <ul>
+                          <li><strong>{% trans 'Phone' %}:</strong>+998 {{ client_data.address.phone|phone_number }}</li>
+                        {% if client_data.address.email %}
+                            <li><strong>{% trans 'Email' %}:</strong> {{ client_data.address.email }}</li>
+                        {% endif %}
+                      </ul>
+                    </div>
+                    <div class="payment_and_time">
+                        <div class="delivery_time">
+                            <strong>{% trans 'Delivery time' %}:</strong>
+                            <a href="{% url 'orders:time' %}">
+                                {% trans 'change' %}
+                            </a>
+                            <div class="delivery_time_inner">
+                                {% print_timestamp client_data.time as timer %}
+                                {{ timer.0 }} - {{ timer.1 }}
+                            </div>
+                        </div>
+                        <div class="payment-method">
+                            <div>
+                                <strong>{% trans 'Payment method' %}:</strong>
+                                <a href="{% url 'orders:payment_method' %}">
+                                    {% trans 'change' %}
+                                </a>
+                            </div>
+                            {% get_payment client_data.payment_method as payment %}
+                            <p class="payment_method">{{ payment.title }}</p>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="products">
+                    <h2 class="title">{% trans 'Ordered products' %}</h2>
+                    {% for cart_item in cart_items %}
+                        <div class="item">
+                          <div class="item_logo">
+                              <img src="{{ cart_item.variation.product.image_0.url }}" alt="">
+                          </div>
+                          <div class="item_information">
+                            <p class="name">
+                                <a href="{{ cart_item.variation.product.get_absolute_url }}">
+                                  {{ cart_item.variation.product.name }}
+                                <br> {{ cart_item.variation.name }} {{ cart_item.variation.product.volume }}
+                                </a>
+                            </p>
+                            {% if cart_item.variation.color %}
+                                <div style="" class="cart_item_color">{{ cart_item.variation.color.name }}</div>
+                            {% endif %}
+                            <p class="price">
+                                <strong>
+                                    <em class="red_color">
+                                        {{ cart_item.variation.price|floatformat|intcomma }}
+                                    </em>
+                                </strong>
+                                {% trans 'sum' %}
+                            </p>
+                            <p class="quantity">
+                                {% trans 'Quantity' %}:
+                                <em class="blue_color">
+                                    {{ cart_item.count }}
+                                </em>
+                            </p>
+                          </div>
+                        </div>
+                    {% endfor %}
+                  </div>
+                </div>
             </div>
-            {% if form_address.phone.errors %}
-                {{ form_address.phone.errors }}
-            {% endif %}
-        </div>
-        <div class="form-group">
-            <input
-                    type="checkbox"
-                    name="{{ form_address.is_default.name }}"
-            >
-            <label>{% trans 'Is default' %}</label>
-        </div>
-        <input type="hidden" name="action_type" value="create">
-        <input type="hidden" name="object_id" value="">
-        {% trans 'Submit' as submit %}
-        <input type="submit" name="Submit" value={{submit}}>
-    </form>
-</div>
+            <div class="right">
+                <div class="order">
+                    <form id="order_form" action="" method="post">
+                      {% csrf_token %}
+                      <input type="hidden" name="is_submitted" value="1">
+                        <button href="#" id="order_button" type="submit" class="btn-yellow order_review_submit_btn">{% trans 'Place your order' %}</button>
+                    </form>
+                    <p class="privacy_and_terms">
+                        By placing your order, you agree to Stroyshop's <a href="" target="_blank">privacy notice</a> and <a href="" target="_blank">conditions of use</a>.
+                    </p>
+                    <strong class="total">{% trans 'Order summary' %}</strong>
+                    <p class="delivery_cost">
+                        <span>{% trans 'Products' %} ({{ total_quantity }}):</span>
+                        <em class="">{{ products_price|floatformat|intcomma }} {% trans 'sum' %}</em>
+                    </p>
+                    <p class="delivery_cost">
+                        <span>{% trans 'Delivery' %}:*</span>
+                        <em class="">{{ delivery_price|floatformat|intcomma }} {% trans 'sum' %}</em>
+                    </p>
+                    {% if client_data.need_porter == '1' %}
+                        <p class="porter">
+                            <span>{% trans 'Porter' %}:*</span>
+                            <em class="">{{ delivery_price|floatformat|intcomma }} {% trans 'sum' %}</em>
+                        </p>
+                    {% endif %}
+                    <p class="total_sum">
+                        <span class="order_total_label">{% trans 'Order total' %}:</span>
+                        <strong>{{ total_amount|floatformat|intcomma }}</strong> {% trans 'sum' %}
+                    </p>
+                </div>
+            </div>
+          </div>
+    </div>
     {{ footer }}
 {% endblock %}
+
 {% block js %}
-   <script type="text/javascript">
+    <script>
         $(document).ready(function () {
-
-            $('#add_address').click(function (e) {
-                e.preventDefault();
-                var add_form_block = $('#add_popup');
-                    add_form_block.addClass('add-address-popup').fadeIn();
-                    add_form_block.find('input[name="object_id"]').val('');
-                    add_form_block.find('input[name="action_type"]').val('create');
-            });
-            $('#delivery_address_add span.close').click(function (e) {
-                e.preventDefault();
-                $('#add_popup').removeClass('add-address-popup').fadeOut();
-            });
-
-            $('.delivery_item_edit').click(function (e) {
-                e.preventDefault();
-                var is_default = $(this).parent('.actions').parent().find('.default').data('is_default');
-                var email = $(this).parent('.actions').parent().find('.email').text().trim();
-                var address = $(this).parent('.actions').parent().find('.address').text().trim();
-                var phone = $(this).parent('.actions').parent().find('.phone').data('phone');
-                var object_id = $(this).data('object_id');
-
-                $('#add_popup').addClass('add-address-popup').fadeIn();
-
-                var form = $('#delivery_address_add');
-
-                form.find('textarea').val(address)
-                form.find('input[name="email"]').val(email);
-                form.find('input[name="phone"]').val(phone);
-                form.find('input[name="object_id"]').val(object_id);
-                form.find('input[name="action_type"]').val('update');
-                if (is_default)
-                {
-                    form.find('input[name="is_default"]').click();
-                }
-            })
+           {#$('#order_button').click(function (e) {#}
+           {#    e.preventDefault();#}
+           {#});#}
         });
     </script>
+{% endblock %}
+{% block css %}
+    <style>
+        #checkout-last-section .right
+        {
+            height: 220px !important;
+        }
+        .red_color
+        {
+            color: red;
+        }
+    </style>
 {% endblock %}

@@ -5,7 +5,7 @@
             <div class="description">
                 <h2 class="cart_item_name">
                     <a href="{{ cart_item.variation.product.get_absolute_url }}">
-                      {{ cart_item.variation.product.name }}
+                      <p>{{ cart_item.variation.product.name }}</p>
                     <br> {{ cart_item.variation.name }} {{ cart_item.variation.product.volume }}
                     </a>
                      </h2>
@@ -15,12 +15,12 @@
                 <p class="cart_item_col">{{ cart_item.count }}</p>
                 <p class="cart_item_sum">{{ cart_item.variation.price|floatformat|intcomma }} {% trans 'sum' %}</p>
             </div>
-            <a href="" class="delete  delete_item" data-cart_item_id="{{ cart_item.id }}">X</a>
+            <a class="delete  delete_item" data-cart_item_id="{{ cart_item.id }}">X</a>
         </div>
     {% endfor %}
 <p class="order_total">
     <span class="order_total_name">{% trans 'Order total' %}</span>
-    <span class="order_total_sum"><em>{% if order_total %}{{ order_total|floatformat|intcomma }}{% else %}0{% endif %}</em> {% trans 'sum' %}</span>
+    <span class="order_total_sum"><em><strong>{% if order_total %}{{ order_total|floatformat|intcomma }}{% else %}0{% endif %}</strong></em> {% trans 'sum' %}</span>
 </p>
 <div class="buttons">
     <a href="{% url 'orders:cart' %}" class="button" id="item_view_cart">{% trans 'View cart' %}</a>

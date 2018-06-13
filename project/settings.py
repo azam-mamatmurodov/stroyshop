@@ -255,7 +255,7 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.TemplateHTMLRenderer',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ),
 }
 
@@ -270,63 +270,69 @@ REST_FRAMEWORK = {
 # }
 
 
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'root': {
-        'level': 'WARNING',
-        'handlers': ['sentry'],
-    },
-    'formatters': {
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s '
-                      '%(process)d %(thread)d %(message)s'
-        },
-    },
-    'handlers': {
-        'sentry': {
-            'level': 'ERROR', # To capture more than ERROR, change to WARNING, INFO, etc.
-            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
-            'tags': {'custom-tag': 'x'},
-        },
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose'
-        }
-    },
-    'loggers': {
-        'django.db.backends': {
-            'level': 'ERROR',
-            'handlers': ['sentry', 'console'],
-            'propagate': False,
-        },
-        'raven': {
-            'level': 'ERROR',
-            'handlers': ['sentry', 'console'],
-            'propagate': False,
-        },
-        'sentry.errors': {
-            'level': 'ERROR',
-            'handlers': ['sentry', 'console'],
-            'propagate': False,
-        },
-    },
-}
+#
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'root': {
+#         'level': 'WARNING',
+#         'handlers': ['sentry'],
+#     },
+#     'formatters': {
+#         'verbose': {
+#             'format': '%(levelname)s %(asctime)s %(module)s '
+#                       '%(process)d %(thread)d %(message)s'
+#         },
+#     },
+#     'handlers': {
+#         'sentry': {
+#             'level': 'ERROR', # To capture more than ERROR, change to WARNING, INFO, etc.
+#             'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+#             'tags': {'custom-tag': 'x'},
+#         },
+#         'console': {
+#             'level': 'DEBUG',
+#             'class': 'logging.StreamHandler',
+#             'formatter': 'verbose'
+#         }
+#     },
+#     'loggers': {
+#         'django.db.backends': {
+#             'level': 'ERROR',
+#             'handlers': ['sentry', 'console'],
+#             'propagate': False,
+#         },
+#         'raven': {
+#             'level': 'ERROR',
+#             'handlers': ['sentry', 'console'],
+#             'propagate': False,
+#         },
+#         'sentry.errors': {
+#             'level': 'ERROR',
+#             'handlers': ['sentry', 'console'],
+#             'propagate': False,
+#         },
+#     },
+# }
 
 GRAPPELLI_ADMIN_TITLE = 'Stroyshop'
 
 
 pardir = os.path.abspath(BASE_DIR)
-
-RAVEN_CONFIG = {
-    'dsn': 'https://7d9bb4cd7a954c2f841ba88fd0eea88b:3c012f644643414e8f9e48d7148b5675@sentry.io/1198570',
-    # If you are using git, you can also automatically configure the
-    # release based on the git info.
-    'release': raven.fetch_git_sha(pardir),
-}
+#
+# RAVEN_CONFIG = {
+#     'dsn': 'https://7d9bb4cd7a954c2f841ba88fd0eea88b:3c012f644643414e8f9e48d7148b5675@sentry.io/1198570',
+#     # If you are using git, you can also automatically configure the
+#     # release based on the git info.
+#     'release': raven.fetch_git_sha(pardir),
+# }
 
 SUIT_CONFIG = {
     'ADMIN_NAME': _('Administration')
 }
+
+
+
+PAYME_MERCHANT_ID = '5a2e656bde89097555cc9041'
+PAYME_KEY = 'ZU%zWDj%cE7nBaY2PrKorh9zRQ8c&hH0Hwnb'
+PAYME_TEST_KEY = 'q558FoDmzO3qVS29sB0OD7I8brdhgEcMy5y&'

@@ -8,6 +8,7 @@
     <meta name="msapplication-navbutton-color" content="#b7c233">
     <meta name="apple-mobile-web-app-status-bar-style" content="#b7c233">
     <style type="text/css">
+
     .bounce {
         margin: 250px auto 0;
         width: 70px;
@@ -45,19 +46,23 @@
     <title>{% block title %}{% endblock %}</title>
     {% block css %}{% endblock %}
 
-
     <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'plugins/owl.theme.default.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/fancy.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'plugins/fontawesome/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fancy.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.structure.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.theme.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/custom_style.css' %}">
-    <script src="{% static 'js/scripts.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}?v=123qwer1t">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom_style.css' %}?v=123qwer1t">
+
+    <script src="{% static 'js/scripts.js' %}?v=123qwer1t"></script>
     <script src="{% static 'js/notify.min.js' %}"></script>
-    <script src="{% static 'js/custom.js' %}"></script>
-    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}?v=123qwer1t"></script>
+    <script src="{% static 'js/main.js' %}?v=123qwer1t"></script>
+    <script src="{% static 'js/js.cookie.min.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <script src="https://use.fontawesome.com/1ff752e90a.js"></script>
+
     <style>
         .notifyjs-corner
         {
@@ -87,7 +92,54 @@
 </div>
 {% block js %}{% endblock %}
 <script>
+window.set_data_to_cookie = function(client_name, phone, email, shipping_address, time, need_porter, payment_method)
+{
+    var client_data;
+    if (Cookies.get('client_data'))
+    {
+        client_data = JSON.parse(Cookies.get('client_data'));
+    }
+    else
+    {
+        client_data = {
+            "time": "",
+            "need_porter": "",
+            "payment_method": "",
+            "address": {
+                "client_name": "",
+                "phone": "",
+                "email": "",
+                "shipping_address": ""
+            }
+        }
+    }
+    var data = {
+        "time": (time)? time : client_data.time ,
+        "need_porter": (need_porter)? need_porter : client_data.need_porter ,
+        "payment_method": (payment_method)? payment_method : client_data.payment_method,
+        "address": {
+            "client_name": (client_name)? client_name : client_data.address.client_name ,
+            "phone": (phone)? phone :  client_data.address.phone,
+            "email": (email)? email : '' ,
+            "shipping_address": (shipping_address)? shipping_address : client_data.address.shipping_address
+        }
+    };
+    Cookies.set('client_data', JSON.stringify(data), { expires: 7, path: '/' });
+};
+
 $(document).ready(function () {
+    var csrftoken = Cookies.get('csrftoken')
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
 
     function addParameter(url, parameterName, parameterValue, atStart/*Add param before others*/){
         replaceDuplicates = true;
@@ -140,7 +192,7 @@ $(document).ready(function () {
     });
 
     $(document).on('click', '.product_list_variation', function (elem) {
-        console.log('Clicked');
+
         var variation_name = $(this).data('variation_name');
         var product_id = $(this).data('product_id');
 
@@ -194,24 +246,22 @@ $(document).ready(function () {
 
             var addtocart = tmp_this.parent().parent('.weight').parent('.product_list_variation_list').siblings('.addtocart');
 
-                if (quantity !== 0)
-                {
-                        addtocart.show();
-                    var quantity_input = addtocart.find('.product_cart_add_form input[name="quantity"]');
-                        quantity_input.prop('max', $(this).data('max'));
-                        quantity_input.data('variation', $(this).data('variation'));
-                        addtocart.siblings('.price').find('.price_display').text(price)
-                        addtocart.siblings('.price').find('.price_label').show()
-                }
-                else
-                {
-                        addtocart.hide();
-                        addtocart.siblings('.price').find('.price_display').text("{% trans 'Not available' %}")
-                        addtocart.siblings('.price').find('.price_label').hide()
-                }
+            if (quantity !== 0)
+            {
+                    addtocart.show();
+                var quantity_input = addtocart.find('.product_cart_add_form input[name="quantity"]');
+                    quantity_input.prop('max', $(this).data('max'));
+                    quantity_input.data('variation', $(this).data('variation'));
+                    addtocart.siblings('.price').find('.price_display').text(price)
+                    addtocart.siblings('.price').find('.price_label').show()
+            }
+            else
+            {
+                    addtocart.hide();
+                    addtocart.siblings('.price').find('.price_display').text("{% trans 'Not available' %}")
+                    addtocart.siblings('.price').find('.price_label').hide()
+            }
         }
-
-
     });
 
 
@@ -255,14 +305,13 @@ $(document).ready(function () {
 
     $(document).on('click', '.delete_item', function (e) {
         var cart_item_id = $(this).data('cart_item_id');
-
         $.ajax({
             url: '/api/v1/cart/' + cart_item_id +'/delete/',
             type: 'DELETE',
             success: function (res) {
                 $(e.target).parent().parent().parent('.product-row').hide();
                 $.notify("{% trans 'Successful removed' %}", 'success');
-                location.reload()
+                update_cart()
             },
             error: function (error) {
                 console.log(error);
@@ -284,9 +333,9 @@ window.onload = function () {
 
     update_cart();
 
-
     $('form.product_cart_add_form').submit(function (e) {
-
+       var this_target = $(this);
+       var this_elem = $(this);
        e.preventDefault();
        var quantity = $(this).find('input[name="quantity"]').val();
        var variation = $(this).find('input[name="quantity"]').data('variation');
@@ -298,8 +347,58 @@ window.onload = function () {
                variation: variation
            },
            success: function (resp) {
+               var cart = $('#cart_icon');
                if (resp.status === 'success')
                {
+                    if (window.innerWidth <= 1024)
+                    {
+                        cart = $('#checkout_block_order_checkout_btn');
+                    }
+                    cart.removeClass('rotated');
+
+                    var top = cart.offset().top + 10;
+                    var left = cart.offset().left + 10;
+
+                    var image_src = this_target.find('button').data("image");
+                    var new_imgtodrag = document.createElement('img');
+                        new_imgtodrag.src = image_src;
+
+                    var imgtodrag =  $(new_imgtodrag);
+
+                    if (imgtodrag) {
+                        var imgclone = imgtodrag.clone()
+                            .offset({
+                                top: this_target.offset().top,
+                                left: this_target.offset().left
+                            })
+                            .css({
+                                'opacity': '0.5',
+                                'position': 'absolute',
+                                'height': '150px',
+                                'width': '150px',
+                                'z-index': '100'
+                            })
+                            .appendTo($('body'))
+                            .animate({
+                                'top': cart.offset().top + 10,
+                                'left': cart.offset().left + 10,
+                                'width': 75,
+                                'height': 75
+                            }, 1000, 'easeInOutExpo');
+
+                        imgclone.animate({
+                            'width': 0,
+                            'height': 0
+                        }, function () {
+                            $(this).detach()
+                        });
+
+                    }
+
+                    setTimeout(function (e) {
+                        cart.addClass('rotated');
+                    }, 1000);
+
                    update_cart();
                    $.notify(resp.message, 'success');
                }
@@ -314,17 +413,22 @@ window.onload = function () {
         var price = $(this).data('price');
         $(this).parent('.quantity').siblings('.price').find('.price_total').text(price);
     });
+
+
+    $(document).on('click', '.order_steps ul.steps li', function(){
+        window.location.href = $(this).children('a').attr('href');
+    });
 };
 
-$(window).load(function() {
-    $('.loader').fadeOut();
-    $('#body').css({ 'opacity': 1 });
-});
-        </script>
+    $(window).load(function() {
+        $('.loader').fadeOut();
+        $('#body').css({ 'opacity': 1 });
+    });
+</script>
 </body>
 </html>
 <!-- Sentry JS SDK 2.1.+ required -->
-<script src="https://cdn.ravenjs.com/2.3.0/raven.min.js"></script>
+{#<script src="https://cdn.ravenjs.com/2.3.0/raven.min.js"></script>#}
 
 {% if request.sentry.id %}
   <script>

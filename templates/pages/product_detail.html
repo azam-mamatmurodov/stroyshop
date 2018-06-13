@@ -36,7 +36,7 @@
                     </div>
                 {% endif %}
                 <div class="images">
-                    <img id="img_01" style="width: 100%; height: 200px;" src="{{ product.get_default_image.url }}" \
+                    <img id="img_01" style="height: 200px;" src="{{ product.get_default_image.url }}" \
                          data-zoom-image="{{ product.get_default_image.url }}" />
                     <div id="gal1">
                         {% for image_object in product.get_all_images %}
@@ -94,7 +94,7 @@
                             <div class="plus"></div>
                             <div class="minus"></div>
                         </div>
-                        <input type="submit" name="submit" value="oz{% trans 'Add to cart' %}">
+                        <button data-image="{{ product.get_default_image.url }}" type="submit" class="btn-yellow" name="submit" value="">{% trans 'Add to cart' %}</button>
                     </form>
                 </div>
             </div>

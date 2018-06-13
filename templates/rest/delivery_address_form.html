@@ -1,0 +1,52 @@
+{% load i18n %}
+<div id="add_popup" class="add-address-popup" style="">
+    <form id="delivery_address_add" method="post">
+        <span class="close">x</span>
+        {% csrf_token %}
+        <h1>{% trans 'Add an address' %}</h1>
+        <div class="form-group">
+            <textarea
+                    id="delivery_address"
+                    placeholder="{{ address_example }}"
+                    name="{{ form.address.name }}"
+            >{% if form.address.value %}{{ form.address.value }}{% endif %}</textarea>
+            {% if form.address.errors %}
+                {{ form.address.errors }}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <input
+                    id="id_shipping_client_email"
+                    type="email"
+                    name="{{ form.email.name }}"
+                    placeholder="E-mail"
+                    value="{% if form.email.value %}{{ form.email.value }}{% endif %}"
+            >
+            {% if form.email.errors %}
+                {{ form.email.errors }}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <div class="input-group prefix">
+                <span class="input-group-addon">+998</span>
+                <input
+                        id="delivery_phone_number"
+                        pattern="[0-9]{9}"
+                        type="text"
+                        name="{{ form.phone.name }}"
+                        size="9"
+                        maxlength="9"
+                        placeholder="Phone number"
+                        value="{% if form.phone.value %}{{ form.phone.value }}{% endif %}"
+                >
+            </div>
+            {% if form.phone.errors %}
+                {{ form.phone.errors }}
+            {% endif %}
+        </div>
+
+        <input type="hidden" name="action_type" value="create">
+        <input type="hidden" name="object_id" value="">
+        <input class="btn-grey" type="button" name="Submit" id="add_address_form_submit_btn" value="{% trans 'Submit' %}">
+    </form>
+</div>

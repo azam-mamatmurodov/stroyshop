@@ -186,10 +186,61 @@ def get_breadcrumbs(request, *args, **kwargs):
             'title': product.name,
             'path': reverse(view_name, args=[slug, product_id, ]),
         })
+    elif view_name == 'orders:address':
+        paths.append({
+            'title': _('Cart'),
+            'path': reverse('orders:cart'),
+        })
+        paths.append({
+            'title': _('Address'),
+            'path': reverse(view_name,),
+        })
+    elif view_name == 'orders:time':
+        paths.append({
+            'title': _('Cart'),
+            'path': reverse('orders:cart'),
+        })
+        paths.append({
+            'title': _('Address'),
+            'path': reverse('orders:address',),
+        })
+        paths.append({
+            'title': _('Delivery time'),
+            'path': reverse(view_name),
+        })
+    elif view_name == 'orders:payment_method':
+        paths.append({
+            'title': _('Cart'),
+            'path': reverse('orders:cart'),
+        })
+        paths.append({
+            'title': _('Address'),
+            'path': reverse('orders:address',),
+        })
+        paths.append({
+            'title': _('Delivery time'),
+            'path': reverse('orders:time'),
+        })
+        paths.append({
+            'title': _('Payment method'),
+            'path': reverse(view_name),
+        })
     elif view_name == 'orders:checkout':
         paths.append({
             'title': _('Cart'),
             'path': reverse('orders:cart'),
+        })
+        paths.append({
+            'title': _('Address'),
+            'path': reverse('orders:address',),
+        })
+        paths.append({
+            'title': _('Delivery time'),
+            'path': reverse('orders:time'),
+        })
+        paths.append({
+            'title': _('Payment method'),
+            'path': reverse('orders:payment_method'),
         })
         paths.append({
             'title': _('Checkout'),
@@ -199,6 +250,17 @@ def get_breadcrumbs(request, *args, **kwargs):
         paths.append({
             'title': _('Search'),
             'path': reverse(view_name,),
+        })
+    elif view_name == 'orders:payment_uzcard':
+        phone = kwargs.get('phone')
+        unique_id = kwargs.get('order_unique_id')
+        paths.append({
+            'title': _('Order detail'),
+            'path': reverse('orders:order_detail', args=[phone, unique_id]),
+        })
+        paths.append({
+            'title': _('Uzcard pay'),
+            'path': reverse(view_name, args=[phone, unique_id]),
         })
     return render_to_string('parts/breadcrumbs.html', {'paths': paths})
 

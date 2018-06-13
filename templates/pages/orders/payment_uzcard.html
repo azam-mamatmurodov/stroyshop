@@ -1,0 +1,304 @@
+{% extends 'base.html' %}
+
+{% load i18n static %}
+
+{% block title %}
+    {% trans 'Uzcard pay' %}
+{% endblock %}
+
+{% block content %}
+    {{ header }}
+    <div id="main">
+        {{ breadcrumbs }}
+        <div id="payment-uzcard-section">
+            <form id="subscribe_api_form" class="form-horizontal">
+                <input type="hidden" id="sub_amount" value="500000">
+                <div class="form-group">
+                    <label for="card_number">Card number</label>
+                    <input
+                            required
+                            class="form-control"
+                            type="text"
+                            id="card_number"
+                            size="16"
+                            maxlength="16"
+                            value="8600134301849596"
+                    >
+                </div>
+                <div class="form-group">
+                    <label for="expire_date">Expire date</label>
+                     <div class="input-append date" id="dpMonths" data-date="10/2018" data-date-format="mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
+                        <input
+                                required
+                                id="expire_date"
+                                class="span2 form-control"
+                                size="16"
+                                type="text"
+                                value="0320"
+                                readonly
+                        >
+                        <span class="add-on"><i class="icon-calendar"></i></span>
+                     </div>
+                </div>
+                <div class="form-group col-xs-2" style="">
+                    <label for="verfication_code">Verification Code</label>
+                    <input
+                            id="verfication_code"
+                            type="text"
+                            class="form-control"
+                            max="6"
+                            min="6"
+                            maxlength="6"
+                            pattern="\d{6}"
+                            value="666666"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <button
+                        style="margin: 10px 0;"
+                        class="payme_button_subscribe btn btn-success "
+                        type="button">
+                    Оплатить с помощью <b>PAYCOM - Subscribe</b>
+                </button>
+                </div>
+            </form>
+
+          </div>
+    </div>
+    {{ footer }}
+{% endblock %}
+
+{% block css %}
+    <style>
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+        form#subscribe_api_form
+        {
+            font-size: 14px !important;
+            width: 400px;
+            margin: 0 auto;
+            border: 2px solid #b8c029;
+            padding: 20px;
+        }
+        .payme_button_subscribe
+        {
+            background-image: url('https://help.paycom.uz/images/ru/payme_01_small.png');
+            width: 300px;
+            height: 100px;
+            background-size: 300px 100px;
+            color: transparent;
+            background-repeat: no-repeat;
+            border: none;
+        }
+        div#payment-uzcard-section {
+            position: relative;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: inline-block;
+            max-width: 100%;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+        .form-control {
+            display: block;
+            width: 100%;
+            height: 34px;
+            padding: 0;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        }
+
+    </style>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(document).ready(function () {
+
+
+            var verification_has_card_number = "8600495473316478";
+
+            var token, card_number, expire_date = null;
+            var paycom_url = "https://checkout.test.paycom.uz/api";
+            var backend_url = "/api/v1/payment/paycom/uzcard/";
+            var x_auth = '5a2e656bde89097555cc9041';
+
+            var step = 1;
+            var method = "cards.create";
+            var data;
+            var id = 123;
+
+
+            var order_id = 108;
+            var customer_id = 998389478;
+            var amount = 5000;
+
+
+            $('.payme_button_subscribe').click(function () {
+                if (method === 'cards.verify')
+                {
+                    var verfication_code = $('#verfication_code');
+                    if (verfication_code.val().length === 0)
+                    {
+                        alert('Invalid verification code');
+                        verfication_code.css({
+                            'border': '1px solid red'
+                        });
+                        return false;
+                    }
+                }}
+
+                card_number = $('#card_number').val();
+                expire_date = "0320";
+
+
+                if(method === "cards.create")
+                {
+                    console.log('Method: ' + method);
+                    console.log('Token: ' + token);
+                    data = JSON.stringify({
+                        "id": id,
+                        "method": method,
+                        "params": {
+                            "card": {
+                                "number": verification_has_card_number,
+                                "expire": "0320"
+                            },
+                            "amount": amount,
+                            "account": {
+                                "order_id": order_id,
+                                "customer_id": customer_id
+                            },
+                            "save": true
+                        }
+                    });
+
+                    $.ajax({
+                        type: 'POST',
+                        url: backend_url,
+                        data: {data: data},
+                        success: function(resp){
+                            if (resp.error)
+                            {
+                                alert(resp.error.message);
+                                return false;
+                            }
+                            console.log(method);
+                            console.log(resp);
+
+                            token = resp.result.card.token;
+                            method = 'cards.get_verify_code';
+
+                        },
+                        async:false
+                    });
+
+                    /* Verify, Sending new request with new data,  */
+                    if (method === 'cards.get_verify_code')
+                    {
+                        console.log('Method: ' + method);
+                        console.log('Token: ' + token);
+                        data = JSON.stringify({
+                            "id": id,
+                            "method": 'cards.get_verify_code',
+                            "params": {
+                                "token":token
+                            }
+                        });
+                        $.ajax({
+                            type: 'POST',
+                            url: backend_url,
+                            data: {data: data},
+                            success: function(resp){
+                                if (resp.error)
+                                {
+                                    alert(resp.error.message);
+                                    return false;
+                                }
+                                console.log(method);
+                                console.log(resp);
+                                method = 'cards.verify'
+                            },
+                            async:false
+                        });
+                    }
+
+                }
+                else if (method === 'cards.verify' )
+                {
+                    console.log('Method: ' + method);
+                    console.log('Token: ' + token);
+                    data = JSON.stringify({
+                        "id": id,
+                        "method": method,
+                        "params": {
+                            "token": token,
+                            "code": "666666"
+                        }
+                    });
+                    $.ajax({
+                        type: 'POST',
+                        url: backend_url,
+                        data: {data: data},
+                        success: function(resp){
+                                if (resp.error)
+                                {
+                                    alert(resp.error.message);
+                                    return false;
+                                }
+                            console.log(method);
+                            console.log(resp);
+                            {#method = 'cards.check'#}
+                        },
+                        async:false
+                    });
+                }
+                else if (step === 'cards.check' )
+                {
+
+                }
+                else if (step === 'cards.remove' )
+                {
+
+                }
+
+
+
+
+            });
+        });
+    </script>
+{% endblock %}

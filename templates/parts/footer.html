@@ -15,9 +15,9 @@
     </div>
     <div class="footer-content">
         <div class="logo">
-            <a href="/">
-            <img src="{% static 'images/logo.png' %}">
-        </a></div>
+            <a href="{% url 'main:home' %}">
+                <img src="{% static 'images/logo.png' %}">
+            </a></div>
         <div class="copyright">
             <p>{% trans 'All rights reserved' %}</p>
             <p>{% trans 'The site is located in the zone TAS-IX' %}</p>
@@ -27,10 +27,7 @@
 
             <ul>
                 {% for menu in footer_partners %}
-
-                        <li><a href="{% url 'main:static_footer' slug=menu.slug %}">{{menu.name}}</a></li>
-
-
+                    <li><a href="{% url 'main:static_footer' slug=menu.slug %}">{{ menu.name }}</a></li>
                 {% endfor %}
             </ul>
         </div>
@@ -38,26 +35,31 @@
             <h2> {% trans 'For customers' %}</h2>
             <ul>
                 {% for menu in footer_clients %}
-
-                        <li><a href="{% url 'main:static_footer' slug=menu.slug %}">{{menu.name}}</a></li>
-
+                    <li><a href="{% url 'main:static_footer' slug=menu.slug %}">{{ menu.name }}</a></li>
                 {% endfor %}
             </ul>
         </div>
         <div class="address">
             <h2>{% trans 'Our address' %}</h2>
             <p>Fuck'in st., Naked country, Bitch region, 6 h. 10000111</p>
-        </div>
-        <div class="contacts">
             <p>+998 71 251 00 55</p>
             <p>+998 71 251 00 55</p>
             <p>info@stroyshop.uz</p>
+        </div>
+        <div class="delevoped_by">
+            <p>
+                {% trans 'Website developed by' %}
+            </p>
+            <a href="http://datasite.uz" target="_blank">
+                <img src="https://datasite.uz/sites/all/themes/dstbest/images/logo.png" alt="">
+            </a>
         </div>
     </div>
 </footer>
 
 
-<div class="{% if login_form.errors or register_form.errors %}popup{% endif %}" style="display:none;" id="login_and_register">
+<div class="{% if login_form.errors or register_form.errors %}popup{% endif %}" style="display:none;"
+     id="login_and_register">
     <div class="container">
         <div class="tabs-title">
             <span class="login {% if login_form.errors %}active{% endif %}">{% trans 'Login' %}</span>
@@ -75,7 +77,8 @@
                     <span>or</span>
                 </div>
                 <div class="form">
-                    <form id="auth_form" method="post" role="form" action="{% url 'users:login' %}{% if 'next' in request.GET %}?next={{ request.GET.next }}{% endif %}">
+                    <form id="auth_form" method="post" role="form" action="
+                            {% url 'users:login' %}{% if 'next' in request.GET %}?next={{ request.GET.next }}{% endif %}">
                         <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
                         <div class="form-group">
                             <div class="input-group prefix">
@@ -94,7 +97,6 @@
                                 >
                             </div>
                         </div>
-
                         {% if login_form.username.errors %}
                             <div class="help-block">
                                 {{ login_form.username.errors }}
@@ -116,7 +118,7 @@
                             </div>
                         {% endif %}
                         <div class="messages-list"></div>
-                        <input type="submit" name="submit" value="Login">
+                        <input type="submit" name="submit" value="{% trans 'Login' %}">
                     </form>
                 </div>
             </div>
@@ -130,7 +132,9 @@
                     <span>{% trans 'or' %}</span>
                 </div>
                 <div class="form">
-                    <form id="register_form" action="{% url 'users:register' %}{% if 'next' in request.GET %}?next={{ request.GET.next }}{% endif %}" method="post">
+                    <form id="register_form" action="
+                            {% url 'users:register' %}{% if 'next' in request.GET %}?next={{ request.GET.next }}{% endif %}"
+                          method="post">
                         <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
                         <div class="form-group">
                             <input
@@ -141,7 +145,7 @@
                                     tabindex="1"
                                     class="form-control"
                                     placeholder="{% trans 'First name' %}"
-                               value="{% if register_form.first_name.value %}{{ register_form.first_name.value }}{% endif %}"
+                                    value="{% if register_form.first_name.value %}{{ register_form.first_name.value }}{% endif %}"
                             >
                             {% if register_form.first_name.errors %}
                                 <div class="help-block">
@@ -167,7 +171,7 @@
                         </div>
                         <div class="form-group">
                             <div class="input-group prefix">
-                                <span class="input-group-addon">+998</span>
+                                <span class="input-group-addon register_phone_default">+998</span>
                                 <input
                                         required
                                         type="text"
@@ -188,23 +192,6 @@
                                 </div>
                             {% endif %}
                         </div>
-
-{#                        <div class="form-group">#}
-{#                            <input#}
-{#                                    required#}
-{#                                    type="text"#}
-{#                                    name="address"#}
-{#                                    tabindex="1"#}
-{##}
-{#                                    placeholder="Address"#}
-{#                                    value="{% if register_form.address.value %}{{ register_form.address.value }}{% endif %}">#}
-{#                            {% if register_form.address.errors %}#}
-{#                                <div class="help-block">#}
-{#                                    {{ register_form.address.errors }}#}
-{#                                </div>#}
-{#                            {% endif %}#}
-{#                        </div>#}
-
                         <div class="form-group">
                             <input
                                     required
@@ -228,7 +215,7 @@
                                     id="register_confirm_password"
                                     tabindex="1"
                                     class="form-control"
-                                    placeholder="{% trans 'Confirm password' %}" >
+                                    placeholder="{% trans 'Confirm password' %}">
                             {% if register_form.confirm_password.errors %}
                                 <div class="help-block">
                                     {{ register_form.confirm_password.errors }}
@@ -238,10 +225,10 @@
                         <div class="form-group">
                             <label for="register_terms">
                                 <input type="checkbox" required id="register_terms">
-                                <a href="" target="_blank">I agree with terms of Stroyshop</a>
+                                <a href="" target="_blank">{% trans 'I agree with terms of Stroyshop' %}</a>
                             </label>
                         </div>
-                        <input type="submit" name="submit" value="Register">
+                        <input type="submit" name="submit" value="{% trans 'Registration' %}">
                     </form>
                 </div>
             </div>
@@ -252,14 +239,15 @@
     $(document).ready(function () {
 
         var login_and_register = $('#login_and_register');
-        $('#user-block .login').click(function(e){
+        $('#user-block .login').click(function (e) {
+            login_and_register.children('.container').addClass('login_container');
             e.preventDefault();
             login_and_register.show().addClass('popup').find('span.login').addClass('active');
             login_and_register.show().addClass('popup').find('span.register').removeClass('active');
             login_and_register.find('.login').show();
             login_and_register.find('.registration').hide();
         });
-        $('#user-block .register').click(function(e){
+        $('#user-block .register').click(function (e) {
             e.preventDefault();
             login_and_register.show().addClass('popup').find('span.login').removeClass('active');
             login_and_register.show().addClass('popup').find('span.register').click().addClass('active');
@@ -267,73 +255,65 @@
             login_and_register.find('.tabs-content').find('.registration').show();
         });
 
-        $('#login_and_register .close').click(function(){
+        $('#login_and_register .close').click(function () {
             $('#login_and_register').hide()
         });
 
         $('#auth_form').submit(function (e) {
-           e.preventDefault();
-           var username = $(this).find('input[name="username"]').val();
-           var passwd = $(this).find('input[name="passwd"]').val();
-           $.post('/api/v1/users/auth/', {
-               'username': username,
-               'passwd': passwd
-           },
-           function (resp) {
-               if (resp.status === 'success')
-               {
-                   document.location = '/accounts/';
-               }
-               else
-               {
-                var html = '<div class="help-block">';
-                    html += resp.message;
-                    html += '</div>';
-                    $('.messages-list').html(html);
-               }
-           });
+            e.preventDefault();
+            var username = $(this).find('input[name="username"]').val();
+            var passwd = $(this).find('input[name="passwd"]').val();
+            $.post('/api/v1/users/auth/', {
+                    'username': username,
+                    'passwd': passwd
+                },
+                function (resp) {
+                    if (resp.status === 'success') {
+                        document.location = '/accounts/';
+                    }
+                    else {
+                        var html = '<div class="help-block">';
+                        html += resp.message;
+                        html += '</div>';
+                        $('.messages-list').html(html);
+                    }
+                });
         });
 
 
         $('#register_form').submit(function (e) {
-           e.preventDefault();
+            e.preventDefault();
 
             var data = $(this).serialize();
 
 
-           $.post('/api/v1/users/register/', data,
-           function (resp) {
-               if (resp.status === 'success')
-               {
-                   document.location = '/accounts/';
-               }
-               else
-               {
-                   $.each(resp.fields, function (item, value) {
-                        var inputs = $('#register_form').find('input[name="' + value.field +'"]');
-                        var parent;
-                        if (inputs.parent('.form-group').length)
-                        {
-                            parent = inputs.parent('.form-group');
-                        }
-                        else
-                        {
-                            parent = inputs.parent().parent('.form-group');
-                        }
+            $.post('/api/v1/users/register/', data,
+                function (resp) {
+                    if (resp.status === 'success') {
+                        document.location = '/accounts/';
+                    }
+                    else {
+                        $.each(resp.fields, function (item, value) {
+                            var inputs = $('#register_form').find('input[name="' + value.field + '"]');
+                            var parent;
+                            if (inputs.parent('.form-group').length) {
+                                parent = inputs.parent('.form-group');
+                            }
+                            else {
+                                parent = inputs.parent().parent('.form-group');
+                            }
 
-                        if (parent.children('.help-block').length)
-                        {
-                            parent.children('.help-block').text(value.message)
-                        }
-                        else
-                        {
-                            var data = '<div class="help-block " style="color:red;">' + value.message + '</div>';
-                            $(data).appendTo(parent);
-                        }
+                            if (parent.children('.help-block').length) {
+                                parent.children('.help-block').text(value.message)
+                            }
+                            else {
+                                var data = '<div class="help-block " style="color:red;">' + value.message + '</div>';
+                                $(data).appendTo(parent);
+                            }
 
-                   });
-               }
-           })
+                        });
+                    }
+                })
 
         });
 
@@ -345,6 +325,7 @@
         border-radius: 4px 0px 0px 4px;
         padding: 6px 0px 6px 20px;
     }
+
     .input-group-addon {
         padding: 6px 12px;
         font-size: 14px;
@@ -359,27 +340,33 @@
         vertical-align: middle;
         display: table-cell;
     }
+
     .prefix input {
         border-radius: 0px 4px 4px 0px;
     }
+
     .prefix .input-group-addon {
         border-right: 0;
         border-radius: 4px 0px 0px 4px;
     }
+
     .input-group {
         position: relative;
         display: table;
         border-collapse: separate;
     }
+
     input#register_form_phone {
         border-left: none;
         margin-left: 0px;
         border-radius: 0px 5px 5px 0px;
         padding: 12px 0px 15px 2px;
     }
+
     #auth_form .messages-list {
         color: red;
     }
+
     .popup .container .tabs-title span.close {
         float: right;
     }

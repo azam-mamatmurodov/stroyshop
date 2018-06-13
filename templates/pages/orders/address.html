@@ -2,19 +2,26 @@
 {% load static %}
 {% load i18n humanize %}
 {% block title %}
-    {% trans 'My delivery addresses' %}
+    {% trans 'Delivery address' %}
 {% endblock %}
 {% block content %}
     {{ header }}
     <div id="main">
         {{ breadcrumbs }}
+        <div class="order_steps">
+            <ul class="steps">
+                <li class="active"><a href="{% url 'orders:cart' %}">{% trans 'Cart' %}</a></li>
+                <li class="active"><a href="{% url 'orders:address' %}">{% trans 'Delivery address' %}</a></li>
+                <li ><a href="{% url 'orders:time' %}">{% trans 'Delivery time' %}</a></li>
+                <li ><a href="{% url 'orders:payment_method' %}">{% trans 'Payment method' %}</a></li>
+                <li ><a href="{% url 'orders:checkout' %}">{% trans 'Checkout' %}</a></li>
+            </ul>
+        </div>
         <section id="address" style="font-size: 14px">
-            <div class="col-md-4">
-                <span>{% trans 'Total amount of order' %}: {{ total_amount|floatformat|intcomma }} {% trans 'sum' %}</span>
-            </div>
+            <div class="col-md-4"></div>
             {% if not user.is_authenticated %}
                 <div class="col-md-8">
-                    <a href="{% url 'users:login' %}?next={{ request.path }}">{% trans 'Login' %}</a>
+                    <a class="enter" href="{% url 'users:login' %}?next={{ request.path }}">{% trans 'Login' %}</a>
                     <h4>{% trans 'or' %} {% trans 'Continue as guest' %}</h4>
                 </div>
             {% else %}
@@ -27,39 +34,36 @@
                         <div class="row delivery_item">
                             <div class="default" data-is_default="{% if address.is_default %}1{% else %}0{% endif %}">
                                 {% if address.is_default %}
-                                    <span>{% trans 'Default' %}:</span><span>stroyshop</span>
+                                    <span>{% trans 'Default' %}:</span>
+                                    <span>stroyshop</span>
                                 {% endif %}
                             </div>
-                            {% if deliveryaddress.email %}
+                            {% if address.email %}
                                 <div class="email">{{ address.email }}</div>
                             {% endif %}
                             <div class="address">{{ address.address }}</div>
                             <div class="phone" data-phone="{{ address.phone }}">
-                                Tel. : +998 {{ address.phone }}
+                                {% trans 'Tel.' %} : +998 {{ address.phone }}
                             </div>
                         </div>
                     {% endfor %}
                 </div>
             {% endif %}
-            {% if form.errors %}
-                {{ form.errors }}
-            {% endif %}
             <div class="col-md-8">
-                <form id="checkout-form" action="{% url 'orders:checkout' %}" method="post" role="form" style="display: block;">
+                <form id="checkout-form" action="{% url 'orders:time' %}" method="post" role="form" style="display: block;">
                     {% csrf_token %}
-                    <div class="form-group">
-                        <input type="text" name="client_name" maxlength="60"
-                               required="" id="id_client_name"
-                               placeholder="{% trans 'Client name' %}"
-                               value="{% if form.client_name.value %}{{ form.client_name.value }}{% elif request.user.is_authenticated %}{{ user.first_name }} {{ user.last_name }}{% endif %}"
+                    <div {% if request.user.is_authenticated %}hidden{% endif %} class="form-group">
+                        <input
+                                type="text"
+                                name="client_name"
+                                maxlength="60"
+                                required=""
+                                id="id_client_name"
+                                placeholder="{% trans 'Client name' %}"
+                                value="{% if address %}{{ address.client_name }}{% elif request.user.is_authenticated %}{{ user.get_full_name }}{% endif %}"
                         >
-                        {% if form.client_name.errors %}
-                            <div class="help-block">
-                                {{ form.client_name.errors }}
-                            </div>
-                        {% endif %}
                     </div>
-                    <div class="form-group">
+                    <div {% if request.user.is_authenticated %}hidden{% endif %} class="form-group">
                         <div class="input-group prefix">
                             <span class="input-group-addon">+998</span>
                             <input
@@ -69,40 +73,38 @@
                                     id="id_phone"
                                     class="form-control checkou-phone"
                                     placeholder="{% trans 'Phone' %}"
-                                    value="{% if form.phone.value %}{{ form.phone.value }}{% endif %}"
+                                    value="{% if address %}{{ address.phone }}{% endif %}"
                                     pattern="[0-9]{9}"
                                     size="9"
                                     maxlength="9"
                             >
                         </div>
-                        {% if form.phone.errors %}
-                            <div class="help-block">
-                                {{ form.phone.errors }}
-                            </div>
-                        {% endif %}
                     </div>
-                    <div class="form-group">
+                    <div {% if request.user.is_authenticated %}hidden{% endif %} class="form-group">
+                        <input
+                                type="email"
+                                name="email"
+                                id="id_email"
+                                placeholder="E-mail"
+                                value="{% if address %}{{ address.email }}{% endif %}">
+                    </div>
+                    <div {% if request.user.is_authenticated %}hidden{% endif %} class="form-group">
                         <textarea
-                                name="shipping_address"
+                                name="address"
                                 cols="40"
                                 rows="5"
                                 required=""
                                 id="id_shipping_address"
                                 placeholder="{{ address_example }}"
-                        >{% if form.shipping_address.value %}{{ form.shipping_address.value }}{% endif %}</textarea>
-                        {% if form.shipping_address.errors %}
-                            <div class="help-block">
-                                {{ form.shipping_address.errors }}
-                            </div>
-                        {% endif %}
+                        >{% if address %}{{ address.shipping_address }}{% endif %}</textarea>
                     </div>
                     <div class="form-actions">
                         <input
-                                type="submit"
+                                type="button"
                                 name="login-submit"
                                 id="login-submit"
                                 tabindex="4"
-                                class="form-control btn btn-login"
+                                class="form-control btn btn-grey"
                                 value="{% trans 'Continue' %}"
                         >
                     </div>
@@ -110,109 +112,85 @@
             </div>
         </section>
     </div>
-<div id="add_popup" class="{% if form.errors %}add-address-popup{% endif %}" style="display: {% if form.errors %}block{% else %}none{% endif %}">
-    <form id="delivery_address_add" method="post">
-        <span class="close">x</span>
-        {% csrf_token %}
-        <h1>{% trans 'Add an address' %}</h1>
-        <div class="form-group">
-            <textarea
-                    placeholder="{{ address_example }}"
-                    name="{{ form_address.address.name }}"
-            >{% if form_address.address.value %}{{ form_address.address.value }}{% endif %}</textarea>
-            {% if form_address.address.errors %}
-                {{ form_address.address.errors }}
-            {% endif %}
-        </div>
-        <div class="form-group">
-            <input
-                    type="email"
-                    name="{{ form_address.email.name }}"
-                    placeholder="E-mail"
-                    value="{% if form_address.email.value %}{{ form_address.email.value }}{% endif %}">
-            {% if form.email.errors %}
-                {{ form.email.errors }}
-            {% endif %}
-        </div>
-        <div class="form-group">
-            <div class="input-group prefix">
-                <span class="input-group-addon">+998</span>
-                <input
-                        id="delivery_phone_number"
-                        pattern="[0-9]{9}"
-                        type="text"
-                        name="{{ form_address.phone.name }}"
-                        size="9"
-                        maxlength="9"
-                        placeholder="Phone number"
-                        value="{% if form_address.phone.value %}{{ form_address.phone.value }}{% endif %}"
-                >
-            </div>
-            {% if form_address.phone.errors %}
-                {{ form_address.phone.errors }}
-            {% endif %}
-        </div>
-        <div class="form-group">
-            <input
-                    type="checkbox"
-                    name="{{ form_address.is_default.name }}"
-            >
-            <label>{% trans 'Is default' %}</label>
-        </div>
-        <input type="hidden" name="action_type" value="create">
-        <input type="hidden" name="object_id" value="">
-        {% trans 'Submit' as submit %}
-        <input type="submit" name="Submit" value={{submit}}>
-    </form>
-</div>
+    <div id="add_address_modal"></div>
     {{ footer }}
 {% endblock %}
 {% block js %}
-   <script type="text/javascript">
+    <script type="text/javascript">
         $(document).ready(function () {
-
+            var add_address_modal = $('#add_address_modal');
             $('#add_address').click(function (e) {
                 e.preventDefault();
-                var add_form_block = $('#add_popup');
-                    add_form_block.addClass('add-address-popup').fadeIn();
-                    add_form_block.find('input[name="object_id"]').val('');
-                    add_form_block.find('input[name="action_type"]').val('create');
+                $.get("{% url 'api:delivery_address_create' %}", function(response){
+                    add_address_modal.html(response)
+                });
             });
-            $('#delivery_address_add span.close').click(function (e) {
-                e.preventDefault();
-                $('#add_popup').removeClass('add-address-popup').fadeOut();
+            $(document).on('click', '#add_popup .close', function () {
+                add_address_modal.html('');
             });
 
-            $('.delivery_item_edit').click(function (e) {
-                e.preventDefault();
-                var is_default = $(this).parent('.actions').parent().find('.default').data('is_default');
-                var email = $(this).parent('.actions').parent().find('.email').text().trim();
-                var address = $(this).parent('.actions').parent().find('.address').text().trim();
-                var phone = $(this).parent('.actions').parent().find('.phone').data('phone');
-                var object_id = $(this).data('object_id');
-
-                $('#add_popup').addClass('add-address-popup').fadeIn();
-
+            $(document).on('click', '#add_address_form_submit_btn', function (e) {
                 var form = $('#delivery_address_add');
+                var client_name = form.find('input[name="client_name"]').val();
+                var address = form.find('#delivery_address').val();
+                var email = form.find('input[name="email"]').val();
+                var phone = form.find('input[name="phone"]').val();
+                var is_default = form.find('input[name="is_default"]').val();
+                console.log(is_default);
+                var data = {
+                    'client_name': client_name,
+                    'address': address,
+                    'email': email,
+                    'phone': phone,
+                    'is_default': is_default
+                };
 
-                form.find('textarea').val(address)
-                form.find('input[name="email"]').val(email);
-                form.find('input[name="phone"]').val(phone);
-                form.find('input[name="object_id"]').val(object_id);
-                form.find('input[name="action_type"]').val('update');
-                if (is_default)
-                {
-                    form.find('input[name="is_default"]').click();
-                }
-            })
+                $.post("{% url 'api:delivery_address_create' %}", data, function(response, status, xhr){
+                    if (xhr.status === 201)
+                    {
+                        location.reload();
+                    }
+                    else
+                    {
+                        add_address_modal.html(response)
+                    }
+                });
+            });
+
+            var checkout_form = $('#checkout-form');
+
             $('.delivery_item').click(function (e) {
-              var address = $(this).find('.address').text();
-              var phone = $(this).find('.phone').data('phone');
-              var checkout_form = $('#checkout-form');
+                $(this).siblings('.delivery_item').removeClass('active');
+                $(this).addClass('active');
+                var address = $(this).find('.address').text();
+                var phone = $(this).find('.phone').data('phone');
+                var email = $(this).find('.email');
+                if (email)
+                {
+                }
+                $("#id_email").val(email.text().trim());
 
-              checkout_form.find('input[name="phone"]').val(phone);
-              checkout_form.find('#id_shipping_address').val(address);
-           });
+                checkout_form.find('input[name="phone"]').val(phone);
+                checkout_form.find('#id_shipping_address').val(address);
+            });
+
+            $('#login-submit').click(function (e) {
+                e.preventDefault();
+                var client_name = $('#id_client_name').val();
+                var phone = $('#id_phone').val();
+                var email = $('#id_email').val();
+                var shipping_address = $('#id_shipping_address').val();
+
+                if (client_name && phone && shipping_address)
+                {
+                    window.set_data_to_cookie(client_name, phone, email, shipping_address);
+                    window.location.href = "{% url 'orders:time' %}";
+                }
+                else
+                {
+                    $.notify('Please, fill form correctly');
+                }
+            });
         });
     </script>
 {% endblock %}
