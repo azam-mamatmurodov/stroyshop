@@ -19,9 +19,9 @@
                   <div class="information">
                     <div class="address">
                       <strong>{% trans 'Delivery address' %}:</strong>
-                        <div class="address_info">{{ client_data.address.shipping_address }}</div>
+                        <div class="address_info">{{ order.shipping_address }}</div>
                         <ul>
-                            <li><strong>{% trans 'Phone' %}:</strong>+998 {{ client_data.address.phone|phone_number }}</li>
+                            <li><strong>{% trans 'Phone' %}:</strong>+998 {{ order.phone }}</li>
                             {% if client_data.address.email %}
                                 <li><strong>{% trans 'Email' %}:</strong> {{ client_data.address.email }}</li>
                             {% endif %}
@@ -31,7 +31,7 @@
                         <div class="delivery_time">
                             <strong>{% trans 'Delivery time' %}:</strong>
                             <div class="delivery_time_inner">
-                                {% print_timestamp client_data.time as timer %}
+                                {% print_timestamp object.shipping_time.timestamp as timer %}
                                 {{ timer.0 }} - {{ timer.1 }}
                             </div>
                         </div>
@@ -39,14 +39,13 @@
                             <div>
                                 <strong>{% trans 'Payment method' %}:</strong>
                             </div>
-                            {% get_payment client_data.payment_method as payment %}
-                            <p class="payment_method">{{ payment.title }}</p>
+                            <p class="payment_method">{{ order.payment.name }}</p>
                         </div>
                     </div>
                   </div>
                   <div class="products">
                     <h2 class="title">{% trans 'Ordered products' %}</h2>
-                    {% for cart_item in cart_items %}
+                    {% for cart_item in order.cart_set.all %}
                         <div class="item">
                           <div class="item_logo">
                               <img src="{{ cart_item.variation.product.image_0.url }}" alt="">

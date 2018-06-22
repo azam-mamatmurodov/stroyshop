@@ -11,59 +11,64 @@
     <div id="main">
         {{ breadcrumbs }}
         <div id="payment-uzcard-section">
-            <form id="subscribe_api_form" class="form-horizontal">
-                <input type="hidden" id="sub_amount" value="500000">
-                <div class="form-group">
-                    <label for="card_number">Card number</label>
+            <p class="total_quantity">Total quantity: 1</p>
+            <p class="total_sum">Order total: 200$</p>
+            <div class="rekvezit">
+              <p>Введите реквизиты вашей банковской карты</p>
+              <i class="fa fa-question-circle" aria-hidden="true"></i>
+              <p class="safe">Данные вашей карты не передаются данному сервису и сохраняются на безопасной территории сервиса <a href="https://payme.uz/start">Payme</a></p>
+            </div>
+            <div class="form-group">
+              <div class="top">
+                  <label for="card_number">Номер карты</label>
+                  <input
+                  required
+                  class="form-control"
+                  type="text"
+                  id="card_number"
+                  size="16"
+                  maxlength="16"
+                  value="8600134301849596"
+                  >
+              </div>
+              <div class="bottom">
+                <div class="poweredby">
+                  <p>Powered by</p>
+                  <img src="/media/filer_public/66/a2/66a215f8-bfec-456e-8176-8ea0b7a59412/payme_01_small.png" alt="Payme">
+                </div>
+                <div class="form-group-sms">
+                    <label for="sms_number">Введите СМС для подтверждения оплаты</label>
                     <input
-                            required
-                            class="form-control"
-                            type="text"
-                            id="card_number"
-                            size="16"
-                            maxlength="16"
-                            value="8600134301849596"
+                    required
+                    class="form-control"
+                    type="text"
+                    id="verification_number"
+                    size="16"
+                    maxlength="4"
+                    value="5632"
                     >
                 </div>
                 <div class="form-group">
-                    <label for="expire_date">Expire date</label>
-                     <div class="input-append date" id="dpMonths" data-date="10/2018" data-date-format="mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
-                        <input
-                                required
-                                id="expire_date"
-                                class="span2 form-control"
-                                size="16"
-                                type="text"
-                                value="0320"
-                                readonly
-                        >
-                        <span class="add-on"><i class="icon-calendar"></i></span>
-                     </div>
-                </div>
-                <div class="form-group col-xs-2" style="">
-                    <label for="verfication_code">Verification Code</label>
+                  <label for="expire_date">Срок действия (Месяц/Год)</label>
+                  <div class="input-append date" id="dpMonths" data-date="10/2018" data-date-format="mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
                     <input
-                            id="verfication_code"
-                            type="text"
-                            class="form-control"
-                            max="6"
-                            min="6"
-                            maxlength="6"
-                            pattern="\d{6}"
-                            value="666666"
+                    required
+                    id="expire_date"
+                    class="span2 form-control"
+                    size="16"
+                    type="text"
+                    value="0320"
+                    readonly
                     >
+                    <span class="add-on"><i class="icon-calendar"></i></span>
+                  </div>
                 </div>
-
-                <div class="form-group">
-                    <button
-                        style="margin: 10px 0;"
-                        class="payme_button_subscribe btn btn-success "
-                        type="button">
-                    Оплатить с помощью <b>PAYCOM - Subscribe</b>
-                </button>
-                </div>
-            </form>
-
+              </div>
+            </div>
+            <div class="oferta">
+              <p>Нажимая на кнопку "Продолжить", вы присоединяетесь к <a href="https://cdn.payme.uz/terms/main.html">условиям оферты.</a></p>
+              <button class="payme_button_subscribe btn btn-success btn-grey" type="button">Продолжить</button>
+            </div>
           </div>
     </div>
     {{ footer }}
@@ -71,75 +76,7 @@
 
 {% block css %}
     <style>
-        .btn {
-            display: inline-block;
-            padding: 6px 12px;
-            margin-bottom: 0;
-            font-size: 14px;
-            font-weight: 400;
-            line-height: 1.42857143;
-            text-align: center;
-            white-space: nowrap;
-            vertical-align: middle;
-            -ms-touch-action: manipulation;
-            touch-action: manipulation;
-            cursor: pointer;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            background-image: none;
-            border: 1px solid transparent;
-            border-radius: 4px;
-        }
-        form#subscribe_api_form
-        {
-            font-size: 14px !important;
-            width: 400px;
-            margin: 0 auto;
-            border: 2px solid #b8c029;
-            padding: 20px;
-        }
-        .payme_button_subscribe
-        {
-            background-image: url('https://help.paycom.uz/images/ru/payme_01_small.png');
-            width: 300px;
-            height: 100px;
-            background-size: 300px 100px;
-            color: transparent;
-            background-repeat: no-repeat;
-            border: none;
-        }
-        div#payment-uzcard-section {
-            position: relative;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: inline-block;
-            max-width: 100%;
-            margin-bottom: 5px;
-            font-weight: 700;
-        }
-        .form-control {
-            display: block;
-            width: 100%;
-            height: 34px;
-            padding: 0;
-            font-size: 14px;
-            line-height: 1.42857143;
-            color: #555;
-            background-color: #fff;
-            background-image: none;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-            box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-            -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-            -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-            transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-        }
+
 
     </style>
 {% endblock %}
@@ -179,7 +116,7 @@
                         });
                         return false;
                     }
-                }}
+                }
 
                 card_number = $('#card_number').val();
                 expire_date = "0320";

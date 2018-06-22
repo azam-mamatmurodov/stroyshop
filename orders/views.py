@@ -287,6 +287,7 @@ class OrderDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        order = self.get_object()
         client_data = cookie_parser(self.request.COOKIES.get('client_data'))
         cart_items = Cart.objects.filter(order=self.get_object())
         delivery_price = get_delivery_price(cart_items)
@@ -295,12 +296,9 @@ class OrderDetail(DetailView):
         for cart_item in cart_items:
             products_price += cart_item.total_price
             total_quantity += cart_item.count
-        total_price = products_price + delivery_price
-        if int(client_data.get('need_porter')):
-            total_price += delivery_price
 
         context['products_price'] = products_price
-        context['total_amount'] = total_price
+        context['total_amount'] = order.total_price
         context['total_quantity'] = total_quantity
         context['form'] = DeliveryAddressForm(self.request.POST or None)
         context['cart_items'] = cart_items

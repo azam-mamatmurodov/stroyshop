@@ -4,7 +4,7 @@ from django.utils.translation import ugettext as _
 from django.shortcuts import Http404
 from django.db.models import Q
 
-from products.models import Product, Category, Brands, Variation
+from products.models import Product, Category, Brands, Variation, Feature, Color
 from products.forms import LeaveReviewForm
 
 ORDER_BY = (
@@ -34,6 +34,15 @@ class ProductListView(ListView):
         brands = self.request.GET.getlist('brand')
         if brands:
             queryset = queryset.filter(brand__in=brands)
+
+        features = self.request.GET.getlist('feature')
+        if features:
+            queryset = queryset.filter(feature__in=features)
+
+        colors = self.request.GET.getlist('color')
+        if colors:
+            queryset = queryset.filter(variations__color__in=colors)
+
         order_by = self.request.GET.get('order_by')
         if order_by:
             if order_by == 'z_a':
@@ -52,10 +61,19 @@ class ProductListView(ListView):
         return queryset
 
     def get_context_data(self, **kwargs):
+        queryset = self.get_queryset()
+        fields = queryset.values('brand', 'feature', ).distinct()
+        print(fields)
+
         context = super(ProductListView, self).get_context_data(**kwargs)
         context['brands'] = Brands.objects.all()
+        context['features'] = Feature.objects.all()
+        context['colors'] = Color.objects.all()
         context['recommended_products'] = self.model.objects.filter(is_recommended=True)
         context['selected_brands'] = self.request.GET.getlist('brand')
+        context['selected_features'] = self.request.GET.getlist('feature')
+        context['selected_colors'] = self.request.GET.getlist('color')
+
         if self.kwargs.get('slug') != 'all':
             try:
                 category = Category.objects.get(translations__slug=self.kwargs.get('slug'))

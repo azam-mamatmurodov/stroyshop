@@ -25,6 +25,11 @@ class CategoryAdmin(TranslatableAdmin, DraggableMPTTAdmin):
     mptt_level_indent = 20
 
 
+class FeatureAdmin(TranslatableAdmin):
+    def get_prepopulated_fields(self, request, obj=None):
+        return {'slug': ('name',),}
+
+
 class VariationAdmin(admin.TabularInline):
     model = Variation
 
@@ -60,7 +65,7 @@ class ProductVariationAdmin(admin.ModelAdmin):
 class ProductAdmin(admin.ModelAdmin):
     inlines = [VariationAdmin, ]
     list_display = ['id', 'name', 'price', ]
-    list_filter = ['brand']
+    list_filter = ['brand', 'feature']
 
     change_list_template = 'admin/products/change_list.html'
 
@@ -97,6 +102,7 @@ class ProductAdmin(admin.ModelAdmin):
         form = ImportForm()
         if request.method == "POST":
             form = ImportForm(request.POST and request.FILES)
+
             if form.is_valid():
                 file = request.FILES["file"]
                 sheet_name = 'products'
@@ -231,6 +237,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(Feature, FeatureAdmin)
 admin.site.register(Brands)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Review, ReviewAdmin)

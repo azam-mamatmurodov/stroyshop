@@ -27,20 +27,59 @@
             </ul>
         </section>
         <section id="filter">
-            <h2>{% trans 'Brands' %}</h2>
+            <h2>{% trans 'Filter' %}</h2>
             <br>
             <div class="filter">
                 <form id="brand_filter" action="{{ request.get_full_path }}" method="get">
-                    {% for brand in brands %}
+
                         <div class="form-group">
-                            <input {% if brand.id|stringformat:"i" in selected_brands %}
-                                checked
-                            {% endif %} name="brand" id="brand_{{ brand.id }}" type="checkbox" value="{{ brand.id }}">
-                            <label for="brand_{{ brand.id }}">
-                                {{ brand.name }}
-                            </label>
+                            <h4 class="filter_label">{% trans 'Brands' %}</h4>
+                            {% for brand in brands %}
+                                <div class="brand_item">
+                                    <input style="display: none;" {% if brand.id|stringformat:"i" in selected_brands %}
+                                        checked
+                                    {% endif %} name="brand" id="brand_{{ brand.id }}" type="checkbox" value="{{ brand.id }}">
+                                    <span style="width: 30px; height: 30px;"></span>
+                                    <label for="brand_{{ brand.id }}">
+                                        {{ brand.name }}
+                                    </label>
+                                </div>
+                            {% endfor %}
                         </div>
-                    {% endfor %}
+                        <div class="form-group">
+                            <h4 class="filter_label">{% trans 'Features' %}</h4>
+                            {% for feature in features %}
+                                <div class="feature_item">
+                                    <input style="display: none;" {% if feature.id|stringformat:"i" in selected_features %}checked{% endif %}
+                                           name="feature"
+                                           id="feature_{{ feature.id }}"
+                                           type="checkbox"
+                                           value="{{ feature.id }}"
+                                    >
+                                    <span style="width: 30px; height: 30px;"></span>
+                                    <label for="feature_{{ feature.id }}">
+                                        {{ feature.name }}
+                                    </label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="form-group">
+                            <h4 class="filter_label">{% trans 'Colors' %}</h4>
+                            {% for color in colors %}
+                                <div class="color-item {% if color.id|stringformat:"i" in selected_colors %}checked{% endif %}">
+                                    <input style="display: none;" {% if color.id|stringformat:"i" in selected_colors %}checked{% endif %}
+                                           name="color"
+                                           id="color_{{ color.id }}"
+                                           type="checkbox"
+                                           value="{{ color.id }}"
+                                    >
+                                    <span style="width: 30px; height: 30px; background-color: {{ color.color }}"></span>
+                                    <label for="color_{{ color.id }}" class="color_filter" >
+                                    {{ color.name }}
+                                    </label>
+                                </div>
+                            {% endfor %}
+                        </div>
                     <input type="submit" />
                 </form>
             </div>
@@ -96,7 +135,12 @@
             </div>
         </section>
         <section id="sort">
-            <div class="found"><span>{{ object_list.count }} {% trans 'products' %}</span></div>
+            <div class="found"><span>{{ object_list.count }} {% trans 'products' %}</span>
+                <div class="mobile_filter_btn">
+                    <button class="btn-grey">Filter</button>
+                </div>
+            </div>
+            <div id="filterview"></div>
             <div class="sorting">
                 <form action="{{ request.get_full_path }}">
                     <label for="order_by">{% trans 'Sorting' %}:</label>
@@ -120,7 +164,7 @@
                         </div>
                         <div class="title">
                             <a href="{{ product.get_absolute_url }}">
-                                {{ product.name }} <span class="product_variation"></span> <span class="product_color"></span>
+                                <p class="product_name"> {{ product.name }} </p> <span class="product_variation"></span> <span class="product_color"></span>
                             </a>
                         </div>
                         <div class="price">
@@ -164,4 +208,6 @@
     </div>
 </div>
 {{ footer }}
+{% endblock %}
+{% block js %}
 {% endblock %}

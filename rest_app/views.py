@@ -67,6 +67,14 @@ class CartViews(generics.ListAPIView, generics.CreateAPIView):
         quantity = int(request.data.get('count'))
         variation = Variation.objects.get(id=variation_id)
 
+        if int(variation.quantity) < quantity:
+            msg = _('Not enough quantity')
+            message = {
+                'status': 'fail',
+                'message': _(msg)
+            }
+            return JsonResponse(data=message)
+
         total_price = Decimal(variation.price) * Decimal(quantity)
 
         new_cart_item, created = Cart.objects.get_or_create(session_key=self.session_key, variation=variation, order=None, defaults={
@@ -74,11 +82,19 @@ class CartViews(generics.ListAPIView, generics.CreateAPIView):
             "total_price": total_price
         })
         if not created:
-            new_cart_item.count += quantity
-            new_cart_item.total_price = new_cart_item.count * new_cart_item.variation.price
-            new_cart_item.save()
-            msg = _('Cart successfully updated')
-
+            total_quantity = new_cart_item.count + quantity
+            if variation.quantity < total_quantity:
+                msg = _('Not enough quantity')
+                message = {
+                    'status': 'fail',
+                    'message': _(msg)
+                }
+                return JsonResponse(data=message)
+            else:
+                new_cart_item.count = total_quantity
+                new_cart_item.total_price = new_cart_item.count * new_cart_item.variation.price
+                new_cart_item.save()
+                msg = _('Cart successfully updated')
         else:
             msg = _('Successful added')
         message = {

@@ -47,6 +47,22 @@ class Category(MPTTModel, TranslatableModel):
         return slugs
 
 
+class Feature(TranslatableModel):
+    translations = TranslatedFields(
+        name=models.CharField(max_length=60, verbose_name=_('Name'), unique=True),
+        slug=models.SlugField(verbose_name=_('Slug'), unique=True, ),
+    )
+
+    objects = TranslationManager()
+
+    class Meta:
+        verbose_name = _('Feature')
+        verbose_name_plural = _('Features')
+
+    def __str__(self):
+        return "{}".format(self.safe_translation_getter('name'))
+
+
 class Brands(models.Model):
     name = models.CharField(max_length=60, verbose_name=_('Name'))
     logo = models.ImageField(upload_to='brands/', verbose_name=_('Logo'))
@@ -118,6 +134,7 @@ class Variation(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=120, verbose_name=_('Product name'), )
     category = TreeForeignKey(Category, verbose_name=_('Category'), )
+    feature = models.ForeignKey(Feature, null=True, blank=True)
     brand = models.ForeignKey(Brands, verbose_name=_('Brand'), )
     description = RichTextUploadingField(blank=True, null=True, verbose_name=_('Description'), )
     characters = RichTextUploadingField(blank=True, null=True, verbose_name=_('Characters'), )
@@ -128,7 +145,6 @@ class Product(models.Model):
     is_recommended = models.BooleanField(default=False, verbose_name=_('Is recommended'))
     price = models.DecimalField(decimal_places=2, max_digits=10, verbose_name=_('Price'), null=True, blank=True, )
     is_top = models.BooleanField(default=False)
-
     image_0 = image.FilerImageField(verbose_name=_('First image'), null=True, related_name='product_image0')
     image_1 = image.FilerImageField(verbose_name=_('Second image'),  null=True, blank=True, related_name='product_image1')
     image_2 = image.FilerImageField(verbose_name=_('Third image'),  null=True, blank=True, related_name='product_image2')
