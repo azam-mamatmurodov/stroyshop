@@ -1659,6 +1659,9 @@ a:hover{
 		.popup .container .tabs-title span{
 			padding: 5px 20px;
 		}
+		#menu-block > ul > li > ul::before{
+			display: none;
+		}
 	}
 	@media (max-width: 768px){
 		#user-block .logout{
