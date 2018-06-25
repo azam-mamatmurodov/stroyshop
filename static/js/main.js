@@ -110,11 +110,27 @@
             }
         });
         $('.mobile_filter_btn > button').on('click', function(){
-            $('#filterview').html($('#brand_filter').parent().html());
+            $('#filterview .brand').html($('#brand_filter .brand').html());
+            $('#filterview .feature').html($('#brand_filter .feature').html());
+            $('#filterview .color').html($('#brand_filter .color').html());
             $('#brand_filter').empty();
             $('#filterview').addClass('hover');
-
         });
+        // accordion
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+        for (i = 0; i < acc.length; i++) {
+          acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight){
+              panel.style.maxHeight = null;
+            } else {
+              panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+          });
+        }
+        // accordion end
         $('#center').swipe({
             swipeRight: function() {
                 $('#filterview').removeClass('hover');

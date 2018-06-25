@@ -32,7 +32,7 @@
             <div class="filter">
                 <form id="brand_filter" action="{{ request.get_full_path }}" method="get">
 
-                        <div class="form-group">
+                        <div class="form-group brand">
                             <h4 class="filter_label">{% trans 'Brands' %}</h4>
                             {% for brand in brands %}
                                 <div class="brand_item">
@@ -46,7 +46,7 @@
                                 </div>
                             {% endfor %}
                         </div>
-                        <div class="form-group">
+                        <div class="form-group feature">
                             <h4 class="filter_label">{% trans 'Features' %}</h4>
                             {% for feature in features %}
                                 <div class="feature_item">
@@ -63,7 +63,7 @@
                                 </div>
                             {% endfor %}
                         </div>
-                        <div class="form-group">
+                        <div class="form-group color">
                             <h4 class="filter_label">{% trans 'Colors' %}</h4>
                             {% for color in colors %}
                                 <div class="color-item {% if color.id|stringformat:"i" in selected_colors %}checked{% endif %}">
@@ -140,7 +140,15 @@
                     <button class="btn-grey">Filter</button>
                 </div>
             </div>
-            <div id="filterview"></div>
+            <div id="filterview">
+                <h2>Filter</h2>
+                <button class="accordion">Бренды</button>
+                <div class="panel brand"></div>
+                <button class="accordion">Features</button>
+                <div class="panel feature"></div>
+                <button class="accordion">Цвета</button>
+                <div class="panel color"></div>
+            </div>
             <div class="sorting">
                 <form action="{{ request.get_full_path }}">
                     <label for="order_by">{% trans 'Sorting' %}:</label>
