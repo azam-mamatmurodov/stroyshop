@@ -555,10 +555,13 @@ a:hover{
 	cursor: pointer;
 	background: #fff;
 	border: solid 2px #b7c233;
-	display: inline-block;
-	margin: 5px 0;
 	background: linear-gradient(#f1f1f1, #e5e5e5);
 	border: 1px solid #ccc;
+	width: 88%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    text-align: center;
 }
 .product #main #filter input[type=submit]:hover{
 	background: #f1f1f1;
@@ -1392,8 +1395,14 @@ a:hover{
 	display: flex;
 	flex-direction: column;
 }
-#filterview #brand_filter > input {
+.product #main #left section input[type=checkbox]{
+	display: inline-block !important;
     position: absolute;
+    top: 6px;
+    left: 7px;
+    width: 20px;
+    height: 20px;
+    margin-right: 0;
     opacity: 0;
     cursor: pointer;
 }
@@ -1408,7 +1417,7 @@ a:hover{
 	float: left;
 	width: 46%;
 	margin: 5px 4px;
-	height: 35px;
+	height: 45px;
     position: relative;
     cursor: pointer;
     -webkit-user-select: none;
@@ -1430,6 +1439,10 @@ a:hover{
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+#filterview .panel .brand_item,
+#filterview .panel .feature_item{
+	margin-top: 15px;
 }
 #brand_filter .form-group .color-item span:after,
 #filterview .panel .color-item span:after,
@@ -1476,7 +1489,7 @@ a:hover{
 #brand_filter .form-group .feature_item input:checked ~ span,
 #filterview .panel .brand_item input:checked ~ span,
 #brand_filter .form-group .feature_item input:checked ~ span{
-    background-color: #2196F3;
+    background-color: #000;
 }
 #brand_filter .form-group .color-item span,
 #filterview .panel .color-item span{
@@ -1531,8 +1544,8 @@ a:hover{
 }
 #brand_filter .form-group .color-item > span,
 #filterview .panel .color-item > span{
-	width: 30px !important;
-	height: 30px !important;
+	width: 44px !important;
+	height: 44px !important;
 	content: '';
 	display: inline-block;
 	vertical-align: middle;
@@ -1557,18 +1570,22 @@ a:hover{
 }
 #brand_filter .form-group .color-item > input:checked ~span::after,
 #filterview .panel .color-item > input:checked ~span::after{
-	left: 10px;
-    top: 6px;
+	left: 17px;
+    top: 13px;
     width: 5px;
     height: 10px;
-    border: solid white;
+    border: solid #eee;
     border-width: 0 3px 3px 0;
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
 }
+.product #main #left #filter{
+	padding: 20px 0;
+}
 .product #main #filter .form-group{
 	border-bottom: 1px solid #b8c11c;
+	padding: 10px;
 }
 .product #main #filter .form-group:nth-child(3){
 	border: 0;
@@ -1577,7 +1594,7 @@ a:hover{
 	padding: 20px 10px;
 }
 .product #main #left section h2{
-	padding: 10px 3px;
+	padding: 10px;
 }
 #sort .found .mobile_filter_btn button{
 	padding: 5px 8px;

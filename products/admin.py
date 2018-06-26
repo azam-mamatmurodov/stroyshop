@@ -125,17 +125,17 @@ class ProductAdmin(admin.ModelAdmin):
                     # Images also
                     image_0_filename = product.get('image_0')
                     if image_0_filename:
-                        image_0_file = File.objects.get(Q(original_filename=image_0_filename) | Q(original_filename__startswith=image_0_filename))
+                        image_0_file = File.objects.filter(Q(original_filename=image_0_filename) | Q(original_filename__startswith=image_0_filename)).first()
                         kwargs.update({'image_0': image_0_file})
 
                     image_1_filename = product.get('image_1')
                     if image_1_filename:
-                        image_1_file = File.objects.get(Q(original_filename=image_1_filename) | Q(original_filename__startswith=image_1_filename))
+                        image_1_file = File.objects.filter(Q(original_filename=image_1_filename) | Q(original_filename__startswith=image_1_filename)).first()
                         kwargs.update({'image_1': image_1_file})
 
                     image_2_filename = product.get('image_2')
                     if image_2_filename:
-                        image_2_file = File.objects.get(Q(original_filename=image_2_filename) | Q(original_filename__startswith=image_2_filename))
+                        image_2_file = File.objects.filter(Q(original_filename=image_2_filename) | Q(original_filename__startswith=image_2_filename)).first()
                         kwargs.update({'image_2': image_2_file})
 
                     product_objects = Product.objects
