@@ -558,10 +558,10 @@ a:hover{
 	background: linear-gradient(#f1f1f1, #e5e5e5);
 	border: 1px solid #ccc;
 	width: 88%;
-    display: flex;
-    justify-content: center;
-    margin: auto;
-    text-align: center;
+	display: flex;
+	justify-content: center;
+	margin: auto;
+	text-align: center;
 }
 .product #main #filter input[type=submit]:hover{
 	background: #f1f1f1;
@@ -1397,14 +1397,14 @@ a:hover{
 }
 .product #main #left section input[type=checkbox]{
 	display: inline-block !important;
-    position: absolute;
-    top: 6px;
-    left: 7px;
-    width: 20px;
-    height: 20px;
-    margin-right: 0;
-    opacity: 0;
-    cursor: pointer;
+	position: absolute;
+	top: 6px;
+	left: 7px;
+	width: 20px;
+	height: 20px;
+	margin-right: 0;
+	opacity: 0;
+	cursor: pointer;
 }
 #brand_filter .form-group label{
 	width: 65px !important;
@@ -1418,12 +1418,12 @@ a:hover{
 	width: 46%;
 	margin: 5px 4px;
 	height: 45px;
-    position: relative;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+	position: relative;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 #brand_filter .form-group .brand_item,
 #filterview .panel .brand_item,
@@ -1434,11 +1434,11 @@ a:hover{
 	height: 35px;
 	display: inline-block;
 	position: relative;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 #filterview .panel .brand_item,
 #filterview .panel .feature_item{
@@ -1451,8 +1451,8 @@ a:hover{
 #filterview .panel .feature_item span:after,
 #brand_filter .form-group .feature_item span:after{
 	content: "";
-    position: absolute;
-    display: none;
+	position: absolute;
+	display: none;
 }
 #brand_filter .form-group .color-item input:checked ~ span:after,
 #filterview .panel .color-item input:checked ~ span:after,
@@ -1460,7 +1460,7 @@ a:hover{
 #filterview .panel .brand_item input:checked ~ span:after,
 #filterview .panel .feature_item input:checked ~ span:after,
 #brand_filter .form-group .feature_item input:checked ~ span:after {
-    display: block;
+	display: block;
 }
 #brand_filter .form-group .color-item span:after,
 #filterview .panel .color-item span:after,
@@ -1468,38 +1468,38 @@ a:hover{
 #filterview .panel .brand_item span:after,
 #filterview .panel .feature_item span:after,
 #brand_filter .form-group .feature_item span:after{
-    left: 4px;
-    top: 8px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
+	left: 4px;
+	top: 8px;
+	width: 5px;
+	height: 10px;
+	border: solid white;
+	border-width: 0 3px 3px 0;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
 }
 #brand_filter .form-group .brand_item:hover input ~ span,
 #filterview .panel .brand_item:hover input ~ span,
 #filterview .panel .feature_item:hover input ~ span,
 #brand_filter .form-group .feature_item:hover input ~ span{
-    background-color: #ccc;
-    cursor: pointer;
+	background-color: #ccc;
+	cursor: pointer;
 }
 #brand_filter .form-group .brand_item input:checked ~ span,
 #brand_filter .form-group .feature_item input:checked ~ span,
 #filterview .panel .brand_item input:checked ~ span,
-#brand_filter .form-group .feature_item input:checked ~ span{
-    background-color: #000;
+#filterview .panel .feature_item input:checked ~ span{
+	background-color: #000;
 }
 #brand_filter .form-group .color-item span,
 #filterview .panel .color-item span{
 	margin-right: 5px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #eee;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 25px;
+	width: 25px;
+	background-color: #eee;
 }
 #brand_filter .form-group .brand_item span,
 #brand_filter .form-group .feature_item span,
@@ -1507,11 +1507,11 @@ a:hover{
 #filterview .panel .feature_item span{
 	background: #fff;
 	position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #eee;
+	top: 0;
+	left: 0;
+	height: 25px;
+	width: 25px;
+	background-color: #eee;
 }
 
 #brand_filter .form-group .feature_item label,
@@ -1519,7 +1519,26 @@ a:hover{
 #filterview .panel .feature_item label,
 #filterview .panel .brand_item label{
 	color: #565656;
-	margin-top: 11px;
+	position: absolute;
+	width: 75% !important;
+	left: 5px;
+	top: 5px;
+	height: 25px;
+	padding-left: 30px;
+	display: flex !important;
+	align-items: center;
+}
+#brand_filter .form-group .color-item label,
+#filterview .panel .color-item label{
+	margin: 1px;
+    position: absolute;
+    width: 60% !important;
+    left: 5px;
+    top: 6px;
+    height: 33px;
+    padding-left: 45px;
+    display: flex !important;
+    align-items: center;
 }
 #brand_filter .form-group .feature_item span,
 #brand_filter .form-group .brand_item span,
@@ -1559,26 +1578,26 @@ a:hover{
 #filterview .panel .brand_item > input:checked ~span::after,
 #filterview .panel .feature_item > input:checked ~span::after{
 	left: 7px;
-    top: 2px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
+	top: 2px;
+	width: 5px;
+	height: 10px;
+	border: solid white;
+	border-width: 0 3px 3px 0;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
 }
 #brand_filter .form-group .color-item > input:checked ~span::after,
 #filterview .panel .color-item > input:checked ~span::after{
 	left: 17px;
-    top: 13px;
-    width: 5px;
-    height: 10px;
-    border: solid #eee;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
+	top: 13px;
+	width: 5px;
+	height: 10px;
+	border: solid #eee;
+	border-width: 0 3px 3px 0;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
 }
 .product #main #left #filter{
 	padding: 20px 0;
@@ -1852,6 +1871,12 @@ a:hover{
 	#filterview > h2{
 		padding: 15px;
 		text-align: center;
+	}
+	#brand_filter .form-group .feature_item label,
+	#brand_filter .form-group .brand_item label,
+	#filterview .panel .feature_item label,
+	#filterview .panel .brand_item label{
+		top: -2px;
 	}
 	#sort .sorting label{
 		display: none;
@@ -2137,6 +2162,9 @@ a:hover{
 	#products .product-row .title a .product_name{
 		text-align: center;
 		padding: 10px 85px;
+	}
+	#filterview .panel.color .color-item > label{
+		width: 89px;
 	}
 }
 @media (max-width: 400px){
