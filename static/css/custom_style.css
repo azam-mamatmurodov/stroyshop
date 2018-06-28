@@ -375,8 +375,8 @@ a:hover{
 #cart-info .cart-block:hover #cartview{
 	display: block;
 }
-#breadcrumbs{
-	margin-top: 4px;
+#breadcrumbs a{
+	margin: 7px 0 10px 15px;
 }
 #breadcrumbs a::after {
 	content: '';
@@ -451,10 +451,11 @@ a:hover{
 	padding: 3px 6px;
 }
 #cartview .item .description{
-	width: 100%;
+	width: 82%;
 	display: flex;
 	align-items: flex-start;
 	justify-content: space-around;
+	align-items: center;
 	margin-left: 10px;
 	font-size: 16px;
 }
@@ -484,9 +485,6 @@ a:hover{
 	display: flex;
 	justify-content: space-between;
 	margin-top: 10px;
-	margin-bottom: 10px;
-}
-#cart-info .delete.delete_item{
 	margin-bottom: 10px;
 }
 #breadcrumbs{
@@ -686,8 +684,7 @@ a:hover{
 	overflow: hidden;
 }
 #search-block input:nth-child(2){
-	height: 36px;
-	border-bottom-right-radius: 5px;
+	height: 34px;
 }
 #search-block input[type=text]{
 	border-radius: 4px;
@@ -1522,7 +1519,7 @@ a:hover{
 	position: absolute;
 	width: 75% !important;
 	left: 5px;
-	top: 5px;
+	top: 4px;
 	height: 25px;
 	padding-left: 30px;
 	display: flex !important;
@@ -1531,14 +1528,14 @@ a:hover{
 #brand_filter .form-group .color-item label,
 #filterview .panel .color-item label{
 	margin: 1px;
-    position: absolute;
-    width: 60% !important;
-    left: 5px;
-    top: 6px;
-    height: 33px;
-    padding-left: 45px;
-    display: flex !important;
-    align-items: center;
+	position: absolute;
+	width: 60% !important;
+	left: 5px;
+	top: 6px;
+	height: 33px;
+	padding-left: 45px;
+	display: flex !important;
+	align-items: center;
 }
 #brand_filter .form-group .feature_item span,
 #brand_filter .form-group .brand_item span,
@@ -1628,6 +1625,22 @@ a:hover{
 #products .product-row .title a p:hover{
 	cursor: pointer;
 }
+#product-content .product_cart_add_form{
+	display: flex;
+	align-items: center;
+}
+#product-content .product-info .actions .form-item input{
+	padding: 9px 10px;
+	border-radius: 5px;
+}
+#product-content .product-info .actions .form-item .plus,
+#product-content .product-info .actions .form-item .minus{
+	height: 17px;
+}
+#products .product-row .title a .product_name{
+	height: 42px;
+	overflow: hidden;
+}
 /*media*/
 
 
@@ -1714,6 +1727,9 @@ a:hover{
 		right: -1000px;
 		transition: .7s;
 	}
+	#cartview .item .description{
+		width: 100%;
+	}
 	/*steps*/
 	.order_steps{
 		width: 80vw;
@@ -1772,13 +1788,28 @@ a:hover{
 		line-height: 13px;
 	}
 	/*filter*/
+	#sort .found{
+		display: flex;
+		align-items: center;
+		margin-top: 0;
+	}
 	#sort .found .mobile_filter_btn{
 		display: block;
 		margin-left: 10px;
 	}
-	#sort .found{
-		display: flex;
-		align-items: center;
+	#sort .found .mobile_filter_btn button{
+		padding: 7px 20px;
+	}
+	#sort .sorting{
+		margin-top: 0;
+	}
+	#sort .sorting select{
+		padding: 6px 0;
+		border-radius: 5px;
+		border: 1px solid #ccc;
+		color: #9c9c9c;
+		background: linear-gradient(#f1f1f1, #e5e5e5);
+		font-size: 13px;
 	}
 	#filterview{
 		position: fixed;
@@ -1843,6 +1874,9 @@ a:hover{
 		outline: none;
 		font-size: 15px;
 		transition: 0.4s;
+		width: 90%;
+		display: block;
+		margin: auto;
 	}
 	#filterview .active, .accordion:hover {
 		background-color: #ccc;
@@ -1863,6 +1897,8 @@ a:hover{
 		max-height: 0;
 		overflow: hidden;
 		transition: max-height 0.2s ease-out;
+		width: 90%;
+		margin: auto;
 	}
 	#filterview .panel.color .color-item > label {
 		margin-left: 3px;
@@ -1931,6 +1967,7 @@ a:hover{
 		transition: .7s;
 		min-width: 100%;
 		min-height: 86%;
+		max-height: 100%;
 	}
 	#cart-info .checkout-block button:hover{
 		-webkit-tap-highlight-color: rgba(0,0,0,0);
@@ -2014,6 +2051,9 @@ a:hover{
 		width: 17%;
 		height: 15vw;
 	}
+	#delivery-time-section .loaders form{
+		margin-top: 5px;
+	}
 }
 @media (max-width: 570px){
 	#cartview .item .description .cart_item_name{
@@ -2029,9 +2069,15 @@ a:hover{
 		margin-left: 0;
 		max-width: 80%;
 	}
+	#cartview .item .description{
+		margin-left: 4px;
+	}
+	#cartview .item .description .cart_item_sum{
+		width: 90px;
+	}
 	#cartview .item .description .cart_item_name{
 		width: 133px;
-		margin-right: 7px;
+		margin-right: 4px;
 	}
 	#cartview .item .description .cart_item_name > a > p{
 		width: 133px;
@@ -2099,6 +2145,10 @@ a:hover{
 	#delivery-time-section .loaders{
 		font-size: 10px;
 	}
+	#order_time_button{
+		font-size: 10px;
+		padding: 7px 16px;
+	}
 	#delivery-time-section .loaders .porter_form_wrapper .form-group{
 		display: flex;
 		align-items: center;
@@ -2161,7 +2211,8 @@ a:hover{
 	}
 	#products .product-row .title a .product_name{
 		text-align: center;
-		padding: 10px 85px;
+		padding: 10px 80px 10px 150px;
+		height: auto;
 	}
 	#filterview .panel.color .color-item > label{
 		width: 89px;
@@ -2170,6 +2221,11 @@ a:hover{
 @media (max-width: 400px){
 	#payment-section .payment-method .item{
 		width: 65%;
+	}
+	#products .product-row .title a .product_name{
+		height: 66px;
+		text-align: center;
+		padding: 10px 80px 0px 115px;
 	}
 }
 @media (max-width: 340px){
