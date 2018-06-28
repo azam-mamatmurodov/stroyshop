@@ -61,12 +61,6 @@
                     $('#search-block').removeClass('width');
                     $('#search_cancel').removeClass('open');
                 });
-               //  $(document).on("vclick", "#search-block", function() {
-               //     $('#header .hamburger').addClass('none');
-               //     $('#header .logo').addClass('none');
-               //     $('#cart-info').addClass('none');
-               //     $('#search-block').addClass('width');
-               // });
            }
        });
         $(window).on('load', function(){

@@ -192,8 +192,11 @@ class CheckoutView(TemplateView):
             products_price += cart_item.total_price
             total_quantity += cart_item.count
         total_price = products_price + delivery_price
-        if int(client_data.get('need_porter')):
-            total_price += delivery_price
+        try:
+            if int(client_data.get('need_porter')):
+                total_price += delivery_price
+        except ValueError:
+            pass
 
         context['products_price'] = products_price
         context['total_amount'] = total_price

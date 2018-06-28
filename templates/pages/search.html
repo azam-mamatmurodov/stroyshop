@@ -1,22 +1,65 @@
 {% extends 'base.html' %}
-{% load i18n static %}
+{% load i18n static humanize %}
 {% block title %}
     {% trans 'Search' %}
 {% endblock %}
 {% block content %}
     {{ header }}
     <div id="main">
-        {{ breadcrumbs }}
-        {% trans 'Found' %}: {{ product_list.count }}
-        <div class="results" style="font-size: 14px;">
-            {% for product in product_list %}
-                <div class="product-item">
-                    <a href="{{ product.get_absolute_url }}">
-                        {{ product }}
-                    </a>
+        <div id="center">
+            {{ breadcrumbs }}
+            <div id="products" class="search-results">
+               <div class="block-content">
+                    {% for product in object_list %}
+                        <div class="product-row">
+                            <div class="image">
+                                <img src="{{ product.get_default_image.url }}">
+                            </div>
+                            <div class="title">
+                                <a href="{{ product.get_absolute_url }}">
+                                    <p class="product_name"> {{ product.name }} </p> <span class="product_variation"></span> <span class="product_color"></span>
+                                </a>
+                            </div>
+                            <div class="price">
+                                <strong>
+                                    <span class="price_display">{{ product.get_price|floatformat|intcomma }}</span>
+                                </strong><span class="price_label">{% trans 'sum' %}</span>
+                            </div>
+                            <div style="display: none;" class="addtocart">
+                                <form class="product_cart_add_form" action="">
+                                    <input type="hidden" name="quantity" value="1" data-variation="{{ product.get_default_variation.pk }}">
+                                    <button data-image="{{ product.get_default_image.url }}" type="submit">{% trans 'Add to cart' %}</button>
+                                </form>
+                            </div>
+                            <div class="variation product_list_variation_list">
+                                <div class="weight">
+                                    <ul>
+                                        {% for variation in product.get_variations %}
+                                            <li
+                                                class="product_list_variation"
+                                                data-variation="{{ variation.pk }}"
+                                                data-product_id="{{ variation.product_id }}"
+                                                data-variation_name="{{ variation.name }}"
+                                                data-quantity="{{ variation.quantity }}"
+                                                data-price="{{ variation.price|floatformat|intcomma }}"
+                                                data-color_has="{% if variation.color %}1{% else %}0{% endif %}"
+                                            >
+                                                <span>{{ variation.name }} {{ product.volume }}</span>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                {% if product.get_variations.0.color %}
+                                    <div class="color"><ul class="colors_set"></ul></div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
-            {% endfor %}
+                {% include 'parts/pagination.html' %}
+               </div>
         </div>
     </div>
+
     {{ footer }}
 {% endblock %}

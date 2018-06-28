@@ -52,13 +52,13 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/fancy.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.structure.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.theme.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}?v=123qwer1t">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/custom_style.css' %}?v=as">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}?v=123qwer1ast">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom_style.css' %}?v=he1">
 
-    <script src="{% static 'js/scripts.js' %}?v=123qwer1t"></script>
+    <script src="{% static 'js/scripts.js' %}?v=123qwer1ast"></script>
     <script src="{% static 'js/notify.min.js' %}"></script>
-    <script src="{% static 'js/custom.js' %}?v=123qwer1t"></script>
-    <script src="{% static 'js/main.js' %}?v=123qwer1t"></script>
+    <script src="{% static 'js/custom.js' %}?v=123qwer1aat"></script>
+    <script src="{% static 'js/main.js' %}?v=123qwer1tas"></script>
     <script src="{% static 'js/js.cookie.min.js' %}"></script>
     <script src="{% static 'js/jquery-ui.min.js' %}"></script>
     <script src="https://use.fontawesome.com/1ff752e90a.js"></script>
@@ -122,6 +122,7 @@ window.set_data_to_cookie = function(client_name, phone, email, shipping_address
             }
         }
     }
+    console.log('need_porter' + need_porter);
     var data = {
         "time": (time)? time : client_data.time ,
         "need_porter": (need_porter)? need_porter : client_data.need_porter ,
