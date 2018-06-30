@@ -31,14 +31,13 @@
             <br>
             <div class="filter">
                 <form id="brand_filter" action="{{ request.get_full_path }}" method="get">
-
                         <div class="form-group brand">
                             <h4 class="filter_label">{% trans 'Brands' %}</h4>
                             {% for brand in brands %}
                                 <div class="brand_item">
                                     <input style="display: none;" {% if brand.id|stringformat:"i" in selected_brands %}
                                         checked
-                                    {% endif %} name="brand" id="brand_{{ brand.id }}" type="checkbox" value="{{ brand.id }}">
+                                    {% endif %} name="brand" id="brand_{{ brand.id }}" type="checkbox" value="{{ brand.id }}" class="brand_item_input">
                                     <span style="width: 30px; height: 30px;"></span>
                                     <label for="brand_{{ brand.id }}">
                                         {{ brand.name }}
@@ -55,6 +54,7 @@
                                            id="feature_{{ feature.id }}"
                                            type="checkbox"
                                            value="{{ feature.id }}"
+                                           class="feature_item_input"
                                     >
                                     <span style="width: 30px; height: 30px;"></span>
                                     <label for="feature_{{ feature.id }}">
@@ -72,6 +72,7 @@
                                            id="color_{{ color.id }}"
                                            type="checkbox"
                                            value="{{ color.id }}"
+                                           class="color_item_input"
                                     >
                                     <span style="width: 30px; height: 30px; background-color: {{ color.color }}"></span>
                                     <label for="color_{{ color.id }}" class="color_filter" >

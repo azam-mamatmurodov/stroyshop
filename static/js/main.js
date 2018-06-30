@@ -102,8 +102,17 @@
             $('#filterview .brand').html($('#brand_filter .brand').html());
             $('#filterview .feature').html($('#brand_filter .feature').html());
             $('#filterview .color').html($('#brand_filter .color').html());
-            $('#brand_filter').empty();
+            // $('#brand_filter').empty();
             $('#filterview').addClass('hover');
+        });
+        $(".brand_item_input").click(function(){
+            $("#brand_filter").submit();
+        });
+        $(".feature_item_input").click(function(){
+            $("#brand_filter").submit();
+        });
+        $(".color_item_input").click(function(){
+            $("#brand_filter").submit();
         });
         // accordion
         var acc = document.getElementsByClassName("accordion");
