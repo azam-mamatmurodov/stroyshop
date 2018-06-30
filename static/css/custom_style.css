@@ -578,6 +578,10 @@ a:hover{
 .popup .container .tabs-content .registration .form form .form-group input#register_form_phone {
 	padding: 13px 3px;
 }
+.popup .container .tabs-content .registration .form-group:nth-child(odd){
+	margin-right: 0;
+	justify-content: center;
+}
 #register_form .prefix .input-group-addon{
 	padding: 6px 0px 4px 10px;
 	border-radius: 5px 0px 0px 5px;
@@ -597,12 +601,15 @@ a:hover{
 	background: #fff;
 	border: solid 2px #b7c233;
 	display: inline-block;
-	margin: 5px 0;
+	margin: 5px auto;
 	background: linear-gradient(#f1f1f1, #e5e5e5);
 	border: 1px solid #ccc;
 }
 .popup .container .tabs-content .form input[type=submit]:hover{
 	background: #f1f1f1;
+}
+#register_terms:hover{
+	cursor: pointer;
 }
 .add-address-popup form input[type=submit], .add-payment-popup form input[type=submit]{
 	border-radius: 5px;
