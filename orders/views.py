@@ -222,7 +222,10 @@ class CheckoutView(TemplateView):
             order.shipping_address = address.get('shipping_address')
             order.total_weight = total_weight
             order.delivery_price = get_delivery_price(cart_items)
-            order.need_porter = int(client_data.get('need_porter'))
+            try:
+                order.need_porter = int(client_data.get('need_porter'))
+            except ValueError:
+                pass
 
             if request.user.is_authenticated():
                 order.customer = request.user
